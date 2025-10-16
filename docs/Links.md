@@ -19,3 +19,6 @@
 - https://github.com/AliAlafandy/
 ## Instagram:
 - https://instagram.com/ali_alafandy_2023?igshid=YzAwZjE1ZTI0Zg==
+## Twitter / X:
+- Old: https://twitter.com/alialafandy09?t=I82F9_3E54poVknLKZMhRA&s=09
+- New: https://x.com/alialafandy09?t=I82F9_3E54poVknLKZMhRA&s=09
