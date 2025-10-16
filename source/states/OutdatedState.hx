@@ -17,14 +17,14 @@ class OutdatedState extends MusicBeatState
 		if (controls.mobileC)
 		{
 			guh = "Sup kiddo, looks like you're running an   \n
-			outdated version of Psych Engine (" + MainMenuState.modsEngineVersion + "),\n
+			outdated version of Mods Engine (" + MainMenuState.modsEngineVersion + "),\n
 			please update to " + TitleState.updateVersion + "!\n
 			Press B to proceed anyway.\n
 			\n
 			Thank you for using the Port!";
 		} else {
 			guh = "Sup bro, looks like you're running an   \n
-			outdated version of Psych Engine (" + MainMenuState.modsEngineVersion + "),\n
+			outdated version of Mods Engine (" + MainMenuState.modsEngineVersion + "),\n
 			please update to " + TitleState.updateVersion + "!\n
 			Press ESCAPE to proceed anyway.\n
 			\n
