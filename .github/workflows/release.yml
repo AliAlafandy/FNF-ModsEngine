@@ -59,25 +59,25 @@ jobs:
         uses: actions/download-artifact@main
         with:
            name: Windows x64
-           path: /home/runner
+           path: export\release\windows\64bits\bin\*
 
       - name: Download Windows x32 Build
         uses: actions/download-artifact@main
         with:
            name: Windows x32
-           path: /home/runner
+           path: export\release\windows\32bits\bin\*
 
       - name: Download Linux Build
         uses: actions/download-artifact@main
         with:
            name: Linux
-           path: /home/runner
+           path: export/release/linux/bin/*
 
       - name: Download MacOS Build
         uses: actions/download-artifact@main
         with:
            name: MacOS
-           path: /home/runner
+           path: export/release/macos/bin/*
       
       - name: Download Android Build
         uses: actions/download-artifact@main
@@ -104,9 +104,9 @@ jobs:
           tag_name: "6.9.9"
           prerelease: false
           files: |
-            Windows x64
-            Windows x32
-            Linux
-            MacOS
+            Windows x64.zip
+            Windows x32.zip
+            Linux.zip
+            MacOS.zip
             /home/runner/*.apk
             /home/runner/*.ipa
