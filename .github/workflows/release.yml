@@ -4,7 +4,7 @@ on: workflow_dispatch
 permissions: write-all
 
 env:
-  PROJECT_NAME: PsychEngine
+  PROJECT_NAME: ModsEngine
 
 jobs:
   build:
@@ -12,16 +12,11 @@ jobs:
     strategy:
       matrix:
         include:
-          - name: Windows x64
+          - name: Windows
             os: windows-2022
             buildArgs: "windows -final"
-            artifactName: Windows x64
+            artifactName: Windows
             artifactPath: export\release\windows\bin\*
-          - name: Windows x32
-            os: windows-2022
-            buildArgs: windows
-            artifactName: Windows x32
-            artifactPath: export\32bit\windows\bin\*
           - name: Linux
             os: ubuntu-22.04
             buildArgs: "linux -final"
@@ -55,16 +50,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
-      - name: Download Windows x64 Build
+      - name: Download Windows Build
         uses: actions/download-artifact@main
         with:
-           name: Windows x64
-           path: /home/runner
-
-      - name: Download Windows x32 Build
-        uses: actions/download-artifact@main
-        with:
-           name: Windows x32
+           name: Windows
            path: /home/runner
 
       - name: Download Linux Build
@@ -104,8 +93,7 @@ jobs:
           tag_name: "0.7.3"
           prerelease: false
           files: |
-            Windows x64
-            Windows x32
+            Windows
             Linux
             MacOS
             /home/runner/*.apk
