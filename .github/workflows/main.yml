@@ -8,21 +8,16 @@ jobs:
     strategy:
       matrix:
         include:
-          - name: Windows
+          - name: Windows x64
             os: windows-2022
-            buildArgs: "windows"
-            artifactName: Windows
+            buildArgs: windows
+            artifactName: Windows x64
             artifactPath: export\release\windows\64bits\bin\*
-          - name: Windows X32
+          - name: Windows x32
             os: windows-2022
             buildArgs: "windows -X32 -D HXCPP_X32"
-            artifactName: Windows X32
+            artifactName: Windows x32
             artifactPath: export\release\windows\32bits\bin\*
-          - name: Windows ARM64
-            os: windows-2022
-            buildArgs: "windows -arm64 -D HXCPP_ARM64"
-            artifactName: windowsBuild-arm64
-            artifactPath: export\release\windows\arm64\\bin\*
           - name: Linux
             os: ubuntu-22.04
             buildArgs: linux
