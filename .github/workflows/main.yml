@@ -1,0 +1,47 @@
+name: Main
+
+on: workflow_dispatch
+
+jobs:
+  Build:
+    name: ${{ matrix.name }}
+    strategy:
+      matrix:
+        include:
+          - name: Windows x64
+            os: windows-2022
+            buildArgs: windows
+            artifactName: Windows x64
+            artifactPath: export\release\windows\bin\*
+          - name: Windows x32
+            os: windows-2019
+            buildArgs: windows
+            artifactName: Windows x32
+            artifactPath: export\32bit\windows\bin\*
+          - name: Linux
+            os: ubuntu-22.04
+            buildArgs: linux
+            artifactName: Linux
+            artifactPath: export/release/linux/bin/*
+          - name: MacOS
+            os: macos-15
+            buildArgs: mac
+            artifactName: MacOS
+            artifactPath: export/release/macos/bin/*
+          - name: Android
+            os: macos-15
+            buildArgs: "android -ONLY_ARMV7"
+            artifactName: Android
+            artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
+          - name: iOS
+            os: macos-15
+            buildArgs: "ios -nosign"
+            artifactName: IOS
+            artifactPath: "export/release/ios/build/Release-iphoneos/*.ipa"
+    uses: ./.github/workflows/build.yml
+    with:
+        name: ${{ matrix.name }}
+        os: ${{ matrix.os }}
+        buildArgs: ${{ matrix.buildArgs }}
+        artifactName: ${{ matrix.artifactName }}
+        artifactPath: ${{ matrix.artifactPath }}

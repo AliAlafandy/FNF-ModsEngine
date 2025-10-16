@@ -1,0 +1,112 @@
+name: Release
+on: workflow_dispatch
+
+permissions: write-all
+
+env:
+  PROJECT_NAME: PsychEngine
+
+jobs:
+  build:
+    name: ${{ matrix.name }}
+    strategy:
+      matrix:
+        include:
+          - name: Windows x64
+            os: windows-2022
+            buildArgs: "windows -final"
+            artifactName: Windows x64
+            artifactPath: export\release\windows\bin\*
+          - name: Windows x32
+            os: windows-2022
+            buildArgs: windows
+            artifactName: Windows x32
+            artifactPath: export\32bit\windows\bin\*
+          - name: Linux
+            os: ubuntu-22.04
+            buildArgs: "linux -final"
+            artifactName: Linux
+            artifactPath: export/release/linux/bin/*
+          - name: MacOS
+            os: macos-15
+            buildArgs: "mac -final"
+            artifactName: MacOS
+            artifactPath: export/release/macos/bin/*
+          - name: Android
+            os: macos-15
+            buildArgs: "android -final -D officialBuild"
+            artifactName: Android
+            artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
+          - name: iOS
+            os: macos-15
+            buildArgs: "ios -final -nosign"
+            artifactName: iOS
+            artifactPath: "export/release/ios/build/Release-iphoneos/*.ipa"
+    uses: ./.github/workflows/build.yml
+    with:
+        name: ${{ matrix.name }}
+        os: ${{ matrix.os }}
+        buildArgs: ${{ matrix.buildArgs }}
+        artifactName: ${{ matrix.artifactName }}
+        artifactPath: ${{ matrix.artifactPath }}
+
+  Releaser:
+    needs: [build]
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Download Windows x64 Build
+        uses: actions/download-artifact@main
+        with:
+           name: Windows x64
+           path: /home/runner
+
+      - name: Download Windows x32 Build
+        uses: actions/download-artifact@main
+        with:
+           name: Windows x32
+           path: /home/runner
+
+      - name: Download Linux Build
+        uses: actions/download-artifact@main
+        with:
+           name: Linux
+           path: /home/runner
+
+      - name: Download MacOS Build
+        uses: actions/download-artifact@main
+        with:
+           name: MacOS
+           path: /home/runner
+      
+      - name: Download Android Build
+        uses: actions/download-artifact@main
+        with:
+           name: Android
+           path: /home/runner
+
+      - name: Move Android File
+        run: mv /home/runner/${{ env.PROJECT_NAME }}-release.apk /home/runner/${{ env.PROJECT_NAME }}-Android.apk
+
+      - name: Download iOS Build
+        uses: actions/download-artifact@main
+        with:
+           name: iOS
+           path: ${{ github.workspace }}
+
+      - name: Move iOS File
+        run: mv ${{ github.workspace }}/${{ env.PROJECT_NAME }}.ipa /home/runner/${{ env.PROJECT_NAME }}-iOS.ipa
+
+      - name: Publish The Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "Template"
+          tag_name: "0.7.3"
+          prerelease: false
+          files: |
+            Windows x64
+            Windows x32
+            Linux
+            MacOS
+            /home/runner/*.apk
+            /home/runner/*.ipa
