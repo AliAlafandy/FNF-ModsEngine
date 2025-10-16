@@ -556,9 +556,9 @@ class TitleState extends MusicBeatState
 				case 5:
 					deleteCoolText();
 				case 6:
-					createCoolText(['Forked from'], -40);
+					createCoolText(['Forked from'], 40);
 				case 8:
-					addMoreText('Psych Engine v0.7.3', -40);
+					addMoreText('Psych Engine v0.7.3', 40);
 				case 9:
 					deleteCoolText();
 				case 10:
