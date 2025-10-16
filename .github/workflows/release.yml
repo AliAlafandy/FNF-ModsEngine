@@ -12,11 +12,16 @@ jobs:
     strategy:
       matrix:
         include:
-          - name: Windows
+          - name: Windows x64
             os: windows-2022
             buildArgs: "windows -final"
-            artifactName: Windows
-            artifactPath: export\release\windows\bin\*
+            artifactName: Windows x64
+            artifactPath: export\release\windows\64bits\bin\*
+          - name: Windows x32
+            os: windows-2022
+            buildArgs: "windows -X32 -D HXCPP_X32"
+            artifactName: Windows x32
+            artifactPath: export\release\windows\32bits\bin\*
           - name: Linux
             os: ubuntu-22.04
             buildArgs: "linux -final"
@@ -50,10 +55,16 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
-      - name: Download Windows Build
+      - name: Download Windows x64 Build
         uses: actions/download-artifact@main
         with:
-           name: Windows
+           name: Windows x64
+           path: /home/runner
+
+      - name: Download Windows x32 Build
+        uses: actions/download-artifact@main
+        with:
+           name: Windows x32
            path: /home/runner
 
       - name: Download Linux Build
@@ -89,11 +100,12 @@ jobs:
       - name: Publish The Release
         uses: softprops/action-gh-release@v2
         with:
-          name: "Template"
-          tag_name: "0.7.3"
+          name: "6.9.9"
+          tag_name: "6.9.9"
           prerelease: false
           files: |
-            Windows
+            Windows x64
+            Windows x32
             Linux
             MacOS
             /home/runner/*.apk
