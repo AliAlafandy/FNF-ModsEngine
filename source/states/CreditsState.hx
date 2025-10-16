@@ -40,8 +40,8 @@ class CreditsState extends MusicBeatState
 
 		#if mobile
 		var defaultListMobile:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
-			['Template Team'],
-			['Ali Alafandy', 'alafandy', 'Templator of Psych Engine', 'https://youtube.com/@alialafandy', '000080'],
+			['Mods Engine Team'],
+			['Ali Alafandy', 'alafandy', 'Main Programmer and Head of Mods Engine', 'https://youtube.com/@alialafandy', '000080'],
 			[''],
 			['Mobile Porting Team'],
 			['mcagabe19', 'lily', 'Head Porter of Psych Engine Mobile', 'https://www.youtube.com/@mcagabe19', 'FFE7C0'],
