@@ -29,7 +29,7 @@
 			],
 			"loop": false,
 			"fps": 24,
-			"anim": "singLEFT",
+			"anim": "singRIGHT",
 			"indices": [],
 			"name": "Monster left note"
 		},
@@ -40,7 +40,7 @@
 			],
 			"loop": false,
 			"fps": 24,
-			"anim": "singRIGHT",
+			"anim": "singLEFT",
 			"indices": [],
 			"name": "Monster Right note"
 		},
@@ -96,7 +96,7 @@
 				14
 			],
 			"fps": 24,
-			"anim": "singRIGHT-loop",
+			"anim": "singLEFT-loop",
 			"loop": true,
 			"name": "Monster Right note"
 		},
@@ -111,7 +111,7 @@
 				19
 			],
 			"fps": 24,
-			"anim": "singLEFT-loop",
+			"anim": "singRIGHT-loop",
 			"loop": true,
 			"name": "Monster left note"
 		},
