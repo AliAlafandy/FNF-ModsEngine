@@ -12,12 +12,12 @@ jobs:
             os: windows-2022
             buildArgs: windows
             artifactName: Windows x64
-            artifactPath: export\release\windows\64bits\bin\*
+            artifactPath: export\release\windows\bin\*
           - name: Windows x32
             os: windows-2022
             buildArgs: "windows -X32 -D HXCPP_X32"
             artifactName: Windows x32
-            artifactPath: export\release\windows\32bits\bin\*
+            artifactPath: export\release\windows\bin\*
           - name: Linux
             os: ubuntu-22.04
             buildArgs: linux
