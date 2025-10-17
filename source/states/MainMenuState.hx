@@ -76,7 +76,7 @@ class MainMenuState extends MusicBeatState
 		magenta.screenCenter();
 		magenta.visible = false;
 		
-		switch (ClientPrefs.themes) {
+		switch (ClientPrefs.data.themes) {
 			case 'Mods Engine':
 				magenta.color = 0xFF000080;
 			
