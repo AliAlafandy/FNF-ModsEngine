@@ -298,7 +298,7 @@ class ControlsSubState extends MusicBeatSubstate
 			if(controls.BACK || FlxG.gamepads.anyJustPressed(B))
 			{
 				ClientPrefs.saveSettings();
-                                controls.isInSubstate = false;
+                controls.isInSubstate = false;
 				close();
 				return;
 			}
@@ -341,6 +341,10 @@ class ControlsSubState extends MusicBeatSubstate
 					holdingEsc = 0;
 					ClientPrefs.toggleVolumeKeys(false);
 					FlxG.sound.play(Paths.sound('scrollMenu'));
+
+					#if mobile
+					addTouchPad("NONE", "B_C");
+					#end
 				}
 				else
 				{
