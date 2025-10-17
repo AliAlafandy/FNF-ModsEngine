@@ -56,14 +56,14 @@ class ControlsSubState extends MusicBeatSubstate
 	var grpBinds:FlxTypedGroup<Alphabet>;
 	var selectSpr:AttachedSprite;
 
-	switch (ClientPrefs.themes) {
-			case 'Mods Engine':
-				var gamepadColor:FlxColor = 0xFF008080;
-				var keyboardColor:FlxColor = 0xFF000080;
-			
-			case 'Psych Engine':
-				var gamepadColor:FlxColor = 0xFFFD7194;
-				var keyboardColor:FlxColor = 0xFF7192FD;
+	switch (ClientPrefs.data.themes) {
+		case 'Mods Engine':
+			var gamepadColor:FlxColor = 0xFF008080;
+			var keyboardColor:FlxColor = 0xFF000080;
+
+		case 'Psych Engine':
+			var gamepadColor:FlxColor = 0xFFFD7194;
+			var keyboardColor:FlxColor = 0xFF7192FD;
 	}
 
 	var onKeyboardMode:Bool = true;
