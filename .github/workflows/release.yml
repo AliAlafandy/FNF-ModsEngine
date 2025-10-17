@@ -14,14 +14,14 @@ jobs:
         include:
           - name: Windows x64
             os: windows-2022
-            buildArgs: "windows -final"
+            buildArgs: "windows -final -D64bits"
             artifactName: Windows x64
-            artifactPath: export\release\windows\bin\*
+            artifactPath: export/release/windows/64bits/bin/*
           - name: Windows x32
             os: windows-2022
-            buildArgs: "windows -X32 -D HXCPP_X32"
+            buildArgs: "windows -X32 -D HXCPP_X32 -D32bits"
             artifactName: Windows x32
-            artifactPath: export\release\windows\bin\*
+            artifactPath: export/release/windows/32bits/bin/*
           - name: Linux
             os: ubuntu-22.04
             buildArgs: "linux -final"
@@ -59,25 +59,25 @@ jobs:
         uses: actions/download-artifact@main
         with:
            name: Windows x64
-           path: /home/runner
+           path: export/release/windows/64bits/bin
 
       - name: Download Windows x32 Build
         uses: actions/download-artifact@main
         with:
            name: Windows x32
-           path: /home/runner
+           path: export/release/windows/32bits/bin
 
       - name: Download Linux Build
         uses: actions/download-artifact@main
         with:
            name: Linux
-           path: /home/runner
+           path: export/release/linux/bin/
 
       - name: Download MacOS Build
         uses: actions/download-artifact@main
         with:
            name: MacOS
-           path: /home/runner
+           path: export/release/macos/bin/
       
       - name: Download Android Build
         uses: actions/download-artifact@main
@@ -97,6 +97,14 @@ jobs:
       - name: Move iOS File
         run: mv ${{ github.workspace }}/${{ env.PROJECT_NAME }}.ipa /home/runner/${{ env.PROJECT_NAME }}-iOS.ipa
 
+      - name: Zip Artifacts
+        run: |
+          cd export/release
+           zip -r "../../Windows x64.zip" windows/64bits/bin/* || true
+           zip -r "../../Windows x32.zip" windows/32bits/bin/* || true
+           zip -r "../../Linux.zip" linux/bin/* || true
+           zip -r "../../MacOS.zip" macos/bin/* || true
+
       - name: Publish The Release
         uses: softprops/action-gh-release@v2
         with:
@@ -104,9 +112,9 @@ jobs:
           tag_name: "6.9.9"
           prerelease: false
           files: |
-            Windows x64
-            Windows x32
-            Linux
-            MacOS
+            Windows x64.zip
+            Windows x32.zip
+            Linux.zip
+            MacOS.zip
             /home/runner/*.apk
             /home/runner/*.ipa
