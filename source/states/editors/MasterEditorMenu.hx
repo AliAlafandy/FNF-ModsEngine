@@ -36,7 +36,7 @@ class MasterEditorMenu extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.scrollFactor.set();
 
-		switch (ClientPrefs.themes) {
+		switch (ClientPrefs.data.themes) {
 			case 'Mods Engine':
 				bg.color = 0xFF000035;
 			
