@@ -56,8 +56,12 @@ class ControlsSubState extends MusicBeatSubstate
 	var grpBinds:FlxTypedGroup<Alphabet>;
 	var selectSpr:AttachedSprite;
 
-	var gamepadColor:FlxColor = 0xFF008080;
-	var keyboardColor:FlxColor = 0xFF000080;
+	var modsGamepadColor:FlxColor = 0xFF008080;
+	var psychGamepadColor:FlxColor = 0xFFFD7194;
+	
+	var modsKeyboardColor:FlxColor = 0xFF000080;
+	var psychKeyboardColor:FlxColor = 0xFF7192FD;
+
 	var onKeyboardMode:Bool = true;
 	
 	var controllerSpr:FlxSprite;
@@ -77,7 +81,15 @@ class ControlsSubState extends MusicBeatSubstate
 		options.push([true, defaultKey]);
 
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.color = keyboardColor;
+
+		switch (ClientPrefs.data.themes) {
+			case 'Mods Engine':
+				bg.color = modsKeyboardColor;
+
+			case 'Psych Engine':
+				bg.color = psychKeyboardColor;
+		}
+		
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		bg.screenCenter();
 		add(bg);
@@ -286,7 +298,7 @@ class ControlsSubState extends MusicBeatSubstate
 			if(controls.BACK || FlxG.gamepads.anyJustPressed(B))
 			{
 				ClientPrefs.saveSettings();
-                                controls.isInSubstate = false;
+                controls.isInSubstate = false;
 				close();
 				return;
 			}
@@ -329,6 +341,10 @@ class ControlsSubState extends MusicBeatSubstate
 					holdingEsc = 0;
 					ClientPrefs.toggleVolumeKeys(false);
 					FlxG.sound.play(Paths.sound('scrollMenu'));
+
+					#if mobile
+					addTouchPad("NONE", "B_C");
+					#end
 				}
 				else
 				{
@@ -639,7 +655,15 @@ class ControlsSubState extends MusicBeatSubstate
 	function swapMode()
 	{
 		if(colorTween != null) colorTween.destroy();
-		colorTween = FlxTween.color(bg, 0.5, bg.color, onKeyboardMode ? gamepadColor : keyboardColor, {ease: FlxEase.linear});
+
+		switch (ClientPrefs.data.themes) {
+			case 'Mods Engine':
+				colorTween = FlxTween.color(bg, 0.5, bg.color, onKeyboardMode ? modsGamepadColor : modsKeyboardColor, {ease: FlxEase.linear});
+
+			case 'Psych Engine':
+				colorTween = FlxTween.color(bg, 0.5, bg.color, onKeyboardMode ? psychGamepadColor : psychKeyboardColor, {ease: FlxEase.linear});
+		}
+
 		onKeyboardMode = !onKeyboardMode;
 
 		curSelected = 0;

@@ -160,6 +160,13 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 
+		var option:Option = new Option('Themes:',
+		    'Change theme from different engines.\nThis option is on alpha state, so maybe can be buggy!',
+			'themes',
+		    'string',
+			['Mods Engine', 'Psych Engine']);
+		addOption(option);
+
 		super();
 		add(notes);
 	}

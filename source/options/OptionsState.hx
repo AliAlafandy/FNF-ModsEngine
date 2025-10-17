@@ -67,7 +67,15 @@ class OptionsState extends MusicBeatState
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.data.antialiasing;
-		bg.color = 0xFF000080;
+
+		switch (ClientPrefs.data.themes) {
+			case 'Mods Engine':
+				bg.color = 0xFF000080;
+			
+			case 'Psych Engine':
+				bg.color = 0xFFEA71FD;
+		}
+
 		bg.updateHitbox();
 
 		bg.screenCenter();

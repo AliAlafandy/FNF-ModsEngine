@@ -75,7 +75,15 @@ class MainMenuState extends MusicBeatState
 		magenta.updateHitbox();
 		magenta.screenCenter();
 		magenta.visible = false;
-		magenta.color = 0xFFfd719b;
+		
+		switch (ClientPrefs.data.themes) {
+			case 'Mods Engine':
+				magenta.color = 0xFF000080;
+			
+			case 'Psych Engine':
+				magenta.color = 0xFFFD719D;
+		}
+		
 		add(magenta);
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
