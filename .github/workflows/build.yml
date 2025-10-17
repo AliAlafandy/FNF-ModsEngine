@@ -59,19 +59,45 @@ jobs:
             export/release/android/obj/
           restore-keys: |
             cache-build-android
-      
+
       - name: Restore existing build cache for faster compilation
-        if: inputs.name == 'Windows x64 / x32'
+        if: inputs.name == 'Windows'
         uses: actions/cache@v4
         with:
           # not caching the bin folder to prevent asset duplication and stuff like that
           key: cache-build-windows
           path: |
             .haxelib/
+            export/release/windows-64/haxe/
+            export/release/windows-64/obj/
+          restore-keys: |
+            cache-build-windows
+
+      - name: Restore existing build cache for faster compilation
+        if: inputs.name == 'Windows x32'
+        uses: actions/cache@v4
+        with:
+          # not caching the bin folder to prevent asset duplication and stuff like that
+          key: cache-build-windows-x32
+          path: |
+            .haxelib/
+            export/release/windows-64/haxe/
+            export/release/windows-64/obj/
+          restore-keys: |
+            cache-build-windows-x32
+      
+      - name: Restore existing build cache for faster compilation
+        if: inputs.name == 'Windows x64'
+        uses: actions/cache@v4
+        with:
+          # not caching the bin folder to prevent asset duplication and stuff like that
+          key: cache-build-windows-x64
+          path: |
+            .haxelib/
             export/release/windows/haxe/
             export/release/windows/obj/
           restore-keys: |
-            cache-build-windows
+            cache-build-windows-x64
       
       - name: Restore existing build cache for faster compilation
         if: inputs.name == 'Linux'
@@ -155,7 +181,47 @@ jobs:
                 console.log("Cache cleared.")
               }
             }
-      
+
+      - name: Clearing already existing cache
+        if: inputs.name == 'Windows x32'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const caches = await github.rest.actions.getActionsCacheList({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            })
+            for (const cache of caches.data.actions_caches) {
+              if (cache.key == "cache-build-windows-x32") {
+                console.log('Clearing ' + cache.key + '...')
+                await github.rest.actions.deleteActionsCacheById({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  cache_id: cache.id,
+                })
+                console.log("Cache cleared.")
+              }
+            }
+      - name: Clearing already existing cache
+        if: inputs.name == 'Windows x64'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const caches = await github.rest.actions.getActionsCacheList({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            })
+            for (const cache of caches.data.actions_caches) {
+              if (cache.key == "cache-build-windows-x64") {
+                console.log('Clearing ' + cache.key + '...')
+                await github.rest.actions.deleteActionsCacheById({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  cache_id: cache.id,
+                })
+                console.log("Cache cleared.")
+              }
+            }
       - name: Clearing already existing cache
         if: inputs.name == 'Windows'
         uses: actions/github-script@v6
@@ -268,9 +334,8 @@ jobs:
             export/release/ios/ModsEngine/haxe/
           restore-keys: |
             cache-build-ios
-       
       - name: Uploading new cache
-        if: inputs.name == 'Windows x64 / x32'
+        if: inputs.name == 'Windows'
         uses: actions/cache@v4
         with:
           # caching again since for some reason it doesnt work with the first post cache shit
@@ -281,6 +346,32 @@ jobs:
             export/release/windows/obj/
           restore-keys: |
             cache-build-windows
+
+      - name: Uploading new cache
+        if: inputs.name == 'Windows x32'
+        uses: actions/cache@v4
+        with:
+          # caching again since for some reason it doesnt work with the first post cache shit
+          key: cache-build-windows-x32
+          path: |
+            .haxelib/
+            export/release/windows/haxe/
+            export/release/windows/obj/
+          restore-keys: |
+            cache-build-windows-x32
+       
+      - name: Uploading new cache
+        if: inputs.name == 'Windows x64'
+        uses: actions/cache@v4
+        with:
+          # caching again since for some reason it doesnt work with the first post cache shit
+          key: cache-build-windows-x64
+          path: |
+            .haxelib/
+            export/release/windows/haxe/
+            export/release/windows/obj/
+          restore-keys: |
+            cache-build-windows-x64
         
       - name: Uploading new cache
         if: inputs.name == 'Linux'
