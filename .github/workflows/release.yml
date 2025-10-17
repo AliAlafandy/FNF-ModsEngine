@@ -16,12 +16,12 @@ jobs:
             os: windows-2022
             buildArgs: "windows -final"
             artifactName: Windows x64
-            artifactPath: export\release\windows\bin\*
+            artifactPath: export/release/windows/64bits/bin/*
           - name: Windows x32
             os: windows-2022
             buildArgs: "windows -X32 -D HXCPP_X32"
             artifactName: Windows x32
-            artifactPath: export\release\windows\bin\*
+            artifactPath: export/release/windows/32bits/bin/*
           - name: Linux
             os: ubuntu-22.04
             buildArgs: "linux -final"
@@ -59,25 +59,25 @@ jobs:
         uses: actions/download-artifact@main
         with:
            name: Windows x64
-           path: export\release\windows\64bits\bin\*
+           path: export/release/windows/64bits/bin
 
       - name: Download Windows x32 Build
         uses: actions/download-artifact@main
         with:
            name: Windows x32
-           path: export\release\windows\32bits\bin\*
+           path: export/release/windows/32bits/bin
 
       - name: Download Linux Build
         uses: actions/download-artifact@main
         with:
            name: Linux
-           path: export/release/linux/bin/*
+           path: export/release/linux/bin/
 
       - name: Download MacOS Build
         uses: actions/download-artifact@main
         with:
            name: MacOS
-           path: export/release/macos/bin/*
+           path: export/release/macos/bin/
       
       - name: Download Android Build
         uses: actions/download-artifact@main
