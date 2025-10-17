@@ -74,7 +74,7 @@ class ModsMenuState extends MusicBeatState
 
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 
-		switch (ClientPrefs.themes) {
+		switch (ClientPrefs.data.themes) {
 			case 'Mods Engine':
 				bg.color = 0xFF0000AF;
 			
