@@ -97,6 +97,14 @@ jobs:
       - name: Move iOS File
         run: mv ${{ github.workspace }}/${{ env.PROJECT_NAME }}.ipa /home/runner/${{ env.PROJECT_NAME }}-iOS.ipa
 
+      - name: Zip Artifacts
+        run: |
+          cd export/release
+           zip -r "../../Windows x64.zip" windows/64bits/bin/* || true
+           zip -r "../../Windows x32.zip" windows/32bits/bin/* || true
+           zip -r "../../Linux.zip" linux/bin/* || true
+           zip -r "../../MacOS.zip" macos/bin/* || true
+
       - name: Publish The Release
         uses: softprops/action-gh-release@v2
         with:
