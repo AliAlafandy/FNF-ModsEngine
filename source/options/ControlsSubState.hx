@@ -126,7 +126,7 @@ class ControlsSubState extends MusicBeatSubstate
 		add(text);
 
 		#if mobile
-		addTouchPad("LEFT_FULL", "A_B_C");
+		addTouchPad("LEFT_FULL", "B");
 		#end
 
 		createTexts();
@@ -341,10 +341,6 @@ class ControlsSubState extends MusicBeatSubstate
 					holdingEsc = 0;
 					ClientPrefs.toggleVolumeKeys(false);
 					FlxG.sound.play(Paths.sound('scrollMenu'));
-
-					#if mobile
-					addTouchPad("NONE", "B_C");
-					#end
 				}
 				else
 				{
@@ -356,11 +352,6 @@ class ControlsSubState extends MusicBeatSubstate
 					curSelected = lastSel;
 					updateText();
 					FlxG.sound.play(Paths.sound('cancelMenu'));
-
-					#if mobile
-					removeTouchPad();
-					addTouchPad("LEFT_FULL", "A_B_C");
-					#end
 				}
 			}
 		}
