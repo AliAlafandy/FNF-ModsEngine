@@ -356,6 +356,11 @@ class ControlsSubState extends MusicBeatSubstate
 					curSelected = lastSel;
 					updateText();
 					FlxG.sound.play(Paths.sound('cancelMenu'));
+
+					#if mobile
+					removeTouchPad();
+					addTouchPad("LEFT_FULL", "A_B_C");
+					#end
 				}
 			}
 		}
