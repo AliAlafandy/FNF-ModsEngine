@@ -25,7 +25,7 @@ jobs:
           - name: Windows x32
             os: windows-2022
             buildArgs: "windows -final -X32 -D HXCPP_X32 -D32bits"
-            artifactName: Windows x64
+            artifactName: Windows x32
             artifactPath: export/release/windows/32bits/bin/*
           - name: Linux
             os: ubuntu-22.04
