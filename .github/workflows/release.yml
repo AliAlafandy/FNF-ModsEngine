@@ -43,7 +43,7 @@ jobs:
             artifactName: Android
             artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
           - name: iOS
-            os: macos-14
+            os: macos-15
             buildArgs: "ios -final -nosign"
             artifactName: iOS
             artifactPath: "export/release/ios/build/Release-iphoneos/*.ipa"
