@@ -65,12 +65,11 @@ jobs:
 
       - name: Zip Artifacts
         run: |
-          cd export/release
-           zip -r Windows.zip Windows
-           zip -r Windows x64.zip Windows x64
-           zip -r Windows x32.zip Windows x32
-           zip -r Linux.zip Linux
-           zip -r MacOS.zip MacOS
+           zip -r Windows.zip Windows/
+           zip -r Windows x64.zip Windows x64/
+           zip -r Windows x32.zip Windows x32/
+           zip -r Linux.zip Linux/
+           zip -r MacOS.zip MacOS/
 
       - name: Publish The Release
         uses: softprops/action-gh-release@v2
