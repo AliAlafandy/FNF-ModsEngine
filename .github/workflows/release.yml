@@ -12,15 +12,20 @@ jobs:
     strategy:
       matrix:
         include:
+          - name: Windows
+            os: windows-2022
+            buildArgs: "windows -final"
+            artifactName: Windows
+            artifactPath: export/release/windows/bin/*
           - name: Windows x64
             os: windows-2022
-            buildArgs: "windows -final -D 64bits"
+            buildArgs: "windows -final -X64 DXHCPP_X64 -D64bits"
             artifactName: Windows x64
             artifactPath: export/release/windows/64bits/bin/*
           - name: Windows x32
             os: windows-2022
-            buildArgs: "windows -X32 -D HXCPP_X32 -D 32bits"
-            artifactName: Windows x32
+            buildArgs: "windows -final -X32 DXHCPP_X32 -D32bits"
+            artifactName: Windows x64
             artifactPath: export/release/windows/32bits/bin/*
           - name: Linux
             os: ubuntu-22.04
@@ -55,55 +60,17 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
-      - name: Download Windows x64 Build
-        uses: actions/download-artifact@main
-        with:
-           name: Windows x64
-           path: export/release/windows/64bits/bin
-
-      - name: Download Windows x32 Build
-        uses: actions/download-artifact@main
-        with:
-           name: Windows x32
-           path: export/release/windows/32bits/bin
-
-      - name: Download Linux Build
-        uses: actions/download-artifact@main
-        with:
-           name: Linux
-           path: export/release/linux/bin/
-
-      - name: Download MacOS Build
-        uses: actions/download-artifact@main
-        with:
-           name: MacOS
-           path: export/release/macos/bin/
-      
-      - name: Download Android Build
-        uses: actions/download-artifact@main
-        with:
-           name: Android
-           path: /home/runner
-
-      - name: Move Android File
-        run: mv /home/runner/${{ env.PROJECT_NAME }}-release.apk /home/runner/${{ env.PROJECT_NAME }}-Android.apk
-
-      - name: Download iOS Build
-        uses: actions/download-artifact@main
-        with:
-           name: iOS
-           path: ${{ github.workspace }}
-
-      - name: Move iOS File
-        run: mv ${{ github.workspace }}/${{ env.PROJECT_NAME }}.ipa /home/runner/${{ env.PROJECT_NAME }}-iOS.ipa
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v4
 
       - name: Zip Artifacts
         run: |
           cd export/release
-           zip -r "../../Windows x64.zip" windows/64bits/bin/* || true
-           zip -r "../../Windows x32.zip" windows/32bits/bin/* || true
-           zip -r "../../Linux.zip" linux/bin/* || true
-           zip -r "../../MacOS.zip" macos/bin/* || true
+           zip -r Windows.zip Windows
+           zip -r Windows x64.zip Windows x64
+           zip -r Windows x32.zip Windows x32
+           zip -r Linux.zip Linux
+           zip -r MacOS.zip MacOS
 
       - name: Publish The Release
         uses: softprops/action-gh-release@v2
@@ -113,8 +80,9 @@ jobs:
           prerelease: false
           files: |
             Windows x64.zip
+            Windows x64.zip
             Windows x32.zip
             Linux.zip
             MacOS.zip
-            /home/runner/*.apk
-            /home/runner/*.ipa
+            Android.apk
+            iOS.ipa
