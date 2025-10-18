@@ -38,7 +38,7 @@ jobs:
             artifactName: MacOS
             artifactPath: export/release/macos/bin/*
           - name: Android
-            os: ubuntu-22.04
+            os: macos-15
             buildArgs: "android -final -D officialBuild"
             artifactName: Android
             artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
