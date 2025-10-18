@@ -21,12 +21,12 @@ jobs:
             os: windows-2022
             buildArgs: "windows -final -X64 -D HXCPP_X64 -D64bits"
             artifactName: Windows x64
-            artifactPath: export/release/windows/64bits/bin/*
+            artifactPath: export/release/windows/bin/*
           - name: Windows x32
             os: windows-2022
             buildArgs: "windows -final -X32 -D HXCPP_X32 -D32bits"
             artifactName: Windows x32
-            artifactPath: export/release/windows/32bits/bin/*
+            artifactPath: export/release/windows/bin/*
           - name: Linux
             os: ubuntu-22.04
             buildArgs: "linux -final"
@@ -62,6 +62,10 @@ jobs:
     steps:
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v4
+      - name: Move Android File
+        run: mv /home/runner/${{ env.PROJECT_NAME }}-release.apk /home/runner/${{ env.PROJECT_NAME }}-Android.apk
+      - name: Move iOS File
+        run: mv ${{ github.workspace }}/${{ env.PROJECT_NAME }}.ipa /home/runner/${{ env.PROJECT_NAME }}-iOS.ipa
 
       - name: Zip Artifacts
         run: |
@@ -83,5 +87,5 @@ jobs:
             Windows x32.zip
             Linux.zip
             MacOS.zip
-            Android.apk
-            iOS.ipa
+            /home/runner/*.apk
+            /home/runner/*.ipa
