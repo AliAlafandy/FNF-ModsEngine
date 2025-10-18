@@ -149,9 +149,9 @@
 		<haxedef name="HXCPP_STACK_TRACE" />
 		<haxedef name="HXCPP_CATCH_SEGV" />
 	</section>
-
+<!--- test
 	<app path="export/release/windows/64bits/bin" if="64bits" />
-	<app path="export/release/windows/32bits/bin" if="32bits" />
+	<app path="export/release/windows/32bits/bin" if="32bits" /> -->
 	
 	<!-- Do whatever you want I'm tired uninstall and install everytime -->
 	<certificate path="key.keystore" password="psychengine" alias="psychport" alias-password="psychengine" if="android" unless="debug" />
