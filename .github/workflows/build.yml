@@ -62,8 +62,8 @@ jobs:
           restore-keys: |
             cache-build-windows-x64
 
-      - name: Restore existing build cache for faster compilation Windows x32
-        if: inputs.name == 'Windows x32'
+      - name: Restore existing build cache for faster compilation
+        if: inputs.name == 'Windows_x32'
         uses: actions/cache@v4
         with:
           # not caching the bin folder to prevent asset duplication and stuff like that
@@ -75,7 +75,20 @@ jobs:
           restore-keys: |
             cache-build-windows-x32
       
-      - name: Restore existing build cache for faster compilation Linux
+      - name: Restore existing build cache for faster compilation
+        if: inputs.name == 'Windows_x64'
+        uses: actions/cache@v4
+        with:
+          # not caching the bin folder to prevent asset duplication and stuff like that
+          key: cache-build-windows-x64
+          path: |
+            .haxelib/
+            export/release/windows/haxe/
+            export/release/windows/obj/
+          restore-keys: |
+            cache-build-windows-x64
+      
+      - name: Restore existing build cache for faster compilation
         if: inputs.name == 'Linux'
         uses: actions/cache@v4
         with:
@@ -340,8 +353,8 @@ jobs:
           restore-keys: |
             cache-build-windows-x64
 
-      - name: Uploading new cache Windows x32
-        if: inputs.name == 'Windows x32'
+      - name: Uploading new cache
+        if: inputs.name == 'Windows_x32'
         uses: actions/cache@v4
         with:
           # caching again since for some reason it doesnt work with the first post cache shit
@@ -352,6 +365,19 @@ jobs:
             export/release/windows/32bits/obj/
           restore-keys: |
             cache-build-windows-x32
+       
+      - name: Uploading new cache
+        if: inputs.name == 'Windows_x64'
+        uses: actions/cache@v4
+        with:
+          # caching again since for some reason it doesnt work with the first post cache shit
+          key: cache-build-windows-x64
+          path: |
+            .haxelib/
+            export/release/windows/haxe/
+            export/release/windows/obj/
+          restore-keys: |
+            cache-build-windows-x64
         
       - name: Uploading new cache Linux
         if: inputs.name == 'Linux'
