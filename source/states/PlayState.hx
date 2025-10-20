@@ -3139,6 +3139,16 @@ class PlayState extends MusicBeatState
 		iconP1.scale.set(1.2, 1.2);
 		iconP2.scale.set(1.2, 1.2);
 
+		if (ClientPrefs.data.iconbops == true) {
+			if (dancingLeft) {
+				iconP1.angle = 8;
+				iconP2.angle = 8; // maybe i should do it with tweens, but i'm lazy // i'll make it in -1.0.0, i promise
+			} else { 
+				iconP1.angle = -8;
+				iconP2.angle = -8;
+			}
+		}
+
 		iconP1.updateHitbox();
 		iconP2.updateHitbox();
 
