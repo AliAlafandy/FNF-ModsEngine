@@ -81,7 +81,7 @@ jobs:
 
       - name: Zip Windows x64 Build For Release
         run: |
-          cd /home/runner/Windows x64
+          cd /home/runner/Windows-x64
           zip -r "/home/runner/${{ env.PROJECT_NAME }}-Windows-x64.zip" .
 
       - name: Download Windows x32 Build
@@ -92,7 +92,7 @@ jobs:
 
       - name: Zip Windows x32 Build For Release
         run: |
-          cd /home/runner/Windows x32
+          cd /home/runner/Windows-x32
           zip -r "/home/runner/${{ env.PROJECT_NAME }}-Windows-x32.zip" .
 
       - name: Download Linux Build
