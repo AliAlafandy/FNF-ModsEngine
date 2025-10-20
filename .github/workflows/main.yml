@@ -9,15 +9,20 @@ jobs:
     strategy:
       matrix:
         include:
-          - name: Windows x64
+          - name: Windows
             os: windows-2022
-            buildArgs: "windows -final -D 64bits"
-            artifactName: Windows x64
-            artifactPath: export/release/windows/64bits/bin/*
-          - name: Windows x32
+            buildArgs: "windows -final"
+            artifactName: Windows
+            artifactPath: export/release/windows/bin/*
+          - name: Windows_x64
             os: windows-2022
-            buildArgs: "windows -X32 -D HXCPP_X32 -D 32bits"
-            artifactName: Windows x32
+            buildArgs: "windows -final -X64 -D HXCPP_X64 -D64bits"
+            artifactName: Windows_x64
+            artifactPath: export/release/windows/bin/*
+          - name: Windows_x32
+            os: windows-2022
+            buildArgs: "windows -final -X32 -D HXCPP_X32 -D32bits"
+            artifactName: Windows_x32
             artifactPath: export/release/windows/32bits/bin/*
           - name: Linux
             os: ubuntu-22.04
