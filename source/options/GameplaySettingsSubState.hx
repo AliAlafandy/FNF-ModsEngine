@@ -33,6 +33,12 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'ghostTapping',
 			'bool');
 		addOption(option);
+
+		var option:Option = new Option('Icon Bounce',
+			'If checked, icon bounce on angle.',
+			'iconbops',
+			'bool');
+		addOption(option);
 		
 		var option:Option = new Option('Auto Pause',
 			"If checked, the game automatically pauses if the screen isn't on focus.",
