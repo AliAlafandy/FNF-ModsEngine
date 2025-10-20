@@ -34,8 +34,8 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 
-		var option:Option = new Option('Icon Bop',
-			'If checked, icon will angle on beat.',
+		var option:Option = new Option('Icon Bounce',
+			'If checked, icon bounce on angle.',
 			'iconbops',
 			'bool');
 		addOption(option);
