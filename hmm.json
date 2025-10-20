@@ -42,11 +42,9 @@
       "url": "https://github.com/AlafandyPorting/hxcpp"
     },
     {
-      "name": "hxCodec",
-      "type": "git",
-      "dir": null,
-      "ref": "main",
-      "url": "https://github.com/polybiusproxy/hxCodec"
+      "name": "hxvlc",
+      "type": "haxelib",
+      "version": null
     },
     {
       "name": "SScript",
