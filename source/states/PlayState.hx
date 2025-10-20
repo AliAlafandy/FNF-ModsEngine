@@ -210,6 +210,8 @@ class PlayState extends MusicBeatState
 	public var luaTpadCam:FlxCamera;
 	public var cameraSpeed:Float = 1;
 
+	public var dancingLeft:bool = false;
+
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
@@ -3138,6 +3140,8 @@ class PlayState extends MusicBeatState
 
 		iconP1.scale.set(1.2, 1.2);
 		iconP2.scale.set(1.2, 1.2);
+
+		dancingLeft = !dancingLeft;
 
 		if (ClientPrefs.data.iconbops == true) {
 			if (dancingLeft) {
