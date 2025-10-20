@@ -14,40 +14,40 @@ jobs:
     strategy:
       matrix:
         include:
-          - name: Windows x86_64
-            os: windows-2025
-            buildArgs: "windows -final -D officialBuild"
-            artifactName: windowsBuild-x86_64
-            artifactPath: export\release\windows\bin\*
-          - name: Linux x86_64
+          - name: Windows
+            os: windows-2022
+            buildArgs: "windows -final"
+            artifactName: Windows
+            artifactPath: export/release/windows/bin/*
+          - name: Windows_x64
+            os: windows-2022
+            buildArgs: "windows -final -X64 -D HXCPP_X64"
+            artifactName: Windows_x64
+            artifactPath: export/release/windows/bin/*
+          - name: Windows_x32
+            os: windows-2022
+            buildArgs: "windows -final -X32 -D HXCPP_X32 -D32bits"
+            artifactName: Windows_x32
+            artifactPath: export/release/windows/32bits/bin/*
+          - name: Linux
             os: ubuntu-22.04
-            buildArgs: "linux -final -D officialBuild"
-            artifactName: linuxBuild-x86_64
+            buildArgs: "linux -final"
+            artifactName: Linux
             artifactPath: export/release/linux/bin/*
-          - name: Linux ARM64
-            os: ubuntu-22.04-arm
-            buildArgs: "linux -arm64 -final -D HXCPP_ARM64 -D officialBuild"
-            artifactName: linuxBuild-arm64
-            artifactPath: export/release/linux/bin/*
-          - name: macOS x86_64
+          - name: MacOS
             os: macos-15
-            buildArgs: "mac -final -64 -D HXCPP_M64 -D officialBuild"
-            artifactName: macOSBuild-x86_64
-            artifactPath: export/release/macos/bin/*
-          - name: macOS ARM64
-            os: macos-15
-            buildArgs: "mac -final -arm64 -D HXCPP_ARM64 -D officialBuild"
-            artifactName: macOSBuild-arm64
+            buildArgs: "mac -final"
+            artifactName: MacOS
             artifactPath: export/release/macos/bin/*
           - name: Android
             os: macos-15
             buildArgs: "android -final -D officialBuild"
-            artifactName: androidBuild
+            artifactName: Android
             artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
           - name: iOS
             os: macos-15
-            buildArgs: "ios -eval -final -nosign -D officialBuild"
-            artifactName: iOSBuild
+            buildArgs: "ios -final -nosign"
+            artifactName: iOS
             artifactPath: "export/release/ios/build/Release-iphoneos/*.ipa"
     uses: ./.github/workflows/build.yml
     with:
@@ -77,7 +77,7 @@ jobs:
         uses: actions/download-artifact@main
         with:
           name: Windows x64
-          path: /home/runner/Windows
+          path: /home/runner/Windows-x64
 
       - name: Zip Windows x64 Build For Release
         run: |
@@ -88,7 +88,7 @@ jobs:
         uses: actions/download-artifact@main
         with:
           name: Windows x32
-          path: /home/runner/Windows x32
+          path: /home/runner/Windows-x32
 
       - name: Zip Windows x32 Build For Release
         run: |
