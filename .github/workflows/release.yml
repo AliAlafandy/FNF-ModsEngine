@@ -80,7 +80,7 @@ jobs:
           tag_name: "6.9.9"
           prerelease: false
           files: |
-            Windows x64.zip
+            Windows.zip
             Windows x64.zip
             Windows x32.zip
             Linux.zip
