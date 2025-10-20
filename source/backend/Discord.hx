@@ -8,7 +8,7 @@ import hxdiscord_rpc.Types;
 class DiscordClient
 {
 	public static var isInitialized:Bool = false;
-	private static final _defaultID:String = "863222024192262205";
+	private static final _defaultID:String = "1429881866663629001";
 	public static var clientID(default, set):String = _defaultID;
 	private static var presence:DiscordRichPresence = #if (hxdiscord_rpc > "1.2.4") new DiscordRichPresence(); #else DiscordRichPresence.create(); #end
 
@@ -89,7 +89,7 @@ class DiscordClient
 		presence.state = state;
 		presence.largeImageKey = 'icon';
 		presence.largeImageText = "Engine Version: " + states.MainMenuState.modsEngineVersion;
-		presence.smallImageKey = 'icon16';
+		presence.smallImageKey = smallImageKey;
 		// Obtained times are in milliseconds so they are divided so Discord can use it
 		presence.startTimestamp = Std.int(startTimestamp / 1000);
 		presence.endTimestamp = Std.int(endTimestamp / 1000);
