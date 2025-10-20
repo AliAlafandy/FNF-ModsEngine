@@ -1,7 +1,7 @@
 name: Main
 on: workflow_dispatch
 
-permissions: write-all
+# permissions: write-all
 
 jobs:
   Build:
@@ -11,7 +11,7 @@ jobs:
         include:
           - name: Windows x64
             os: windows-2022
-            buildArgs: "windows -final -D 64bits"
+            buildArgs: "windows -D 64bits"
             artifactName: Windows x64
             artifactPath: export/release/windows/64bits/bin/*
           - name: Windows x32
