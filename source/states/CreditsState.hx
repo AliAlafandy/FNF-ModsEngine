@@ -43,6 +43,9 @@ class CreditsState extends MusicBeatState
 			['Mods Engine Team'],
 			['Ali Alafandy', 'alafandy', 'Main Programmer and Head of Mods Engine', 'https://youtube.com/@alialafandy', '000080'],
 			[''],
+			['Special Thanks'],
+			['Ethantobot', 'ethat_and_mw', 'Fixed releases for all devices', 'https://youtube.com/@ethanpater548', '808000'],
+			[''],
 			['Mobile Porting Team'],
 			['mcagabe19', 'lily', 'Head Porter of Psych Engine Mobile', 'https://www.youtube.com/@mcagabe19', 'FFE7C0'],
 			['Karim Akra', 'karim', 'Assistant Porter/Helper #1 of Psych Engine Mobile', 'https://youtube.com/@Karim0690', 'FFB4F0'],
@@ -76,8 +79,11 @@ class CreditsState extends MusicBeatState
 		];
 		#else
 		var defaultList:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
-			['Template Team'],
-			['Ali Alafandy', 'alafandy', 'Templator of Psych Engine', 'https://youtube.com/@alialafandy', '000080'],
+			['Mods Engine Team'],
+			['Ali Alafandy', 'alafandy', 'Main Programmer and Head of Mods Engine', 'https://youtube.com/@alialafandy', '000080'],
+			[''],
+			['Special Thanks'],
+			['Ethantobot', 'ethat_and_mw', 'Fixed releases for all devices', 'https://youtube.com/@ethanpater548', '808000'],
 			[''],
 			['Psych Engine Team'],
 			['Shadow Mario', 'shadowmario', 'Main Programmer and Head of Psych Engine', 'https://ko-fi.com/shadowmario', '444444'],
