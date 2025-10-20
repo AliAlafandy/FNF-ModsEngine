@@ -44,7 +44,7 @@ class CreditsState extends MusicBeatState
 			['Ali Alafandy', 'alafandy', 'Main Programmer and Head of Mods Engine', 'https://youtube.com/@alialafandy', '000080'],
 			[''],
 			['Special Thanks'],
-			['Ethantobot', 'ethat_and_mw', 'Fixed releases for all devices', 'https://youtube.com/@ethanpater548', '808000'],
+			['Ethantobot', 'ethan_and_mw', 'Fixed releases for all devices', 'https://youtube.com/@ethanpater548', '808000'],
 			[''],
 			['Mobile Porting Team'],
 			['mcagabe19', 'lily', 'Head Porter of Psych Engine Mobile', 'https://www.youtube.com/@mcagabe19', 'FFE7C0'],
