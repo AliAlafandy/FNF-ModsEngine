@@ -19,14 +19,14 @@ jobs:
             buildArgs: "windows -final"
             artifactName: Windows
             artifactPath: export/release/windows/bin/*
-          - name: Windows_x64
+          - name: Windows x64
             os: windows-2022
             buildArgs: "windows -final -X64 -D HXCPP_X64"
             artifactName: Windows_x64
             artifactPath: export/release/windows/bin/*
-          - name: Windows_x32
+          - name: Windowsbx32
             os: windows-2022
-            buildArgs: "windows -final -X32 -D HXCPP_X32 -D32bits"
+            buildArgs: "windows -final -X32 -D HXCPP_X32 -D 32bits"
             artifactName: Windows_x32
             artifactPath: export/release/windows/32bits/bin/*
           - name: Linux
