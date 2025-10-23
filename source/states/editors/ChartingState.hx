@@ -223,7 +223,15 @@ class ChartingState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		bg.scrollFactor.set();
-		bg.color = 0xFF222222;
+
+		switch (ClientPrefs.data.themes) {
+			case 'Mods Engine':
+				bg.color = 0xFF000022;
+			
+			case 'Psych Engine':
+				bg.color = 0xFF222222;
+		}
+		
 		add(bg);
 
 		gridLayer = new FlxTypedGroup<FlxSprite>();
