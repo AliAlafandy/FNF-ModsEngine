@@ -559,10 +559,8 @@ class TitleState extends MusicBeatState
 					createCoolText(['Forked from'], 40);
 				case 8:
 					addMoreText('Psych Engine v0.7.3', 40);
-					ngSpr.visible = true;
 				case 9:
 					deleteCoolText();
-					ngSpr.visible = false;
 				case 10:
 					createCoolText([curWacky[0]], 40);
 				case 12:
