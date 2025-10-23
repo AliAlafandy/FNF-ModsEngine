@@ -1,0 +1,82 @@
+name: Release Action
+on: workflow_dispatch
+
+permissions: write-all
+
+env:
+  PROJECT_NAME: ModsEngine
+
+jobs:
+  build:
+    name: ${{ matrix.name }}
+    strategy:
+      matrix:
+        include:
+          - name: Windows x64
+            os: windows-2022
+            buildArgs: "windows -final -X64 -D HXCPP_X64"
+            artifactName: Windows x64
+            artifactPath: export/release/windows/64bits/bin/*
+          - name: Windows x32
+            os: windows-2022
+            buildArgs: "windows -final -X32 -D HXCPP_X32 -D 32bits"
+            artifactName: Windows x32
+            artifactPath: export/release/windows/32bits/bin/*
+          - name: Linux
+            os: ubuntu-22.04
+            buildArgs: "linux -final"
+            artifactName: Linux
+            artifactPath: export/release/linux/bin/*
+          - name: MacOS
+            os: macos-15
+            buildArgs: "mac -final"
+            artifactName: MacOS
+            artifactPath: export/release/macos/bin/*
+          - name: Android
+            os: macos-15
+            buildArgs: "android -final -D officialBuild"
+            artifactName: Android
+            artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
+          - name: iOS
+            os: macos-15
+            buildArgs: "ios -final -nosign"
+            artifactName: iOS
+            artifactPath: "export/release/ios/build/Release-iphoneos/*.ipa"
+    uses: ./.github/workflows/build.yml
+    with:
+        name: ${{ matrix.name }}
+        os: ${{ matrix.os }}
+        buildArgs: ${{ matrix.buildArgs }}
+        artifactName: ${{ matrix.artifactName }}
+        artifactPath: ${{ matrix.artifactPath }}
+
+  Releaser:
+    needs: [build]
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v4
+
+      - name: Zip Artifacts
+        run: |
+           zip -r Windows x64.zip Windows x64/
+           zip -r Windows x32.zip Windows x32/
+           zip -r Linux.zip Linux/
+           zip -r MacOS.zip MacOS/
+           zip -r Android.zip Android/
+           zip -r iOS.zip iOS/
+
+      - name: Publish The Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "6.9.9"
+          tag_name: "6.9.9"
+          make_latest: false
+          files: |
+            Windows x64.zip
+            Windows x32.zip
+            Linux.zip
+            MacOS.zip
+            Android.zip
+            iOS.zip
