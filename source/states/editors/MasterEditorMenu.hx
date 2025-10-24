@@ -28,6 +28,8 @@ class MasterEditorMenu extends MusicBeatState
 	private var curDirectory = 0;
 	private var directoryTxt:FlxText;
 
+	public var grid:FlxBackdrop;
+
 	override function create()
 	{
 		FlxG.camera.bgColor = FlxColor.BLACK;
@@ -51,10 +53,10 @@ class MasterEditorMenu extends MusicBeatState
 
 		switch (ClientPrefs.data.themes) {
 			case 'Mods Engine':
-				var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
+				grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
 			
 			case 'Psych Engine':
-				var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+				grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
 		}
 		
 		grid.velocity.set(40, 40);
