@@ -113,10 +113,10 @@ class MainMenuState extends MusicBeatState
 		modsEngineLogo.setGraphicSize(Std.int(bg.width * 0.32));
 		modsEngineLogo.updateHitbox();
 		modsEngineLogo.screenCenter();
-		modsEngineLogo.x = 1000;
-		modsEngineLogo.y = 90;
-		modsEngineLogo.scale.x = 1;
-		modsEngineLogo.scale.y = 1;
+		modsEngineLogo.x = 900;
+		modsEngineLogo.y = 130;
+		modsEngineLogo.scale.x = 0.7;
+		modsEngineLogo.scale.y = 0.7;
 		add(modsEngineLogo);
 
 		var modsVer:FlxText = new FlxText(12, FlxG.height - 64, 0, "Mods Engine v" + modsEngineVersion, 12);
