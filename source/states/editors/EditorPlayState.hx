@@ -178,8 +178,7 @@ class EditorPlayState extends MusicBeatSubstate
 		#if mobile
 		if(
 		#if android
-		FlxG.android.justReleased.BACK
-		touchPad.buttonP.justPressed
+		FlxG.android.justReleased.BACK || touchPad.buttonP.justPressed
 		#else
 		touchPad.buttonP.justPressed
 		#end
