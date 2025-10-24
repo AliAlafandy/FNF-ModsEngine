@@ -6,6 +6,7 @@ import haxe.format.JsonParser;
 import haxe.io.Bytes;
 
 import flixel.FlxObject;
+import flixel.addons.display.FlxBackdrop;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.ui.FlxUI;
 import flixel.addons.ui.FlxUICheckBox;
@@ -233,6 +234,12 @@ class ChartingState extends MusicBeatState
 		}
 		
 		add(bg);
+
+		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
+		grid.velocity.set(40, 40);
+		grid.alpha = 0;
+		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+		add(grid);
 
 		gridLayer = new FlxTypedGroup<FlxSprite>();
 		add(gridLayer);
