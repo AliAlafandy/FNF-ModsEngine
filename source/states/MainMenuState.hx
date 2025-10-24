@@ -28,11 +28,6 @@ class MainMenuState extends MusicBeatState
 		#end
 		
 		'credits',
-		
-		#if !switch
-		'donate',
-		#end
-		
 		'options'
 	];
 
@@ -104,8 +99,23 @@ class MainMenuState extends MusicBeatState
 				scr = 0;
 			menuItem.scrollFactor.set(0, scr);
 			menuItem.updateHitbox();
-			menuItem.screenCenter(X);
+			// menuItem.screenCenter(X);
+			menuItem.x = 95;
 		}
+
+		modsEngineLogo = new FlxSprite(0).loadGraphic(Paths.image('modsEngineLogo'));
+		modsEngineLogo.scrollFactor.x = 0;
+		modsEngineLogo.scrollFactor.y = 0;
+		modsEngineLogo.antialiasing = ClientPrefs.data.globalAntialiasing;
+		modsEngineLogo.visible = ClientPrefs.data.objects;
+		modsEngineLogo.setGraphicSize(Std.int(menuBackground.width * 0.32));
+		modsEngineLogo.updateHitbox();
+		modsEngineLogo.screenCenter();
+		modsEngineLogo.x = 1000;
+		modsEngineLogo.y = 90;
+		modsEngineLogo.scale.x = 1;
+		modsEngineLogo.scale.y = 1;
+		add(modsEngineLogo);
 
 		var modsVer:FlxText = new FlxText(12, FlxG.height - 64, 0, "Mods Engine v" + modsEngineVersion, 12);
 		modsVer.scrollFactor.set();
@@ -171,10 +181,6 @@ class MainMenuState extends MusicBeatState
 			if (controls.ACCEPT)
 			{
 				FlxG.sound.play(Paths.sound('confirmMenu'));
-				if (optionShit[curSelected] == 'donate')
-				{
-					CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
-				}
 				else
 				{
 					selectedSomethin = true;
@@ -238,10 +244,6 @@ class MainMenuState extends MusicBeatState
 			if (controls.ACCEPT)
 			{
 				FlxG.sound.play(Paths.sound('confirmMenu'));
-				if (optionShit[curSelected] == 'donate')
-				{
-					CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
-				}
 				else
 				{
 					selectedSomethin = true;
