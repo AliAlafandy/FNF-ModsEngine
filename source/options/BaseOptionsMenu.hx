@@ -30,6 +30,9 @@ class BaseOptionsMenu extends MusicBeatSubstate
 	public var rpcTitle:String;
 
 	public var bg:FlxSprite;
+
+	public var grid:FlxBackdrop;
+	
 	public function new()
 	{
         controls.isInSubstate = true;
@@ -59,10 +62,10 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 		switch (ClientPrefs.data.themes) {
 			case 'Mods Engine':
-				var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
+				grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
 			
 			case 'Psych Engine':
-				var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+				grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
 		}
 		
 		grid.velocity.set(40, 40);
