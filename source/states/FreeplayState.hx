@@ -10,6 +10,9 @@ import objects.MusicPlayer;
 import substates.GameplayChangersSubstate;
 import substates.ResetScoreSubState;
 
+import flixel.addons.display.FlxBackdrop;
+import flixel.addons.display.FlxGridOverlay;
+
 import flixel.math.FlxMath;
 
 class FreeplayState extends MusicBeatState
@@ -92,6 +95,12 @@ class FreeplayState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
 		bg.screenCenter();
+
+		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+		grid.velocity.set(40, 40);
+		grid.alpha = 0;
+		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+		add(grid);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
