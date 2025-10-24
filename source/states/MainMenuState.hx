@@ -108,9 +108,9 @@ class MainMenuState extends MusicBeatState
 		modsEngineLogo = new FlxSprite(0).loadGraphic(Paths.image('modsEngineLogo'));
 		modsEngineLogo.scrollFactor.x = 0;
 		modsEngineLogo.scrollFactor.y = 0;
-		modsEngineLogo.antialiasing = ClientPrefs.data.globalAntialiasing;
-		modsEngineLogo.visible = ClientPrefs.data.objects;
-		modsEngineLogo.setGraphicSize(Std.int(menuBackground.width * 0.32));
+		modsEngineLogo.antialiasing = ClientPrefs.data.antialiasing;
+		modsEngineLogo.visible = true;
+		modsEngineLogo.setGraphicSize(Std.int(bg.width * 0.32));
 		modsEngineLogo.updateHitbox();
 		modsEngineLogo.screenCenter();
 		modsEngineLogo.x = 1000;
