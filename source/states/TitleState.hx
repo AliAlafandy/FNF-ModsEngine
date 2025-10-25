@@ -52,6 +52,8 @@ class TitleState extends MusicBeatState
 	var credTextShit:Alphabet;
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
+
+	var toastTxt:String = '';
 	
 	var titleTextColors:Array<FlxColor> = [0xFF33FFFF, 0xFF3333CC];
 	var titleTextAlphas:Array<Float> = [1, .64];
@@ -79,10 +81,10 @@ class TitleState extends MusicBeatState
 		Paths.clearStoredMemory();
 
 		#if android
-		toastText = "Welcome to: FNF': Mods Engine v" + MainMenuState.modsEngineVersion;
+		toastTxt = "Welcome to: FNF': Mods Engine v" + MainMenuState.modsEngineVersion;
 		if(!checkingToastMessage) {		
 		    checkingToastMessage = true;
-		    AndroidDialogsExtend.OpenToast(toastText, 1);
+		    AndroidDialogsExtend.OpenToast(toastTxt, 1);
 		}
 		FlxG.android.preventDefaultKeys = [BACK];
 		#end
