@@ -83,7 +83,7 @@
       "name": "AndroidDialogs",
       "type": "git",
       "dir": null,
-      "ref": "main",
+      "ref": "master",
       "url": "https://github.com/AlafandyPorting/AndroidDialogs"
     }
   ]
