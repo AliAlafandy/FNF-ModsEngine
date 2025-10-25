@@ -80,11 +80,11 @@
       "url": "https://github.com/ShadowMario/flxanimate.git"
     },
     {
-      "name": "extension-androidtools",
+      "name": "AndroidDialogs",
       "type": "git",
       "dir": null,
       "ref": "main",
-      "url": "https://github.com/AlafandyPorting/extension-androidtools"
+      "url": "https://github.com/AlafandyPorting/AndroidDialogs"
     }
   ]
 }
