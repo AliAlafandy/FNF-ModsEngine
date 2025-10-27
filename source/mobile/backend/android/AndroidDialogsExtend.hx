@@ -1,6 +1,6 @@
 package mobile.backend.android;
 
-import extension.androiddialogs.AndroidDialogs;
+import extension.androiddialogs as AndroidDialogs;
 
 class AndroidDialogsExtend {
 
