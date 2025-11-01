@@ -1,9 +1,5 @@
 package states;
 
-#if android
-import mobile.backend.android.AndroidDialogsExtend;
-#end
-
 import backend.WeekData;
 import backend.Highscore;
 
@@ -52,8 +48,6 @@ class TitleState extends MusicBeatState
 	var credTextShit:Alphabet;
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
-
-	var toastTxt:String = '';
 	
 	var titleTextColors:Array<FlxColor> = [0xFF33FFFF, 0xFF3333CC];
 	var titleTextAlphas:Array<Float> = [1, .64];
@@ -79,15 +73,6 @@ class TitleState extends MusicBeatState
 	override public function create():Void
 	{
 		Paths.clearStoredMemory();
-
-		#if android
-		toastTxt = "Welcome to: FNF': Mods Engine v" + MainMenuState.modsEngineVersion;
-		if(!checkingToastMessage) {		
-		    checkingToastMessage = true;
-		    AndroidDialogsExtend.OpenToast(toastTxt, 1);
-		}
-		FlxG.android.preventDefaultKeys = [BACK];
-		#end
 
 		#if LUA_ALLOWED
 		Mods.pushGlobalMods();
