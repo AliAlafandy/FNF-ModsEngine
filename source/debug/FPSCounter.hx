@@ -35,6 +35,8 @@ class FPSCounter extends TextField
 
 	public var os:String = '';
 
+	public var engineVersion:String = '';
+
 	public function new(x:Float = 10, y:Float = 10, color:Int = 0x000000)
 	{
 		super();
@@ -44,6 +46,8 @@ class FPSCounter extends TextField
 		else
 			os = '\nOS: ${LimeSystem.platformName}' #if cpp + ' ${getArch() != 'Unknown' ? getArch() : ''}' #end + ' - ${LimeSystem.platformVersion}';
 
+		engineVersion = 'Mods Engine v${state.MainMenuState.modsEngineVersion}';
+		
 		positionFPS(x, y);
 
 		currentFPS = 0;
@@ -82,7 +86,8 @@ class FPSCounter extends TextField
 		text = 
 		'FPS: $currentFPS' + 
 		'\nMemory: ${flixel.util.FlxStringUtil.formatBytes(memoryMegas)}' +
-		os;
+		os +
+		engineVersion;
 
 		textColor = 0xFF0000FF;
 		if (currentFPS < FlxG.drawFramerate * 0.5)
