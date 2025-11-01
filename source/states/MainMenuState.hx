@@ -123,7 +123,7 @@ class MainMenuState extends MusicBeatState
 		modsEngineLogo.updateHitbox();
 		modsEngineLogo.screenCenter();
 		modsEngineLogo.x = 735;
-		modsEngineLogo.y = 235;
+		modsEngineLogo.y = 233;
 		modsEngineLogo.scale.x = 0.5;
 		modsEngineLogo.scale.y = 0.5;
 		add(modsEngineLogo);
