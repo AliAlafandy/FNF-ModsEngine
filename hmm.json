@@ -78,13 +78,6 @@
       "dir": null,
       "ref": "dev",
       "url": "https://github.com/ShadowMario/flxanimate.git"
-    },
-    {
-      "name": "AndroidDialogs",
-      "type": "git",
-      "dir": null,
-      "ref": "master",
-      "url": "https://github.com/AlafandyPorting/AndroidDialogs"
     }
   ]
 }
