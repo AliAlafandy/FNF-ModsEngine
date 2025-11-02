@@ -576,7 +576,7 @@ class PlayState extends MusicBeatState
 				botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "BOTPLAY", 32);
 			
 			case 'Song Name':
-				botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, songName, 32);
+				botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, songs[i].songName, 32);
 
 			case 'None':
 				botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "", 32);
