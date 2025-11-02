@@ -53,7 +53,7 @@ import states.TitleState;
 
 	public var ghostTapping:Bool = true;
 	public var timeBarType:String = 'Time Left';
-	public var timeBarColor:Bool = false;
+	public var hudColor:String = 'Off';
 	public var iconBops:Bool = true;
 	public var scoreZoom:Bool = true;
 	public var noReset:Bool = false;
