@@ -137,7 +137,7 @@ class FunkinLua {
 		set('rating', 0);
 		set('ratingName', '');
 		set('ratingFC', '');
-		set('version', MainMenuState.psychEngineVersion.trim());
+		set('version', MainMenuState.modsEngineVersion.trim());
 
 		set('inGameOver', false);
 		set('mustHitSection', false);
@@ -186,6 +186,8 @@ class FunkinLua {
 		set('ghostTapping', ClientPrefs.data.ghostTapping);
 		set('hideHud', ClientPrefs.data.hideHud);
 		set('timeBarType', ClientPrefs.data.timeBarType);
+		set('timeBarColor', ClientPrefs.data.timeBarColor);
+		set('iconBops', ClientPrefs.data.iconBops);
 		set('scoreZoom', ClientPrefs.data.scoreZoom);
 		set('cameraZoomOnBeat', ClientPrefs.data.camZooms);
 		set('flashingLights', ClientPrefs.data.flashing);
