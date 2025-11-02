@@ -4,6 +4,9 @@ import backend.WeekData;
 
 import objects.Character;
 
+import flixel.addons.display.FlxBackdrop;
+import flixel.addons.display.FlxGridOverlay;
+
 import states.MainMenuState;
 import states.FreeplayState;
 
@@ -25,6 +28,8 @@ class MasterEditorMenu extends MusicBeatState
 	private var curDirectory = 0;
 	private var directoryTxt:FlxText;
 
+	public var grid:FlxBackdrop;
+
 	override function create()
 	{
 		FlxG.camera.bgColor = FlxColor.BLACK;
@@ -45,6 +50,19 @@ class MasterEditorMenu extends MusicBeatState
 		}
 		
 		add(bg);
+
+		switch (ClientPrefs.data.themes) {
+			case 'Mods Engine':
+				grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
+			
+			case 'Psych Engine':
+				grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+		}
+		
+		grid.velocity.set(40, 40);
+		grid.alpha = 0;
+		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+		add(grid);
 
 		grpTexts = new FlxTypedGroup<Alphabet>();
 		add(grpTexts);

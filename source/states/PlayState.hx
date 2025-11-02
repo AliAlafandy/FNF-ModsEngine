@@ -651,10 +651,8 @@ class PlayState extends MusicBeatState
 		cachePopUpScore();
 
 		#if mobile
-		#if (!android)
 		addTouchPad("NONE", "P");
  		addTouchPadCamera();
-		#end
 		#end
 
 		super.create();
@@ -1680,6 +1678,7 @@ class PlayState extends MusicBeatState
 		if ((controls.PAUSE
 			 #if android
 			 || FlxG.android.justReleased.BACK
+			 || touchPad.buttonP.justPressed
 			 #else
 			 || touchPad.buttonP.justPressed
 			 #end)
@@ -3143,7 +3142,7 @@ class PlayState extends MusicBeatState
 		
 		dancingLeft = !dancingLeft;
 
-		if (ClientPrefs.data.iconbops == true) {
+		if (ClientPrefs.data.iconBops == true) {
 			if (dancingLeft) {
 				iconP1.angle = 8;
 				iconP2.angle = 8; // maybe i should do it with tweens, but i'm lazy // i'll make it in -1.0.0, i promise

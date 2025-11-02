@@ -161,10 +161,8 @@ class EditorPlayState extends MusicBeatSubstate
 		#end
 
 		#if mobile
-		#if !android
 		addTouchPad("NONE", "P");
 		addTouchPadCamera();
-		#end
 		#end
 
 		#if mobile
@@ -180,7 +178,7 @@ class EditorPlayState extends MusicBeatSubstate
 		#if mobile
 		if(
 		#if android
-		FlxG.android.justReleased.BACK
+		FlxG.android.justReleased.BACK || touchPad.buttonP.justPressed
 		#else
 		touchPad.buttonP.justPressed
 		#end

@@ -36,7 +36,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		
 		var option:Option = new Option('Icon Bounce',
 			'If checked, icon bounce on angle.',
-			'iconbops',
+			'iconBops',
 			'bool');
 		addOption(option);
 		
