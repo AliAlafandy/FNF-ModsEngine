@@ -201,6 +201,7 @@ class PlayState extends MusicBeatState
 
 	public var botplaySine:Float = 0;
 	public var botplayTxt:FlxText;
+	public var playBot:FlxText;
 
 	public var iconP1:HealthIcon;
 	public var iconP2:HealthIcon;
@@ -585,13 +586,13 @@ class PlayState extends MusicBeatState
 
 		switch (ClientPrefs.data.botPlayName) {
 			case 'Normal':
-				playBot = "BOTPLAY";
+				playBot == "BOTPLAY";
 			
 			case 'Song Name':
-				playBot = songName;
+				playBot == songName;
 
 			case 'None':
-				playBot = "";
+				playBot == "";
 		}
 
 		uiGroup.cameras = [camHUD];
