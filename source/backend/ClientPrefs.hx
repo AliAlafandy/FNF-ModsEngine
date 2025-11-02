@@ -23,6 +23,7 @@ import states.TitleState;
 	public var vsync:Bool = false;
 	public var gameOverVibration:Bool = false;
 
+	// Other Releated
 	public var downScroll:Bool = false;
 	public var middleScroll:Bool = false;
 	public var opponentStrums:Bool = true;
@@ -40,6 +41,7 @@ import states.TitleState;
 	public var camZooms:Bool = true;
 	public var hideHud:Bool = false;
 	public var noteOffset:Int = 0;
+	
 	public var arrowRGB:Array<Array<FlxColor>> = [
 		[0xFFC24B99, 0xFFFFFFFF, 0xFF3C1F56],
 		[0xFF00FFFF, 0xFFFFFFFF, 0xFF1542B7],
@@ -52,6 +54,7 @@ import states.TitleState;
 		[0xFFFF884E, 0xFFFFFAF5, 0xFF6C0000]];
 
 	public var ghostTapping:Bool = true;
+	public var botPlayName:String = 'Normal';
 	public var timeBarType:String = 'Time Left';
 	public var hudColor:String = 'Off';
 	public var iconBops:Bool = true;
@@ -63,6 +66,7 @@ import states.TitleState;
 	public var checkForUpdates:Bool = true;
 	public var comboStacking:Bool = true;
 	public var themes:String = 'Mods Engine';
+	
 	public var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
