@@ -33,6 +33,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'ghostTapping',
 			'bool');
 		addOption(option);
+
+		var option:Option = new Option('Bot Play Name:',
+			"'Normal': Nothing change,\n'Song Name': change BOTPLAY to This Song you play it,\n'None': make BOTPLAY not visible.",
+			'botPlayName',
+			'string',
+			['Normal', 'Song Name', 'None']);
+		addOption(option);
 		
 		var option:Option = new Option('Icon Bounce',
 			'If checked, icon bounce on angle.',
