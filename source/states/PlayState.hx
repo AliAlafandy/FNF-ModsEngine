@@ -498,6 +498,12 @@ class PlayState extends MusicBeatState
 		timeBar.screenCenter(X);
 		timeBar.alpha = 0;
 		timeBar.visible = showTime;
+		
+		if (ClientPrefs.data.timeBarColor == true)
+		{
+			reloadTimeBarColor();
+		}
+		
 		uiGroup.add(timeBar);
 		uiGroup.add(timeTxt);
 
@@ -725,6 +731,11 @@ class PlayState extends MusicBeatState
 		healthBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
 			FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
 	}
+
+	public function reloadTimeBarColor() {
+		timeBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]));
+	}
+
 
 	public function addCharacterToList(newCharacter:String, type:Int) {
 		switch(type) {
