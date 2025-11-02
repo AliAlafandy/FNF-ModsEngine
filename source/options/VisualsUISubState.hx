@@ -85,6 +85,12 @@ class VisualsUISubState extends BaseOptionsMenu
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
 		addOption(option);
 
+		var option:Option = new Option('Time Bar Coloring',
+			"If checked, make Time Bar Color like Opponent Health Bar.",
+			'timeBarColor',
+			'bool');
+		addOption(option);
+
 		var option:Option = new Option('Flashing Lights',
 			"Uncheck this if you're sensitive to flashing lights!",
 			'flashing',
