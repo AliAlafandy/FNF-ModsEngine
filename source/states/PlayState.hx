@@ -1,4 +1,4 @@
-package origin states;
+package states;
 
 import backend.Highscore;
 import backend.StageData;
@@ -590,7 +590,7 @@ class PlayState extends MusicBeatState
 			case 'Time Bar Only':
 				reloadTimeBarColor();
 			
-			case 'On';
+			case 'On':
 				reloadHUDColor();
 		}
 
