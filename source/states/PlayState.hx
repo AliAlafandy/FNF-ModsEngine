@@ -490,6 +490,7 @@ class PlayState extends MusicBeatState
 		timeTxt.alpha = 0;
 		timeTxt.borderSize = 2;
 		timeTxt.visible = updateTime = showTime;
+		
 		if(ClientPrefs.data.downScroll) timeTxt.y = FlxG.height - 44;
 		if(ClientPrefs.data.timeBarType == 'Song Name') timeTxt.text = SONG.song;
 
@@ -498,11 +499,6 @@ class PlayState extends MusicBeatState
 		timeBar.screenCenter(X);
 		timeBar.alpha = 0;
 		timeBar.visible = showTime;
-		
-		if (ClientPrefs.data.timeBarColor == true)
-		{
-			reloadTimeBarColor();
-		}
 		
 		uiGroup.add(timeBar);
 		uiGroup.add(timeTxt);
@@ -589,6 +585,14 @@ class PlayState extends MusicBeatState
 		comboGroup.cameras = [camHUD];
 
 		startingSong = true;
+
+		switch (ClientPrefs.data.HUDColor) {
+			case 'Time Bar Only':
+				reloadTimeBarColor();
+			
+			case 'On';
+				reloadHUDColor();
+		}
 
 		#if LUA_ALLOWED
 		for (notetype in noteTypes)
@@ -734,6 +738,13 @@ class PlayState extends MusicBeatState
 
 	public function reloadTimeBarColor() {
 		timeBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]));
+	}
+
+	public function reloadHUDColor() {
+		timeTxt.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]));
+		timeBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]));
+		scoreTxt.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]));
+		botplayTxt.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]));
 	}
 
 
