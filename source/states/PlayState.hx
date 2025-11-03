@@ -768,7 +768,9 @@ class PlayState extends MusicBeatState
 	}
 
 	public function reloadTimeBarColor() {
-		if ((FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]) = 0xFF000000)) {
+		var dadColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
+		
+		if (dadColor == 0xFF000000) {
 			timeBar.color = 0xFFFFFFFF;
 		} else {
 			timeBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]));
@@ -776,19 +778,22 @@ class PlayState extends MusicBeatState
 	}
 
 	public function reloadHUDColor() {
-		if ((FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]) = 0xFF000000)) {
-			timeTxt.color = 0xFFFFFFFF;
-			timeBar.color = 0xFFFFFFFF;
-			scoreTxt.color = 0xFFFFFFFF;
-			botplayTxt.color = 0xFFFFFFFF;
-		} else {
-			timeTxt.color = (FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]));
-			timeBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]));
-			scoreTxt.color = (FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]));
-			botplayTxt.color = (FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]));
-		}
-	}
+		var dadColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
 
+    	if (dadColor == 0xFF000000) {
+        	timeTxt.color = 0xFFFFFFFF;
+        	timeBar.color = 0xFFFFFFFF;
+        	scoreTxt.color = 0xFFFFFFFF;
+        	botplayTxt.color = 0xFFFFFFFF;
+    	} else {
+        	var hudColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
+			
+        	timeTxt.color = hudColor;
+        	timeBar.setColors(hudColor);
+        	scoreTxt.color = hudColor;
+        	botplayTxt.color = hudColor;
+    	}
+	}
 
 	public function addCharacterToList(newCharacter:String, type:Int) {
 		switch(type) {
