@@ -184,7 +184,7 @@ class FunkinLua {
 		set('middlescroll', ClientPrefs.data.middleScroll);
 		set('framerate', ClientPrefs.data.framerate);
 		set('ghostTapping', ClientPrefs.data.ghostTapping);
-		set('botplayName', ClientPrefs.data.botPlayName);
+		set('botplayName', ClientPrefs.data.botplayName);
 		set('hideHud', ClientPrefs.data.hideHud);
 		set('timeBarType', ClientPrefs.data.timeBarType);
 		set('hudColor', ClientPrefs.data.hudColor);
