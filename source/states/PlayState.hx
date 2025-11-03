@@ -492,7 +492,16 @@ class PlayState extends MusicBeatState
 		timeTxt.visible = updateTime = showTime;
 		
 		if(ClientPrefs.data.downScroll) timeTxt.y = FlxG.height - 44;
-		if(ClientPrefs.data.timeBarType == 'Song Name') timeTxt.text = SONG.song;
+		if(ClientPrefs.data.timeBarType == 'Song Name')
+		{
+			switch (ClientPrefs.data.botplayName) {
+			case 'Normal':
+				timeTxt.text = SONG.song;
+
+			case 'None':
+				timeTxt.text = SONG.song;
+			}
+		}
 
 		timeBar = new Bar(0, timeTxt.y + (timeTxt.height / 4), 'timeBar', function() return songPercent, 0, 1);
 		timeBar.scrollFactor.set();
@@ -570,14 +579,6 @@ class PlayState extends MusicBeatState
 		scoreTxt.visible = !ClientPrefs.data.hideHud;
 		updateScore(false);
 		uiGroup.add(scoreTxt);
-
-		switch (ClientPrefs.data.botPlayName) {
-			case 'Normal':
-				botPlayTxt.text = "BOTPLAY";
-			
-			case 'Song Name':
-				botPlayTxt.text = SONG.song;
-		}
 		
 		botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -589,6 +590,14 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.data.downScroll)
 		{
 			botplayTxt.y = timeBar.y - 78;
+		}
+
+		if switch (ClientPrefs.data.botplayName) {
+			case 'Normal':
+				botplayTxt.text = "BOTPLAY";
+			
+			case 'Song Name':
+				botplayTxt.text = SONG.song;
 		}
 
 		uiGroup.cameras = [camHUD];
