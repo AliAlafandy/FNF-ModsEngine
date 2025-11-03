@@ -573,10 +573,10 @@ class PlayState extends MusicBeatState
 
 		switch (ClientPrefs.data.botPlayName) {
 			case 'Normal':
-				botplayTxt.text = "BOTPLAY";
+				botPlayTxt.text = "BOTPLAY";
 			
 			case 'Song Name':
-				botplayTxt.text = SONG.song;
+				botPlayTxt.text = SONG.song;
 		}
 		
 		botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "", 32);
