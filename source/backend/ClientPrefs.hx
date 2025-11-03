@@ -54,7 +54,7 @@ import states.TitleState;
 		[0xFFFF884E, 0xFFFFFAF5, 0xFF6C0000]];
 
 	public var ghostTapping:Bool = true;
-	public var botPlayName:String = 'Normal';
+	public var botplayName:String = 'Normal';
 	public var timeBarType:String = 'Time Left';
 	public var hudColor:String = 'Off';
 	public var iconBops:Bool = true;
