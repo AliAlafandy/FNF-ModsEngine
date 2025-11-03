@@ -495,11 +495,11 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.data.timeBarType == 'Song Name')
 		{
 			switch (ClientPrefs.data.botplayName) {
-			case 'Normal':
-				timeTxt.text = SONG.song;
+				case 'Normal':
+					timeTxt.text = SONG.song;
 
-			case 'None':
-				timeTxt.text = SONG.song;
+				case 'None':
+					timeTxt.text = SONG.song;
 			}
 		}
 
@@ -579,25 +579,36 @@ class PlayState extends MusicBeatState
 		scoreTxt.visible = !ClientPrefs.data.hideHud;
 		updateScore(false);
 		uiGroup.add(scoreTxt);
-		
-		botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "", 32);
-		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		botplayTxt.scrollFactor.set();
-		botplayTxt.borderSize = 1.25;
-		botplayTxt.visible = cpuControlled;
-		uiGroup.add(botplayTxt);
+
+		switch (ClientPrefs.data.botplayName) {
+			case 'Normal':
+				botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "BOTPLAY", 32);
+				botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+				botplayTxt.scrollFactor.set();
+				botplayTxt.borderSize = 1.25;
+				botplayTxt.visible = cpuControlled;
+				uiGroup.add(botplayTxt);
+			
+			case 'Song Name':
+				botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, SONG.song, 32);
+				botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+				botplayTxt.scrollFactor.set();
+				botplayTxt.borderSize = 1.25;
+				botplayTxt.visible = cpuControlled;
+				uiGroup.add(botplayTxt);
+
+			case 'None':
+				botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "", 32);
+				botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+				botplayTxt.scrollFactor.set();
+				botplayTxt.borderSize = 1.25;
+				botplayTxt.visible = cpuControlled;
+				uiGroup.add(botplayTxt);
+		}
 		
 		if(ClientPrefs.data.downScroll)
 		{
 			botplayTxt.y = timeBar.y - 78;
-		}
-
-		if switch (ClientPrefs.data.botplayName) {
-			case 'Normal':
-				botplayTxt.text = "BOTPLAY";
-			
-			case 'Song Name':
-				botplayTxt.text = SONG.song;
 		}
 
 		uiGroup.cameras = [camHUD];
