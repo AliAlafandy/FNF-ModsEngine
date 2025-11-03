@@ -36,7 +36,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 
 		var option:Option = new Option('Bot Play Name:',
 			"'Normal': Nothing change,\n'Song Name': change BOTPLAY to This Song you play it,\n'None': make BOTPLAY not visible.",
-			'botPlayName',
+			'botplayName',
 			'string',
 			['Normal', 'Song Name', 'None']);
 		addOption(option);
