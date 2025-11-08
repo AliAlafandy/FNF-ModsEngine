@@ -643,6 +643,18 @@ class FreeplayState extends MusicBeatState
 			item.alpha = 0.6;
 			if (item.targetY == curSelected)
 				item.alpha = 1;
+
+			if (isMenuItemCentered)
+			{
+				if (controls.UI_UP_P)
+				{
+					songText.y = songText.y / 2;
+				}
+				if (controls.UI_DOWN_P)
+				{
+					songText.y = songText.y * 2;
+				}
+			}
 		}
 		
 		Mods.currentModDirectory = songs[curSelected].folder;
