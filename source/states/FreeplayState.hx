@@ -53,6 +53,8 @@ class FreeplayState extends MusicBeatState
 
 	var player:MusicPlayer;
 
+	public var isMenuItemCentered:Bool = false;
+
 	override function create()
 	{
 		//Paths.clearStoredMemory();
