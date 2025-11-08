@@ -177,7 +177,7 @@ class Alphabet extends FlxSpriteGroup
 				y = FlxMath.lerp((targetY * 1.3 * distancePerItem.y) + startPosition.y, y, lerpVal);
 		}
 		
-		if (isMenuItemCenter)
+		if (isMenuItemCentered)
         {
             var scaledY = FlxMath.remapToRange(targetY, 0, 1, 0, 1.3);
             var yTarget = (scaledY * yMult) + (FlxG.height * 0.48) + yAdd;
