@@ -7,6 +7,8 @@ import backend.Song;
 import objects.HealthIcon;
 import objects.MusicPlayer;
 
+import objects.Alphabet;
+
 import substates.GameplayChangersSubstate;
 import substates.ResetScoreSubState;
 
@@ -644,7 +646,7 @@ class FreeplayState extends MusicBeatState
 			if (item.targetY == curSelected)
 				item.alpha = 1;
 
-			if (Alphabet.isMenuItemCentered)
+			if (isMenuItemCentered)
 			{
 				if (controls.UI_UP_P)
 				{
