@@ -644,7 +644,7 @@ class FreeplayState extends MusicBeatState
 			if (item.targetY == curSelected)
 				item.alpha = 1;
 
-			if (isMenuItemCentered)
+			if (Alphabet.isMenuItemCentered)
 			{
 				if (controls.UI_UP_P)
 				{
