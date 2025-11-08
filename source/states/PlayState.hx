@@ -38,10 +38,15 @@ import openfl.filters.ShaderFilter;
 #end
 
 #if VIDEOS_ALLOWED
-#if (hxCodec >= "3.0.0") import hxcodec.flixel.FlxVideo as VideoHandler;
-#elseif (hxCodec >= "2.6.1") import hxcodec.VideoHandler as VideoHandler;
-#elseif (hxCodec == "2.6.0") import VideoHandler;
-#else import vlc.MP4Handler as VideoHandler; #end
+#if (hxCodec >= "3.0.0")
+import hxcodec.flixel.FlxVideo as VideoHandler;
+#elseif (hxCodec >= "2.6.1")
+import hxcodec.VideoHandler as VideoHandler;
+#elseif (hxCodec == "2.6.0")
+import VideoHandler;
+#else
+import vlc.MP4Handler as VideoHandler;
+#end
 #end
 
 import objects.Note.EventNote;
@@ -770,7 +775,7 @@ class PlayState extends MusicBeatState
 	public function reloadTimeBarColor() {
 		var dadColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
 		
-		if (dadColor == 0xFF000000) {
+		if (dadColor == FlxColor.BLACK) {
 			timeBar.setColors(0xFFFFFFFF);
 		} else {
 			timeBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]));
@@ -780,7 +785,7 @@ class PlayState extends MusicBeatState
 	public function reloadHUDColor() {
 		var dadColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
 
-    	if (dadColor == 0xFF000000) {
+    	if (dadColor == FlxColor.BLACK) {
         	timeTxt.color = 0xFFFFFFFF;
         	timeBar.setColors(0xFFFFFFFF);
         	scoreTxt.color = 0xFFFFFFFF;
