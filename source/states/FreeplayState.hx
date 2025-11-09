@@ -635,6 +635,19 @@ class FreeplayState extends MusicBeatState
 			});
 		}
 
+		var transformColor:Int = songs[curSelected].color;
+		if(transformColor != intendColor) {
+			if(rgbTween != null) {
+				colorTween.cancel();
+			}
+			intendColor = transformColor;
+			rgbTween = FlxTween.color(grid, 1, grid.color, intendColor, {
+				onComplete: function(twn:FlxTween) {
+					rgbTween = null;
+				}
+			});
+		}
+		
 		// selector.y = (70 * curSelected) + 30;
 
 		var bullShit:Int = 0;
