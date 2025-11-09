@@ -15,8 +15,13 @@ class CreditsState extends MusicBeatState
 
 	var bg:FlxSprite;
 	var descText:FlxText;
+	
 	var intendedColor:FlxColor;
 	var colorTween:FlxTween;
+
+	var intendColor:FlxColor;
+	var rgbTween:FlxTween;
+	
 	var descBox:AttachedSprite;
 
 	var offsetThing:Float = -75;
@@ -34,11 +39,20 @@ class CreditsState extends MusicBeatState
 		add(bg);
 		bg.screenCenter();
 
-		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33000000, 0x0));
+		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, creditColor, 0x0));
 		grid.velocity.set(40, 40);
 		grid.alpha = 0;
 		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
 		add(grid);
+
+		var creditColor = CoolUtil.colorFromString(creditsStuff[curSelected][4])
+
+		if (creditColor == FlxColor.BLACK)
+		{
+			grid.color = 0x33FFFFFF;
+		} else {
+			grid.color = 0x33000000;
+		}
 		
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
@@ -306,6 +320,20 @@ class CreditsState extends MusicBeatState
 			colorTween = FlxTween.color(bg, 1, bg.color, intendedColor, {
 				onComplete: function(twn:FlxTween) {
 					colorTween = null;
+				}
+			});
+		}
+
+		var transformColor:Int = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
+		//trace('The Grid color is: $transformColor');
+		if(transformColor != intendColor) {
+			if(rgbTween != null) {
+				colorTween.cancel();
+			}
+			intendColor = transformColor;
+			rgbTween = FlxTween.color(grid, 1, grid.color, intendColor, {
+				onComplete: function(twn:FlxTween) {
+					rgbTween = null;
 				}
 			});
 		}
