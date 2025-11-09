@@ -194,6 +194,15 @@ class Alphabet extends FlxSpriteGroup
             } else {
                 screenCenter(X);
             }
+
+			if (controls.UI_UP_P)
+			{
+				y = startPosition.y / 2;
+			}
+			if (controls.UI_DOWN_P)
+			{
+				y = startPosition.y * 2;
+			}
 		}
 		
 		super.update(elapsed);
