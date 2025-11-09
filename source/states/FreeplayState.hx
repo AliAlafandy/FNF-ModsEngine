@@ -96,11 +96,20 @@ class FreeplayState extends MusicBeatState
 		add(bg);
 		bg.screenCenter();
 
-		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33000000, 0x0));
+		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, freeColor, 0x0));
 		grid.velocity.set(40, 40);
 		grid.alpha = 0;
 		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
 		add(grid);
+
+		var freeColor = FlxColor.fromRGB(colors[0], colors[2], colors[2]);
+		
+		if (freeColor == FlxColor.BLACK)
+		{
+			grid.color = 0x33FFFFFF;
+		} else {
+			grid.color = 0x33000000;
+		}
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
