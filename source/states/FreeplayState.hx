@@ -7,8 +7,6 @@ import backend.Song;
 import objects.HealthIcon;
 import objects.MusicPlayer;
 
-import objects.Alphabet;
-
 import substates.GameplayChangersSubstate;
 import substates.ResetScoreSubState;
 
@@ -52,8 +50,6 @@ class FreeplayState extends MusicBeatState
 	var bottomBG:FlxSprite;
 
 	var player:MusicPlayer;
-
-	public var isMenuItemCentered:Bool = false;
 
 	override function create()
 	{
@@ -285,11 +281,15 @@ class FreeplayState extends MusicBeatState
 				{
 					changeSelection(-shiftMult);
 					holdTime = 0;
+
+					songText.y = songText.y / 2;
 				}
 				if (controls.UI_DOWN_P)
 				{
 					changeSelection(shiftMult);
 					holdTime = 0;
+
+					songText.y = songText.y * 2;
 				}
 
 				if(controls.UI_DOWN || controls.UI_UP)
@@ -647,18 +647,6 @@ class FreeplayState extends MusicBeatState
 			item.alpha = 0.6;
 			if (item.targetY == curSelected)
 				item.alpha = 1;
-
-			if (isMenuItemCentered)
-			{
-				if (controls.UI_UP_P)
-				{
-					songText.y = songText.y / 2;
-				}
-				if (controls.UI_DOWN_P)
-				{
-					songText.y = songText.y * 2;
-				}
-			}
 		}
 		
 		Mods.currentModDirectory = songs[curSelected].folder;
