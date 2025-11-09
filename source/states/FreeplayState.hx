@@ -118,6 +118,15 @@ class FreeplayState extends MusicBeatState
 			songText.scaleX = Math.min(1, 980 / songText.width);
 			// songText.snapToPosition();
 
+			if (controls.UI_UP_P)
+			{
+				songText.y = songText.y / 2;
+			}
+			if (controls.UI_DOWN_P)
+			{
+				songText.y = songText.y * 2;
+			}
+
 			Mods.currentModDirectory = songs[i].folder;
 			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
 			icon.sprTracker = songText;
@@ -281,15 +290,11 @@ class FreeplayState extends MusicBeatState
 				{
 					changeSelection(-shiftMult);
 					holdTime = 0;
-
-					songText.y = songText.y / 2;
 				}
 				if (controls.UI_DOWN_P)
 				{
 					changeSelection(shiftMult);
 					holdTime = 0;
-
-					songText.y = songText.y * 2;
 				}
 
 				if(controls.UI_DOWN || controls.UI_UP)
