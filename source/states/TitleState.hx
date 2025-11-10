@@ -214,12 +214,15 @@ class TitleState extends MusicBeatState
 		// bg.updateHitbox();
 		add(bg);
 
-		switch (ClientPrefs.data.themes) {
-			case 'Mods Engine':
-				grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
+		if (ClientPrefs.data.gridTitle == true)
+		{
+			switch (ClientPrefs.data.themes) {
+				case 'Mods Engine':
+					grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
 			
-			case 'Psych Engine':
-				grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+				case 'Psych Engine':
+					grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+			}
 		}
 
 		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
