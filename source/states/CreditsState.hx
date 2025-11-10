@@ -16,7 +16,7 @@ class CreditsState extends MusicBeatState
 	var bg:FlxSprite;
 	var descText:FlxText;
 
-	var creditColor = CoolUtil.colorFromString(creditsStuff[curSelected][4])
+	var creditColor = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
 	
 	var intendedColor:FlxColor;
 	var colorTween:FlxTween;
