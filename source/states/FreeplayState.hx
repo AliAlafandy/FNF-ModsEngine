@@ -640,21 +640,11 @@ class FreeplayState extends MusicBeatState
 
 		for (item in grpSongs.members)
 		{
+			item.targetY = bullShit - curSelected;
 			bullShit++;
 			item.alpha = 0.6;
-			if (item.targetY == curSelected)
-			{
+			if (item.targetY == 0)
 				item.alpha = 1;
-
-				if (controls.UI_UP_P)
-				{
-					item.y >= curSelected + 5;
-				}
-				if (controls.UI_DOWN_P)
-				{
-					item.y >= curSelected - 5;
-				}
-			}
 		}
 		
 		Mods.currentModDirectory = songs[curSelected].folder;
