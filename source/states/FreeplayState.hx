@@ -43,9 +43,6 @@ class FreeplayState extends MusicBeatState
 	var intendedColor:Int;
 	var colorTween:FlxTween;
 
-	var intendColor:Int;
-	var rgbTween:FlxTween;
-
 	var missingTextBG:FlxSprite;
 	var missingText:FlxText;
 
@@ -100,15 +97,7 @@ class FreeplayState extends MusicBeatState
 		add(bg);
 		bg.screenCenter();
 
-		var freeColor = song[2];
-
-		if (freeColor == FlxColor.BLACK)
-		{
-			var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
-		} else {
-			var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33000000, 0x0));
-		}
-		
+		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
 		grid.velocity.set(40, 40);
 		grid.alpha = 0;
 		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
@@ -638,19 +627,6 @@ class FreeplayState extends MusicBeatState
 			});
 		}
 
-		var transformColor:Int = songs[curSelected].color;
-		if(transformColor != intendColor) {
-			if(rgbTween != null) {
-				colorTween.cancel();
-			}
-			intendColor = transformColor;
-			rgbTween = FlxTween.color(grid, 1, grid.color, intendColor, {
-				onComplete: function(twn:FlxTween) {
-					rgbTween = null;
-				}
-			});
-		}
-		
 		selector.y = (70 * curSelected) + 30;
 
 		var bullShit:Int = 0;
