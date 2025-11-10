@@ -11,6 +11,9 @@ import flixel.group.FlxGroup;
 import flixel.input.gamepad.FlxGamepad;
 import haxe.Json;
 
+import flixel.addons.display.FlxBackdrop;
+import flixel.addons.display.FlxGridOverlay;
+
 import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
@@ -42,6 +45,8 @@ class TitleState extends MusicBeatState
 	public static var initialized:Bool = false;
 
 	public static var checkingToastMessage:Bool = false;
+
+	public var grid:FlxBackdrop;
 
 	var blackScreen:FlxSprite;
 	var credGroup:FlxGroup;
@@ -208,6 +213,14 @@ class TitleState extends MusicBeatState
 		// bg.setGraphicSize(Std.int(bg.width * 0.6));
 		// bg.updateHitbox();
 		add(bg);
+
+		switch (ClientPrefs.data.themes) {
+			case 'Mods Engine':
+				grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
+			
+			case 'Psych Engine':
+				grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+		}
 
 		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
