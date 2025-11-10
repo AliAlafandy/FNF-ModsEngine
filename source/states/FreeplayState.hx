@@ -86,8 +86,6 @@ class FreeplayState extends MusicBeatState
 			for (song in leWeek.songs)
 			{
 				var colors:Array<Int> = song[2];
-				var freeColor = FlxColor.fromRGB(colors[0], colors[1], colors[2]);
-
 				if(colors == null || colors.length < 3)
 				{
 					colors = [146, 113, 253];
@@ -101,6 +99,8 @@ class FreeplayState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
 		bg.screenCenter();
+
+		var freeColor = song[2];
 
 		if (freeColor == FlxColor.BLACK)
 		{
