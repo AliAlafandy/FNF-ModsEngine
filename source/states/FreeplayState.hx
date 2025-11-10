@@ -46,8 +46,6 @@ class FreeplayState extends MusicBeatState
 	var intendColor:Int;
 	var rgbTween:FlxTween;
 
-	var freeColor = FlxColor.fromRGB(colors[0], colors[1], colors[2]);
-
 	var missingTextBG:FlxSprite;
 	var missingText:FlxText;
 
@@ -88,6 +86,8 @@ class FreeplayState extends MusicBeatState
 			for (song in leWeek.songs)
 			{
 				var colors:Array<Int> = song[2];
+				var freeColor = FlxColor.fromRGB(colors[0], colors[1], colors[2]);
+
 				if(colors == null || colors.length < 3)
 				{
 					colors = [146, 113, 253];
