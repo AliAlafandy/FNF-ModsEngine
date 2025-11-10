@@ -39,9 +39,12 @@ class FreeplayState extends MusicBeatState
 	private var iconArray:Array<HealthIcon> = [];
 
 	var bg:FlxSprite;
+	
 	var intendedColor:Int;
-	var intendColor:Int;
 	var colorTween:FlxTween;
+
+	var intendColor:Int;
+	var rgbTween:FlxTween;
 
 	var freeColor = FlxColor.fromRGB(colors[0], colors[1], colors[2]);
 
