@@ -117,7 +117,7 @@ class FreeplayState extends MusicBeatState
 
 			// songText.x = FlxG.width / 2 - (songText.width + 150) / 2;
 			songText.scaleX = Math.min(1, 980 / songText.width);
-			// songText.snapToPosition();
+			songText.snapToPosition();
 
 			Mods.currentModDirectory = songs[i].folder;
 			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
