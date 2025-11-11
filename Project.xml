@@ -151,8 +151,8 @@
 	</section>
 	
 	<!-- For all Windows platforms -->
-	<app path="export/windows/64bits/bin" if="64bits" />
-	<app path="export/windows/32bits/bin/" if="32bits" />
+	<app path="export/64bits/release/windows/bin" if="64bits" />
+	<app path="export/32bits/release/windows/bin" if="32bits" />
 	
 	<!-- Do whatever you want I'm tired uninstall and install everytime -->
 	<certificate path="key.keystore" password="psychengine" alias="psychport" alias-password="psychengine" if="android" unless="debug" />
