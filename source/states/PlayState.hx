@@ -1947,7 +1947,7 @@ class PlayState extends MusicBeatState
 
 	var iconsAnimations:Bool = true;
 	function set_health(value:Float):Float
-{
+	{
 	if (!iconsAnimations || healthBar == null || !healthBar.enabled || healthBar.valueFunction == null)
 	{
 		health = value;
