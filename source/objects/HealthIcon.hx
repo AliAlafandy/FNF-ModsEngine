@@ -56,16 +56,47 @@ class HealthIcon extends FlxSprite
 			isAnimated = true;
 			frames = Paths.getSparrowAtlas(baseName, allowGPU);
 
-			// Try common animation names
-			if (frames.getByName('icon win') != null)
-				animation.addByPrefix('winning', 'icon win', 24, true);
-			if (frames.getByName('icon lose') != null)
-				animation.addByPrefix('losing', 'icon lose', 24, true);
-			if (frames.getByName('icon idle') != null)
-				animation.addByPrefix('idle', 'icon idle', 24, true);
+			// 🔹 Add flexible animation prefix matching
+			var hasIdle = false;
+			var hasLosing = false;
+			var hasWinning = false;
 
-			if (animation.getByName('idle') != null)
+			// Try all common name styles automatically
+			for (anim in ['idle', 'icon idle'])
+			{
+				if (frames.getByName(anim + '0000') != null || frames.getByName(anim) != null)
+				{
+					animation.addByPrefix('idle', anim, 24, true);
+					hasIdle = true;
+					break;
+				}
+			}
+			for (anim in ['losing', 'icon lose'])
+			{
+				if (frames.getByName(anim + '0000') != null || frames.getByName(anim) != null)
+				{
+					animation.addByPrefix('losing', anim, 24, true);
+					hasLosing = true;
+					break;
+				}
+			}
+			for (anim in ['winning', 'icon win'])
+			{
+				if (frames.getByName(anim + '0000') != null || frames.getByName(anim) != null)
+				{
+					animation.addByPrefix('winning', anim, 24, true);
+					hasWinning = true;
+					break;
+				}
+			}
+
+			// Play idle by default
+			if (hasIdle)
 				animation.play('idle');
+			else if (hasWinning)
+				animation.play('winning');
+			else if (hasLosing)
+				animation.play('losing');
 
 			iconOffsets[0] = (width - 150) / 2;
 			iconOffsets[1] = (height - 150) / 2;
