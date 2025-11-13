@@ -1,8 +1,6 @@
 package objects;
 
-import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
-import backend.Paths;
 
 class HealthIcon extends FlxSprite
 {
@@ -10,7 +8,7 @@ class HealthIcon extends FlxSprite
 	private var isOldIcon:Bool = false;
 	private var isPlayer:Bool = false;
 	private var char:String = '';
-	private var isAnimated:Bool = false;
+	public var isAnimated:Bool = false;
 
 	private var iconOffsets:Array<Float> = [0, 0];
 
@@ -43,70 +41,39 @@ class HealthIcon extends FlxSprite
 		var iconPath:String = 'images/' + baseName + '.png';
 		var xmlPath:String = 'images/' + baseName + '.xml';
 
-		// Try fallback paths
+		// fallback if missing
 		if (!Paths.fileExists(iconPath, IMAGE))
 			baseName = 'icons/icon-' + char;
 		if (!Paths.fileExists('images/' + baseName + '.png', IMAGE))
 			baseName = 'icons/icon-face';
 
-		// --- Check if XML exists (animated icon support) ---
+		// ✅ Animated icon (XML)
 		if (Paths.fileExists('images/' + baseName + '.xml', TEXT))
 		{
-			// Animated icon
 			isAnimated = true;
 			frames = Paths.getSparrowAtlas(baseName, allowGPU);
 
-			// 🔹 Add flexible animation prefix matching
-			var hasIdle = false;
-			var hasLosing = false;
-			var hasWinning = false;
+			// Register animations based on frame name prefixes
+			if (frames.getByName("idle0000") != null)
+				animation.addByPrefix("idle", "idle", 24, true);
+			if (frames.getByName("losing0000") != null)
+				animation.addByPrefix("losing", "losing", 24, true);
+			if (frames.getByName("winning0000") != null)
+				animation.addByPrefix("winning", "winning", 24, true);
 
-			// Try all common name styles automatically
-			for (anim in ['idle', 'icon idle'])
-			{
-				if (frames.getByName(anim + '0000') != null || frames.getByName(anim) != null)
-				{
-					animation.addByPrefix('idle', anim, 24, true);
-					hasIdle = true;
-					break;
-				}
-			}
-			for (anim in ['losing', 'icon lose'])
-			{
-				if (frames.getByName(anim + '0000') != null || frames.getByName(anim) != null)
-				{
-					animation.addByPrefix('losing', anim, 24, true);
-					hasLosing = true;
-					break;
-				}
-			}
-			for (anim in ['winning', 'icon win'])
-			{
-				if (frames.getByName(anim + '0000') != null || frames.getByName(anim) != null)
-				{
-					animation.addByPrefix('winning', anim, 24, true);
-					hasWinning = true;
-					break;
-				}
-			}
-
-			// Play idle by default
-			if (hasIdle)
-				animation.play('idle');
-			else if (hasWinning)
-				animation.play('winning');
-			else if (hasLosing)
-				animation.play('losing');
+			// Default to idle animation
+			if (animation.exists("idle"))
+				animation.play("idle");
 
 			iconOffsets[0] = (width - 150) / 2;
 			iconOffsets[1] = (height - 150) / 2;
 		}
 		else
 		{
-			// Static icon (2 or 3 frames)
+			// Static 2–3 frame icon
 			var graphic = Paths.image(baseName, allowGPU);
 
-			var frameWidth:Int = Math.floor(graphic.height); // Square frame
+			var frameWidth:Int = Math.floor(graphic.height);
 			var frameCount:Int = Math.floor(graphic.width / frameWidth);
 			if (frameCount < 2) frameCount = 2;
 
@@ -123,7 +90,7 @@ class HealthIcon extends FlxSprite
 			iconOffsets[1] = (height - 150) / 2;
 		}
 
-		// Antialias settings
+		// Antialias
 		if (char.endsWith('-pixel'))
 			antialiasing = false;
 		else
