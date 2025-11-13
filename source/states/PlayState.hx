@@ -1946,45 +1946,77 @@ class PlayState extends MusicBeatState
 	}
 
 	var iconsAnimations:Bool = true;
-	function set_health(value:Float):Float // You can alter how icon animations work here
+	function set_health(value:Float):Float
 	{
-		if(!iconsAnimations || healthBar == null || !healthBar.enabled || healthBar.valueFunction == null)
-		{
-			health = value;
-			return health;
-		}
-
-		// update health bar
+	if (!iconsAnimations || healthBar == null || !healthBar.enabled || healthBar.valueFunction == null)
+	{
 		health = value;
-		var newPercent:Null<Float> = FlxMath.remapToRange(FlxMath.bound(healthBar.valueFunction(), healthBar.bounds.min, healthBar.bounds.max), healthBar.bounds.min, healthBar.bounds.max, 0, 100);
-		healthBar.percent = (newPercent != null ? newPercent : 0);
+		return health;
+	}
 
-		// Player icon (right)
+	// update health bar
+	health = value;
+	var newPercent:Null<Float> = FlxMath.remapToRange(
+		FlxMath.bound(healthBar.valueFunction(), healthBar.bounds.min, healthBar.bounds.max),
+		healthBar.bounds.min, healthBar.bounds.max, 0, 100
+	);
+	healthBar.percent = (newPercent != null ? newPercent : 0);
+
+	// Helper to check if icon is animated
+	inline function isAnimated(icon:HealthIcon)
+		return icon.animation != null && icon.animation.getByName('idle') != null;
+
+	// Player icon (right)
+	if (isAnimated(iconP1))
+	{
+		if (healthBar.percent > 80 && iconP1.animation.exists('winning'))
+			iconP1.animation.play('winning');
+		else if (healthBar.percent < 20 && iconP1.animation.exists('losing'))
+			iconP1.animation.play('losing');
+		else if (iconP1.animation.exists('idle'))
+			iconP1.animation.play('idle');
+	}
+	else // Static 2-3 frame icons
+	{
 		if (iconP1.animation.curAnim != null && iconP1.animation.curAnim.frames.length >= 3)
 		{
-		if (healthBar.percent > 80)
+			if (healthBar.percent > 80)
 				iconP1.animation.curAnim.curFrame = 2; // Winning face
-		else if (healthBar.percent < 20)
+			else if (healthBar.percent < 20)
 				iconP1.animation.curAnim.curFrame = 1; // Losing face
-		else
+			else
 				iconP1.animation.curAnim.curFrame = 0; // Neutral face
 		}
 		else
-    	iconP1.animation.curAnim.curFrame = (healthBar.percent < 20) ? 0 : 1;
+			iconP1.animation.curAnim.curFrame = (healthBar.percent < 20) ? 0 : 1;
+	}
 
-		// Opponent icon (left)
+	// Opponent icon (left)
+	if (isAnimated(iconP2))
+	{
+		if (healthBar.percent > 80 && iconP2.animation.exists('losing'))
+			iconP2.animation.play('losing');
+		else if (healthBar.percent < 20 && iconP2.animation.exists('winning'))
+			iconP2.animation.play('winning');
+		else if (iconP2.animation.exists('idle'))
+			iconP2.animation.play('idle');
+	}
+	else
+	{
 		if (iconP2.animation.curAnim != null && iconP2.animation.curAnim.frames.length >= 3)
 		{
-		if (healthBar.percent > 80)
-			   iconP2.animation.curAnim.curFrame = 1; // Losing face
-		else if (healthBar.percent < 20)
-			   iconP2.animation.curAnim.curFrame = 2; // Winning face
-		else
-			   iconP2.animation.curAnim.curFrame = 0; // Neutral face
+			if (healthBar.percent > 80)
+				iconP2.animation.curAnim.curFrame = 1; // Losing face
+			else if (healthBar.percent < 20)
+				iconP2.animation.curAnim.curFrame = 2; // Winning face
+			else
+				iconP2.animation.curAnim.curFrame = 0; // Neutral face
 		}
 		else
-		iconP2.animation.curAnim.curFrame = (healthBar.percent > 80) ? 0 : 1;
-		return health;
+			iconP2.animation.curAnim.curFrame = (healthBar.percent > 80) ? 0 : 1;
+	}
+
+	return health;
 	}
 
 	function openPauseMenu()
