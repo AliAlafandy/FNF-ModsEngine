@@ -1947,14 +1947,14 @@ class PlayState extends MusicBeatState
 
 	var iconsAnimations:Bool = true;
 	function set_health(value:Float):Float
-	{
+{
 	if (!iconsAnimations || healthBar == null || !healthBar.enabled || healthBar.valueFunction == null)
 	{
 		health = value;
 		return health;
 	}
 
-	// update health bar
+	// Update health bar
 	health = value;
 	var newPercent:Null<Float> = FlxMath.remapToRange(
 		FlxMath.bound(healthBar.valueFunction(), healthBar.bounds.min, healthBar.bounds.max),
@@ -1962,62 +1962,81 @@ class PlayState extends MusicBeatState
 	);
 	healthBar.percent = (newPercent != null ? newPercent : 0);
 
-	// Helper to check if icon is animated
-	inline function isAnimated(icon:HealthIcon)
-		return icon.animation != null && icon.animation.getByName('idle') != null;
+	inline function isAnimated(icon:HealthIcon):Bool
+		return icon != null && icon.animation != null && (icon.animation.exists("idle") || icon.animation.exists("winning") || icon.animation.exists("losing"));
 
-	// Player icon (right)
-	if (isAnimated(iconP1))
+	// --- PLAYER ICON (right) ---
+	if (iconP1 != null)
 	{
-		if (healthBar.percent > 80 && iconP1.animation.exists('winning'))
-			iconP1.animation.play('winning');
-		else if (healthBar.percent < 20 && iconP1.animation.exists('losing'))
-			iconP1.animation.play('losing');
-		else if (iconP1.animation.exists('idle'))
-			iconP1.animation.play('idle');
-	}
-	else // Static 2-3 frame icons
-	{
-		if (iconP1.animation.curAnim != null && iconP1.animation.curAnim.frames.length >= 3)
+		if (isAnimated(iconP1))
 		{
-			if (healthBar.percent > 80)
-				iconP1.animation.curAnim.curFrame = 2; // Winning face
-			else if (healthBar.percent < 20)
-				iconP1.animation.curAnim.curFrame = 1; // Losing face
-			else
-				iconP1.animation.curAnim.curFrame = 0; // Neutral face
+			var anim:String = "idle";
+			if (healthBar.percent > 80 && iconP1.animation.exists("winning"))
+				anim = "winning";
+			else if (healthBar.percent < 20 && iconP1.animation.exists("losing"))
+				anim = "losing";
+
+			if (iconP1.animation.curAnim == null || iconP1.animation.curAnim.name != anim)
+				iconP1.animation.play(anim);
 		}
-		else
-			iconP1.animation.curAnim.curFrame = (healthBar.percent < 20) ? 0 : 1;
+		else if (iconP1.animation != null && iconP1.animation.curAnim != null)
+		{
+			var frames = iconP1.animation.curAnim.frames;
+			var numFrames = (frames != null) ? frames.length : 2;
+
+			if (numFrames >= 3)
+			{
+				if (healthBar.percent > 80)
+					iconP1.animation.curAnim.curFrame = 2;
+				else if (healthBar.percent < 20)
+					iconP1.animation.curAnim.curFrame = 1;
+				else
+					iconP1.animation.curAnim.curFrame = 0;
+			}
+			else
+			{
+				iconP1.animation.curAnim.curFrame = (healthBar.percent < 20) ? 0 : 1;
+			}
+		}
 	}
 
-	// Opponent icon (left)
-	if (isAnimated(iconP2))
+	// --- OPPONENT ICON (left) ---
+	if (iconP2 != null)
 	{
-		if (healthBar.percent > 80 && iconP2.animation.exists('losing'))
-			iconP2.animation.play('losing');
-		else if (healthBar.percent < 20 && iconP2.animation.exists('winning'))
-			iconP2.animation.play('winning');
-		else if (iconP2.animation.exists('idle'))
-			iconP2.animation.play('idle');
-	}
-	else
-	{
-		if (iconP2.animation.curAnim != null && iconP2.animation.curAnim.frames.length >= 3)
+		if (isAnimated(iconP2))
 		{
-			if (healthBar.percent > 80)
-				iconP2.animation.curAnim.curFrame = 1; // Losing face
-			else if (healthBar.percent < 20)
-				iconP2.animation.curAnim.curFrame = 2; // Winning face
-			else
-				iconP2.animation.curAnim.curFrame = 0; // Neutral face
+			var anim:String = "idle";
+			if (healthBar.percent > 80 && iconP2.animation.exists("losing"))
+				anim = "losing";
+			else if (healthBar.percent < 20 && iconP2.animation.exists("winning"))
+				anim = "winning";
+
+			if (iconP2.animation.curAnim == null || iconP2.animation.curAnim.name != anim)
+				iconP2.animation.play(anim);
 		}
-		else
-			iconP2.animation.curAnim.curFrame = (healthBar.percent > 80) ? 0 : 1;
+		else if (iconP2.animation != null && iconP2.animation.curAnim != null)
+		{
+			var frames = iconP2.animation.curAnim.frames;
+			var numFrames = (frames != null) ? frames.length : 2;
+
+			if (numFrames >= 3)
+			{
+				if (healthBar.percent > 80)
+					iconP2.animation.curAnim.curFrame = 1;
+				else if (healthBar.percent < 20)
+					iconP2.animation.curAnim.curFrame = 2;
+				else
+					iconP2.animation.curAnim.curFrame = 0;
+			}
+			else
+			{
+				iconP2.animation.curAnim.curFrame = (healthBar.percent > 80) ? 0 : 1;
+			}
+		}
 	}
 
 	return health;
-	}
+}
 
 	function openPauseMenu()
 	{
