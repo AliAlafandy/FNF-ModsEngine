@@ -12,7 +12,7 @@ import options.OptionsState;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var modsEngineVersion:String = '6.9.9'; // Latest Version bcuz v1.0.0 so late these today and This is also used for Discord RPC
+	public static var modsEngineVersion:String = '9.6.6'; // Latest Version bcuz v1.0.0 so late these today and This is also used for Discord RPC
 	public static var psychEngineVersion:String = '0.7.3';
 	public static var curSelected:Int = 0;
 
