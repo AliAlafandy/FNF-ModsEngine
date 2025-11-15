@@ -76,8 +76,8 @@ jobs:
       - name: Publish The Release
         uses: softprops/action-gh-release@v2
         with:
-          name: "6.9.9"
-          tag_name: "6.9.9"
+          name: "9.6.6"
+          tag_name: "9.6.6"
           make_latest: false
           files: |
             Windows.zip
