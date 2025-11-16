@@ -114,16 +114,15 @@ class MainMenuState extends MusicBeatState
 			menuItem.x = 95;
 		}
 
-		modsEngineLogo = new FlxSprite(0).loadGraphic(Paths.image('modsEngineLogo'));
+		modsEngineLogo = new FlxSprite(0).loadGraphic(Paths.image('modsEngineLogoOld'));
 		modsEngineLogo.scrollFactor.x = 0;
 		modsEngineLogo.scrollFactor.y = 0;
 		modsEngineLogo.antialiasing = ClientPrefs.data.antialiasing;
 		modsEngineLogo.visible = true;
 		modsEngineLogo.setGraphicSize(Std.int(bg.width * 0.32));
 		modsEngineLogo.updateHitbox();
-		modsEngineLogo.screenCenter();
+		modsEngineLogo.screenCenter(Y);
 		modsEngineLogo.x = 735;
-		modsEngineLogo.y = 233;
 		modsEngineLogo.scale.x = 0.5;
 		modsEngineLogo.scale.y = 0.5;
 		add(modsEngineLogo);
