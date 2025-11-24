@@ -171,13 +171,15 @@ class LoadingState extends MusicBeatState
 		#end*/
 
 		#if NO_PRELOAD_ALL
-		var loaded:Bool = false;
-		if (PlayState.SONG != null) {
-			loaded = isSoundLoaded(getSongPath()) && (!PlayState.SONG.needsVoices || isSoundLoaded(getVocalPath())) && isLibraryLoaded('week_assets');
-		}
+		if (ClientPrefs.data.loadingScreen == true) {
+			var loaded:Bool = false;
+			if (PlayState.SONG != null) {
+				loaded = isSoundLoaded(getSongPath()) && (!PlayState.SONG.needsVoices || isSoundLoaded(getVocalPath())) && isLibraryLoaded('week_assets');
+			}
 		
-		if (!loaded)
-			return new LoadingState(target, stopMusic, directory);
+			if (!loaded)
+				return new LoadingState(target, stopMusic, directory);
+		}
 		#end
 		
 		if (stopMusic && FlxG.sound.music != null)
@@ -200,15 +202,17 @@ class LoadingState extends MusicBeatState
 	#end*/
 
 	#if NO_PRELOAD_ALL
-	static function isSoundLoaded(path:String):Bool
-	{
-		trace(path);
-		return Assets.cache.hasSound(path);
-	}
+	if (ClientPrefs.data.loadingScreen == true) {
+		static function isSoundLoaded(path:String):Bool
+		{
+			trace(path);
+			return Assets.cache.hasSound(path);
+		}
 	
-	static function isLibraryLoaded(library:String):Bool
-	{
-		return Assets.getLibrary(library) != null;
+		static function isLibraryLoaded(library:String):Bool
+		{
+			return Assets.getLibrary(library) != null;
+		}
 	}
 	#end
 	
