@@ -202,7 +202,7 @@ class LoadingState extends MusicBeatState
 	#end*/
 
 	#if NO_PRELOAD_ALL
-	if (ClientPrefs.data.loadingScreen == true) {
+	if (ClientPrefs.data.loadingScreen == true)
 		static function isSoundLoaded(path:String):Bool
 		{
 			trace(path);
@@ -213,7 +213,6 @@ class LoadingState extends MusicBeatState
 		{
 			return Assets.getLibrary(library) != null;
 		}
-	}
 	#end
 	
 	override function destroy()
