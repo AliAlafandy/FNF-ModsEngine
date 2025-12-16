@@ -170,18 +170,6 @@ class LoadingState extends MusicBeatState
 			return new LoadingState(target, stopMusic, directory);
 		#end*/
 
-		if (ClientPrefs.data.loadingScreen == true) {
-			#if NO_PRELOAD_ALL
-			var loaded:Bool = false;
-			if (PlayState.SONG != null) {
-				loaded = isSoundLoaded(getSongPath()) && (!PlayState.SONG.needsVoices || isSoundLoaded(getVocalPath())) && isLibraryLoaded('week_assets');
-			}
-		
-			if (!loaded)
-				return new LoadingState(target, stopMusic, directory);
-			#end
-		}
-
 		if (stopMusic && FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 		
@@ -200,21 +188,6 @@ class LoadingState extends MusicBeatState
 		return Assets.getLibrary(library) != null;
 	}
 	#end*/
-
-	if (ClientPrefs.data.loadingScreen == true) {
-		#if NO_PRELOAD_ALL
-		static function isSoundLoaded(path:String):Bool
-		{
-			trace(path);
-			return Assets.cache.hasSound(path);
-		}
-	
-		static function isLibraryLoaded(library:String):Bool
-		{
-			return Assets.getLibrary(library) != null;
-		}
-		#end
-	}
 	
 	override function destroy()
 	{
