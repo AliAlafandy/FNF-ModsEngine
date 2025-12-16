@@ -206,7 +206,7 @@ class TitleState extends MusicBeatState
 
 		if (titleJSON.backgroundSprite != null && titleJSON.backgroundSprite.length > 0 && titleJSON.backgroundSprite != "none"){
 			bg.loadGraphic(Paths.image(titleJSON.backgroundSprite));
-		}else{
+		} else {
 			bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		}
 
@@ -219,16 +219,19 @@ class TitleState extends MusicBeatState
 			switch (ClientPrefs.data.themes) {
 				case 'Mods Engine':
 					grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
+					grid.velocity.set(40, 40);
+					grid.alpha = 0;
+					FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+					add(grid);
 			
 				case 'Psych Engine':
 					grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+					grid.velocity.set(40, 40);
+					grid.alpha = 0;
+					FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+					add(grid);
 			}
 		}
-
-		grid.velocity.set(40, 40);
-		grid.alpha = 0;
-		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-		add(grid);
 
 		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
