@@ -179,6 +179,13 @@ class Alphabet extends FlxSpriteGroup
 		
 		if (isMenuItemCentered)
         {
+			function boundTo(value:Float, min:Float, max:Float):Float {
+				var newValue:Float = value;
+				if(newValue < min) newValue = min;
+				else if(newValue > max) newValue = max;
+				return newValue;
+			}
+			
             var scaledY = FlxMath.remapToRange(targetY, 0, 1, 0, 1.3);
             // var yTarget = (scaledY * yMult) + (FlxG.height * 0.48) + yAdd;
 
@@ -507,12 +514,5 @@ class AlphaCharacter extends FlxSprite
 	{
 		super.updateHitbox();
 		updateLetterOffset();
-	}
-
-	function boundTo(value:Float, min:Float, max:Float):Float {
-		var newValue:Float = value;
-		if(newValue < min) newValue = min;
-		else if(newValue > max) newValue = max;
-		return newValue;
 	}
 }
