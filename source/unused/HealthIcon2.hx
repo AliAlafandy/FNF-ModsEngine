@@ -1,4 +1,4 @@
-package objects;
+package;
 
 class HealthIcon extends FlxSprite
 {
