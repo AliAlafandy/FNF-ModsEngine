@@ -1565,6 +1565,7 @@ class PlayState extends MusicBeatState
         					timeBar.setColors(hudColor);
         					scoreTxt.color = hudColor;
         					botplayTxt.color = hudColor;
+						}
 				}
 
 				var newCharacter:String = event.value2;
