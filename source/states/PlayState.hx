@@ -1540,9 +1540,6 @@ class PlayState extends MusicBeatState
 						charType = val1;
 				}
 
-				reloadTimeBarColor();
-				reloadHUDColor();
-
 				var newCharacter:String = event.value2;
 				addCharacterToList(newCharacter, charType);
 
