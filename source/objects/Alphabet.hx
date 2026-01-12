@@ -183,7 +183,7 @@ class Alphabet extends FlxSpriteGroup
             var yTarget = (scaledY * yMult) + (FlxG.height * 0.48) + yAdd;
 
             if (Math.abs(y - yTarget) > 0.1) {
-                y = FlxMath.lerp(y, yTarget * 2, 0.1);
+                y = FlxMath.lerp(y, yTarget, 0.1);
             } else {
                 y = yTarget;
             }
@@ -202,6 +202,14 @@ class Alphabet extends FlxSpriteGroup
 	public function snapToPosition()
 	{
 		if (isMenuItem)
+		{
+			if(changeX)
+				x = (targetY * distancePerItem.x) + startPosition.x;
+			if(changeY)
+				y = (targetY * 1.3 * distancePerItem.y) + startPosition.y;
+		}
+		
+		if (isMenuItemCentered)
 		{
 			if(changeX)
 				x = (targetY * distancePerItem.x) + startPosition.x;
