@@ -627,7 +627,7 @@ class PlayState extends MusicBeatState
 				reloadTimeBarColor();
 			
 			case 'On':
-				reloadHUDColor();
+				reloadHUDColors();
 		}
 
 		#if LUA_ALLOWED
@@ -782,7 +782,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	public function reloadHUDColor() {
+	public function reloadHUDColors() {
 		var dadColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
 
     	if (dadColor == FlxColor.BLACK) {
@@ -1539,33 +1539,6 @@ class PlayState extends MusicBeatState
 						var val1:Int = Std.parseInt(event.value1);
 						if(Math.isNaN(val1)) val1 = 0;
 						charType = val1;
-				}
-
-				switch (ClientPrefs.data.hudColor) {
-					case "Time Bar Only":
-						var dadColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
-		
-						if (dadColor == FlxColor.BLACK) {
-							timeBar.setColors(0xFFFFFFFF);
-						} else {
-							timeBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]));
-						}
-					case "On":
-						var dadColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
-
-    					if (dadColor == FlxColor.BLACK) {
-        					timeTxt.color = 0xFFFFFFFF;
-        					timeBar.setColors(0xFFFFFFFF);
-        					scoreTxt.color = 0xFFFFFFFF;
-        					botplayTxt.color = 0xFFFFFFFF;
-    					} else {
-        					var hudColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
-			
-        					timeTxt.color = hudColor;
-        					timeBar.setColors(hudColor);
-        					scoreTxt.color = hudColor;
-        					botplayTxt.color = hudColor;
-						}
 				}
 
 				var newCharacter:String = event.value2;
