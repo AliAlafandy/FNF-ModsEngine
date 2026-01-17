@@ -741,10 +741,6 @@ class FreeplayState extends MusicBeatState
 		if (!FlxG.sound.music.playing)
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
 	}
-
-	private function unselectableCheck(num:Int):Bool {
-		return songs[i].length <= 1;
-	}
 }
 
 class SongMetadata
@@ -764,5 +760,9 @@ class SongMetadata
 		this.color = color;
 		this.folder = Mods.currentModDirectory;
 		if(this.folder == null) this.folder = '';
+	}
+
+	private function unselectableCheck(num:Int):Bool {
+		return songs[i].length <= 1;
 	}
 }
