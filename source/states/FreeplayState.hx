@@ -108,14 +108,13 @@ class FreeplayState extends MusicBeatState
 		for (i in 0...songs.length)
 		{
 			//var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
-			var songText = new Alphabet(0, 0, songs[i].songName, true);
+			var songText = new Alphabet(0, 320, songs[i].songName, true);
 			songText.isMenuItemCentered = true;
 			songText.targetY = i;
 			grpSongs.add(songText);
 
 			//songText.scaleX = Math.min(1, 980 / songText.width);
 			songText.screenCenter(X);
-			songText.screenCenter(Y);
 			songText.snapToPosition();
 
 			Mods.currentModDirectory = songs[i].folder;
@@ -141,7 +140,7 @@ class FreeplayState extends MusicBeatState
 
 		scoreBG = new FlxSprite((FlxG.width * 0.7) - 6, 0).makeGraphic(1, 66, 0xFF000000);
 		scoreBG.screenCenter(X);
-		scoreBG.alpha = 0.6;
+		//scoreBG.alpha = 0.6;
 		add(scoreBG);
 
 		diffText = new FlxText(scoreText.x, scoreText.y + 36, 0, "", 24);
