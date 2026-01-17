@@ -140,7 +140,7 @@ class FreeplayState extends MusicBeatState
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER);
 
 		scoreBG = new FlxSprite((FlxG.width * 0.7) - 6, 0).makeGraphic(1, 66, 0xFF000000);
-		scoreBG.alignment = 'centered';
+		scoreBG.screenCenter(X);
 		scoreBG.alpha = 0.6;
 		add(scoreBG);
 
