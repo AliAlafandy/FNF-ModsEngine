@@ -717,9 +717,6 @@ class FreeplayState extends MusicBeatState
 		if (!FlxG.sound.music.playing)
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
 	}
-	}
-	
-	super.update(elapsed);
 }
 
 class SongMetadata
