@@ -205,6 +205,7 @@ class FreeplayState extends MusicBeatState
 		return !Song.doesSongExist(Paths.formatToSongPath(songs[i].songName));
 	}
 
+	override function closeSubState() {
 		changeSelection(0, false);
 		persistentUpdate = true;
 		super.closeSubState();
