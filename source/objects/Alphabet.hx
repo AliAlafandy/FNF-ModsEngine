@@ -169,40 +169,15 @@ class Alphabet extends FlxSpriteGroup
 	{
 		if (isMenuItem)
 		{
-			/*var lerpVal:Float = Math.exp(-elapsed * 9.6);
+			var lerpVal:Float = Math.exp(-elapsed * 9.6);
 			
 			if(changeX)
 				x = FlxMath.lerp((targetY * distancePerItem.x) + startPosition.x, x, lerpVal);
 			if(changeY)
-				y = FlxMath.lerp((targetY * 1.3 * distancePerItem.y) + startPosition.y, y, lerpVal);*/
-
-			function boundTo(value:Float, min:Float, max:Float):Float {
-				var newValue:Float = value;
-				if(newValue < min) newValue = min;
-				else if(newValue > max) newValue = max;
-				return newValue;
-			}
-
-			var scaledY = FlxMath.remapToRange(targetY, 0, 1, 0, 1.3);
-
-			var lerpVal:Float = boundTo(elapsed * 9.6, 0, 1);
-			y = FlxMath.lerp(y, (scaledY * yMult) + (FlxG.height * 0.48) + yAdd, lerpVal);
-			
-			if(isMenuItemCentered)
-			{
-				screenCenter(X);
-			}
-			else
-			{
-				if(forceX != Math.NEGATIVE_INFINITY) {
-					x = forceX;
-				} else {
-					x = FlxMath.lerp(x, (targetY * 20) + 90 + xAdd, lerpVal);
-				}
-			}
+				y = FlxMath.lerp((targetY * 1.3 * distancePerItem.y) + startPosition.y, y, lerpVal);
 		}
 		
-		/*if (isMenuItemCentered)
+		if (isMenuItemCentered)
         {
             var scaledY = FlxMath.remapToRange(targetY, 0, 1, 0, 1.3);
             var yTarget = (scaledY * yMult) + (FlxG.height * 0.48) + yAdd;
@@ -219,7 +194,7 @@ class Alphabet extends FlxSpriteGroup
             } else {
                 screenCenter(X);
             }
-		}*/
+		}
 		
 		super.update(elapsed);
 	}
