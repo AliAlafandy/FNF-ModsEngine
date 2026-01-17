@@ -581,7 +581,7 @@ class FreeplayState extends MusicBeatState
 		curDifficulty += change;
 
 		if (curDifficulty < 0)
-			curDifficulty = Difficulty.list.length-1;
+			curDifficulty = Difficulty.list.length - 1;
 		if (curDifficulty >= Difficulty.list.length)
 			curDifficulty = 0;
 
@@ -701,7 +701,7 @@ class FreeplayState extends MusicBeatState
 			var item:Alphabet = grpSongs.members[i];
 			item.visible = item.active = true;
 			item.x = ((item.targetY - lerpSelected) * item.distancePerItem.x) + item.startPosition.x;
-			item.y = ((item.targetY - lerpSelected) * 1.3 * item.distancePerItem.y) + item.startPosition.y;
+			item.y = ((item.targetY - lerpSelected) * 1.7 * item.distancePerItem.y) + item.startPosition.y;
 
 			var icon:HealthIcon = iconArray[i];
 			icon.visible = icon.active = true;
