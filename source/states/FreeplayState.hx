@@ -108,8 +108,8 @@ class FreeplayState extends MusicBeatState
 		for (i in 0...songs.length)
 		{
 			//var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
-			var songText = new Alphabet(0, 0, songs[i].songName, true, true);
-			songText.isMenuItem = true;
+			var songText = new Alphabet(0, 0, songs[i].songName, true);
+			songText.isMenuItem = songText.isMenuItemCentered = true;
 			songText.targetY = i;
 			grpSongs.add(songText);
 
@@ -199,11 +199,11 @@ class FreeplayState extends MusicBeatState
 		super.create();
 	}
 
-	inline function unselectableCheck(i:Int):Bool
+	/*inline function unselectableCheck(i:Int):Bool
 	{
 		if (i < 0 || i >= songs.length) return true;
 		return !Song.doesSongExist(Paths.formatToSongPath(songs[i].songName));
-	}
+	}*/
 
 	override function closeSubState() {
 		changeSelection(0, false);
