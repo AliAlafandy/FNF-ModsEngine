@@ -108,8 +108,10 @@ class FreeplayState extends MusicBeatState
 
 		for (i in 0...songs.length)
 		{
+			var songs[i].isSelectable:Bool = !unselectableCheck(i);
+			
 			// var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
-			var songText:Alphabet = new Alphabet(0, 320, songs[i].songName, songs[i].isSelectable, true);
+			var songText:Alphabet = new Alphabet(0, 320, songs[i].songName, !songs[i].isSelectable, true);
 			songText.isMenuItem = true;
 
 			if(songs[i].isSelectable) {
@@ -630,11 +632,13 @@ class FreeplayState extends MusicBeatState
 		var lastList:Array<String> = Difficulty.list;
 		curSelected += change;
 
-		if (curSelected < 0)
-			curSelected = songs.length - 1;
-		if (curSelected >= songs.length)
-			curSelected = 0;
-			
+		do {
+			if (curSelected < 0)
+				curSelected = songs.length - 1;
+			if (curSelected >= songs.length)
+				curSelected = 0;
+		} while(unselectableCheck(curSelected));
+
 		var newColor:Int = songs[curSelected].color;
 		if(newColor != intendedColor) {
 			if(colorTween != null) {
@@ -662,9 +666,12 @@ class FreeplayState extends MusicBeatState
 		for (item in grpSongs.members)
 		{
 			bullShit++;
-			item.alpha = 0.6;
-			if (item.targetY == curSelected)
-				item.alpha = 1;
+
+			if(!unselectableCheck(bullShit-1)) {
+				item.alpha = 0.6;
+				if (item.targetY == curSelected)
+					item.alpha = 1;
+			}
 		}
 		
 		Mods.currentModDirectory = songs[curSelected].folder;
@@ -733,7 +740,11 @@ class FreeplayState extends MusicBeatState
 		FlxG.autoPause = ClientPrefs.data.autoPause;
 		if (!FlxG.sound.music.playing)
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
-	}	
+	}
+
+	private function unselectableCheck(num:Int):Bool {
+		return songs[i].length <= 1;
+	}
 }
 
 class SongMetadata
