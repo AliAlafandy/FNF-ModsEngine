@@ -135,7 +135,11 @@ class EditorPlayState extends MusicBeatSubstate
 
         var daButton:String;
 		#if android
-		daButton = "BACK";
+		if (ClientPrefs.data.pauseButton == true) {
+			daButton = "BACK or P";
+		} else {
+			daButton = "BACK";
+		}
 		#else
         if (controls.mobileC)
         	daButton = "P";
@@ -161,7 +165,13 @@ class EditorPlayState extends MusicBeatSubstate
 		#end
 
 		#if mobile
-		addTouchPad("NONE", "P");
+		#if android
+		if (ClientPrefs.data.pauseButton == true) {
+			addTouchPad("NONE", "P");
+		}
+		#else
+			addTouchPad("NONE", "P");
+		#end
 		addTouchPadCamera();
 		#end
 
@@ -178,7 +188,10 @@ class EditorPlayState extends MusicBeatSubstate
 		#if mobile
 		if(
 		#if android
-		FlxG.android.justReleased.BACK || touchPad.buttonP.justPressed
+		FlxG.android.justReleased.BACK
+		if (ClientPrefs.data.pauseButton == true) {
+			|| touchPad.buttonP.justPressed
+		}
 		#else
 		touchPad.buttonP.justPressed
 		#end
