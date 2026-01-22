@@ -697,13 +697,12 @@ class PlayState extends MusicBeatState
 		cachePopUpScore();
 
 		#if mobile
-		#if !android
-		addTouchPad("NONE", "P");
-		#end
 		#if android
 		if (ClientPrefs.data.pauseButton == true) {
 			addTouchPad("NONE", "P");
 		}
+		#else
+		addTouchPad("NONE", "P");
 		#end
  		addTouchPadCamera();
 		#end
@@ -1760,7 +1759,9 @@ class PlayState extends MusicBeatState
 		if ((controls.PAUSE
 			 #if android
 			 || FlxG.android.justReleased.BACK
-			 || touchPad.buttonP.justPressed
+			 if (ClientPrefs.data.pauseButton == true) {
+				|| touchPad.buttonP.justPressed
+			 }
 			 #else
 			 || touchPad.buttonP.justPressed
 			 #end)
