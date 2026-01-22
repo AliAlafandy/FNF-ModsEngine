@@ -179,14 +179,11 @@ class Alphabet extends FlxSpriteGroup
 		
 		if (isMenuItemCentered)
         {
-			var lerpVal:Float = Math.exp(-elapsed * 9.6);
-
             var scaledY = FlxMath.remapToRange(targetY, 0, 1, 0, 1.3);
 			var yTarget = (scaledY * yMult) + (FlxG.height * 0.48) + yAdd;
 
-            if (Math.abs(y - yTarget) > lerpVal) {
-                // y = FlxMath.lerp(y, yTarget, 0.1);
-				y = FlxMath.lerp((targetY * 1.3) + startPosition.y, y, 0.1);
+            if (Math.abs(y - yTarget) >= 0.1) {
+                y = FlxMath.lerp(y, yTarget, 0.1);
             } else {
                 y = yTarget;
             }
