@@ -17,11 +17,11 @@ import states.TitleState;
 	public var wideScreen:Bool = false;
 	#if android
 	public var storageType:String = "EXTERNAL_DATA";
+	public var pauseButton:Bool = true;
 	#end
 	public var hitboxType:String = "Gradient";
 	public var popUpRating:Bool = true;
 	public var vsync:Bool = false;
-	public var pauseButton:Bool = true;
 	public var gameOverVibration:Bool = false;
 
 	// Other Releated
