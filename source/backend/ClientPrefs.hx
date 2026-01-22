@@ -21,6 +21,7 @@ import states.TitleState;
 	public var hitboxType:String = "Gradient";
 	public var popUpRating:Bool = true;
 	public var vsync:Bool = false;
+	public var pauseButton:Bool = true;
 	public var gameOverVibration:Bool = false;
 
 	// Other Releated
