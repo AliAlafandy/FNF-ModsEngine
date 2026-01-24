@@ -700,6 +700,8 @@ class PlayState extends MusicBeatState
 		#if android
 		if (ClientPrefs.data.pauseButton == true) {
 			addTouchPad("NONE", "P");
+		} else {
+			addTouchPad("NONE", "NONE");
 		}
 		#else
 		addTouchPad("NONE", "P");
@@ -1759,9 +1761,7 @@ class PlayState extends MusicBeatState
 		if ((controls.PAUSE
 			 #if android
 			 || FlxG.android.justReleased.BACK
-			 #if (ClientPrefs.data.pauseButton == true)
-				|| touchPad.buttonP.justPressed
-			 #end
+			 || touchPad.buttonP.justPressed
 			 #else
 			 || touchPad.buttonP.justPressed
 			 #end
