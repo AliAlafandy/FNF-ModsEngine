@@ -189,9 +189,9 @@ class EditorPlayState extends MusicBeatSubstate
 		if(
 		#if android
 		FlxG.android.justReleased.BACK
-		if (ClientPrefs.data.pauseButton == true) {
+		#if (ClientPrefs.data.pauseButton == true)
 			|| touchPad.buttonP.justPressed
-		}
+		#end
 		#else
 		touchPad.buttonP.justPressed
 		#end
