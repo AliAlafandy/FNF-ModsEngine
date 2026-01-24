@@ -168,6 +168,8 @@ class EditorPlayState extends MusicBeatSubstate
 		#if android
 		if (ClientPrefs.data.pauseButton == true) {
 			addTouchPad("NONE", "P");
+		} else {
+			addTouchPad("NONE", "NONE");
 		}
 		#else
 			addTouchPad("NONE", "P");
@@ -187,16 +189,13 @@ class EditorPlayState extends MusicBeatSubstate
 	{
 		#if mobile
 		if(
-		#if android
-		FlxG.android.justReleased.BACK
-		#if (ClientPrefs.data.pauseButton == true)
+			#if android
+			FlxG.android.justReleased.BACK
 			|| touchPad.buttonP.justPressed
-		#end
-		#else
-		touchPad.buttonP.justPressed
-		#end
-		
-		|| FlxG.keys.justPressed.ESCAPE)
+			#else
+			touchPad.buttonP.justPressed
+			#end
+			|| FlxG.keys.justPressed.ESCAPE)
 		{
 			mobileControls.instance.visible = false;
 			endSong();
