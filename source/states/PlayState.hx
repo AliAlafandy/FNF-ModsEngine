@@ -1764,8 +1764,8 @@ class PlayState extends MusicBeatState
 			 }
 			 #else
 			 || touchPad.buttonP.justPressed
-			 #end)
-			 && (startedCountdown && canPause)))
+			 #end
+		   	 ) && (startedCountdown && canPause))
 		{
 			var ret:Dynamic = callOnScripts('onPause', null, true);
 			if(ret != LuaUtils.Function_Stop) {
