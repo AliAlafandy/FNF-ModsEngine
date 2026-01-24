@@ -284,13 +284,11 @@ class FreeplayState extends MusicBeatState
 				if (controls.UI_UP_P)
 				{
 					changeSelection(-shiftMult);
-					grpSongs.yAdd -= 70;
 					holdTime = 0;
 				}
 				if (controls.UI_DOWN_P)
 				{
 					changeSelection(shiftMult);
-					grpSongs.yAdd += 70;
 					holdTime = 0;
 				}
 
@@ -688,7 +686,9 @@ class FreeplayState extends MusicBeatState
 
 	public function updateTexts(elapsed:Float = 0.0)
 	{
-		lerpSelected = FlxMath.lerp(curSelected, lerpSelected, Math.exp(-elapsed * 9.6));
+		//lerpSelected = FlxMath.lerp(curSelected, lerpSelected, Math.exp(-elapsed * 9.6));
+		lerpSelected = FlxMath.lerp(curSelected, lerpSelected, 0.1);
+		
 		for (i in _lastVisibles)
 		{
 			grpSongs.members[i].visible = grpSongs.members[i].active = false;
