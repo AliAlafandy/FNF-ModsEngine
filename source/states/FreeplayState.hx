@@ -681,13 +681,14 @@ class FreeplayState extends MusicBeatState
 		diffText.x -= diffText.width / 2;
 	}
 
-	var _drawDistance:Int = 4;
+	//var _drawDistance:Int = 4;
+	var _drawDistance:Int = 7;
+	
 	var _lastVisibles:Array<Int> = [];
 
 	public function updateTexts(elapsed:Float = 0.0)
 	{
-		//lerpSelected = FlxMath.lerp(curSelected, lerpSelected, Math.exp(-elapsed * 9.6));
-		lerpSelected = FlxMath.lerp(curSelected, lerpSelected, 0.1);
+		lerpSelected = FlxMath.lerp(curSelected, lerpSelected, Math.exp(-elapsed * 9.6));
 		
 		for (i in _lastVisibles)
 		{
