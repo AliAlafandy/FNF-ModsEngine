@@ -686,7 +686,7 @@ class FreeplayState extends MusicBeatState
 
 	public function updateTexts(elapsed:Float = 0.0)
 	{
-		lerpSelected = FlxMath.lerp(curSelected, lerpSelected - 70, Math.exp(-elapsed * 9.6));
+		lerpSelected = FlxMath.lerp(curSelected, lerpSelected, Math.exp(-elapsed * 9.6));
 		
 		for (i in _lastVisibles)
 		{
