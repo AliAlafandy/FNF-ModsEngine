@@ -110,7 +110,8 @@ class FreeplayState extends MusicBeatState
 			//var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
 			var songText = new Alphabet(0, 320, songs[i].songName, true);
 			songText.isMenuItemCentered = true;
-			songText.targetY = i;
+			songText.targetY = i - curSelected;
+			//songText.targetY = i;
 			grpSongs.add(songText);
 
 			//songText.scaleX = Math.min(1, 980 / songText.width);
@@ -643,12 +644,10 @@ class FreeplayState extends MusicBeatState
 
 		for (item in grpSongs.members)
 		{
-			item.targetY = bullShit - curSelected;
 			bullShit++;
 			item.alpha = 0.6;
 			if (item.targetY == curSelected)
 				item.alpha = 1;
-				item.targetY = bullShit - curSelected;
 		}
 		
 		Mods.currentModDirectory = songs[curSelected].folder;
