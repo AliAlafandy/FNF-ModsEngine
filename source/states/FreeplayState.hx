@@ -108,13 +108,33 @@ class FreeplayState extends MusicBeatState
 		for (i in 0...songs.length)
 		{
 			//var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
-			var songText = new Alphabet(0, 320, songs[i].songName, true);
-			songText.isMenuItemCentered = true;
+			var songText = new Alphabet(0, 320, songs[i].songName, songs[i].isSelectable, false);
+			songText.isMenuItem = true;
+			if(songs[i].isSelectable) {
+				songText.isMenuItemCentered = true;
+			} else {
+				songText.screenCenter(X);
+				songText.forceX = songText.x + 40;
+				songText.yAdd -= 70;
+			}
 			songText.targetY = i;
 			grpSongs.add(songText);
 
+			if (songText.width > 980 && songs[i].isSelectable)
+			{
+				var textScale:Float = 980 / songText.width;
+				songText.scale.x = textScale;
+				for (letter in songText.lettersArray)
+				{
+					letter.x *= textScale;
+					letter.offset.x *= textScale;
+				}
+				//songText.updateHitbox();
+				//trace(songs[i].songName + ' new scale: ' + textScale);
+			}
+
 			//songText.scaleX = Math.min(1, 980 / songText.width);
-			songText.screenCenter(X);
+			//songText.screenCenter(X);
 			songText.snapToPosition();
 
 			Mods.currentModDirectory = songs[i].folder;
