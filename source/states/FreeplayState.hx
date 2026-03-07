@@ -116,6 +116,7 @@ class FreeplayState extends MusicBeatState
 
 			//songText.scaleX = Math.min(1, 980 / songText.width);
 			songText.screenCenter(X);
+			songText.snapToPosition();
 			//songText.snapToPosition();
 
 			Mods.currentModDirectory = songs[i].folder;
