@@ -97,7 +97,7 @@ import states.TitleState;
 	public var goodWindow:Int = 90;
 	public var badWindow:Int = 135;
 	public var safeFrames:Float = 10;
-	public var guitarHeroSustains:Bool = true;
+	public var guitarHeroSustains:Bool = false;
 	public var discordRPC:Bool = true;
 	public var loadingScreen:Bool = true;
 }
