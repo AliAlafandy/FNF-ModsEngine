@@ -1783,7 +1783,7 @@ class ChartingState extends MusicBeatState
 		FlxG.watch.addQuick('daBeat', curBeat);
 		FlxG.watch.addQuick('daStep', curStep);
 
-		if (controls.mobileC) {
+		/*if (controls.mobileC) {
 		for (touch in FlxG.touches.list)
 		{
 			if (touch.justPressed)
@@ -1841,7 +1841,7 @@ class ChartingState extends MusicBeatState
 			}
 		}
 
-		} else {
+		} else {*/
 
 		if (FlxG.mouse.justPressed)
 		{
@@ -1896,7 +1896,7 @@ class ChartingState extends MusicBeatState
 		} else {
 			dummyArrow.visible = false;
 		}
-		}
+		// }
 
 		var blockInput:Bool = false;
 		for (inputText in blockPressWhileTypingOn) {
