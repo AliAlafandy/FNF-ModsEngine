@@ -195,7 +195,7 @@ class EditorPlayState extends MusicBeatSubstate
 			#else
 			touchPad.buttonP.justPressed
 			#end
-			|| FlxG.keys.justPressed.ESCAPE)
+			|| controls.BACK || FlxG.keys.justPressed.ESCAPE)
 		{
 			mobileControls.instance.visible = false;
 			endSong();
@@ -203,7 +203,7 @@ class EditorPlayState extends MusicBeatSubstate
 			return;
 		}
 		#else
-		if(FlxG.keys.justPressed.ESCAPE)
+		if(controls.BACK || FlxG.keys.justPressed.ESCAPE)
 		{
 			endSong();
 			super.update(elapsed);
