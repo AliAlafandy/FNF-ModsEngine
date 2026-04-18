@@ -22,6 +22,8 @@
 
 package mobile.objects;
 
+import flixel.util.FlxSignal.FlxTypedSignal;
+
 /**
  * ...
  * @author: Karim Akra
