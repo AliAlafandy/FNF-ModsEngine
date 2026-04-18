@@ -25,7 +25,6 @@ package mobile.objects;
 import openfl.display.BitmapData;
 import openfl.display.Shape;
 import flixel.graphics.FlxGraphic;
-import flixel.util.FlxSignal.FlxTypedSignal;
 import openfl.geom.Matrix;
 
 /**
@@ -48,8 +47,6 @@ class Hitbox extends MobileInputManager implements IMobileControls
 	public var buttonExtra2:TouchButton = new TouchButton(0, 0);
 
 	public var instance:MobileInputManager;
-	public var onButtonDown:FlxTypedSignal<TouchButton->Void> = new FlxTypedSignal<TouchButton->Void>();
-	public var onButtonUp:FlxTypedSignal<TouchButton->Void> = new FlxTypedSignal<TouchButton->Void>();
 
 	var storedButtonsIDs:Map<String, Array<MobileInputID>> = new Map<String, Array<MobileInputID>>();
 
