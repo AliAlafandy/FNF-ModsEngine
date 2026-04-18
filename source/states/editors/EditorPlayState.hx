@@ -135,7 +135,11 @@ class EditorPlayState extends MusicBeatSubstate
 
         var daButton:String;
 		#if android
-		daButton = "BACK";
+		if (ClientPrefs.data.pauseButton == true) {
+			daButton = "BACK or P";
+		} else {
+			daButton = "BACK";
+		}
 		#else
         if (controls.mobileC)
         	daButton = "P";
@@ -148,7 +152,28 @@ class EditorPlayState extends MusicBeatSubstate
 		tipText.borderSize = 2;
 		tipText.scrollFactor.set();
 		add(tipText);
+		
 		FlxG.mouse.visible = false;
+
+		#if mobile
+		#if android
+		if (ClientPrefs.data.pauseButton == true) {
+			addTouchPad("NONE", "P");
+		} else {
+			addTouchPad("NONE", "NONE");
+		}
+		#else
+			addTouchPad("NONE", "P");
+		#end
+		addTouchPadCamera();
+		#end
+
+		#if mobile
+		addMobileControls();
+		mobileControls.instance.visible = true;
+		mobileControls.onButtonDown.add(onButtonPress);
+		mobileControls.onButtonUp.add(onButtonRelease);
+		#end
 		
 		generateSong(PlayState.SONG.song);
 
@@ -160,16 +185,6 @@ class EditorPlayState extends MusicBeatSubstate
 		DiscordClient.changePresence('Playtesting on Chart Editor', PlayState.SONG.song, null, true, songLength);
 		#end
 
-		#if mobile
-		addTouchPad("NONE", "P");
-		addTouchPadCamera();
-		#end
-
-		#if mobile
-		addMobileControls();
-		mobileControls.instance.visible = true;
-		#end
-
 		RecalculateRating();
 	}
 
@@ -177,13 +192,12 @@ class EditorPlayState extends MusicBeatSubstate
 	{
 		#if mobile
 		if(
-		#if android
-		FlxG.android.justReleased.BACK || touchPad.buttonP.justPressed
-		#else
-		touchPad.buttonP.justPressed
-		#end
-		
-		|| FlxG.keys.justPressed.ESCAPE)
+			#if android
+			FlxG.android.justPressed.BACK || touchPad.buttonP.justPressed
+			#else
+			touchPad.buttonP.justPressed
+			#end
+			|| controls.BACK || FlxG.keys.justPressed.ESCAPE)
 		{
 			mobileControls.instance.visible = false;
 			endSong();
@@ -191,7 +205,7 @@ class EditorPlayState extends MusicBeatSubstate
 			return;
 		}
 		#else
-		if(FlxG.keys.justPressed.ESCAPE)
+		if(controls.BACK || FlxG.keys.justPressed.ESCAPE)
 		{
 			endSong();
 			super.update(elapsed);
@@ -594,6 +608,7 @@ class EditorPlayState extends MusicBeatSubstate
 		var pixelShitPart1:String = "";
 		var pixelShitPart2:String = '';
 
+		if(ClientPrefs.data.popUpRating) {
 		rating.loadGraphic(Paths.image(pixelShitPart1 + daRating.image + pixelShitPart2));
 		rating.screenCenter();
 		rating.x = coolText.x - 40;
@@ -713,6 +728,7 @@ class EditorPlayState extends MusicBeatSubstate
 			},
 			startDelay: Conductor.crochet * 0.002 / playbackRate
 		});
+		}
 	}
 
 	private function onKeyPress(event:KeyboardEvent):Void
@@ -799,6 +815,24 @@ class EditorPlayState extends MusicBeatSubstate
 			spr.playAnim('static');
 			spr.resetAnim = 0;
 		}
+	}
+
+	private function onButtonPress(button:TouchButton):Void
+	{
+		if (button.IDs.filter(id -> id.toString().startsWith("EXTRA")).length > 0)
+			return;
+
+		var buttonCode:Int = (button.IDs[0].toString().startsWith('NOTE')) ? button.IDs[0] : button.IDs[1];
+		if (button.justPressed) keyPressed(buttonCode);
+	}
+
+	private function onButtonRelease(button:TouchButton):Void
+	{
+		if (button.IDs.filter(id -> id.toString().startsWith("EXTRA")).length > 0)
+			return;
+
+		var buttonCode:Int = (button.IDs[0].toString().startsWith('NOTE')) ? button.IDs[0] : button.IDs[1];
+		if(buttonCode > -1) keyReleased(buttonCode);
 	}
 	
 	// Hold notes
@@ -948,7 +982,7 @@ class EditorPlayState extends MusicBeatSubstate
 	}
 
 	public function invalidateNote(note:Note):Void {
-		//note.kill();
+		//if (!ClientPrefs.data.lowQuality) note.kill();
 		notes.remove(note, true);
 		note.destroy();
 	}

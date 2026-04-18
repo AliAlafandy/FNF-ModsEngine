@@ -17,6 +17,7 @@ import states.TitleState;
 	public var wideScreen:Bool = false;
 	#if android
 	public var storageType:String = "EXTERNAL_DATA";
+	public var pauseButton:Bool = true;
 	#end
 	public var hitboxType:String = "Gradient";
 	public var popUpRating:Bool = true;
@@ -66,6 +67,7 @@ import states.TitleState;
 	public var checkForUpdates:Bool = true;
 	public var comboStacking:Bool = true;
 	public var themes:String = 'Mods Engine';
+	public var gridTitle:Bool = false;
 	
 	public var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
@@ -95,8 +97,9 @@ import states.TitleState;
 	public var goodWindow:Int = 90;
 	public var badWindow:Int = 135;
 	public var safeFrames:Float = 10;
-	public var guitarHeroSustains:Bool = true;
+	public var guitarHeroSustains:Bool = false;
 	public var discordRPC:Bool = true;
+	public var loadingScreen:Bool = true;
 }
 
 class ClientPrefs {

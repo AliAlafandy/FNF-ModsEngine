@@ -627,7 +627,7 @@ class PlayState extends MusicBeatState
 				reloadTimeBarColor();
 			
 			case 'On':
-				reloadHUDColor();
+				reloadHUDColors();
 		}
 
 		#if LUA_ALLOWED
@@ -671,6 +671,9 @@ class PlayState extends MusicBeatState
 
 		#if mobile
 		addMobileControls();
+		mobileControls.instance.visible = true;
+		mobileControls.onButtonDown.add(onButtonPress);
+		mobileControls.onButtonUp.add(onButtonRelease);
 		#end
 
 		startCallback();
@@ -697,7 +700,17 @@ class PlayState extends MusicBeatState
 		cachePopUpScore();
 
 		#if mobile
-		addTouchPad("NONE", "P");
+		#if android
+		if (ClientPrefs.data.pauseButton == true) {
+			addTouchPad("NONE", "PAUSE");
+			touchPad.buttonP.color = 0xFFF1F1F1;
+		} else {
+			addTouchPad("NONE", "NONE");
+		}
+		#else
+		addTouchPad("NONE", "PAUSE");
+		touchPad.buttonP.color = 0xFFF1F1F1;
+		#end
  		addTouchPadCamera();
 		#end
 
@@ -782,7 +795,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	public function reloadHUDColor() {
+	public function reloadHUDColors() {
 		var dadColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
 
     	if (dadColor == FlxColor.BLACK) {
@@ -1529,6 +1542,7 @@ class PlayState extends MusicBeatState
 		switch(event.event) {
 			case "Change Character":
 				var charType:Int = 0;
+				
 				switch(event.value1.toLowerCase()) {
 					case 'gf' | 'girlfriend' | '1':
 						charType = 2;
@@ -1752,11 +1766,11 @@ class PlayState extends MusicBeatState
 		if ((controls.PAUSE
 			 #if android
 			 || FlxG.android.justReleased.BACK
-			 || touchPad.buttonP.justPressed
+			 || touchPad.pauseButton.justPressed
 			 #else
-			 || touchPad.buttonP.justPressed
-			 #end)
-			 && (startedCountdown && canPause))
+			 || touchPad.pauseButton.justPressed
+			 #end
+		   	 ) && (startedCountdown && canPause))
 		{
 			var ret:Dynamic = callOnScripts('onPause', null, true);
 			if(ret != LuaUtils.Function_Stop) {
@@ -1948,7 +1962,7 @@ class PlayState extends MusicBeatState
 	var iconsAnimations:Bool = true;
 	function set_health(value:Float):Float // You can alter how icon animations work here
 	{
-		if(!iconsAnimations || healthBar == null || !healthBar.enabled || healthBar.valueFunction == null)
+		if (!iconsAnimations || healthBar == null || !healthBar.enabled || healthBar.valueFunction == null)
 		{
 			health = value;
 			return health;
@@ -1956,11 +1970,80 @@ class PlayState extends MusicBeatState
 
 		// update health bar
 		health = value;
-		var newPercent:Null<Float> = FlxMath.remapToRange(FlxMath.bound(healthBar.valueFunction(), healthBar.bounds.min, healthBar.bounds.max), healthBar.bounds.min, healthBar.bounds.max, 0, 100);
+		var newPercent:Null<Float> = FlxMath.remapToRange(FlxMath.bound(healthBar.valueFunction(), healthBar.bounds.min, healthBar.bounds.max),
+														  healthBar.bounds.min, healthBar.bounds.max, 0, 100);
 		healthBar.percent = (newPercent != null ? newPercent : 0);
+
+		/*inline function isAnimated(icon:HealthIcon):Bool
+			return icon != null && icon.animation != null && (icon.animation.exists("idle") || icon.animation.exists("winning") || icon.animation.exists("losing"));
+
+		if (iconP1 != null)
+		{
+			if (isAnimated(iconP1))
+			{
+				var anim:String = "idle";
+				if (healthBar.percent > 80 && iconP1.animation.exists("winning"))
+					anim = "winning";
+				else if (healthBar.percent < 20 && iconP1.animation.exists("losing"))
+					anim = "losing";
+
+				if (iconP1.animation.curAnim == null || iconP1.animation.curAnim.name != anim)
+					iconP1.animation.play(anim);
+			}
+			else if (iconP1.animation != null && iconP1.animation.curAnim != null)
+			{
+				var frames = iconP1.animation.curAnim.frames;
+				var numFrames = (frames != null) ? frames.length : 2;
+
+				if (numFrames >= 3)
+				{
+					if (healthBar.percent > 80)
+						iconP1.animation.curAnim.curFrame = 2;
+					else if (healthBar.percent < 20)
+						iconP1.animation.curAnim.curFrame = 1;
+					else
+						iconP1.animation.curAnim.curFrame = 0;
+				} else {
+					iconP1.animation.curAnim.curFrame = (healthBar.percent < 20) ? 0 : 1;
+				}
+			}
+		}
+
+		if (iconP2 != null)
+		{
+			if (isAnimated(iconP2))
+			{
+				var anim:String = "idle";
+				if (healthBar.percent > 80 && iconP2.animation.exists("losing"))
+					anim = "losing";
+				else if (healthBar.percent < 20 && iconP2.animation.exists("winning"))
+					anim = "winning";
+
+				if (iconP2.animation.curAnim == null || iconP2.animation.curAnim.name != anim)
+					iconP2.animation.play(anim);
+			}
+			else if (iconP2.animation != null && iconP2.animation.curAnim != null)
+			{
+				var frames = iconP2.animation.curAnim.frames;
+				var numFrames = (frames != null) ? frames.length : 2;
+
+				if (numFrames >= 3)
+				{
+					if (healthBar.percent > 80)
+						iconP2.animation.curAnim.curFrame = 1;
+					else if (healthBar.percent < 20)
+						iconP2.animation.curAnim.curFrame = 2;
+					else
+						iconP2.animation.curAnim.curFrame = 0;
+				} else {
+					iconP2.animation.curAnim.curFrame = (healthBar.percent > 80) ? 0 : 1;
+				}
+			}
+		}*/
 
 		iconP1.animation.curAnim.curFrame = (healthBar.percent < 20) ? 1 : 0; //If health is under 20%, change player icon to frame 1 (losing icon), otherwise, frame 0 (normal)
 		iconP2.animation.curAnim.curFrame = (healthBar.percent > 80) ? 1 : 0; //If health is over 80%, change opponent icon to frame 1 (losing icon), otherwise, frame 0 (normal)
+
 		return health;
 	}
 
@@ -2835,6 +2918,28 @@ class PlayState extends MusicBeatState
 			}
 		}
 		return -1;
+	}
+
+	private function onButtonPress(button:TouchButton):Void
+	{
+		if (button.IDs.filter(id -> id.toString().startsWith("EXTRA")).length > 0)
+			return;
+
+		var buttonCode:Int = (button.IDs[0].toString().startsWith('NOTE')) ? button.IDs[0] : button.IDs[1];
+		callOnScripts('onButtonPressPre', [buttonCode]);
+		if (button.justPressed) keyPressed(buttonCode);
+		callOnScripts('onButtonPress', [buttonCode]);
+	}
+
+	private function onButtonRelease(button:TouchButton):Void
+	{
+		if (button.IDs.filter(id -> id.toString().startsWith("EXTRA")).length > 0)
+			return;
+
+		var buttonCode:Int = (button.IDs[0].toString().startsWith('NOTE')) ? button.IDs[0] : button.IDs[1];
+		callOnScripts('onButtonReleasePre', [buttonCode]);
+		if(buttonCode > -1) keyReleased(buttonCode);
+		callOnScripts('onButtonRelease', [buttonCode]);
 	}
 
 	// Hold notes

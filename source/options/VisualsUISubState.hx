@@ -174,6 +174,12 @@ class VisualsUISubState extends BaseOptionsMenu
 			['Mods Engine', 'Psych Engine']);
 		addOption(option);
 
+		var option:Option = new Option('Grid Title',
+			"If checked, make the Title or Song Intro have Grid.",
+			'gridTitle',
+			'bool');
+		addOption(option);
+
 		super();
 		add(notes);
 	}
