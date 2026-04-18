@@ -22,8 +22,6 @@
 
 package mobile.objects;
 
-import flixel.util.FlxSignal.FlxTypedSignal;
-
 /**
  * ...
  * @author: Karim Akra and Lily Ross (mcagabe19)
@@ -73,8 +71,6 @@ class TouchPad extends MobileInputManager implements IMobileControls
 	public var pauseButton:TouchButton = new TouchButton(0, 0, [MobileInputID.PAUSE]);
 
 	public var instance:MobileInputManager;
-	public var onButtonDown:FlxTypedSignal<TouchButton->Void> = new FlxTypedSignal<TouchButton->Void>();
-	public var onButtonUp:FlxTypedSignal<TouchButton->Void> = new FlxTypedSignal<TouchButton->Void>();
 
 	/**
 	 * Create a gamepad.
