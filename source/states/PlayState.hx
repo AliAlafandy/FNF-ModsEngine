@@ -672,6 +672,8 @@ class PlayState extends MusicBeatState
 		#if mobile
 		addMobileControls();
 		mobileControls.instance.visible = true;
+		mobileControls.onButtonDown.add(onButtonPress);
+		mobileControls.onButtonUp.add(onButtonRelease);
 		#end
 
 		startCallback();
