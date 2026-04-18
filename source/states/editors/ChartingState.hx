@@ -348,18 +348,23 @@ class ChartingState extends MusicBeatState
 		UI_box.scrollFactor.set();
 
         if (controls.mobileC) {
-			text =
-			"Up/Down - Change Conductor's strum time
-			\nLeft/Right - Go to the previous/next section
-			\nHold Y to move 4x faster
-			\nZ/D - Zoom in/out
+			text = "Up/Down - Change Conductor's strum time
+			\nLeft/Right - Go to the previous/next section" +
+
+			#if FLX_PITCH
+			"\nG - Reset Song Playback Rate" +
+			#end
+
+			"\nHold Y to move 4x faster
+			\nHold H and touch on an arrow to select it
+			\nV/D - Zoom in/out
 			\n
 			\nC - Test your chart inside Chart Editor
 			\nA - Play your chart
+			\nUp/Down (On The Right) - Decrease/Increase Note Sustain Length
 			\nX - Stop/Resume song";
         } else {
-			text =
-			"W/S or Mouse Wheel - Change Conductor's strum time
+			text = "W/S or Mouse Wheel - Change Conductor's strum time
 			\nA/D - Go to the previous/next section
 			\nLeft/Right - Change Snap
 			\nUp/Down - Change Conductor's Strum Time with Snapping" +
@@ -2082,7 +2087,7 @@ class ChartingState extends MusicBeatState
 			#end
 
 			#if mobile
-			if(FlxG.keys.justPressed.Z || touchPad.buttonZ.justPressed && curZoom > 0 && !FlxG.keys.pressed.CONTROL) {
+			if(FlxG.keys.justPressed.Z || touchPad.buttonV.justPressed && curZoom > 0 && !FlxG.keys.pressed.CONTROL) {
 				--curZoom;
 				updateZoom();
 			}
