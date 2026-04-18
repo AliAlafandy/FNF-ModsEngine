@@ -156,14 +156,13 @@ class EditorPlayState extends MusicBeatSubstate
 		FlxG.mouse.visible = false;
 
 		#if mobile
-		/*#if android
+		#if android
 		if (ClientPrefs.data.pauseButton == true) {
 			addTouchPad("NONE", "P");
 		} else {
 			addTouchPad("NONE", "NONE");
 		}
-		#else*/
-		#if !android
+		#else
 			addTouchPad("NONE", "P");
 		#end
 		addTouchPadCamera();
@@ -172,6 +171,8 @@ class EditorPlayState extends MusicBeatSubstate
 		#if mobile
 		addMobileControls();
 		mobileControls.instance.visible = true;
+		mobileControls.onButtonDown.add(onButtonPress);
+		mobileControls.onButtonUp.add(onButtonRelease);
 		#end
 		
 		generateSong(PlayState.SONG.song);
@@ -189,13 +190,28 @@ class EditorPlayState extends MusicBeatSubstate
 
 	override function update(elapsed:Float)
 	{
-		if(#if android FlxG.android.justReleased.BACK #else touchPad.buttonP.justPressed #end || FlxG.keys.justPressed.ESCAPE)
+		#if mobile
+		if(
+			#if android
+			FlxG.android.justPressed.BACK || touchPad.buttonP.justPressed
+			#else
+			touchPad.buttonP.justPressed
+			#end
+			|| controls.BACK || FlxG.keys.justPressed.ESCAPE)
 		{
 			mobileControls.instance.visible = false;
 			endSong();
 			super.update(elapsed);
 			return;
 		}
+		#else
+		if(controls.BACK || FlxG.keys.justPressed.ESCAPE)
+		{
+			endSong();
+			super.update(elapsed);
+			return;
+		}
+		#end
 		
 		if (startingSong)
 		{
