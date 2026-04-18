@@ -35,4 +35,6 @@ interface IMobileControls
 	public var buttonExtra:TouchButton;
 	public var buttonExtra2:TouchButton;
 	public var instance:MobileInputManager;
+	public var onButtonDown:FlxTypedSignal<TouchButton->Void>;
+	public var onButtonUp:FlxTypedSignal<TouchButton->Void>;
 }
