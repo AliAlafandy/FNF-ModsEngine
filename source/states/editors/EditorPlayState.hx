@@ -152,13 +152,26 @@ class EditorPlayState extends MusicBeatSubstate
 		tipText.borderSize = 2;
 		tipText.scrollFactor.set();
 		add(tipText);
+		
 		FlxG.mouse.visible = false;
+
+		#if mobile
+		/*#if android
+		if (ClientPrefs.data.pauseButton == true) {
+			addTouchPad("NONE", "P");
+		} else {
+			addTouchPad("NONE", "NONE");
+		}
+		#else*/
+		#if !android
+			addTouchPad("NONE", "P");
+		#end
+		addTouchPadCamera();
+		#end
 
 		#if mobile
 		addMobileControls();
 		mobileControls.instance.visible = true;
-		mobileControls.onButtonDown.add(onButtonPress);
-		mobileControls.onButtonUp.add(onButtonRelease);
 		#end
 		
 		generateSong(PlayState.SONG.song);
@@ -169,13 +182,6 @@ class EditorPlayState extends MusicBeatSubstate
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence (with Time Left)
 		DiscordClient.changePresence('Playtesting on Chart Editor', PlayState.SONG.song, null, true, songLength);
-		#end
-
-		#if mobile
-		#if !android
-		addTouchPad("NONE", "P");
-		addTouchPadCamera();
-		#end
 		#end
 
 		RecalculateRating();
