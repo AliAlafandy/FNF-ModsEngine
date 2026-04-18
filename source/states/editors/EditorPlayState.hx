@@ -154,10 +154,12 @@ class EditorPlayState extends MusicBeatSubstate
 		add(tipText);
 		FlxG.mouse.visible = false;
 
+		#if mobile
 		addMobileControls();
 		mobileControls.instance.visible = true;
 		mobileControls.onButtonDown.add(onButtonPress);
 		mobileControls.onButtonUp.add(onButtonRelease);
+		#end
 		
 		generateSong(PlayState.SONG.song);
 
@@ -169,9 +171,11 @@ class EditorPlayState extends MusicBeatSubstate
 		DiscordClient.changePresence('Playtesting on Chart Editor', PlayState.SONG.song, null, true, songLength);
 		#end
 
+		#if mobile
 		#if !android
 		addTouchPad("NONE", "P");
 		addTouchPadCamera();
+		#end
 		#end
 
 		RecalculateRating();
