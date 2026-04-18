@@ -154,23 +154,10 @@ class EditorPlayState extends MusicBeatSubstate
 		add(tipText);
 		FlxG.mouse.visible = false;
 
-		#if mobile
-		#if android
-		if (ClientPrefs.data.pauseButton == true) {
-			addTouchPad("NONE", "P");
-		} else {
-			addTouchPad("NONE", "NONE");
-		}
-		#else
-			addTouchPad("NONE", "P");
-		#end
-		addTouchPadCamera();
-		#end
-
-		#if mobile
 		addMobileControls();
 		mobileControls.instance.visible = true;
-		#end
+		mobileControls.onButtonDown.add(onButtonPress);
+		mobileControls.onButtonUp.add(onButtonRelease);
 		
 		generateSong(PlayState.SONG.song);
 
@@ -182,33 +169,23 @@ class EditorPlayState extends MusicBeatSubstate
 		DiscordClient.changePresence('Playtesting on Chart Editor', PlayState.SONG.song, null, true, songLength);
 		#end
 
+		#if !android
+		addTouchPad("NONE", "P");
+		addTouchPadCamera();
+		#end
+
 		RecalculateRating();
 	}
 
 	override function update(elapsed:Float)
 	{
-		#if mobile
-		if(
-			#if android
-			FlxG.android.justPressed.BACK || touchPad.buttonP.justPressed
-			#else
-			touchPad.buttonP.justPressed
-			#end
-			|| controls.BACK || FlxG.keys.justPressed.ESCAPE)
+		if(#if android FlxG.android.justReleased.BACK #else touchPad.buttonP.justPressed #end || FlxG.keys.justPressed.ESCAPE)
 		{
 			mobileControls.instance.visible = false;
 			endSong();
 			super.update(elapsed);
 			return;
 		}
-		#else
-		if(controls.BACK || FlxG.keys.justPressed.ESCAPE)
-		{
-			endSong();
-			super.update(elapsed);
-			return;
-		}
-		#end
 		
 		if (startingSong)
 		{
