@@ -1974,7 +1974,8 @@ class ChartingState extends MusicBeatState
 				playtesting = true;
 				playtestingTime = Conductor.songPosition;
 				playtestingOnComplete = FlxG.sound.music.onComplete;
-				touchPad.alpha = 0;
+				// touchPad.alpha = 0;
+				// touchPad.active = touchPad.visible = false;
 				openSubState(new states.editors.EditorPlayState(playbackSpeed));
 			}
 			else if (FlxG.keys.justPressed.ENTER || touchPad.buttonA.justPressed)
