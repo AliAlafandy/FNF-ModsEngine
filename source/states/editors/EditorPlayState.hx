@@ -153,16 +153,6 @@ class EditorPlayState extends MusicBeatSubstate
 		tipText.scrollFactor.set();
 		add(tipText);
 		FlxG.mouse.visible = false;
-		
-		generateSong(PlayState.SONG.song);
-
-		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
-		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
-		
-		#if DISCORD_ALLOWED
-		// Updating Discord Rich Presence (with Time Left)
-		DiscordClient.changePresence('Playtesting on Chart Editor', PlayState.SONG.song, null, true, songLength);
-		#end
 
 		#if mobile
 		#if android
@@ -180,6 +170,16 @@ class EditorPlayState extends MusicBeatSubstate
 		#if mobile
 		addMobileControls();
 		mobileControls.instance.visible = true;
+		#end
+		
+		generateSong(PlayState.SONG.song);
+
+		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
+		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
+		
+		#if DISCORD_ALLOWED
+		// Updating Discord Rich Presence (with Time Left)
+		DiscordClient.changePresence('Playtesting on Chart Editor', PlayState.SONG.song, null, true, songLength);
 		#end
 
 		RecalculateRating();
@@ -606,6 +606,7 @@ class EditorPlayState extends MusicBeatSubstate
 		var pixelShitPart1:String = "";
 		var pixelShitPart2:String = '';
 
+		if(ClientPrefs.data.popUpRating) {
 		rating.loadGraphic(Paths.image(pixelShitPart1 + daRating.image + pixelShitPart2));
 		rating.screenCenter();
 		rating.x = coolText.x - 40;
@@ -725,6 +726,7 @@ class EditorPlayState extends MusicBeatSubstate
 			},
 			startDelay: Conductor.crochet * 0.002 / playbackRate
 		});
+		}
 	}
 
 	private function onKeyPress(event:KeyboardEvent):Void
@@ -811,6 +813,24 @@ class EditorPlayState extends MusicBeatSubstate
 			spr.playAnim('static');
 			spr.resetAnim = 0;
 		}
+	}
+
+	private function onButtonPress(button:TouchButton):Void
+	{
+		if (button.IDs.filter(id -> id.toString().startsWith("EXTRA")).length > 0)
+			return;
+
+		var buttonCode:Int = (button.IDs[0].toString().startsWith('NOTE')) ? button.IDs[0] : button.IDs[1];
+		if (button.justPressed) keyPressed(buttonCode);
+	}
+
+	private function onButtonRelease(button:TouchButton):Void
+	{
+		if (button.IDs.filter(id -> id.toString().startsWith("EXTRA")).length > 0)
+			return;
+
+		var buttonCode:Int = (button.IDs[0].toString().startsWith('NOTE')) ? button.IDs[0] : button.IDs[1];
+		if(buttonCode > -1) keyReleased(buttonCode);
 	}
 	
 	// Hold notes
@@ -960,7 +980,7 @@ class EditorPlayState extends MusicBeatSubstate
 	}
 
 	public function invalidateNote(note:Note):Void {
-		//note.kill();
+		//if (!ClientPrefs.data.lowQuality) note.kill();
 		notes.remove(note, true);
 		note.destroy();
 	}
