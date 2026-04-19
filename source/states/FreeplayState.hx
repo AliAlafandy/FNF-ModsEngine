@@ -646,7 +646,7 @@ class FreeplayState extends MusicBeatState
 		}
 
 		if(//intendedColor == FlxColor.BLACK
-		FlxColor.get_brightness(intendedColor) < 0.2) {
+		FlxColor.brightness(intendedColor) < 0.2) {
 			if(tweenColor != null) {
 				tweenColor.cancel();
 			}
