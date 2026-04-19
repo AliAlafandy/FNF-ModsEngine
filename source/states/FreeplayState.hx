@@ -645,12 +645,13 @@ class FreeplayState extends MusicBeatState
 			});
 		}
 
-		if(intendedColor == FlxColor.BLACK) {
+		if(//intendedColor == FlxColor.BLACK
+		FlxColor.getBrightness(intendedColor) < 0.2) {
 			if(tweenColor != null) {
 				tweenColor.cancel();
 			}
 			tweenColor = FlxTween.color(gird, 1, gird.color, 0x33FFFFFF, {
-				onComplete: function(twn:FlxTimer) {
+				onComplete: function(twn:FlxTween) {
 					tweenColor = null;
 				}
 			});
@@ -659,7 +660,7 @@ class FreeplayState extends MusicBeatState
 				tweenColor.cancel();
 			}
 			tweenColor = FlxTween.color(gird, 1, gird.color, 0x33000000, {
-				onComplete: function(twn:FlxTimer) {
+				onComplete: function(twn:FlxTween) {
 					tweenColor = null;
 				}
 			});
