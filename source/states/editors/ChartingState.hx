@@ -356,7 +356,7 @@ class ChartingState extends MusicBeatState
 			#end
 
 			"\nHold Y to move 4x faster
-			\nHold H and touch on an arrow to select it
+			\nHold F and touch on an arrow to select it
 			\nV/D - Zoom in/out
 			\n
 			\nC - Test your chart inside Chart Editor
