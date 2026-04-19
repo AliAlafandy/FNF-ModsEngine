@@ -441,7 +441,12 @@ class FreeplayState extends MusicBeatState
 				super.update(elapsed);
 				return;
 			}
-			LoadingState.loadAndSwitchState(new PlayState());
+
+			if((FlxG.keys.pressed.SHIFT || touchPad.buttonZ.justPressed) && !player.playingMusic) {
+				LoadingState.loadAndSwitchState(new ChartingState());
+			} else {
+				LoadingState.loadAndSwitchState(new PlayState());
+			}
 
 			FlxG.sound.music.volume = 0;
 					
@@ -547,7 +552,12 @@ class FreeplayState extends MusicBeatState
 				super.update(elapsed);
 				return;
 			}
-			LoadingState.loadAndSwitchState(new PlayState());
+
+			if(FlxG.keys.pressed.SHIFT && !player.playingMusic) {
+				LoadingState.loadAndSwitchState(new ChartingState());
+			} else {
+				LoadingState.loadAndSwitchState(new PlayState());
+			}
 
 			FlxG.sound.music.volume = 0;
 					
