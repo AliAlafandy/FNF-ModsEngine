@@ -645,8 +645,7 @@ class FreeplayState extends MusicBeatState
 			});
 		}
 
-		if(//intendedColor == FlxColor.BLACK
-		FlxColor.brightness(intendedColor) < 0.2) {
+		if(intendedColor == FlxColor.BLACK) {
 			if(tweenColor != null) {
 				tweenColor.cancel();
 			}
