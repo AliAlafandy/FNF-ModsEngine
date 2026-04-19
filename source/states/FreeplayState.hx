@@ -42,6 +42,10 @@ class FreeplayState extends MusicBeatState
 	var intendedColor:Int;
 	var colorTween:FlxTween;
 
+	var grid:FlxBackdrop;
+	var colorIntended:Int;
+	var tweenColor:FlxTween;
+
 	var missingTextBG:FlxSprite;
 	var missingText:FlxText;
 
@@ -96,7 +100,7 @@ class FreeplayState extends MusicBeatState
 		bg.screenCenter();
 		add(bg);
 
-		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33000000, 0x0));
+		gird = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33000000, 0x0));
 		grid.velocity.set(40, 40);
 		grid.alpha = 0;
 		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
@@ -164,6 +168,7 @@ class FreeplayState extends MusicBeatState
 		if(curSelected >= songs.length) curSelected = 0;
 		bg.color = songs[curSelected].color;
 		intendedColor = bg.color;
+		colorIntended = gird.color;
 		lerpSelected = curSelected;
 
 		curDifficulty = Math.round(Math.max(0, Difficulty.defaultList.indexOf(lastDifficultyName)));
@@ -343,6 +348,9 @@ class FreeplayState extends MusicBeatState
 				if(colorTween != null) {
 					colorTween.cancel();
 				}
+				if(tweenColor != null) {
+					tweenColor.cancel();
+				}
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new MainMenuState());
 			}
@@ -421,6 +429,9 @@ class FreeplayState extends MusicBeatState
 				trace('CURRENT WEEK: ' + WeekData.getWeekFileName());
 				if(colorTween != null) {
 					colorTween.cancel();
+				}
+				if(tweenColor != null) {
+					tweenColor.cancel();
 				}
 			}
 			catch(e:Dynamic)
@@ -528,6 +539,9 @@ class FreeplayState extends MusicBeatState
 				if(colorTween != null) {
 					colorTween.cancel();
 				}
+				if(tweenColor != null) {
+					tweenColor.cancel();
+				}
 			}
 			catch(e:Dynamic)
 			{
@@ -632,21 +646,21 @@ class FreeplayState extends MusicBeatState
 		}
 
 		if(intendedColor == FlxColor.BLACK) {
-			if(colorTween != null) {
-				colorTween.cancel();
+			if(tweenColor != null) {
+				tweenColor.cancel();
 			}
-			colorTween = FlxTween.color(gird, 1, gird.color, 0x33FFFFFF, {
+			tweenColor = FlxTween.color(gird, 1, gird.color, 0x33FFFFFF, {
 				onComplete: function(twn:FlxTimer) {
-					colorTween = null;
+					tweenColor = null;
 				}
 			});
 		} else {
-			if(colorTween != null) {
-				colorTween.cancel();
+			if(tweenColor != null) {
+				tweenColor.cancel();
 			}
-			colorTween = FlxTween.color(gird, 1, gird.color, 0x33000000, {
+			tweenColor = FlxTween.color(gird, 1, gird.color, 0x33000000, {
 				onComplete: function(twn:FlxTimer) {
-					colorTween = null;
+					tweenColor = null;
 				}
 			});
 		}
