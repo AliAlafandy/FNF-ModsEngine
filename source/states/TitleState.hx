@@ -292,7 +292,7 @@ class TitleState extends MusicBeatState
 		}
 
 		#if mobile
-		titleTextMobile = new FlxSprite(titleJSON.startx - 65, titleJSON.starty);
+		titleTextMobile = new FlxSprite(titleJSON.startx - 70, titleJSON.starty);
 		titleTextMobile.frames = Paths.getSparrowAtlas('titleEnter_mobile');
 		var animFrames:Array<FlxFrame> = [];
 		@:privateAccess {
@@ -625,6 +625,7 @@ class TitleState extends MusicBeatState
 					createCoolText(['Mods Engine by'], 40);
 				case 4:
 					addMoreText('Ali Alafandy', 40);
+					addMoreText('Ethantobot', 40);
 				case 5:
 					deleteCoolText();
 				case 6:
