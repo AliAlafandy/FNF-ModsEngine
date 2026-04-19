@@ -100,7 +100,7 @@ class FreeplayState extends MusicBeatState
 		bg.screenCenter();
 		add(bg);
 
-		gird = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33000000, 0x0));
+		grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33000000, 0x0));
 		grid.velocity.set(40, 40);
 		grid.alpha = 0;
 		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
@@ -646,11 +646,11 @@ class FreeplayState extends MusicBeatState
 		}
 
 		if(//intendedColor == FlxColor.BLACK
-		FlxColor.getBrightness(intendedColor) < 0.2) {
+		FlxColor.get_brightness(intendedColor) < 0.2) {
 			if(tweenColor != null) {
 				tweenColor.cancel();
 			}
-			tweenColor = FlxTween.color(gird, 1, gird.color, 0x33FFFFFF, {
+			tweenColor = FlxTween.color(grid, 1, grid.color, 0x33FFFFFF, {
 				onComplete: function(twn:FlxTween) {
 					tweenColor = null;
 				}
@@ -659,7 +659,7 @@ class FreeplayState extends MusicBeatState
 			if(tweenColor != null) {
 				tweenColor.cancel();
 			}
-			tweenColor = FlxTween.color(gird, 1, gird.color, 0x33000000, {
+			tweenColor = FlxTween.color(grid, 1, grid.color, 0x33000000, {
 				onComplete: function(twn:FlxTween) {
 					tweenColor = null;
 				}
