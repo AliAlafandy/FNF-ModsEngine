@@ -186,7 +186,13 @@ class TitleState extends MusicBeatState
 	var logoBl:FlxSprite;
 	var gfDance:FlxSprite;
 	var danceLeft:Bool = false;
+
+	#if mobile
+	var titleTextMobile:FlxSprite;
+	#else
 	var titleText:FlxSprite;
+	#end
+
 	var swagShader:ColorSwap = null;
 
 	function startIntro()
@@ -285,6 +291,33 @@ class TitleState extends MusicBeatState
 			logoBl.shader = swagShader.shader;
 		}
 
+		#if mobile
+		titleTextMobile = new FlxSprite(titleJSON.startx - 65, titleJSON.starty);
+		titleTextMobile.frames = Paths.getSparrowAtlas('titleEnter_mobile');
+		var animFrames:Array<FlxFrame> = [];
+		@:privateAccess {
+			titleTextMobile.animation.findByPrefix(animFrames, "ENTER IDLE");
+			titleTextMobile.animation.findByPrefix(animFrames, "ENTER FREEZE");
+		}
+		
+		if (animFrames.length > 0) {
+			newTitle = true;
+			
+			titleTextMobile.animation.addByPrefix('idle', "ENTER IDLE", 24);
+			titleTextMobile.animation.addByPrefix('press', ClientPrefs.data.flashing ? "ENTER PRESSED" : "ENTER FREEZE", 24);
+		}
+		else {
+			newTitle = false;
+			
+			titleTextMobile.animation.addByPrefix('idle', "Press Enter to Begin", 24);
+			titleTextMobile.animation.addByPrefix('press', "ENTER PRESSED", 24);
+		}
+		
+		titleTextMobile.animation.play('idle');
+		titleTextMobile.updateHitbox();
+		// titleTextMobile.screenCenter(X);
+		add(titleTextMobile);
+		#else
 		titleText = new FlxSprite(titleJSON.startx, titleJSON.starty);
 		titleText.frames = Paths.getSparrowAtlas('titleEnter');
 		var animFrames:Array<FlxFrame> = [];
@@ -310,6 +343,7 @@ class TitleState extends MusicBeatState
 		titleText.updateHitbox();
 		// titleText.screenCenter(X);
 		add(titleText);
+		#end
 
 		var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image('logo'));
 		logo.antialiasing = ClientPrefs.data.antialiasing;
@@ -422,16 +456,28 @@ class TitleState extends MusicBeatState
 				
 				timer = FlxEase.quadInOut(timer);
 				
+				#if mobile
+				titleTextMobile.color = FlxColor.interpolate(titleTextColors[0], titleTextColors[1], timer);
+				titleTextMobile.alpha = FlxMath.lerp(titleTextAlphas[0], titleTextAlphas[1], timer);
+				#else
 				titleText.color = FlxColor.interpolate(titleTextColors[0], titleTextColors[1], timer);
 				titleText.alpha = FlxMath.lerp(titleTextAlphas[0], titleTextAlphas[1], timer);
+				#end
 			}
 			
 			if(pressedEnter)
 			{
+				#if mobile
+				titleTextMobile.color = FlxColor.WHITE;
+				titleTextMobile.alpha = 1;
+
+				if(titleTextMobile != null) titleTextMobile.animation.play('press');
+				#else
 				titleText.color = FlxColor.WHITE;
 				titleText.alpha = 1;
 				
 				if(titleText != null) titleText.animation.play('press');
+				#end
 
 				FlxG.camera.flash(ClientPrefs.data.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
 				FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
