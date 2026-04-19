@@ -444,7 +444,7 @@ class FreeplayState extends MusicBeatState
 				return;
 			}
 
-			if((FlxG.keys.pressed.SHIFT || touchPad.buttonZ.pressed) && !player.playingMusic) {
+			if((FlxG.keys.pressed.SHIFT || touchPad.buttonZ.pressed || touchPad.buttonZ.justPressed) && !player.playingMusic) {
 				LoadingState.loadAndSwitchState(new ChartingState());
 			} else {
 				LoadingState.loadAndSwitchState(new PlayState());
