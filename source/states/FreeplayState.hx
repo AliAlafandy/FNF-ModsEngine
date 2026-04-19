@@ -1,5 +1,7 @@
 package states;
 
+import states.editors.ChartingState;
+
 import backend.WeekData;
 import backend.Highscore;
 import backend.Song;
