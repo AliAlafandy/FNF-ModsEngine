@@ -633,7 +633,7 @@ class FreeplayState extends MusicBeatState
 
 		if(intendedColor == FlxColor.BLACK) {
 			if(colorTween != null) {
-				colorTween.cancel():
+				colorTween.cancel();
 			}
 			colorTween = FlxTween.color(gird, 1, gird.color, 0x33FFFFFF, {
 				onComplete: function(twn:FlxTimer) {
@@ -642,7 +642,7 @@ class FreeplayState extends MusicBeatState
 			});
 		} else {
 			if(colorTween != null) {
-				colorTween.cancel():
+				colorTween.cancel();
 			}
 			colorTween = FlxTween.color(gird, 1, gird.color, 0x33000000, {
 				onComplete: function(twn:FlxTimer) {
