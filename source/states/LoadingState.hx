@@ -73,7 +73,6 @@ class LoadingState extends MusicBeatState
 							checkLoadSong(getVocalPath());
 					}
 				}
-
 				
 				if(directory != null && directory.length > 0 && directory != 'shared') {
 					checkLibrary('week_assets');
