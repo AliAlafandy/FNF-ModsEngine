@@ -58,12 +58,13 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		option.defaultValue = Std.int(FlxMath.bound(refreshRate, option.minValue, option.maxValue));
 		option.displayFormat = '%v FPS';
 		option.onChange = onChangeFramerate;
-		#end
 
 		var option:Option = new Option('Loading Screens', // Name
 			"EXPERIMENTAL: Allows Loading Screen, speeds up loading times,\nbut might be incompatible with older PCs.", // Description
-			'loadingScreen', 'bool');
+			'loadingScreen',
+			'bool');
 		addOption(option);
+		#end
 
 		super();
 		insert(1, boyfriend);
