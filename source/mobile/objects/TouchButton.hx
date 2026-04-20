@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Mobile Porting Team
+ * Copyright (C) 2024 Mobile Porting Team
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -439,7 +439,7 @@ class TypedTouchButton<T:FlxSprite> extends FlxSprite implements IFlxInput
 		updateLabelPosition();
 
 		if (statusIndicatorType == BRIGHTNESS && label != null && brightShader != null)
-			_spriteLabel.shader = brightShader;
+			label.shader = brightShader;
 
 		return Value;
 	}
