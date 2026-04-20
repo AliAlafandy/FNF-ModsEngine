@@ -17,7 +17,6 @@ class CreditsState extends MusicBeatState
 	var descText:FlxText;
 	var intendedColor:FlxColor;
 	var colorTween:FlxTween;
-	
 	var descBox:AttachedSprite;
 
 	var offsetThing:Float = -75;
@@ -35,12 +34,12 @@ class CreditsState extends MusicBeatState
 		add(bg);
 		bg.screenCenter();
 
-		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33000000, 0x0));
 		grid.velocity.set(40, 40);
 		grid.alpha = 0;
 		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
 		add(grid);
-
+		
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 
@@ -52,7 +51,9 @@ class CreditsState extends MusicBeatState
 		var defaultListMobile:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 			['Mods Engine Team'],
 			['Ali Alafandy', 'alafandy', 'Main Programmer and Head of Mods Engine', 'https://youtube.com/@alialafandy', '000080'],
-			['Ethantobot', 'ethan_and_mw', 'Second Programmer of Mods Engine', 'https://youtube.com/@ethanpater548', '808000'],
+			[''],
+			['Special Thanks'],
+			['Ethantobot', 'ethan_and_mw', 'Fixed releases for all devices', 'https://youtube.com/@ethanpater548', '808000'],
 			[''],
 			['Mobile Porting Team'],
 			['mcagabe19', 'lily', 'Head Porter of Psych Engine Mobile', 'https://www.youtube.com/@mcagabe19', 'FFE7C0'],
@@ -93,7 +94,9 @@ class CreditsState extends MusicBeatState
 		var defaultList:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 			['Mods Engine Team'],
 			['Ali Alafandy', 'alafandy', 'Main Programmer and Head of Mods Engine', 'https://youtube.com/@alialafandy', '000080'],
-			['Ethantobot', 'ethan_and_mw', 'Second Programmer of Mods Engine', 'https://youtube.com/@ethanpater548', '808000'],
+			[''],
+			['Special Thanks'],
+			['Ethantobot', 'ethan_and_mw', 'Fixed releases for all devices', 'https://youtube.com/@ethanpater548', '808000'],
 			[''],
 			['Psych Engine Team'],
 			['Shadow Mario', 'shadowmario', 'Main Programmer and Head of Psych Engine', 'https://ko-fi.com/shadowmario', '444444'],

@@ -11,9 +11,6 @@ import flixel.group.FlxGroup;
 import flixel.input.gamepad.FlxGamepad;
 import haxe.Json;
 
-import flixel.addons.display.FlxBackdrop;
-import flixel.addons.display.FlxGridOverlay;
-
 import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
@@ -45,8 +42,6 @@ class TitleState extends MusicBeatState
 	public static var initialized:Bool = false;
 
 	public static var checkingToastMessage:Bool = false;
-
-	public var grid:FlxBackdrop;
 
 	var blackScreen:FlxSprite;
 	var credGroup:FlxGroup;
@@ -186,13 +181,7 @@ class TitleState extends MusicBeatState
 	var logoBl:FlxSprite;
 	var gfDance:FlxSprite;
 	var danceLeft:Bool = false;
-
-	#if mobile
-	var titleTextMobile:FlxSprite;
-	#else
 	var titleText:FlxSprite;
-	#end
-
 	var swagShader:ColorSwap = null;
 
 	function startIntro()
@@ -212,32 +201,13 @@ class TitleState extends MusicBeatState
 
 		if (titleJSON.backgroundSprite != null && titleJSON.backgroundSprite.length > 0 && titleJSON.backgroundSprite != "none"){
 			bg.loadGraphic(Paths.image(titleJSON.backgroundSprite));
-		} else {
+		}else{
 			bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		}
 
 		// bg.setGraphicSize(Std.int(bg.width * 0.6));
 		// bg.updateHitbox();
 		add(bg);
-
-		if (ClientPrefs.data.gridTitle == true)
-		{
-			switch (ClientPrefs.data.themes) {
-				case 'Mods Engine':
-					grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
-					grid.velocity.set(40, 40);
-					grid.alpha = 0;
-					FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-					add(grid);
-			
-				case 'Psych Engine':
-					grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
-					grid.velocity.set(40, 40);
-					grid.alpha = 0;
-					FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-					add(grid);
-			}
-		}
 
 		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
@@ -291,33 +261,6 @@ class TitleState extends MusicBeatState
 			logoBl.shader = swagShader.shader;
 		}
 
-		#if mobile
-		titleTextMobile = new FlxSprite(titleJSON.startx - 35, titleJSON.starty);
-		titleTextMobile.frames = Paths.getSparrowAtlas('titleEnter_mobile');
-		var animFrames:Array<FlxFrame> = [];
-		@:privateAccess {
-			titleTextMobile.animation.findByPrefix(animFrames, "ENTER IDLE");
-			titleTextMobile.animation.findByPrefix(animFrames, "ENTER FREEZE");
-		}
-		
-		if (animFrames.length > 0) {
-			newTitle = true;
-			
-			titleTextMobile.animation.addByPrefix('idle', "ENTER IDLE", 24);
-			titleTextMobile.animation.addByPrefix('press', ClientPrefs.data.flashing ? "ENTER PRESSED" : "ENTER FREEZE", 24);
-		}
-		else {
-			newTitle = false;
-			
-			titleTextMobile.animation.addByPrefix('idle', "Press Enter to Begin", 24);
-			titleTextMobile.animation.addByPrefix('press', "ENTER PRESSED", 24);
-		}
-		
-		titleTextMobile.animation.play('idle');
-		titleTextMobile.updateHitbox();
-		// titleTextMobile.screenCenter(X);
-		add(titleTextMobile);
-		#else
 		titleText = new FlxSprite(titleJSON.startx, titleJSON.starty);
 		titleText.frames = Paths.getSparrowAtlas('titleEnter');
 		var animFrames:Array<FlxFrame> = [];
@@ -343,7 +286,6 @@ class TitleState extends MusicBeatState
 		titleText.updateHitbox();
 		// titleText.screenCenter(X);
 		add(titleText);
-		#end
 
 		var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image('logo'));
 		logo.antialiasing = ClientPrefs.data.antialiasing;
@@ -456,28 +398,16 @@ class TitleState extends MusicBeatState
 				
 				timer = FlxEase.quadInOut(timer);
 				
-				#if mobile
-				titleTextMobile.color = FlxColor.interpolate(titleTextColors[0], titleTextColors[1], timer);
-				titleTextMobile.alpha = FlxMath.lerp(titleTextAlphas[0], titleTextAlphas[1], timer);
-				#else
 				titleText.color = FlxColor.interpolate(titleTextColors[0], titleTextColors[1], timer);
 				titleText.alpha = FlxMath.lerp(titleTextAlphas[0], titleTextAlphas[1], timer);
-				#end
 			}
 			
 			if(pressedEnter)
 			{
-				#if mobile
-				titleTextMobile.color = FlxColor.WHITE;
-				titleTextMobile.alpha = 1;
-
-				if(titleTextMobile != null) titleTextMobile.animation.play('press');
-				#else
 				titleText.color = FlxColor.WHITE;
 				titleText.alpha = 1;
 				
 				if(titleText != null) titleText.animation.play('press');
-				#end
 
 				FlxG.camera.flash(ClientPrefs.data.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
 				FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
@@ -625,7 +555,6 @@ class TitleState extends MusicBeatState
 					createCoolText(['Mods Engine by'], 40);
 				case 4:
 					addMoreText('Ali Alafandy', 40);
-					addMoreText('Ethantobot', 40);
 				case 5:
 					deleteCoolText();
 				case 6:
