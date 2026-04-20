@@ -12,7 +12,7 @@ import options.OptionsState;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var modsEngineVersion:String = '9.6.6'; // Latest Version bcuz v1.0.0 so late these today and This is also used for Discord RPC
+	public static var modsEngineVersion:String = '6.9.9'; // Latest Version bcuz v1.0.0 so late these today and This is also used for Discord RPC
 	public static var psychEngineVersion:String = '0.7.3';
 	public static var curSelected:Int = 0;
 
@@ -86,7 +86,7 @@ class MainMenuState extends MusicBeatState
 		
 		add(magenta);
 
-		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33000000, 0x0));
+		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
 		grid.velocity.set(40, 40);
 		grid.alpha = 0;
 		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
@@ -114,6 +114,22 @@ class MainMenuState extends MusicBeatState
 			menuItem.x = 95;
 		}
 
+		// Mods Engine Old Logo
+		/*
+		modsEngineLogo = new FlxSprite(0).loadGraphic(Paths.image('modsEngineLogoOld'));
+		modsEngineLogo.scrollFactor.x = 0;
+		modsEngineLogo.scrollFactor.y = 0;
+		modsEngineLogo.antialiasing = ClientPrefs.data.antialiasing;
+		modsEngineLogo.visible = true;
+		modsEngineLogo.setGraphicSize(Std.int(bg.width * 0.32));
+		modsEngineLogo.updateHitbox();
+		modsEngineLogo.screenCenter(Y);
+		modsEngineLogo.x = 735;
+		modsEngineLogo.scale.x = 0.5;
+		modsEngineLogo.scale.y = 0.5;
+		add(modsEngineLogo);
+		*/
+
 		modsEngineLogo = new FlxSprite(0).loadGraphic(Paths.image('modsEngineLogo'));
 		modsEngineLogo.scrollFactor.x = 0;
 		modsEngineLogo.scrollFactor.y = 0;
@@ -121,11 +137,10 @@ class MainMenuState extends MusicBeatState
 		modsEngineLogo.visible = true;
 		modsEngineLogo.setGraphicSize(Std.int(bg.width * 0.32));
 		modsEngineLogo.updateHitbox();
-		modsEngineLogo.screenCenter();
+		modsEngineLogo.screenCenter(Y);
 		modsEngineLogo.x = 735;
-		modsEngineLogo.y = 233;
-		modsEngineLogo.scale.x = 0.5;
-		modsEngineLogo.scale.y = 0.5;
+		modsEngineLogo.scale.x = 0.4;
+		modsEngineLogo.scale.y = 0.4;
 		add(modsEngineLogo);
 
 		var modsVer:FlxText = new FlxText(12, FlxG.height - 64, 0, "Mods Engine v" + modsEngineVersion, 12);

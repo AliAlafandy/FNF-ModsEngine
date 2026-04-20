@@ -40,11 +40,13 @@ class LoadingState extends MusicBeatState
 
 	var funkay:FlxSprite;
 	var loadBar:FlxSprite;
+	
 	override function create()
 	{
 		var bg:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, 0xFF000000);
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
+		
 		funkay = new FlxSprite(0, 0).loadGraphic(Paths.getPath('images/funkay.png', IMAGE));
 		funkay.setGraphicSize(0, FlxG.height);
 		funkay.updateHitbox();
@@ -63,11 +65,15 @@ class LoadingState extends MusicBeatState
 			{
 				callbacks = new MultiCallback(onLoad);
 				var introComplete = callbacks.add("introComplete");
-				if (PlayState.SONG != null) {
-					checkLoadSong(getSongPath());
-					if (PlayState.SONG.needsVoices)
-						checkLoadSong(getVocalPath());
+
+				if(ClientPrefs.data.loadingScreen == false) {
+					if (PlayState.SONG != null) {
+						checkLoadSong(getSongPath());
+						if (PlayState.SONG.needsVoices)
+							checkLoadSong(getVocalPath());
+					}
 				}
+				
 				if(directory != null && directory.length > 0 && directory != 'shared') {
 					checkLibrary('week_assets');
 				}
@@ -158,33 +164,36 @@ class LoadingState extends MusicBeatState
 		Paths.setCurrentLevel(directory);
 		trace('Setting asset folder to ' + directory);
 
-		/*#if NO_PRELOAD_ALL
-		var loaded:Bool = false;
-		if (PlayState.SONG != null) {
-			loaded = isSoundLoaded(getSongPath()) && (!PlayState.SONG.needsVoices || isSoundLoaded(getVocalPath())) && isLibraryLoaded('week_assets');
-		}
+		if(ClientPrefs.data.loadingScreen == true) {
+			//#if NO_PRELOAD_ALL
+			var loaded:Bool = false;
+			if (PlayState.SONG != null) {
+				loaded = isSoundLoaded(getSongPath()) && (!PlayState.SONG.needsVoices || isSoundLoaded(getVocalPath())) && isLibraryLoaded('week_assets');
+			}
 		
-		if (!loaded)
-			return new LoadingState(target, stopMusic, directory);
-		#end*/
+			if (!loaded)
+				return new LoadingState(target, stopMusic, directory);
+			//#end
+		}
+
 		if (stopMusic && FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 		
 		return target;
 	}
-	
-	/*#if NO_PRELOAD_ALL
+
+	//#if NO_PRELOAD_ALL
 	static function isSoundLoaded(path:String):Bool
 	{
 		trace(path);
 		return Assets.cache.hasSound(path);
 	}
-	
+
 	static function isLibraryLoaded(library:String):Bool
 	{
 		return Assets.getLibrary(library) != null;
 	}
-	#end*/
+	//#end
 	
 	override function destroy()
 	{

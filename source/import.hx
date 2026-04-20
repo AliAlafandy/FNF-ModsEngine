@@ -62,7 +62,10 @@ import objects.Alphabet;
 import objects.BGSprite;
 
 import states.PlayState;
+
+#if NO_PRELOAD_ALL
 import states.LoadingState;
+#end
 
 #if flxanimate
 import flxanimate.*;

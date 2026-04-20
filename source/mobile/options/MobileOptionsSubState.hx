@@ -97,6 +97,13 @@ class MobileOptionsSubState extends BaseOptionsMenu
 		addOption(option);
 		#end
 
+		#if android
+		option = new Option('P Button',
+			'If unchecked, remove P button from play state.\n(you can use BACK button in both cases)', 'pauseButton',
+			'bool');
+		addOption(option);
+		#end
+
 		super();
 	}
 

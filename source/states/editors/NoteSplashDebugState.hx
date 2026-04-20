@@ -165,7 +165,7 @@ class NoteSplashDebugState extends MusicBeatState
             Ctrl + C/V - Copy & Paste";
         }
 
-		var text:FlxText = new FlxText(0, 520, FlxG.width, sillyText, 16);
+		var text:FlxText = new FlxText(30, 520, FlxG.width, sillyText, 16);
 		text.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		text.scrollFactor.set();
 		add(text);
