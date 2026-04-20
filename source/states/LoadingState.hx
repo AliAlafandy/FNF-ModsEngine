@@ -182,7 +182,7 @@ class LoadingState extends MusicBeatState
 		return target;
 	}
 	
-	if(ClientPrefs.data.loadingScreen == true) {
+	//if(ClientPrefs.data.loadingScreen == true) {
 		//#if NO_PRELOAD_ALL
 		static function isSoundLoaded(path:String):Bool
 		{
@@ -195,7 +195,7 @@ class LoadingState extends MusicBeatState
 			return Assets.getLibrary(library) != null;
 		}
 		//#end
-	}
+	//}
 	
 	override function destroy()
 	{
