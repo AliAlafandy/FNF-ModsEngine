@@ -111,9 +111,9 @@ class CreditsEditorState extends MusicBeatState
 			\nA - Apply changes
 			\nX - Get selected item data
 			\nY - Delete selected item
-			\nZ - Reset inputs
-			\nC - Add title
-			\nB - Add credit";
+			\nC - Reset inputs
+			\nZ - Add title
+			\nH - Add credit";
 		} else {
 			text = "W/S or Up/Down - Change selected item
 			\nEnter - Apply changes
@@ -165,7 +165,7 @@ class CreditsEditorState extends MusicBeatState
 		changeSelection();
 
 		#if mobile
-		addTouchPad("UP_DOWN", "A_B_C_X_Y_Z");
+		addTouchPad("UP_DOWN", "CREDIT_EDITOR");
 		addTouchPadCamera();
 		#end
 		
@@ -188,7 +188,7 @@ class CreditsEditorState extends MusicBeatState
 	
 	var colorSquare:FlxSprite;
 
-	function addCreditsUI():Void
+	function addCreditsUI()
 	{
 		var yDist:Float = 20;
 		titleInput = new FlxUIInputText(60, 20, 180, '', 8);
@@ -304,7 +304,8 @@ class CreditsEditorState extends MusicBeatState
 		showIconExist(iconInput.text);
 	}
 
-	function updateCreditObjects(){
+	function updateCreditObjects()
+	{
 		if(creditsStuff != null && creditsStuff.length > 0){
 			for (i in 0...iconArray.length){
 				iconArray[i].kill();
@@ -355,7 +356,8 @@ class CreditsEditorState extends MusicBeatState
 		}
 	}
 
-	function addCredit(){
+	function addCredit()
+	{
 		var daData:Array<String> = [];
 		daData.push('User');
 		daData.push('');
@@ -369,7 +371,8 @@ class CreditsEditorState extends MusicBeatState
 		changeSelection();
 	}
 
-	function addTitle(){
+	function addTitle()
+	{
 		var daData:Array<String> = [];
 		daData.push('Title');
 		pushAtPos(currentlySelected + 1, daData);
@@ -383,7 +386,8 @@ class CreditsEditorState extends MusicBeatState
 		changeSelection();
 	}
 
-	function dataGoToInputs(){
+	function dataGoToInputs()
+	{
 		if(curSelIsTitle){
 			titleInput.text = creditsStuff[currentlySelected][0];
 		} else {
@@ -397,7 +401,8 @@ class CreditsEditorState extends MusicBeatState
 		}
 	}
 	
-	function cleanInputs(){
+	function cleanInputs()
+	{
 		titleInput.text = '';
 		creditNameInput.text = '';
 		iconInput.text = '';
@@ -408,7 +413,8 @@ class CreditsEditorState extends MusicBeatState
 		iconColorShow();
 	}
 
-	function setItemData(){
+	function setItemData()
+	{
 		if(curSelIsTitle){
 			if(titleInput.text != null && titleInput.text.length > 0) creditsStuff[currentlySelected][0] = titleInput.text;
 			else creditsStuff[currentlySelected][0] = 'Title';
@@ -429,7 +435,8 @@ class CreditsEditorState extends MusicBeatState
 		}
 	}
 
-	function deleteSelItem(){
+	function deleteSelItem()
+	{
 		if(currentlySelected == 0 || creditsStuff.length <= 1) return; // you trying to delete the first title? why dont you edit it...
 		var daStuff:Array<Array<String>> = [];
 		for(i in 0...creditsStuff.length){
@@ -461,14 +468,16 @@ class CreditsEditorState extends MusicBeatState
 		changeSelection(-1);
 	}
 
-	function templateArray(){
+	function templateArray()
+	{
 		return([
 			['Title'],
 			['User', '', 'Description here...',	'',	'E1E1E1']
 		]);
 	}
 
-	function pushAtPos(pos:Int, data:Array<String>){
+	function pushAtPos(pos:Int, data:Array<String>)
+	{
 		var daStuff:Array<Array<String>> = [];
 		for(i in 0...creditsStuff.length){
 			if(i == pos){
@@ -566,7 +575,7 @@ class CreditsEditorState extends MusicBeatState
 			#end
 
 			#if mobile
-			if (FlxG.keys.pressed.R || touchPad.buttonZ.justPressed) {
+			if (FlxG.keys.pressed.R || touchPad.buttonC.justPressed) {
 				cleanInputs();
 			}
 			#else
@@ -576,7 +585,7 @@ class CreditsEditorState extends MusicBeatState
 			#end
 
 			#if mobile
-			if (FlxG.keys.justPressed.ONE || touchPad.buttonC.justPressed) {
+			if (FlxG.keys.justPressed.ONE || touchPad.buttonZ.justPressed) {
 				addTitle();
 			}
 			#else
@@ -586,7 +595,7 @@ class CreditsEditorState extends MusicBeatState
 			#end
 
 			#if mobile
-			if (FlxG.keys.justPressed.TWO || touchPad.buttonB.justPressed) {
+			if (FlxG.keys.justPressed.TWO || touchPad.buttonH.justPressed) {
 				addCredit();
 			}
 			#else
@@ -608,7 +617,7 @@ class CreditsEditorState extends MusicBeatState
 				FlxG.mouse.visible = false;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new states.editors.MasterEditorMenu());
-				FlxG.sound.playMusic(Paths.music('freakyMenu-' + ClientPrefs.mainMenuMusic));
+				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				quitting = true;
 			}
 			#else
@@ -620,11 +629,12 @@ class CreditsEditorState extends MusicBeatState
 				FlxG.mouse.visible = false;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new states.editors.MasterEditorMenu());
-				FlxG.sound.playMusic(Paths.music('freakyMenu-' + ClientPrefs.mainMenuMusic));
+				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				quitting = true;
 			}
 			#end
 		}
+		
 		if (blockInput) {
 			if (FlxG.keys.justPressed.ENTER) {
 				for (i in 0...blockPressWhileTypingOn.length) {
@@ -695,7 +705,7 @@ class CreditsEditorState extends MusicBeatState
 		descriptionBox.visible = !unselectableCheck(currentlySelected);	
 		descriptionText.visible = !unselectableCheck(currentlySelected);
 
-		if(change != 0){
+		if(change != 0) {
 			descriptionText.y = FlxG.height - descriptionText.height + offsetThing - 60;
 			if(moveTween != null) moveTween.cancel();
 			moveTween = FlxTween.tween(descriptionText, {y : descriptionText.y + 75}, 0.25, {ease: FlxEase.sineOut});
@@ -705,15 +715,19 @@ class CreditsEditorState extends MusicBeatState
 		descriptionBox.updateHitbox();
 	}
 
-	private function unselectableCheck(num:Int):Bool {
+	private function unselectableCheck(num:Int):Bool
+	{
 		return creditsStuff[num].length <= 1;
 	}
-	private function nullCheck(num:Int):Bool {
+	
+	private function nullCheck(num:Int):Bool
+	{
 		if(creditsStuff[num].length <= 1 && creditsStuff[num][0].length <= 0) return true;
 		return false;
 	}
 
-	function getCurrentBGColor() {
+	function getCurrentBGColor()
+	{
 		var bgColor:String = creditsStuff[currentlySelected][4];
 		if(!bgColor.startsWith('0x')) {
 			bgColor = '0xFF' + bgColor;
@@ -721,7 +735,8 @@ class CreditsEditorState extends MusicBeatState
 		return Std.parseInt(bgColor);
 	}
 
-	function makeSquareBorder(object:FlxSprite, size:Int){ // Just to make color squares look a little nice and easier to see
+	function makeSquareBorder(object:FlxSprite, size:Int)
+	{ // Just to make color squares look a little nice and easier to see
 		var x:Float = object.x;
 		var y:Float = object.y;
 		var offset:Float = 1.5;
@@ -730,9 +745,10 @@ class CreditsEditorState extends MusicBeatState
 		return(border);
 	}
 
-	function showIconExist(text:String){
+	function showIconExist(text:String)
+	{
 		var daColor:Int;
-		if(text.length == 0){
+		if(text.length == 0) {
 			daColor = Std.parseInt('0xFFFFC31E'); // no input then
 		} else {
 			if(!Paths.fileExists('images/credits/' + text + '.png', IMAGE)) daColor = Std.parseInt('0xFFFF004C'); // icon not found
@@ -741,16 +757,22 @@ class CreditsEditorState extends MusicBeatState
 		iconExistCheck.color = daColor;
 	}
 
-	function iconColorShow(){
-		if(colorInput.text.length > 10) return;
+	function iconColorShow()
+	{
+		if(colorInput.text.length > 10)
+			return;
+		
 		var daColor:Int;
 		if(colorInput.text != null && colorInput.text.length > 0) {
-
 			if(!colorInput.text.startsWith('0xFF')) {
 				daColor = Std.parseInt('0xFF' + colorInput.text);
-			} else { daColor = Std.parseInt(colorInput.text); }
-			
-		} else { daColor = Std.parseInt('0xFFe1e1e1'); }
+			} else {
+				daColor = Std.parseInt(colorInput.text);
+			}
+		} else { 
+			daColor = Std.parseInt('0xFFe1e1e1');
+		}
+		
 		colorSquare.color = daColor;
 	}
 
@@ -794,9 +816,10 @@ class CreditsEditorState extends MusicBeatState
 		FlxG.log.error("Problem saving file");
 	}
 
-	function saveCredits() {
+	function saveCredits()
+	{
 		var daStuff:Array<String> = [];
-		for(i in 0...creditsStuff.length){
+		for(i in 0...creditsStuff.length) {
 			daStuff.push(creditsStuff[i].join('::'));
 		}
 
@@ -804,11 +827,11 @@ class CreditsEditorState extends MusicBeatState
 
 		if (data.length > 0)
 		{
-			#if android
-			SUtil.saveContent("credits", ".txt", data.trim());
+			#if mobile
+			StorageUtil.saveContent('credits.txt', data);
 			#else
 			_file = new FileReference();
-			_file.addEventListener(Event.COMPLETE, onSaveComplete);
+			_file.addEventListener(#if desktop Event.SELECT #else Event.COMPLETE #end, onSaveComplete);
 			_file.addEventListener(Event.CANCEL, onSaveCancel);
 			_file.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
 			_file.save(data, "credits.txt");
@@ -816,7 +839,8 @@ class CreditsEditorState extends MusicBeatState
 		}
 	}
 
-	function loadCredits() {
+	function loadCredits()
+	{
 		var txtFilter:FileFilter = new FileFilter('TXT', 'txt');
 		_file = new FileReference();
 		_file.addEventListener(Event.SELECT, onLoadComplete);
