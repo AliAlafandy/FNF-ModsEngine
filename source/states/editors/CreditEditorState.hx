@@ -65,6 +65,7 @@ class CreditEditorState extends MusicBeatState
 		FlxG.sound.playMusic(Paths.music('offsetSong'), 0.5);
 		
 		Paths.clearStoredMemory();
+		Paths.clearUnusedMemory();
 		
 		#if desktop
 		// Updating Discord Rich Presence
@@ -159,8 +160,7 @@ class CreditEditorState extends MusicBeatState
 		//descriptionText.borderSize = 2.4;
 		descriptionBox.sprTracker = descriptionText;
 		add(descriptionText);
-
-		Paths.clearUnusedMemory();
+		
 		descriptionBox.cameras = [camUI];
 		descriptionText.cameras = [camUI];
 	
@@ -383,7 +383,7 @@ class CreditEditorState extends MusicBeatState
 		daData.push('Title');
 		pushAtPos(currentlySelected + 1, daData);
 
-		if(titleJump.checked){
+		if(titleJump.checked) {
 			var daData:Array<String> = [];
 			pushAtPos(currentlySelected + 1, daData);
 		}
@@ -394,7 +394,7 @@ class CreditEditorState extends MusicBeatState
 
 	function dataGoToInputs()
 	{
-		if(curSelIsTitle){
+		if(curSelIsTitle) {
 			titleInput.text = creditsStuff[currentlySelected][0];
 		} else {
 			creditNameInput.text = creditsStuff[currentlySelected][0];
@@ -421,7 +421,7 @@ class CreditEditorState extends MusicBeatState
 
 	function setItemData()
 	{
-		if(curSelIsTitle){
+		if(curSelIsTitle) {
 			if(titleInput.text != null && titleInput.text.length > 0) creditsStuff[currentlySelected][0] = titleInput.text;
 			else creditsStuff[currentlySelected][0] = 'Title';
 		} else {
@@ -776,7 +776,7 @@ class CreditEditorState extends MusicBeatState
 				daColor = Std.parseInt(colorInput.text);
 			}
 		} else { 
-			daColor = Std.parseInt('0xFFe1e1e1');
+			daColor = Std.parseInt('0xFFE1E1E1');
 		}
 		
 		colorSquare.color = daColor;
