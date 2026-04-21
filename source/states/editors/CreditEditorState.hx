@@ -7,6 +7,9 @@ import flixel.ui.FlxSpriteButton;
 
 import flixel.addons.transition.FlxTransitionableState;
 
+import flixel.addons.display.FlxBackdrop;
+import flixel.addons.display.FlxGridOverlay;
+
 import flixel.addons.ui.FlxInputText;
 import flixel.addons.ui.FlxUI;
 import flixel.addons.ui.FlxUICheckBox;
