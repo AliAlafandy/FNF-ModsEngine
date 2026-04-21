@@ -112,8 +112,8 @@ class CreditsEditorState extends MusicBeatState
 			\nX - Get selected item data
 			\nY - Delete selected item
 			\nC - Reset inputs
-			\nZ - Add title
-			\nH - Add credit";
+			\nH - Add title
+			\nZ - Add credit";
 		} else {
 			text = "W/S or Up/Down - Change selected item
 			\nEnter - Apply changes
@@ -585,7 +585,7 @@ class CreditsEditorState extends MusicBeatState
 			#end
 
 			#if mobile
-			if (FlxG.keys.justPressed.ONE || touchPad.buttonZ.justPressed) {
+			if (FlxG.keys.justPressed.ONE || touchPad.buttonH.justPressed) {
 				addTitle();
 			}
 			#else
@@ -595,7 +595,7 @@ class CreditsEditorState extends MusicBeatState
 			#end
 
 			#if mobile
-			if (FlxG.keys.justPressed.TWO || touchPad.buttonH.justPressed) {
+			if (FlxG.keys.justPressed.TWO || touchPad.buttonZ.justPressed) {
 				addCredit();
 			}
 			#else
