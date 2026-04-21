@@ -98,7 +98,7 @@ class CreditEditorState extends MusicBeatState
 		FlxG.cameras.add(camUI, false);
 		FlxG.cameras.add(camOther, false);
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
-		CustomFadeTransition.nextCamera = camOther;
+		// CustomFadeTransition.nextCamera = camOther;
 
 		var tabs = [
 			{name: 'Credits', label: 'Credits'}
@@ -338,7 +338,7 @@ class CreditEditorState extends MusicBeatState
 			if(isSelectable) {
 				if(creditsStuff[i][5] != null)
 				{
-					Paths.currentModDirectory = creditsStuff[i][5];
+					Mods.currentModDirectory = creditsStuff[i][5];
 				}
 
 				var icon:AttachedSprite;
@@ -354,7 +354,7 @@ class CreditEditorState extends MusicBeatState
 				// using a FlxGroup is too much fuss!
 				iconArray.push(icon);
 				add(icon);
-				Paths.currentModDirectory = '';
+				Mods.currentModDirectory = '';
 
 				if(currentlySelected == -1) currentlySelected = i;
 			}
