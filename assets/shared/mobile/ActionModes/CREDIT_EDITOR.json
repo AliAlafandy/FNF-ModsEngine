@@ -22,11 +22,11 @@
       "color": "0x00FF00"
     },
     {
-      "button": "buttonH",
-      "graphic": "h",
+      "button": "buttonB",
+      "graphic": "b",
       "x": 1032,
       "y": 596,
-      "color": "0xFF009D"
+      "color": "0xFFCB00"
     },
     {
       "button": "buttonZ",
@@ -43,11 +43,11 @@
       "color": "0xFF0000"
     },
     {
-      "button": "buttonB",
-      "graphic": "b",
-      "x": 870,
-      "y": 2,
-      "color": "0xFFCB00"
+      "button": "buttonH",
+      "graphic": "h",
+      "x": 1156,
+      "y": 348,
+      "color": "0xFF009D"
     }
   ]
 }
