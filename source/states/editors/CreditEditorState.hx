@@ -26,6 +26,9 @@ import openfl.utils.ByteArray;
 
 import states.MainMenuState;
 import states.editors.MasterEditorMenu;
+
+import objects.AttachedSprite;
+
 import substates.Prompt;
 
 class CreditEditorState extends MusicBeatState
