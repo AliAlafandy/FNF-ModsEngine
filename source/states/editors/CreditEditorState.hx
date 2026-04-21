@@ -28,7 +28,7 @@ import states.MainMenuState;
 import states.editors.MasterEditorMenu;
 import substates.Prompt;
 
-class CreditsEditorState extends MusicBeatState
+class CreditEditorState extends MusicBeatState
 {
 	var currentlySelected:Int = -1;
 
