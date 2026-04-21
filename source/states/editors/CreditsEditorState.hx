@@ -165,7 +165,7 @@ class CreditsEditorState extends MusicBeatState
 		changeSelection();
 
 		#if mobile
-		addTouchPad('UP_DOWN", "A_B_C_X_Y_Z");
+		addTouchPad("UP_DOWN", "A_B_C_X_Y_Z");
 		addTouchPadCamera();
 		#end
 		
@@ -259,6 +259,7 @@ class CreditsEditorState extends MusicBeatState
 				changeSelection();
 			}, null,ignoreWarnings));
 		});
+		
 		resetAll.color = FlxColor.RED;
 		resetAll.label.color = FlxColor.WHITE;
 		var loadFile:FlxButton = new FlxButton(resetAll.x, resetAll.y + 25, "Load Credits", function()
@@ -360,7 +361,7 @@ class CreditsEditorState extends MusicBeatState
 		daData.push('');
 		daData.push('Description here...');
 		daData.push('');
-		daData.push('e1e1e1');
+		daData.push('E1E1E1');
 
 		pushAtPos(currentlySelected + 1, daData);
 
@@ -530,32 +531,76 @@ class CreditsEditorState extends MusicBeatState
 				}
 			}
 
-			if (FlxG.keys.justPressed.ENTER #if android || virtualPad.buttonA.justPressed #end) {
+			#if mobile
+			if (FlxG.keys.justPressed.ENTER || touchPad.buttonA.justPressed) {
 				setItemData();
 				updateCreditObjects();
 				changeSelection();
 			}
+			#else
+			if (FlxG.keys.justPressed.ENTER) {
+				setItemData();
+				updateCreditObjects();
+				changeSelection();
+			}
+			#end
 
-			if (FlxG.keys.justPressed.SPACE #if android || virtualPad.buttonX.justPressed #end) {
+			#if mobile
+			if (FlxG.keys.justPressed.SPACE || touchPad.buttonX.justPressed) {
 				dataGoToInputs();
 			}
+			#else
+			if (FlxG.keys.justPressed.SPACE) {
+				dataGoToInputs();
+			}
+			#end
 
-			if (FlxG.keys.justPressed.DELETE #if android || virtualPad.buttonY.justPressed #end) {
+			#if mobile
+			if (FlxG.keys.justPressed.DELETE || touchPad.buttonY.justPressed) {
 				deleteSelItem();
 			}
+			#else
+			if (FlxG.keys.justPressed.DELETE) {
+				deleteSelItem();
+			}
+			#end
 
-			if (FlxG.keys.pressed.R #if android || virtualPad.buttonZ.justPressed #end){
+			#if mobile
+			if (FlxG.keys.pressed.R || touchPad.buttonZ.justPressed) {
 				cleanInputs();
 			}
+			#else
+			if (FlxG.keys.pressed.R) {
+				cleanInputs();
+			}
+			#end
 
-			if (FlxG.keys.justPressed.ONE #if android || virtualPad.buttonC.justPressed #end) {
+			#if mobile
+			if (FlxG.keys.justPressed.ONE || touchPad.buttonC.justPressed) {
 				addTitle();
 			}
-			if (FlxG.keys.justPressed.TWO #if android || virtualPad.buttonB.justPressed #end) {
+			#else
+			if (FlxG.keys.justPressed.ONE) {
+				addTitle();
+			}
+			#end
+
+			#if mobile
+			if (FlxG.keys.justPressed.TWO || touchPad.buttonB.justPressed) {
 				addCredit();
 			}
+			#else
+			if (FlxG.keys.justPressed.TWO) {
+				addCredit();
+			}
+			#end
 
-			if (FlxG.keys.justPressed.BACKSPACE || FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
+			#if mobile
+			if (controls.BACK || FlxG.keys.justPressed.ESCAPE
+				#if android
+				|| FlxG.android.justReleased.BACK
+				#end
+			   )
 			{
 				if(colorTween != null) {
 					colorTween.cancel();
@@ -563,12 +608,24 @@ class CreditsEditorState extends MusicBeatState
 				FlxG.mouse.visible = false;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new states.editors.MasterEditorMenu());
-				Application.current.window.title = "Friday Night Funkin': SB Engine v" + MainMenuState.sbEngineVersion + " - Mod Maker Menu";
 				FlxG.sound.playMusic(Paths.music('freakyMenu-' + ClientPrefs.mainMenuMusic));
 				quitting = true;
 			}
+			#else
+			if (controls.BACK || FlxG.keys.justPressed.ESCAPE)
+			{
+				if(colorTween != null) {
+					colorTween.cancel();
+				}
+				FlxG.mouse.visible = false;
+				FlxG.sound.play(Paths.sound('cancelMenu'));
+				MusicBeatState.switchState(new states.editors.MasterEditorMenu());
+				FlxG.sound.playMusic(Paths.music('freakyMenu-' + ClientPrefs.mainMenuMusic));
+				quitting = true;
+			}
+			#end
 		}
-		if (blockInput){
+		if (blockInput) {
 			if (FlxG.keys.justPressed.ENTER) {
 				for (i in 0...blockPressWhileTypingOn.length) {
 					if(blockPressWhileTypingOn[i].hasFocus) {
@@ -657,11 +714,11 @@ class CreditsEditorState extends MusicBeatState
 	}
 
 	function getCurrentBGColor() {
-		var backgroundColor:String = creditsStuff[currentlySelected][4];
-		if(!backgroundColor.startsWith('0x')) {
-			backgroundColor = '0xFF' + backgroundColor;
+		var bgColor:String = creditsStuff[currentlySelected][4];
+		if(!bgColor.startsWith('0x')) {
+			bgColor = '0xFF' + bgColor;
 		}
-		return Std.parseInt(backgroundColor);
+		return Std.parseInt(bgColor);
 	}
 
 	function makeSquareBorder(object:FlxSprite, size:Int){ // Just to make color squares look a little nice and easier to see
