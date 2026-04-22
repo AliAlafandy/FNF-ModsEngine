@@ -88,17 +88,16 @@ class CreditEditorState extends MusicBeatState
 		groupOptions = new FlxTypedGroup<Alphabet>();
 		add(groupOptions);
 		
-		camGame = new FlxCamera();
+		// var gameCam:FlxCamera = FlxG.camera;
+		camGame = new initPsychCamera(); // FlxCamera
 		camUI = new FlxCamera();
 		camOther = new FlxCamera();
 		camUI.bgColor.alpha = 0;
 		camOther.bgColor.alpha = 0;
 
-		FlxG.cameras.reset(camGame);
+		// FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camUI, false);
 		FlxG.cameras.add(camOther, false);
-		FlxG.cameras.setDefaultDrawTarget(camGame, true);
-		// CustomFadeTransition.nextCamera = camOther;
 
 		var tabs = [
 			{name: 'Credits', label: 'Credits'}
