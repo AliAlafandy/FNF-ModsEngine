@@ -328,7 +328,7 @@ class CreditEditorState extends MusicBeatState
 			var isSelectable:Bool = !unselectableCheck(i);
 			var optionText:Alphabet = new Alphabet(FlxG.width / 2, 300, creditsStuff[i][0], !isSelectable);
 			optionText.isMenuItem = true;
-			optionText.targetY = i - currentlySelected;
+			optionText.targetY = i - curSelected;
 
 			optionText.ID = i;
 			optionText.changeX = false;
