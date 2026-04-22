@@ -38,7 +38,7 @@ class CreditEditorState extends MusicBeatState
 {
 	var currentlySelected:Int = -1;
 
-	private var groupOptions:FlxTypedGroup<Alphabet>;
+	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private var iconArray:Array<AttachedSprite> = [];
 	private var creditsStuff:Array<Array<String>> = [];
 	private var blockPressWhileTypingOn:Array<FlxUIInputText> = [];
@@ -85,8 +85,8 @@ class CreditEditorState extends MusicBeatState
 		
 		FlxG.mouse.visible = true;
 		
-		groupOptions = new FlxTypedGroup<Alphabet>();
-		add(groupOptions);
+		grpOptions = new FlxTypedGroup<Alphabet>();
+		add(grpOptions);
 		
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = initPsychCamera(); // new FlxCamera
@@ -257,7 +257,7 @@ class CreditEditorState extends MusicBeatState
 		
 		var resetAll:FlxButton = new FlxButton(50, 300, "Reset all", function()
 		{
-			openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, function(){
+			openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, function() {
 				creditsStuff = templateArray();
 				updateCreditObjects();
 				currentlySelected = 1;
@@ -311,15 +311,16 @@ class CreditEditorState extends MusicBeatState
 
 	function updateCreditObjects()
 	{
-		if(creditsStuff != null && creditsStuff.length > 0){
-			for (i in 0...iconArray.length){
+		if(creditsStuff != null && creditsStuff.length > 0)
+		{
+			for (i in 0...iconArray.length) {
 				iconArray[i].kill();
 			}
 			iconArray = [];
-			for (option in groupOptions){
+			for (option in grpOptions) {
 				option.kill();
 			}
-			groupOptions.clear();
+			grpOptions.clear();
 		}
 
 		for (i in 0...creditsStuff.length)
@@ -332,7 +333,7 @@ class CreditEditorState extends MusicBeatState
 			optionText.ID = i;
 			optionText.changeX = false;
 			optionText.snapToPosition();
-			groupOptions.add(optionText);
+			grpOptions.add(optionText);
 
 			if(isSelectable) {
 				if(creditsStuff[i][5] != null)
@@ -341,10 +342,12 @@ class CreditEditorState extends MusicBeatState
 				}
 
 				var icon:AttachedSprite;
-				if(Paths.fileExists('images/credits/' + creditsStuff[i][1] + '.png', IMAGE)) icon = new AttachedSprite('credits/' + creditsStuff[i][1]);
+				if(Paths.fileExists('images/credits/' + creditsStuff[i][1] + '.png', IMAGE))
+					icon = new AttachedSprite('credits/' + creditsStuff[i][1]);
 				else {
 					icon = new AttachedSprite('credits/missing_icon'); // If icon didnt load it will load the unknow icon.
-					if(creditsStuff[i][1] == null || creditsStuff[i][1] == '') icon = new AttachedSprite('credits/missing_icon');
+					if(creditsStuff[i][1] == null || creditsStuff[i][1] == '')
+						icon = new AttachedSprite('credits/missing_icon');
 				}
 
 				icon.xAdd = optionText.width + 10;
@@ -436,34 +439,39 @@ class CreditEditorState extends MusicBeatState
 			
 			if(colorInput.text != null && colorInput.text.length > 0) {
 				creditsStuff[currentlySelected][4] = colorInput.text;
-			} else { creditsStuff[currentlySelected][4] = 'e1e1e1'; }
+			} else { creditsStuff[currentlySelected][4] = 'E1E1E1'; }
 		}
 	}
 
 	function deleteSelItem()
 	{
-		if(currentlySelected == 0 || creditsStuff.length <= 1) return; // you trying to delete the first title? why dont you edit it...
+		if(currentlySelected == 0 || creditsStuff.length <= 1)
+			return; // you trying to delete the first title? why dont you edit it...
+		
 		var daStuff:Array<Array<String>> = [];
-		for(i in 0...creditsStuff.length){
-			if(!unselectableCheck(currentlySelected)){
-				if(i != currentlySelected){
+		
+		for(i in 0...creditsStuff.length)
+		{
+			if(!unselectableCheck(currentlySelected)) {
+				if(i != currentlySelected) {
 					daStuff.push(creditsStuff[i]);
 				}
 			} else {
 				var creditThing:Bool = true;
-				if(nullCheck(currentlySelected - 1)){ // remove space betwen title's
+				if(nullCheck(currentlySelected - 1)) { // remove space betwen title's
 					var u:Int = currentlySelected - 1;
 					if(i == u) creditThing = false;
 				}
 
-				if(i != currentlySelected && creditThing){
+				if(i != currentlySelected && creditThing) {
 					daStuff.push(creditsStuff[i]);
 				}
 			}
 		}
 		creditsStuff = daStuff;
 
-		if(currentlySelected > (creditsStuff.length - 1)) currentlySelected = creditsStuff.length;
+		if(currentlySelected > (creditsStuff.length - 1))
+			currentlySelected = creditsStuff.length;
 		do {
 			currentlySelected -= 1;
 		} while(nullCheck(currentlySelected));
@@ -484,13 +492,13 @@ class CreditEditorState extends MusicBeatState
 	function pushAtPos(pos:Int, data:Array<String>)
 	{
 		var daStuff:Array<Array<String>> = [];
-		for(i in 0...creditsStuff.length){
-			if(i == pos){
+		for(i in 0...creditsStuff.length) {
+			if(i == pos) {
 				daStuff.push(data);
 			}
 			daStuff.push(creditsStuff[i]);
 		}
-		if(pos == creditsStuff.length){
+		if(pos == creditsStuff.length) {
 			daStuff.push(data);
 		}
 		creditsStuff = daStuff;
@@ -664,7 +672,8 @@ class CreditEditorState extends MusicBeatState
 	var curSelIsTitle:Bool = false;
 	function changeSelection(change:Int = 0, playSound:Bool = true)
 	{
-		if(change != 0 && playSound) FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		if(change != 0 && playSound)
+			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 		do {
 			currentlySelected += change;
 			if (currentlySelected < 0)
@@ -673,12 +682,16 @@ class CreditEditorState extends MusicBeatState
 				currentlySelected = 0;
 		} while(nullCheck(currentlySelected));
 
-		if(unselectableCheck(currentlySelected)) curSelIsTitle = true;
-		else curSelIsTitle = false;
+		if(unselectableCheck(currentlySelected))
+			curSelIsTitle = true;
+		else
+			curSelIsTitle = false;
 
 		var newColor:Int;
-		if(unselectableCheck(currentlySelected)) newColor =  Std.parseInt('0xFFE1E1E1');
-		else newColor =  getCurrentBGColor();
+		if(unselectableCheck(currentlySelected))
+			newColor =  Std.parseInt('0xFFE1E1E1');
+		else
+			newColor =  getCurrentBGColor();
 
 		if(newColor != intendedColor) {
 			if(colorTween != null) {
@@ -693,7 +706,7 @@ class CreditEditorState extends MusicBeatState
 		}
 		
 		var alphabetValue:Int = 0;
-		for (item in groupOptions.members)
+		for (item in grpOptions.members)
 		{
 			item.targetY = alphabetValue - currentlySelected;
 			alphabetValue++;
@@ -712,7 +725,10 @@ class CreditEditorState extends MusicBeatState
 
 		if(change != 0) {
 			descriptionText.y = FlxG.height - descriptionText.height + offsetThing - 60;
-			if(moveTween != null) moveTween.cancel();
+			
+			if(moveTween != null)
+				moveTween.cancel();
+			
 			moveTween = FlxTween.tween(descriptionText, {y : descriptionText.y + 75}, 0.25, {ease: FlxEase.sineOut});
 		}
 
@@ -727,7 +743,9 @@ class CreditEditorState extends MusicBeatState
 	
 	private function nullCheck(num:Int):Bool
 	{
-		if(creditsStuff[num].length <= 1 && creditsStuff[num][0].length <= 0) return true;
+		if(creditsStuff[num].length <= 1 && creditsStuff[num][0].length <= 0)
+			return true;
+		
 		return false;
 	}
 
@@ -864,7 +882,8 @@ class CreditEditorState extends MusicBeatState
 		#if sys
 		var fullPath:String = null;
 		@:privateAccess
-		if(_file.__path != null) fullPath = _file.__path;
+		if(_file.__path != null)
+			fullPath = _file.__path;
 
 		if(fullPath != null) {
 			var rawTxt:String = File.getContent(fullPath);
