@@ -530,18 +530,22 @@ class CreditEditorState extends MusicBeatState
 			if(creditsStuff.length > 1)
 			{
 				var shiftMult:Int = 1;
-				if (controls.UI_UP)
+
+				var upP = controls.UI_UP_P;
+				var downP = controls.UI_DOWN_P;
+				
+				if (upP)
 				{
 					changeSelection(-shiftMult);
 					holdTime = 0;
 				}
-				if (controls.UI_DOWN)
+				if (downP)
 				{
 					changeSelection(shiftMult);
 					holdTime = 0;
 				}
 
-				if((FlxG.keys.justPressed.S || FlxG.keys.justPressed.DOWN) || (FlxG.keys.justPressed.W || FlxG.keys.justPressed.UP))
+				if((FlxG.keys.justPressed.S || FlxG.keys.justPressed.DOWN || controls.UI_DOWN) || (FlxG.keys.justPressed.W || FlxG.keys.justPressed.UP || controls.UI_UP))
 				{
 					var checkLastHold:Int = Math.floor((holdTime - 0.5) * 10);
 					holdTime += elapsed;
@@ -681,7 +685,7 @@ class CreditEditorState extends MusicBeatState
 				curSelected = creditsStuff.length - 1;
 			if (curSelected >= creditsStuff.length)
 				curSelected = 0;
-		} while(unselectableCheck(curSelected)); // nullCheck
+		} while(nullCheck(curSelected));
 
 		if(unselectableCheck(curSelected))
 			curSelIsTitle = true;
@@ -713,7 +717,7 @@ class CreditEditorState extends MusicBeatState
 			item.targetY = bullShit - curSelected;
 			bullShit++;
 
-			if(!unselectableCheck(bullShit-1)) { // nullCheck
+			if(!nullCheck(bullShit-1)) {
 				item.alpha = 0.6;
 				if (item.targetY == 0) {
 					item.alpha = 1;
@@ -725,14 +729,12 @@ class CreditEditorState extends MusicBeatState
 		descBox.visible = !unselectableCheck(curSelected);	
 		descText.visible = !unselectableCheck(curSelected);
 
-		if(change != 0) {
+		// if(change != 0) {
 			descText.y = FlxG.height - descText.height + offsetThing - 60;
 			
-			if(moveTween != null)
-				moveTween.cancel();
-			
+			if(moveTween != null) moveTween.cancel();
 			moveTween = FlxTween.tween(descText, {y : descText.y + 75}, 0.25, {ease: FlxEase.sineOut});
-		}
+		// }
 
 		descBox.setGraphicSize(Std.int(descText.width + 20), Std.int(descText.height + 25));
 		descBox.updateHitbox();
