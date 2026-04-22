@@ -36,7 +36,7 @@ import substates.Prompt;
 
 class CreditEditorState extends MusicBeatState
 {
-	var currentlySelected:Int = -1;
+	var curSelected:Int = -1;
 
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private var iconArray:Array<AttachedSprite> = [];
@@ -50,10 +50,10 @@ class CreditEditorState extends MusicBeatState
 
 	var bg:FlxSprite;
 	var grid:FlxBackdrop;
-	var descriptionText:FlxText;
+	var descText:FlxText;
 	var intendedColor:Int;
 	var colorTween:FlxTween;
-	var descriptionBox:AttachedSprite;
+	var descBox:AttachedSprite;
 	var UI_box:FlxUITabMenu;
 
 	var offsetThing:Float = -75;
@@ -145,23 +145,23 @@ class CreditEditorState extends MusicBeatState
 
 		creditsStuff = templateArray();
 
-		descriptionBox = new AttachedSprite();
-		descriptionBox.makeGraphic(1, 1, FlxColor.BLACK);
-		descriptionBox.xAdd = -10;
-		descriptionBox.yAdd = -10;
-		descriptionBox.alphaMult = 0.6;
-		descriptionBox.alpha = 0.6;
-		add(descriptionBox);
+		descBox = new AttachedSprite();
+		descBox.makeGraphic(1, 1, FlxColor.BLACK);
+		descBox.xAdd = -10;
+		descBox.yAdd = -10;
+		descBox.alphaMult = 0.6;
+		descBox.alpha = 0.6;
+		add(descBox);
 
-		descriptionText = new FlxText(50, FlxG.height + offsetThing - 25, 1180, "", 32);
-		descriptionText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		descriptionText.scrollFactor.set();
-		//descriptionText.borderSize = 2.4;
-		descriptionBox.sprTracker = descriptionText;
-		add(descriptionText);
+		descText = new FlxText(50, FlxG.height + offsetThing - 25, 1180, "", 32);
+		descText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		descText.scrollFactor.set();
+		//descText.borderSize = 2.4;
+		descBox.sprTracker = descText;
+		add(descText);
 		
-		descriptionBox.cameras = [camUI];
-		descriptionText.cameras = [camUI];
+		descBox.cameras = [camUI];
+		descText.cameras = [camUI];
 	
 		updateCreditObjects();
 
@@ -358,7 +358,8 @@ class CreditEditorState extends MusicBeatState
 				add(icon);
 				Mods.currentModDirectory = '';
 
-				if(currentlySelected == -1) currentlySelected = i;
+				if(curSelected == -1)
+					curSelected = i;
 			}
 			else optionText.alignment = CENTERED;
 		}
@@ -373,7 +374,7 @@ class CreditEditorState extends MusicBeatState
 		daData.push('');
 		daData.push('E1E1E1');
 
-		pushAtPos(currentlySelected + 1, daData);
+		pushAtPos(curSelected + 1, daData);
 
 		updateCreditObjects();
 		changeSelection();
@@ -397,13 +398,13 @@ class CreditEditorState extends MusicBeatState
 	function dataGoToInputs()
 	{
 		if(curSelIsTitle) {
-			titleInput.text = creditsStuff[currentlySelected][0];
+			titleInput.text = creditsStuff[curSelected][0];
 		} else {
-			creditNameInput.text = creditsStuff[currentlySelected][0];
-			iconInput.text = creditsStuff[currentlySelected][1];
-			descInput.text = creditsStuff[currentlySelected][2];
-			linkInput.text = creditsStuff[currentlySelected][3];
-			colorInput.text = creditsStuff[currentlySelected][4];
+			creditNameInput.text = creditsStuff[curSelected][0];
+			iconInput.text = creditsStuff[curSelected][1];
+			descInput.text = creditsStuff[curSelected][2];
+			linkInput.text = creditsStuff[curSelected][3];
+			colorInput.text = creditsStuff[curSelected][4];
 			showIconExist(iconInput.text);
 			iconColorShow();
 		}
@@ -424,57 +425,57 @@ class CreditEditorState extends MusicBeatState
 	function setItemData()
 	{
 		if(curSelIsTitle) {
-			if(titleInput.text != null && titleInput.text.length > 0) creditsStuff[currentlySelected][0] = titleInput.text;
-			else creditsStuff[currentlySelected][0] = 'Title';
+			if(titleInput.text != null && titleInput.text.length > 0) creditsStuff[curSelected][0] = titleInput.text;
+			else creditsStuff[curSelected][0] = 'Title';
 		} else {
-			if(creditNameInput.text != null && creditNameInput.text.length > 0) creditsStuff[currentlySelected][0] = creditNameInput.text;
-			else creditsStuff[currentlySelected][0] = 'User';
+			if(creditNameInput.text != null && creditNameInput.text.length > 0) creditsStuff[curSelected][0] = creditNameInput.text;
+			else creditsStuff[curSelected][0] = 'User';
 	
 			creditsStuff[currentlySelected][1] = iconInput.text;		
 	
-			if(descInput.text != null && descInput.text.length > 0) creditsStuff[currentlySelected][2] = descInput.text;
-			else creditsStuff[currentlySelected][2] = 'Description here...';
+			if(descInput.text != null && descInput.text.length > 0) creditsStuff[curSelected][2] = descInput.text;
+			else creditsStuff[curSelected][2] = 'Description here...';
 	
-			creditsStuff[currentlySelected][3] = linkInput.text;
+			creditsStuff[curSelected][3] = linkInput.text;
 			
 			if(colorInput.text != null && colorInput.text.length > 0) {
-				creditsStuff[currentlySelected][4] = colorInput.text;
-			} else { creditsStuff[currentlySelected][4] = 'E1E1E1'; }
+				creditsStuff[curSelected][4] = colorInput.text;
+			} else { creditsStuff[curSelected][4] = 'E1E1E1'; }
 		}
 	}
 
 	function deleteSelItem()
 	{
-		if(currentlySelected == 0 || creditsStuff.length <= 1)
+		if(curSelected == 0 || creditsStuff.length <= 1)
 			return; // you trying to delete the first title? why dont you edit it...
 		
 		var daStuff:Array<Array<String>> = [];
 		
 		for(i in 0...creditsStuff.length)
 		{
-			if(!unselectableCheck(currentlySelected)) {
-				if(i != currentlySelected) {
+			if(!unselectableCheck(curSelected)) {
+				if(i != curSelected) {
 					daStuff.push(creditsStuff[i]);
 				}
 			} else {
 				var creditThing:Bool = true;
-				if(nullCheck(currentlySelected - 1)) { // remove space betwen title's
-					var u:Int = currentlySelected - 1;
+				if(nullCheck(curSelected - 1)) { // remove space betwen title's
+					var u:Int = curSelected - 1;
 					if(i == u) creditThing = false;
 				}
 
-				if(i != currentlySelected && creditThing) {
+				if(i != curSelected && creditThing) {
 					daStuff.push(creditsStuff[i]);
 				}
 			}
 		}
 		creditsStuff = daStuff;
 
-		if(currentlySelected > (creditsStuff.length - 1))
-			currentlySelected = creditsStuff.length;
+		if(curSelected > (creditsStuff.length - 1))
+			curSelected = creditsStuff.length;
 		do {
-			currentlySelected -= 1;
-		} while(nullCheck(currentlySelected));
+			curSelected -= 1;
+		} while(nullCheck(curSelected));
 		
 		currentlySelected += 1;
 		updateCreditObjects();
@@ -675,20 +676,20 @@ class CreditEditorState extends MusicBeatState
 		if(change != 0 && playSound)
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 		do {
-			currentlySelected += change;
-			if (currentlySelected < 0)
-				currentlySelected = creditsStuff.length - 1;
-			if (currentlySelected >= creditsStuff.length)
-				currentlySelected = 0;
-		} while(nullCheck(currentlySelected));
+			curSelected += change;
+			if (curSelected < 0)
+				curSelected = creditsStuff.length - 1;
+			if (curSelected >= creditsStuff.length)
+				curSelected = 0;
+		} while(unselectableCheck(curSelected)); // nullCheck
 
-		if(unselectableCheck(currentlySelected))
+		if(unselectableCheck(curSelected))
 			curSelIsTitle = true;
 		else
 			curSelIsTitle = false;
 
 		var newColor:Int;
-		if(unselectableCheck(currentlySelected))
+		if(unselectableCheck(curSelected))
 			newColor =  Std.parseInt('0xFFE1E1E1');
 		else
 			newColor =  getCurrentBGColor();
@@ -705,13 +706,14 @@ class CreditEditorState extends MusicBeatState
 			});
 		}
 		
-		var alphabetValue:Int = 0;
+		var bullShit:Int = 0;
+
 		for (item in grpOptions.members)
 		{
-			item.targetY = alphabetValue - currentlySelected;
-			alphabetValue++;
+			item.targetY = bullShit - curSelected;
+			bullShit++;
 
-			if(!nullCheck(alphabetValue-1)) {
+			if(!unselectableCheck(bullShit-1)) { // nullCheck
 				item.alpha = 0.6;
 				if (item.targetY == 0) {
 					item.alpha = 1;
@@ -719,21 +721,21 @@ class CreditEditorState extends MusicBeatState
 			}
 		}
 		
-		descriptionText.text = creditsStuff[currentlySelected][2];
-		descriptionBox.visible = !unselectableCheck(currentlySelected);	
-		descriptionText.visible = !unselectableCheck(currentlySelected);
+		descText.text = creditsStuff[curSelected][2];
+		descBox.visible = !unselectableCheck(curSelected);	
+		descText.visible = !unselectableCheck(curSelected);
 
 		if(change != 0) {
-			descriptionText.y = FlxG.height - descriptionText.height + offsetThing - 60;
+			descText.y = FlxG.height - descText.height + offsetThing - 60;
 			
 			if(moveTween != null)
 				moveTween.cancel();
 			
-			moveTween = FlxTween.tween(descriptionText, {y : descriptionText.y + 75}, 0.25, {ease: FlxEase.sineOut});
+			moveTween = FlxTween.tween(descText, {y : descText.y + 75}, 0.25, {ease: FlxEase.sineOut});
 		}
 
-		descriptionBox.setGraphicSize(Std.int(descriptionText.width + 20), Std.int(descriptionText.height + 25));
-		descriptionBox.updateHitbox();
+		descBox.setGraphicSize(Std.int(descText.width + 20), Std.int(descText.height + 25));
+		descBox.updateHitbox();
 	}
 
 	private function unselectableCheck(num:Int):Bool
@@ -751,7 +753,7 @@ class CreditEditorState extends MusicBeatState
 
 	function getCurrentBGColor()
 	{
-		var bgColor:String = creditsStuff[currentlySelected][4];
+		var bgColor:String = creditsStuff[curSelected][4];
 		if(!bgColor.startsWith('0x')) {
 			bgColor = '0xFF' + bgColor;
 		}
