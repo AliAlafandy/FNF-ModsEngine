@@ -89,7 +89,7 @@ class CreditEditorState extends MusicBeatState
 		add(groupOptions);
 		
 		// var gameCam:FlxCamera = FlxG.camera;
-		camGame = new initPsychCamera(); // FlxCamera
+		camGame = initPsychCamera(); // new FlxCamera
 		camUI = new FlxCamera();
 		camOther = new FlxCamera();
 		camUI.bgColor.alpha = 0;
