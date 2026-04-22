@@ -99,7 +99,7 @@ import states.TitleState;
 	public var safeFrames:Float = 10;
 	public var guitarHeroSustains:Bool = false;
 	public var discordRPC:Bool = true;
-	public var loadingScreen:Bool = true;
+	public var loadingScreen:Bool = false;
 }
 
 class ClientPrefs {
