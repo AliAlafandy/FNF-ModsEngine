@@ -230,7 +230,7 @@ class CreditEditorState extends MusicBeatState
 			{
 				var icon:String;
 				if(iconInput.text != null && iconInput.text.length > 0) icon = iconInput.text;
-				else icon = creditsStuff[currentlySelected][1];
+				else icon = creditsStuff[curSelected][1];
 
 				var pathIcon:String;
 				if(Paths.fileExists('images/credits/' + icon + '.png', IMAGE)) pathIcon = 'credits/' + icon;
@@ -260,7 +260,7 @@ class CreditEditorState extends MusicBeatState
 			openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, function() {
 				creditsStuff = templateArray();
 				updateCreditObjects();
-				currentlySelected = 1;
+				curSelected = 1;
 				changeSelection();
 			}, null,ignoreWarnings));
 		});
@@ -384,11 +384,11 @@ class CreditEditorState extends MusicBeatState
 	{
 		var daData:Array<String> = [];
 		daData.push('Title');
-		pushAtPos(currentlySelected + 1, daData);
+		pushAtPos(curSelected + 1, daData);
 
 		if(titleJump.checked) {
 			var daData:Array<String> = [];
-			pushAtPos(currentlySelected + 1, daData);
+			pushAtPos(curSelected + 1, daData);
 		}
 
 		updateCreditObjects();
@@ -431,7 +431,7 @@ class CreditEditorState extends MusicBeatState
 			if(creditNameInput.text != null && creditNameInput.text.length > 0) creditsStuff[curSelected][0] = creditNameInput.text;
 			else creditsStuff[curSelected][0] = 'User';
 	
-			creditsStuff[currentlySelected][1] = iconInput.text;		
+			creditsStuff[curSelected][1] = iconInput.text;		
 	
 			if(descInput.text != null && descInput.text.length > 0) creditsStuff[curSelected][2] = descInput.text;
 			else creditsStuff[curSelected][2] = 'Description here...';
@@ -477,7 +477,7 @@ class CreditEditorState extends MusicBeatState
 			curSelected -= 1;
 		} while(nullCheck(curSelected));
 		
-		currentlySelected += 1;
+		curSelected += 1;
 		updateCreditObjects();
 		changeSelection(-1);
 	}
