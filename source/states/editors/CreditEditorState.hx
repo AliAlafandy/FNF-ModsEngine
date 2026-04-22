@@ -658,7 +658,7 @@ class CreditEditorState extends MusicBeatState
 			}
 		}
 		
-		for (item in groupOptions.members)
+		for (item in grpOptions.members)
 		{
 			if (!item.bold)
 			{
