@@ -3429,7 +3429,7 @@ class ChartingState extends MusicBeatState
 					PlayState.SONG = Song.loadFromJson(song.toLowerCase() + "-" + Difficulty.getString(), song.toLowerCase());
 				}
 			}
-			else PlayState.SONG = Song.loadFromJson(song.toLowerCase() + //postfix
+			else PlayState.SONG = Song.loadFromJson(song.toLowerCase() // + postfix
 													, song.toLowerCase());
 			MusicBeatState.resetState();
 		}
@@ -3485,14 +3485,14 @@ class ChartingState extends MusicBeatState
 		if ((data != null) && (data.length > 0))
 		{
 			#if mobile
-			StorageUtil.saveContent('${Paths.formatToSongPath(_song.song)}' + // postfix
+			StorageUtil.saveContent('${Paths.formatToSongPath(_song.song)}' // + postfix
 									+ '.json', data.trim());
 			#else
 			_file = new FileReference();
 			_file.addEventListener(#if desktop Event.SELECT #else Event.COMPLETE #end, onSaveComplete);
 			_file.addEventListener(Event.CANCEL, onSaveCancel);
 			_file.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
-			_file.save(data.trim(), Paths.formatToSongPath(_song.song) + //postfix
+			_file.save(data.trim(), Paths.formatToSongPath(_song.song) // + postfix
 					   	+ ".json");
 			#end
 		}
