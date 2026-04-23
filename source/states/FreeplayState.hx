@@ -111,15 +111,16 @@ class FreeplayState extends MusicBeatState
 
 		for (i in 0...songs.length)
 		{
-			var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
-			// var songText:Alphabet = new Alphabet(0, 320, songs[i].songName, true);
+			// var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
+			var songText:Alphabet = new Alphabet(FlxG.width / 2, 320, songs[i].songName, true); // 0
 			songText.isMenuItem = true;
 			// songText.isMenuItemCentered = true;
-			songText.targetY = i;
+			songText.targetY = i - curSelected;
 			grpSongs.add(songText);
 
 			//songText.scaleX = Math.min(1, 980 / songText.width);
-			songText.screenCenter(X);
+			songText.ID = i;
+			songText.changeX = false;
 			songText.snapToPosition();
 
 			Mods.currentModDirectory = songs[i].folder;
@@ -136,6 +137,7 @@ class FreeplayState extends MusicBeatState
 
 			// songText.x += 40;
 			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
+			// songText.screenCenter(X);
 		}
 		WeekData.setDirectoryFromWeek();
 
