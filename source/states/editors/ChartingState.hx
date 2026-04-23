@@ -30,6 +30,7 @@ import openfl.utils.Assets as OpenFlAssets;
 import backend.Song;
 import backend.Section;
 import backend.StageData;
+import backend.Difficulty;
 
 import objects.Note;
 import objects.StrumNote;
@@ -84,6 +85,7 @@ class ChartingState extends MusicBeatState
 	];
 
 	var _file:FileReference;
+	var postfix:String = '';
 
 	var UI_box:FlxUITabMenu;
 
@@ -640,14 +642,14 @@ class ChartingState extends MusicBeatState
 		stageDropDown.selectedLabel = _song.stage;
 		blockPressWhileScrolling.push(stageDropDown);
 
-		if (CoolUtil.difficulties[PlayState.storyDifficulty].toLowerCase() != 'normal') {
-			postfix = '-' + CoolUtil.difficulties[PlayState.storyDifficulty].toLowerCase();
+		if (Difficulty.getString() != 'normal') {
+			postfix = '-' + Difficulty.getString();
 		}
 
-		var difficultyDropDown = new FlxUIDropDownMenuCustom(stageDropDown.x, gfVersionDropDown.y,
-			FlxUIDropDownMenuCustom.makeStrIdLabelArray(CoolUtil.difficulties, true), function(difficulty:String) {
+		var difficultyDropDown = new FlxUIDropDownMenu(stageDropDown.x, gfVersionDropDown.y,
+			FlxUIDropDownMenu.makeStrIdLabelArray(Difficulty.getString(), true), function(difficulty:String) {
 				var newDifficulty:String = CoolUtil.difficulties[Std.parseInt(difficulty)].toLowerCase();
-				trace("Current difficulty: " + CoolUtil.difficulties[PlayState.storyDifficulty]);
+				trace("Current difficulty: " + Difficulty.getString());
 				trace("New diffculty: " + newDifficulty);
 				PlayState.storyDifficulty = Std.parseInt(difficulty);
 				if (newDifficulty != 'normal') {
@@ -656,7 +658,7 @@ class ChartingState extends MusicBeatState
 				PlayState.SONG = Song.loadFromJson(_song.song.toLowerCase() + postfix, _song.song.toLowerCase());
 				MusicBeatState.resetState();
 		});
-		difficultyDropDown.selectedLabel = CoolUtil.difficulties[PlayState.storyDifficulty];
+		difficultyDropDown.selectedLabel = Difficulty.getString();
 		blockPressWhileScrolling.push(difficultyDropDown);
 
 		var tab_group_song = new FlxUI(null, UI_box);
@@ -3426,7 +3428,7 @@ class ChartingState extends MusicBeatState
 					PlayState.SONG = Song.loadFromJson(song.toLowerCase() + "-" + Difficulty.getString(), song.toLowerCase());
 				}
 			}
-			else PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
+			else PlayState.SONG = Song.loadFromJson(song.toLowerCase() + postfix, song.toLowerCase());
 			MusicBeatState.resetState();
 		}
 		catch(e)
@@ -3481,13 +3483,13 @@ class ChartingState extends MusicBeatState
 		if ((data != null) && (data.length > 0))
 		{
 			#if mobile
-			StorageUtil.saveContent('${Paths.formatToSongPath(_song.song)}.json', data.trim());
+			StorageUtil.saveContent('${Paths.formatToSongPath(_song.song)}' + postfix + '.json', data.trim());
 			#else
 			_file = new FileReference();
 			_file.addEventListener(#if desktop Event.SELECT #else Event.COMPLETE #end, onSaveComplete);
 			_file.addEventListener(Event.CANCEL, onSaveCancel);
 			_file.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
-			_file.save(data.trim(), Paths.formatToSongPath(_song.song) + ".json");
+			_file.save(data.trim(), Paths.formatToSongPath(_song.song) + postfix + ".json");
 			#end
 		}
 	}
