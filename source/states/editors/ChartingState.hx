@@ -40,7 +40,6 @@ import objects.AttachedSprite;
 import objects.Character;
 import substates.Prompt;
 
-
 #if sys
 import flash.media.Sound;
 #end
@@ -642,14 +641,16 @@ class ChartingState extends MusicBeatState
 		stageDropDown.selectedLabel = _song.stage;
 		blockPressWhileScrolling.push(stageDropDown);
 
-		if (Difficulty.getString() != 'normal') {
-			postfix = '-' + Difficulty.getString();
+		var difficulties = Difficulty.getString();
+
+		if (difficulties != 'normal') {
+			postfix = '-' + difficulties;
 		}
 
-		var difficultyDropDown = new FlxUIDropDownMenu(stageDropDown.x, gfVersionDropDown.y,
-			FlxUIDropDownMenu.makeStrIdLabelArray(Difficulty.getString(), true), function(difficulty:String) {
-				var newDifficulty:String = CoolUtil.difficulties[Std.parseInt(difficulty)].toLowerCase();
-				trace("Current difficulty: " + Difficulty.getString());
+		var difficultyDropDown = new FlxUIDropDownMenu(stageDropDown.x, gfVersionDropDown.y, FlxUIDropDownMenu.makeStrIdLabelArray(difficulties, true), function(difficulty:String)
+		{
+				var newDifficulty:String = difficulties[Std.parseInt(difficulty)];
+				trace("Current difficulty: " + difficulties);
 				trace("New diffculty: " + newDifficulty);
 				PlayState.storyDifficulty = Std.parseInt(difficulty);
 				if (newDifficulty != 'normal') {
@@ -658,7 +659,7 @@ class ChartingState extends MusicBeatState
 				PlayState.SONG = Song.loadFromJson(_song.song.toLowerCase() + postfix, _song.song.toLowerCase());
 				MusicBeatState.resetState();
 		});
-		difficultyDropDown.selectedLabel = Difficulty.getString();
+		difficultyDropDown.selectedLabel = difficulties;
 		blockPressWhileScrolling.push(difficultyDropDown);
 
 		var tab_group_song = new FlxUI(null, UI_box);
