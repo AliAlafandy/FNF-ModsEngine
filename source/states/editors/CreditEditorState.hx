@@ -106,8 +106,8 @@ class CreditEditorState extends MusicBeatState
 		UI_box = new FlxUITabMenu(null, tabs, true);
 		UI_box.cameras = [camUI];
 		UI_box.resize(270, 380);
-		UI_box.x = 940;
-		UI_box.y = 25;
+		UI_box.x = 980; // 940
+		UI_box.y = 15; // 25
 		UI_box.scrollFactor.set();
 		add(UI_box);
 		UI_box.selected_tab = 0;
@@ -132,7 +132,7 @@ class CreditEditorState extends MusicBeatState
 
 		var tipTextArray:Array<String> = text.split('\n');
 		for (i in 0...tipTextArray.length) {
-			var tipText:FlxText = new FlxText(UI_box.x, UI_box.y + UI_box.height + 8, 0, tipTextArray[i], 14);
+			var tipText:FlxText = new FlxText(20, 15, 0, tipTextArray[i], 14); // UI_box.x, UI_box.y + UI_box.height + 8
 			tipText.y += i * 9;
 			tipText.setFormat("VCR OSD Mono", 14, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			tipText.borderSize = 1;
