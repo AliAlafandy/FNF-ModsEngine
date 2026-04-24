@@ -219,7 +219,7 @@ class CreditEditorState extends MusicBeatState
 		iconInput = new FlxUIInputText(60, creditNameInput.y + yDist, 155, '', 8);
 		iconInput.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
 		iconExistCheck = new FlxSprite(iconInput.x + 165, iconInput.y).makeGraphic(15, 15, 0xFFFFFFFF);
-		descInput = new FlxUIInputText(100, iconInput.y + yDist, 140, '', 8);
+		descInput = new FlxUIInputText(90, iconInput.y + yDist, 140, '', 8);
 		descInput.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
 		linkInput = new FlxUIInputText(60, descInput.y + yDist, 180, '', 8);
 		linkInput.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
@@ -257,12 +257,19 @@ class CreditEditorState extends MusicBeatState
 		
 		var resetAll:FlxButton = new FlxButton(50, 300, "Reset all", function()
 		{
-			openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, function() {
+			openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, function()
+			{
 				creditsStuff = templateArray();
 				updateCreditObjects();
 				curSelected = 1;
 				changeSelection();
 			}, null,ignoreWarnings));
+		});
+		var updateInput:FlxButton = new FlxButton(resetAll.x + 90, resetAll.y, "Update Credits", function()
+		{
+			setItemData();
+			updateCreditObjects();
+			changeSelection();
 		});
 		
 		resetAll.color = FlxColor.RED;
@@ -271,7 +278,7 @@ class CreditEditorState extends MusicBeatState
 		{
 			loadCredits();
 		});
-		var saveFile:FlxButton = new FlxButton(loadFile.x + 90, loadFile.y, "Save Credits", function()
+		var saveFile:FlxButton = new FlxButton(loadFile.x + 90, updateInput.y + 25, "Save Credits", function()
 		{
 			saveCredits();
 		});
@@ -295,7 +302,7 @@ class CreditEditorState extends MusicBeatState
 		tab_group_credits.add(getIconColor);
 		tab_group_credits.add(new FlxText(creditNameInput.x - 40, creditNameInput.y, 0, 'Name:'));
 		tab_group_credits.add(new FlxText(iconInput.x - 40, iconInput.y, 0, 'Icon:'));
-		tab_group_credits.add(new FlxText(descInput.x - 80, descInput.y, 0, 'Description:'));
+		tab_group_credits.add(new FlxText(descInput.x - 70, descInput.y, 0, 'Description:'));
 		tab_group_credits.add(new FlxText(linkInput.x - 40, linkInput.y, 0, 'Link:'));
 		tab_group_credits.add(new FlxText(colorInput.x - 40, colorInput.y, 0, 'Color:'));
 		tab_group_credits.add(titleAdd);
@@ -304,6 +311,7 @@ class CreditEditorState extends MusicBeatState
 		tab_group_credits.add(loadFile);
 		tab_group_credits.add(saveFile);
 		tab_group_credits.add(resetAll);
+		tab_group_credits.add(updateInput);
 
 		UI_box.addGroup(tab_group_credits);
 		showIconExist(iconInput.text);
