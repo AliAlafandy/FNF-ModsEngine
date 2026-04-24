@@ -111,9 +111,8 @@ class FreeplayState extends MusicBeatState
 
 		for (i in 0...songs.length)
 		{
-			var isSelectable:Bool = !unselectableCheck(i);
 			// var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
-			var songText:Alphabet = new Alphabet(0, 320, songs[i].songName, !isSelectable); // FlxG.width / 2
+			var songText:Alphabet = new Alphabet(0, 320, songs[i].songName, true); // FlxG.width / 2
 			songText.isMenuItem = true;
 			// songText.isMenuItemCentered = true;
 			songText.targetY = i - curSelected;
@@ -205,12 +204,6 @@ class FreeplayState extends MusicBeatState
 		#end
 		
 		super.create();
-	}
-
-	inline function unselectableCheck(i:Int):Bool
-	{
-		if (i < 0 || i >= songs.length) return true;
-		return !Song.doesSongExist(Paths.formatToSongPath(songs[i].songName));
 	}
 
 	override function closeSubState() {
@@ -579,6 +572,24 @@ class FreeplayState extends MusicBeatState
 		}
 		#end
 
+		for (item in grpSongs.members)
+		{
+			if(!item.bold)
+			{
+				var lerpVal:Float = Math.exp(-elapsed * 12);
+				if(item.targetY == 0)
+				{
+					var lastX:Float = item.x;
+					item.screenCenter(X);
+					item.x = FlxMath.lerp(item.x - 70, lastX, lerpVal);
+				}
+				else
+				{
+					item.x = FlxMath.lerp(200 + -40 * Math.abs(item.targetY), item.x, lerpVal);
+				}
+			}
+		}
+
 		updateTexts(elapsed);
 		super.update(elapsed);
 	}
@@ -661,10 +672,13 @@ class FreeplayState extends MusicBeatState
 
 		for (item in grpSongs.members)
 		{
+			item.targetY = bullShit - curSelected;
 			bullShit++;
+
 			item.alpha = 0.6;
-			if (item.targetY == curSelected)
+			if (item.targetY == curSelected) 
 				item.alpha = 1;
+			}
 		}
 		
 		Mods.currentModDirectory = songs[curSelected].folder;
@@ -697,6 +711,11 @@ class FreeplayState extends MusicBeatState
 		scoreBG.x = FlxG.width - (scoreBG.scale.x / 2);
 		diffText.x = Std.int(scoreBG.x + (scoreBG.width / 2));
 		diffText.x -= diffText.width / 2;
+	}
+
+	private function unselectableCheck():Bool
+	{
+		return songs.length <= 1;
 	}
 
 	var _drawDistance:Int = 4;
