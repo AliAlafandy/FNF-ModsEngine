@@ -106,8 +106,8 @@ class CreditEditorState extends MusicBeatState
 		UI_box = new FlxUITabMenu(null, tabs, true);
 		UI_box.cameras = [camUI];
 		UI_box.resize(270, 380);
-		UI_box.x = 980; // 940
-		UI_box.y = 15; // 25
+		UI_box.x = 940;
+		UI_box.y = 25;
 		UI_box.scrollFactor.set();
 		add(UI_box);
 		UI_box.selected_tab = 0;
@@ -115,11 +115,11 @@ class CreditEditorState extends MusicBeatState
 		if (controls.mobileC) {
 			text = "Up/Down - Change selected item
 			\nA - Apply changes
-			\nX - Get selected item data
-			\nY - Delete selected item
-			\nC - Reset inputs
-			\nH - Add title
-			\nZ - Add credit";
+			\nZ - Get selected item data
+			\nH - Delete selected item
+			\nY - Reset inputs
+			\nX - Add title
+			\nC - Add credit";
 		} else {
 			text = "W/S or Up/Down - Change selected item
 			\nEnter - Apply changes
@@ -132,7 +132,7 @@ class CreditEditorState extends MusicBeatState
 
 		var tipTextArray:Array<String> = text.split('\n');
 		for (i in 0...tipTextArray.length) {
-			var tipText:FlxText = new FlxText(20, 15, 0, tipTextArray[i], 14); // UI_box.x, UI_box.y + UI_box.height + 8
+			var tipText:FlxText = new FlxText(15, 53, 0, tipTextArray[i], 14); // UI_box.x, UI_box.y + UI_box.height + 8
 			tipText.y += i * 9;
 			tipText.setFormat("VCR OSD Mono", 14, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			tipText.borderSize = 1;
@@ -573,7 +573,7 @@ class CreditEditorState extends MusicBeatState
 			#end
 
 			#if mobile
-			if (FlxG.keys.justPressed.SPACE || touchPad.buttonX.justPressed) {
+			if (FlxG.keys.justPressed.SPACE || touchPad.buttonZ.justPressed) {
 				dataGoToInputs();
 			}
 			#else
@@ -583,7 +583,7 @@ class CreditEditorState extends MusicBeatState
 			#end
 
 			#if mobile
-			if (FlxG.keys.justPressed.DELETE || touchPad.buttonY.justPressed) {
+			if (FlxG.keys.justPressed.DELETE || touchPad.buttonH.justPressed) {
 				deleteSelItem();
 			}
 			#else
@@ -593,7 +593,7 @@ class CreditEditorState extends MusicBeatState
 			#end
 
 			#if mobile
-			if (FlxG.keys.pressed.R || touchPad.buttonC.justPressed) {
+			if (FlxG.keys.pressed.R || touchPad.buttonY.justPressed) {
 				cleanInputs();
 			}
 			#else
@@ -603,7 +603,7 @@ class CreditEditorState extends MusicBeatState
 			#end
 
 			#if mobile
-			if (FlxG.keys.justPressed.ONE || touchPad.buttonH.justPressed) {
+			if (FlxG.keys.justPressed.ONE || touchPad.buttonX.justPressed) {
 				addTitle();
 			}
 			#else
@@ -613,7 +613,7 @@ class CreditEditorState extends MusicBeatState
 			#end
 
 			#if mobile
-			if (FlxG.keys.justPressed.TWO || touchPad.buttonZ.justPressed) {
+			if (FlxG.keys.justPressed.TWO || touchPad.buttonC.justPressed) {
 				addCredit();
 			}
 			#else
