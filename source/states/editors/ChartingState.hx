@@ -645,9 +645,9 @@ class ChartingState extends MusicBeatState
 			postfix = '-' + Difficulty.getString();
 		}
 
-		var difficultyDropDown = new FlxUIDropDownMenu(stageDropDown.x, gfVersionDropDown.y, FlxUIDropDownMenu.makeStrIdLabelArray(Difficulty.getString(), true), function(difficulty:String)
+		var difficultyDropDown = new FlxUIDropDownMenu(stageDropDown.x, gfVersionDropDown.y, FlxUIDropDownMenu.makeStrIdLabelArray(Difficulty.list, true), function(difficulty:String)
 		{
-				var newDifficulty:String = Difficulty.getString([Std.parseInt(difficulty)]);
+				var newDifficulty:String = Difficulty.list[Std.parseInt(difficulty)];
 				trace("Current difficulty: " + Difficulty.getString());
 				trace("New diffculty: " + newDifficulty);
 				PlayState.storyDifficulty = Std.parseInt(difficulty);
