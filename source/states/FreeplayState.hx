@@ -112,7 +112,7 @@ class FreeplayState extends MusicBeatState
 		for (i in 0...songs.length)
 		{
 			// var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
-			var songText:Alphabet = new Alphabet(0, 320, songs[i].songName, true); // FlxG.width / 2
+			var songText:Alphabet = new Alphabet(FlxG.width / 2, 320, songs[i].songName, true);
 			songText.isMenuItem = true;
 			// songText.isMenuItemCentered = true;
 			songText.targetY = i - curSelected;
@@ -137,7 +137,7 @@ class FreeplayState extends MusicBeatState
 
 			// songText.x += 40;
 			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
-			songText.screenCenter(X);
+			// songText.screenCenter(X);
 		}
 		WeekData.setDirectoryFromWeek();
 
