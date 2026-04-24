@@ -678,7 +678,6 @@ class FreeplayState extends MusicBeatState
 			item.alpha = 0.6;
 			if (item.targetY == curSelected) 
 				item.alpha = 1;
-			}
 		}
 		
 		Mods.currentModDirectory = songs[curSelected].folder;
