@@ -641,16 +641,14 @@ class ChartingState extends MusicBeatState
 		stageDropDown.selectedLabel = _song.stage;
 		blockPressWhileScrolling.push(stageDropDown);
 
-		var difficulties:Array<String> = Difficulty.getString();
-
-		if (difficulties != 'normal') {
-			postfix = '-' + difficulties;
+		if (Difficulty.getString() != 'normal') {
+			postfix = '-' + Difficulty.getString();
 		}
 
-		var difficultyDropDown = new FlxUIDropDownMenu(stageDropDown.x, gfVersionDropDown.y, FlxUIDropDownMenu.makeStrIdLabelArray(difficulties, true), function(difficulty:String)
+		var difficultyDropDown = new FlxUIDropDownMenu(stageDropDown.x, gfVersionDropDown.y, FlxUIDropDownMenu.makeStrIdLabelArray(Difficulty.getString(), true), function(difficulty:String)
 		{
-				var newDifficulty:String = difficulties[Std.parseInt(difficulty)];
-				trace("Current difficulty: " + difficulties);
+				var newDifficulty:String = Difficulty.getString([Std.parseInt(difficulty)]);
+				trace("Current difficulty: " + Difficulty.getString());
 				trace("New diffculty: " + newDifficulty);
 				PlayState.storyDifficulty = Std.parseInt(difficulty);
 				if (newDifficulty != 'normal') {
@@ -659,7 +657,7 @@ class ChartingState extends MusicBeatState
 				PlayState.SONG = Song.loadFromJson(_song.song.toLowerCase() + postfix, _song.song.toLowerCase());
 				MusicBeatState.resetState();
 		});
-		difficultyDropDown.selectedLabel = difficulties;
+		difficultyDropDown.selectedLabel = Difficulty.getString();
 		blockPressWhileScrolling.push(difficultyDropDown);
 
 		var tab_group_song = new FlxUI(null, UI_box);
