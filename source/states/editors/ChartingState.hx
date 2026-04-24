@@ -651,9 +651,20 @@ class ChartingState extends MusicBeatState
 				trace("Current difficulty: " + Difficulty.getString());
 				trace("New diffculty: " + newDifficulty);
 				PlayState.storyDifficulty = Std.parseInt(difficulty);
-				if (newDifficulty != 'normal') {
+
+				if (newDifficulty == 'Easy')
+				{
+					postfix = '-easy';
+				}
+				if (newDifficulty == 'Hard')
+				{
+					postfix = '-hard';
+				}
+				if (newDifficulty != Difficulty.defaultList)
+				{
 					postfix = '-' + newDifficulty;
 				}
+
 				PlayState.SONG = Song.loadFromJson(_song.song.toLowerCase() + postfix, _song.song.toLowerCase());
 				MusicBeatState.resetState();
 		});
