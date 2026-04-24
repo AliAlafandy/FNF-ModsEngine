@@ -106,8 +106,8 @@ class CreditEditorState extends MusicBeatState
 		UI_box = new FlxUITabMenu(null, tabs, true);
 		UI_box.cameras = [camUI];
 		UI_box.resize(270, 380);
-		UI_box.x = 980; // 940
-		UI_box.y = 15; // 25
+		UI_box.x = 940;
+		UI_box.y = 25;
 		UI_box.scrollFactor.set();
 		add(UI_box);
 		UI_box.selected_tab = 0;
@@ -115,11 +115,11 @@ class CreditEditorState extends MusicBeatState
 		if (controls.mobileC) {
 			text = "Up/Down - Change selected item
 			\nA - Apply changes
-			\nX - Get selected item data
-			\nY - Delete selected item
-			\nC - Reset inputs
-			\nH - Add title
-			\nZ - Add credit";
+			\nZ - Get selected item data
+			\nH - Delete selected item
+			\nY - Reset inputs
+			\nX - Add title
+			\nC - Add credit";
 		} else {
 			text = "W/S or Up/Down - Change selected item
 			\nEnter - Apply changes
@@ -132,7 +132,7 @@ class CreditEditorState extends MusicBeatState
 
 		var tipTextArray:Array<String> = text.split('\n');
 		for (i in 0...tipTextArray.length) {
-			var tipText:FlxText = new FlxText(20, 15, 0, tipTextArray[i], 14); // UI_box.x, UI_box.y + UI_box.height + 8
+			var tipText:FlxText = new FlxText(15, 53, 0, tipTextArray[i], 14); // UI_box.x, UI_box.y + UI_box.height + 8
 			tipText.y += i * 9;
 			tipText.setFormat("VCR OSD Mono", 14, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			tipText.borderSize = 1;
@@ -219,7 +219,7 @@ class CreditEditorState extends MusicBeatState
 		iconInput = new FlxUIInputText(60, creditNameInput.y + yDist, 155, '', 8);
 		iconInput.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
 		iconExistCheck = new FlxSprite(iconInput.x + 165, iconInput.y).makeGraphic(15, 15, 0xFFFFFFFF);
-		descInput = new FlxUIInputText(100, iconInput.y + yDist, 140, '', 8);
+		descInput = new FlxUIInputText(90, iconInput.y + yDist, 140, '', 8);
 		descInput.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
 		linkInput = new FlxUIInputText(60, descInput.y + yDist, 180, '', 8);
 		linkInput.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
@@ -257,12 +257,19 @@ class CreditEditorState extends MusicBeatState
 		
 		var resetAll:FlxButton = new FlxButton(50, 300, "Reset all", function()
 		{
-			openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, function() {
+			openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, function()
+			{
 				creditsStuff = templateArray();
 				updateCreditObjects();
 				curSelected = 1;
 				changeSelection();
 			}, null,ignoreWarnings));
+		});
+		var updateInput:FlxButton = new FlxButton(resetAll.x + 90, resetAll.y, "Update Credits", function()
+		{
+			setItemData();
+			updateCreditObjects();
+			changeSelection();
 		});
 		
 		resetAll.color = FlxColor.RED;
@@ -271,7 +278,7 @@ class CreditEditorState extends MusicBeatState
 		{
 			loadCredits();
 		});
-		var saveFile:FlxButton = new FlxButton(loadFile.x + 90, loadFile.y, "Save Credits", function()
+		var saveFile:FlxButton = new FlxButton(loadFile.x + 90, updateInput.y + 25, "Save Credits", function()
 		{
 			saveCredits();
 		});
@@ -295,7 +302,7 @@ class CreditEditorState extends MusicBeatState
 		tab_group_credits.add(getIconColor);
 		tab_group_credits.add(new FlxText(creditNameInput.x - 40, creditNameInput.y, 0, 'Name:'));
 		tab_group_credits.add(new FlxText(iconInput.x - 40, iconInput.y, 0, 'Icon:'));
-		tab_group_credits.add(new FlxText(descInput.x - 80, descInput.y, 0, 'Description:'));
+		tab_group_credits.add(new FlxText(descInput.x - 70, descInput.y, 0, 'Description:'));
 		tab_group_credits.add(new FlxText(linkInput.x - 40, linkInput.y, 0, 'Link:'));
 		tab_group_credits.add(new FlxText(colorInput.x - 40, colorInput.y, 0, 'Color:'));
 		tab_group_credits.add(titleAdd);
@@ -304,6 +311,7 @@ class CreditEditorState extends MusicBeatState
 		tab_group_credits.add(loadFile);
 		tab_group_credits.add(saveFile);
 		tab_group_credits.add(resetAll);
+		tab_group_credits.add(updateInput);
 
 		UI_box.addGroup(tab_group_credits);
 		showIconExist(iconInput.text);
@@ -573,7 +581,7 @@ class CreditEditorState extends MusicBeatState
 			#end
 
 			#if mobile
-			if (FlxG.keys.justPressed.SPACE || touchPad.buttonX.justPressed) {
+			if (FlxG.keys.justPressed.SPACE || touchPad.buttonZ.justPressed) {
 				dataGoToInputs();
 			}
 			#else
@@ -583,7 +591,7 @@ class CreditEditorState extends MusicBeatState
 			#end
 
 			#if mobile
-			if (FlxG.keys.justPressed.DELETE || touchPad.buttonY.justPressed) {
+			if (FlxG.keys.justPressed.DELETE || touchPad.buttonH.justPressed) {
 				deleteSelItem();
 			}
 			#else
@@ -593,7 +601,7 @@ class CreditEditorState extends MusicBeatState
 			#end
 
 			#if mobile
-			if (FlxG.keys.pressed.R || touchPad.buttonC.justPressed) {
+			if (FlxG.keys.pressed.R || touchPad.buttonY.justPressed) {
 				cleanInputs();
 			}
 			#else
@@ -603,7 +611,7 @@ class CreditEditorState extends MusicBeatState
 			#end
 
 			#if mobile
-			if (FlxG.keys.justPressed.ONE || touchPad.buttonH.justPressed) {
+			if (FlxG.keys.justPressed.ONE || touchPad.buttonX.justPressed) {
 				addTitle();
 			}
 			#else
@@ -613,7 +621,7 @@ class CreditEditorState extends MusicBeatState
 			#end
 
 			#if mobile
-			if (FlxG.keys.justPressed.TWO || touchPad.buttonZ.justPressed) {
+			if (FlxG.keys.justPressed.TWO || touchPad.buttonC.justPressed) {
 				addCredit();
 			}
 			#else
