@@ -138,6 +138,9 @@ class FreeplayState extends MusicBeatState
 			// songText.x += 40;
 			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
 			// songText.screenCenter(X);
+
+			if (curSelected == -1)
+				curSelected = i;
 		}
 		WeekData.setDirectoryFromWeek();
 
@@ -574,19 +577,13 @@ class FreeplayState extends MusicBeatState
 
 		for (item in grpSongs.members)
 		{
-			if(!item.bold)
-			{
-				var lerpVal:Float = Math.exp(-elapsed * 12);
-				if(item.targetY == 0)
-				{
-					var lastX:Float = item.x;
-					item.screenCenter(X);
-					item.x = FlxMath.lerp(item.x - 70, lastX, lerpVal);
-				}
-				else
-				{
-					item.x = FlxMath.lerp(200 + -40 * Math.abs(item.targetY), item.x, lerpVal);
-				}
+			var lerpVal:Float = Math.exp(-elapsed * 12);
+			if(item.targetY == 0) {
+				var lastX:Float = item.x;
+				item.screenCenter(X);
+				item.x = FlxMath.lerp(item.x - 70, lastX, lerpVal);
+			} else {
+				item.x = FlxMath.lerp(200 + -40 * Math.abs(item.targetY), item.x, lerpVal);
 			}
 		}
 
@@ -672,9 +669,7 @@ class FreeplayState extends MusicBeatState
 
 		for (item in grpSongs.members)
 		{
-			item.targetY = bullShit - curSelected;
 			bullShit++;
-
 			item.alpha = 0.6;
 			if (item.targetY == curSelected) 
 				item.alpha = 1;
