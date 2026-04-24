@@ -111,8 +111,9 @@ class FreeplayState extends MusicBeatState
 
 		for (i in 0...songs.length)
 		{
+			var isSelectable:Bool = !unselectableCheck(i);
 			// var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
-			var songText:Alphabet = new Alphabet(FlxG.width / 2, 320, songs[i].songName, true); // 0
+			var songText:Alphabet = new Alphabet(FlxG.width / 2, 320, songs[i].songName, !isSelectable); // 0
 			songText.isMenuItem = true;
 			// songText.isMenuItemCentered = true;
 			songText.targetY = i - curSelected;
@@ -698,9 +699,13 @@ class FreeplayState extends MusicBeatState
 		diffText.x -= diffText.width / 2;
 	}
 
+	private function unselectableCheck():Bool
+	{
+		return songs.length <= 1;
+	}
+
 	var _drawDistance:Int = 4;
 	var _lastVisibles:Array<Int> = [];
-
 	public function updateTexts(elapsed:Float = 0.0)
 	{
 		lerpSelected = FlxMath.lerp(curSelected, lerpSelected, Math.exp(-elapsed * 9.6));
