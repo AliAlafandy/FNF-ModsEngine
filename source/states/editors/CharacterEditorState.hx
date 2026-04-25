@@ -94,11 +94,11 @@ class CharacterEditorState extends MusicBeatState
 		boyfriend.offset.set(-6, 2);
 		silhouettes.add(boyfriend);
 
-		var gf:FlxSprite = new FlxSprite(gfPosition.x, gfPosition.y).loadGraphic(Paths.image('editors/silhouetteGF'));
+		var gf:FlxSprite = new FlxSprite(gfPosition.x + 100, gfPosition.y + 320).loadGraphic(Paths.image('editors/silhouetteGF'));
 		gf.antialiasing = ClientPrefs.data.antialiasing;
 		gf.active = false;
-		gf.offset.set(17.5, 17.5);
-		gf.scale.set(2.5, 2.5);
+		gf.offset.set(-5, 1.5);
+		gf.scale.set(3, 3);
 		silhouettes.add(gf);
 
 		silhouettes.alpha = 0.25;
