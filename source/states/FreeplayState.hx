@@ -120,8 +120,8 @@ class FreeplayState extends MusicBeatState
 
 			//songText.scaleX = Math.min(1, 980 / songText.width);
 			//songText.ID = i;
-			songText.alignment = CENTER;
-			songText.changeX = false;
+			songText.alignment = CENTERED;
+			//songText.changeX = false;
 			songText.snapToPosition();
 
 			Mods.currentModDirectory = songs[i].folder;
@@ -140,8 +140,8 @@ class FreeplayState extends MusicBeatState
 			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
 			// songText.screenCenter(X);
 
-			if (curSelected == -1)
-				curSelected = i;
+			/*if (curSelected == -1)
+				curSelected = i;*/
 		}
 		WeekData.setDirectoryFromWeek();
 
