@@ -18,6 +18,7 @@ typedef SwagSong =
 	var player2:String;
 	var gfVersion:String;
 	var stage:String;
+	var format:String;
 
 	@:optional var gameOverChar:String;
 	@:optional var gameOverSound:String;
@@ -32,6 +33,8 @@ typedef SwagSong =
 
 class Song
 {
+	var version:String = ${states.MainMenuState.modsEngineVersion};
+
 	public var song:String;
 	public var notes:Array<SwagSection>;
 	public var events:Array<Dynamic>;
@@ -49,6 +52,7 @@ class Song
 	public var player1:String = 'bf';
 	public var player2:String = 'dad';
 	public var gfVersion:String = 'gf';
+	public var format:String = 'Mods Engine v' + version;
 
 	private static function onLoadJson(songJson:Dynamic) // Convert old charts to newest format
 	{
@@ -142,8 +146,25 @@ class Song
 		return songJson;
 	}
 
-	public static function parseJSONshit(rawJson:String):SwagSong
+	public static function parseJSONshit(rawJson:String, ?nameForError:String = null, ?convertTo:String = 'Mods Engine v' + version):SwagSong
 	{
 		return cast Json.parse(rawJson).song;
+
+		if(convertTo != null && convertTo.length > 0)
+		{
+			var fmt:String = songJson.format;
+			if(fmt == null) fmt = songJson.format = 'unknown';
+
+			switch(convertTo)
+			{
+				case 'Mods Engine v' + version:
+					if(!fmt.startsWith('Mods Engine v' + version))
+					{
+						trace('converting chart $nameForError with format $fmt to Mods Engine v' + version + 'format...');
+						songJson.format = 'Mods Engine v' + version;
+						convert(songJson);
+					}
+			}
+			}
 	}
 }
