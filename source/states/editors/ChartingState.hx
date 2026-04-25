@@ -656,6 +656,10 @@ class ChartingState extends MusicBeatState
 				{
 					postfix = '-easy';
 				}
+				if (newDifficulty == 'Normal')
+				{
+					postfix = '';
+				}
 				if (newDifficulty == 'Hard')
 				{
 					postfix = '-hard';
@@ -3432,10 +3436,10 @@ class ChartingState extends MusicBeatState
 		//make it look sexier if possible
 		try {
 			if (Difficulty.getString() != Difficulty.getDefault()) {
-				if(Difficulty.getString() == null){
+				if (Difficulty.getString() == null) {
 					PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
-				}else{
-					PlayState.SONG = Song.loadFromJson(song.toLowerCase() + "-" + Difficulty.getString(), song.toLowerCase());
+				} else {
+					PlayState.SONG = Song.loadFromJson(song.toLowerCase() + "-" + postfix, song.toLowerCase()); // Difficulty.getString()
 				}
 			}
 			else PlayState.SONG = Song.loadFromJson(song.toLowerCase() + postfix, song.toLowerCase());
