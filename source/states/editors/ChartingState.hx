@@ -641,7 +641,7 @@ class ChartingState extends MusicBeatState
 		stageDropDown.selectedLabel = _song.stage;
 		blockPressWhileScrolling.push(stageDropDown);
 
-		if (Difficulty.getString() != 'normal') {
+		if (Difficulty.getString() != 'Normal') {
 			postfix = '-' + Difficulty.getString();
 		}
 
@@ -654,19 +654,15 @@ class ChartingState extends MusicBeatState
 
 				if (newDifficulty == 'Easy')
 				{
-					postfix = '-easy';
-				}
-				if (newDifficulty == 'Normal')
-				{
-					postfix = '';
+					postfix = 'easy';
 				}
 				if (newDifficulty == 'Hard')
 				{
-					postfix = '-hard';
+					postfix = 'hard';
 				}
 				if (newDifficulty != 'Easy' || newDifficulty != 'Normal' || newDifficulty != 'Hard')
 				{
-					postfix = '-' + newDifficulty;
+					postfix = newDifficulty;
 				}
 
 				PlayState.SONG = Song.loadFromJson(_song.song.toLowerCase() + postfix, _song.song.toLowerCase());
