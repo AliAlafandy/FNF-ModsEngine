@@ -660,7 +660,7 @@ class ChartingState extends MusicBeatState
 				{
 					postfix = '-hard';
 				}
-				if (newDifficulty != Difficulty.defaultList)
+				if (newDifficulty != 'Easy' || newDifficulty != 'Normal' || newDifficulty != 'Hard')
 				{
 					postfix = '-' + newDifficulty;
 				}
