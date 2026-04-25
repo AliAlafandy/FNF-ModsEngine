@@ -115,11 +115,12 @@ class FreeplayState extends MusicBeatState
 			var songText:Alphabet = new Alphabet(FlxG.width / 2, 320, songs[i].songName, true);
 			songText.isMenuItem = true;
 			// songText.isMenuItemCentered = true;
-			songText.targetY = i - curSelected;
+			songText.targetY = i;
 			grpSongs.add(songText);
 
 			//songText.scaleX = Math.min(1, 980 / songText.width);
 			//songText.ID = i;
+			songText.alignment = CENTER;
 			songText.changeX = false;
 			songText.snapToPosition();
 
@@ -574,18 +575,6 @@ class FreeplayState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('scrollMenu'));
 		}
 		#end
-
-		for (item in grpSongs.members)
-		{
-			var lerpVal:Float = Math.exp(-elapsed * 12);
-			if(item.targetY == 0) {
-				var lastX:Float = item.x;
-				item.screenCenter(X);
-				item.x = FlxMath.lerp(item.x - 70, lastX, lerpVal);
-			} else {
-				item.x = FlxMath.lerp(200 + -40 * Math.abs(item.targetY), item.x, lerpVal);
-			}
-		}
 
 		updateTexts(elapsed);
 		super.update(elapsed);
