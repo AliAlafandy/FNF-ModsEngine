@@ -653,7 +653,7 @@ class ChartingState extends MusicBeatState
 			postfix = '-easy';
 		} else if (Difficulty.getString() == 'Hard') {
 			postfix = '-hard';
-		} else if (Difficulty.getString() != Difficulty.defaultList) {
+		} else if (Difficulty.getString() != Difficulty.getDefault()) {
 			postfix = '-' + Difficulty.getString();
 		} else if (Difficulty.getString() == 'Normal') {
 			postfix = '';
@@ -678,7 +678,7 @@ class ChartingState extends MusicBeatState
 					postfix = '-easy';
 				} else if (newDifficulty == 'Hard') {
 					postfix = '-hard';
-				} else if (newDifficulty != 'Normal') {
+				} else if (newDifficulty != Difficulty.getDefault()) {
 					postfix = '-' + newDifficulty;
 				} else if (newDifficulty == 'Normal') {
 					postfix = '';
