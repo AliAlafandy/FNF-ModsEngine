@@ -643,6 +643,8 @@ class ChartingState extends MusicBeatState
 
 		if (Difficulty.getString() != 'Normal') {
 			postfix = '-' + Difficulty.getString();
+		} else {
+			postfix = '';
 		}
 
 		var difficultyDropDown = new FlxUIDropDownMenu(stageDropDown.x, gfVersionDropDown.y, FlxUIDropDownMenu.makeStrIdLabelArray(Difficulty.list, true), function(difficulty:String)
@@ -652,17 +654,11 @@ class ChartingState extends MusicBeatState
 				trace("New diffculty: " + newDifficulty);
 				PlayState.storyDifficulty = Std.parseInt(difficulty);
 
-				if (newDifficulty == 'Easy')
+				if (newDifficulty != 'Normal')
 				{
-					postfix = 'easy';
-				}
-				if (newDifficulty == 'Hard')
-				{
-					postfix = 'hard';
-				}
-				if (newDifficulty != 'Easy' || newDifficulty != 'Normal' || newDifficulty != 'Hard')
-				{
-					postfix = newDifficulty;
+					postfix = '-' + newDifficulty;
+				} else {
+					postfix = '';
 				}
 
 				PlayState.SONG = Song.loadFromJson(_song.song.toLowerCase() + postfix, _song.song.toLowerCase());
@@ -3435,7 +3431,7 @@ class ChartingState extends MusicBeatState
 				if (Difficulty.getString() == null) {
 					PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
 				} else {
-					PlayState.SONG = Song.loadFromJson(song.toLowerCase() + "-" + postfix, song.toLowerCase()); // Difficulty.getString()
+					PlayState.SONG = Song.loadFromJson(song.toLowerCase() + "-" + Difficulty.getString(), song.toLowerCase()); // Difficulty.getString()
 				}
 			}
 			else PlayState.SONG = Song.loadFromJson(song.toLowerCase() + postfix, song.toLowerCase());
