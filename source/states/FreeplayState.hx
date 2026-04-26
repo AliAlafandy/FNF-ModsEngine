@@ -113,15 +113,10 @@ class FreeplayState extends MusicBeatState
 		{
 			// var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
 			var songText:Alphabet = new Alphabet(0, 320, songs[i].songName, true); // FlxG.width / 2
-			songText.isMenuItem = true;
-			// songText.isMenuItemCentered = true;
 			songText.targetY = i;
 			grpSongs.add(songText);
 
-			//songText.scaleX = Math.min(1, 980 / songText.width);
-			//songText.ID = i;
-			//songText.alignment = CENTERED;
-			//songText.changeX = false;
+			// songText.scaleX = Math.min(1, 980 / songText.width);
 			songText.snapToPosition();
 
 			Mods.currentModDirectory = songs[i].folder;
@@ -139,9 +134,6 @@ class FreeplayState extends MusicBeatState
 			// songText.x += 40;
 			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
 			// songText.screenCenter(X);
-
-			/*if (curSelected == -1)
-				curSelected = i;*/
 		}
 		WeekData.setDirectoryFromWeek();
 
@@ -694,11 +686,6 @@ class FreeplayState extends MusicBeatState
 		scoreBG.x = FlxG.width - (scoreBG.scale.x / 2);
 		diffText.x = Std.int(scoreBG.x + (scoreBG.width / 2));
 		diffText.x -= diffText.width / 2;
-	}
-
-	private function unselectableCheck():Bool
-	{
-		return songs.length <= 1;
 	}
 
 	var _drawDistance:Int = 4;
