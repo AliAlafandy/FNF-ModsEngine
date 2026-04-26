@@ -641,9 +641,21 @@ class ChartingState extends MusicBeatState
 		stageDropDown.selectedLabel = _song.stage;
 		blockPressWhileScrolling.push(stageDropDown);
 
-		if (Difficulty.getString() != 'Normal') {
+		/*if (Difficulty.getString() != 'Normal')
+		{
 			postfix = '-' + Difficulty.getString();
 		} else {
+			postfix = '';
+		}*/
+
+		if (Difficulty.getString() == 'Easy')
+		{
+			postfix = '-easy';
+		} else if (Difficulty.getString() == 'Hard') {
+			postfix = '-hard';
+		} else if (Difficulty.getString() != Difficulty.defaultList) {
+			postfix = '-' + Difficulty.getString();
+		} else if (Difficulty.getString() == 'Normal') {
 			postfix = '';
 		}
 
@@ -654,10 +666,21 @@ class ChartingState extends MusicBeatState
 				trace("New diffculty: " + newDifficulty);
 				PlayState.storyDifficulty = Std.parseInt(difficulty);
 
-				if (newDifficulty != 'Normal')
+				/*if (newDifficulty != 'Normal')
 				{
 					postfix = '-' + newDifficulty;
 				} else {
+					postfix = '';
+				}*/
+
+				if (newDifficulty == 'Easy')
+				{
+					postfix = '-easy';
+				} else if (newDifficulty == 'Hard') {
+					postfix = '-hard';
+				} else if (newDifficulty != 'Normal') {
+					postfix = '-' + newDifficulty;
+				} else if (newDifficulty == 'Normal') {
 					postfix = '';
 				}
 
