@@ -120,7 +120,7 @@ class FreeplayState extends MusicBeatState
 
 			//songText.scaleX = Math.min(1, 980 / songText.width);
 			//songText.ID = i;
-			songText.alignment = CENTERED;
+			//songText.alignment = CENTERED;
 			//songText.changeX = false;
 			songText.snapToPosition();
 
