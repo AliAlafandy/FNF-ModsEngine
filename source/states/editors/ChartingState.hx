@@ -661,8 +661,10 @@ class ChartingState extends MusicBeatState
 					postfix = '';
 				}
 
-				PlayState.SONG = Song.loadFromJson(_song.song.toLowerCase() + postfix, _song.song.toLowerCase());
-				MusicBeatState.resetState();
+				loadJson(_song.song.toLowerCase());
+
+				/*PlayState.SONG = Song.loadFromJson(_song.song.toLowerCase() + postfix, _song.song.toLowerCase());
+				MusicBeatState.resetState();*/
 		});
 		difficultyDropDown.selectedLabel = Difficulty.getString();
 		blockPressWhileScrolling.push(difficultyDropDown);
