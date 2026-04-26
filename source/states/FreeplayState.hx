@@ -112,7 +112,7 @@ class FreeplayState extends MusicBeatState
 		for (i in 0...songs.length)
 		{
 			// var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
-			var songText:Alphabet = new Alphabet(FlxG.width / 2, 320, songs[i].songName, true);
+			var songText:Alphabet = new Alphabet(0, 320, songs[i].songName, true); // FlxG.width / 2
 			songText.isMenuItem = true;
 			// songText.isMenuItemCentered = true;
 			songText.targetY = i;
@@ -126,7 +126,7 @@ class FreeplayState extends MusicBeatState
 
 			Mods.currentModDirectory = songs[i].folder;
 			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
-			//icon.sprTracker = songText;
+			icon.sprTracker = songText;
 			
 			// too laggy with a lot of songs, so i had to recode the logic for it
 			songText.visible = songText.active = songText.isMenuItem = false;
@@ -719,6 +719,7 @@ class FreeplayState extends MusicBeatState
 		for (i in min...max)
 		{
 			var item:Alphabet = grpSongs.members[i];
+			item.screenCenter(X);
 			item.visible = item.active = true;
 			// item.x = ((item.targetY - lerpSelected) * item.distancePerItem.x) + item.startPosition.x;
 			item.y = ((item.targetY - lerpSelected) * 1.7 * item.distancePerItem.y) + item.startPosition.y;
