@@ -15,6 +15,7 @@ class Alphabet extends FlxSpriteGroup
 	public var letters:Array<AlphaCharacter> = [];
 
 	public var isMenuItem:Bool = false;
+	public var isMenuItemCentered:Bool = false;
 	public var targetY:Int = 0;
 	public var changeX:Bool = true;
 	public var changeY:Bool = true;
@@ -35,6 +36,11 @@ class Alphabet extends FlxSpriteGroup
 		this.startPosition.y = y;
 		this.bold = bold;
 		this.text = text;
+
+		if (isMenuItemCentered)
+		{
+			this.screenCenter(X);
+		}
 	}
 
 	public function setAlignmentFromString(align:String)
@@ -170,6 +176,16 @@ class Alphabet extends FlxSpriteGroup
 			if(changeY)
 				y = FlxMath.lerp((targetY * 1.3 * distancePerItem.y) + startPosition.y, y, lerpVal);
 		}
+
+		if (isMenuItemCentered)
+		{
+			var lerpVal:Float = Math.exp(-elapsed * 9.6);
+
+			/*if(changeX)
+				x = FlxG.width / 2;*/
+			if(changeY)
+				y = FlxMath.lerp((targetY * 1.3 * distancePerItem.y) + startPosition.y, y, lerpVal);
+		}
 		
 		super.update(elapsed);
 	}
@@ -182,6 +198,16 @@ class Alphabet extends FlxSpriteGroup
 				x = (targetY * distancePerItem.x) + startPosition.x;
 			if(changeY)
 				y = (targetY * 1.3 * distancePerItem.y) + startPosition.y;
+		}
+
+		if (isMenuItemCentered)
+		{
+			var lerpVal:Float = Math.exp(-elapsed * 9.6);
+
+			/*if(changeX)
+				x = FlxG.width / 2;*/
+			if(changeY)
+				y = FlxMath.lerp((targetY * 1.3 * distancePerItem.y) + startPosition.y, y, lerpVal);
 		}
 	}
 
