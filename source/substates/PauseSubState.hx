@@ -443,7 +443,7 @@ class PauseSubState extends MusicBeatSubstate
 		missingTextBG.visible = false;
 	}
 
-	function regenMenu():Void {
+	function regenMenu(elapsed:Float = 0.0):Void {
 		for (i in 0...grpMenuShit.members.length) {
 			var obj = grpMenuShit.members[0];
 			obj.kill();
