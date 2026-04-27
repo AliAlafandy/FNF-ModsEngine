@@ -202,12 +202,10 @@ class Alphabet extends FlxSpriteGroup
 
 		if (isMenuItemCentered)
 		{
-			var lerpVal:Float = Math.exp(-elapsed * 9.6);
-
 			/*if(changeX)
 				x = FlxG.width / 2;*/
 			if(changeY)
-				y = FlxMath.lerp((targetY * 1.3 * distancePerItem.y) + startPosition.y, y, lerpVal);
+				y = (targetY * 1.3 * distancePerItem.y) + startPosition.y;
 		}
 	}
 
