@@ -20,7 +20,16 @@ class PauseSubState extends MusicBeatSubstate
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 
 	var menuItems:Array<String> = [];
-	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Chart Editor', 'Change Difficulty', 'Options', 'Exit to menu'];
+	
+	var menuItemsOG:Array<String> = [
+		'Resume',
+		'Restart Song',
+		'Chart Editor',
+		'Change Difficulty',
+		'Options',
+		'Exit to menu'
+	];
+	
 	var difficultyChoices = [];
 	var curSelected:Int = 0;
 
@@ -99,7 +108,7 @@ class PauseSubState extends MusicBeatSubstate
 		levelDifficulty.updateHitbox();
 		add(levelDifficulty);
 
-		var blueballedTxt:FlxText = new FlxText(20, 15 + 64, 0, "Blueballed: " + PlayState.deathCounter, 32);
+		var blueballedTxt:FlxText = new FlxText(20, 15 + 64, 0, "Death Times: " + PlayState.deathCounter, 32);
 		blueballedTxt.scrollFactor.set();
 		blueballedTxt.setFormat(Paths.font('vcr.ttf'), 32);
 		blueballedTxt.updateHitbox();
@@ -440,9 +449,12 @@ class PauseSubState extends MusicBeatSubstate
 		}
 
 		for (i in 0...menuItems.length) {
-			var item = new Alphabet(90, 320, menuItems[i], true);
-			item.isMenuItem = true;
+			// var item = new Alphabet(90, 320, menuItems[i], true);
+			var item = new Alphabet(0, 320, menuItems[i], true);
+			// item.isMenuItem = true;
 			item.targetY = i;
+			item.screenCenter(X);
+			item.y = ((item.targetY - lerpSelected) * 1.7 * item.distancePerItem.y) + item.startPosition.y;
 			grpMenuShit.add(item);
 
 			if(menuItems[i] == 'Skip Time')
