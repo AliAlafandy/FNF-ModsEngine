@@ -185,7 +185,6 @@ class PauseSubState extends MusicBeatSubstate
 
 	var holdTime:Float = 0;
 	var cantUnpause:Float = 0.1;
-	var _drawDistance:Int = 4;
 	override function update(elapsed:Float)
 	{
 		cantUnpause -= elapsed;
@@ -352,17 +351,6 @@ class PauseSubState extends MusicBeatSubstate
 			}
 		}
 
-		var min:Int = Math.round(Math.max(0, Math.min(menuItems.length, lerpSelected - _drawDistance)));
-		var max:Int = Math.round(Math.max(0, Math.min(menuItems.length, lerpSelected + _drawDistance)));
-		for (i in min...max)
-		{
-			lerpSelected = FlxMath.lerp(curSelected, lerpSelected, Math.exp(-elapsed * 9.6));
-
-			var item:Alphabet = grpMenuShit.members;
-			item.screenCenter(X);
-			item.y = ((item.targetY - lerpSelected) * 1.3 * item.distancePerItem.y) + item.startPosition.y;
-		}
-
 		#if mobile
 		if (touchPad == null) //sometimes it dosent add the tpad, hopefully this fixes it
 		{
@@ -455,7 +443,8 @@ class PauseSubState extends MusicBeatSubstate
 		missingTextBG.visible = false;
 	}
 
-	function regenMenu():Void {
+	var _drawDistance:Int = 4;
+	function regenMenu(elapsed:Float = 0.0):Void {
 		for (i in 0...grpMenuShit.members.length) {
 			var obj = grpMenuShit.members[0];
 			obj.kill();
@@ -467,8 +456,17 @@ class PauseSubState extends MusicBeatSubstate
 			// var item = new Alphabet(90, 320, menuItems[i], true);
 			var item = new Alphabet(0, 320, menuItems[i], true);
 			// item.isMenuItem = true;
+			item.screenCenter(X);
 			item.targetY = i;
 			grpMenuShit.add(item);
+
+			var min:Int = Math.round(Math.max(0, Math.min(menuItems.length, lerpSelected - _drawDistance)));
+			var max:Int = Math.round(Math.max(0, Math.min(menuItems.length, lerpSelected + _drawDistance)));
+			for (i in min...max)
+			{
+				lerpSelected = FlxMath.lerp(curSelected, lerpSelected, Math.exp(-elapsed * 9.6));
+				item.y = ((item.targetY - lerpSelected) * 1.3 * item.distancePerItem.y) + item.startPosition.y;
+			}
 
 			if(menuItems[i] == 'Skip Time')
 			{
