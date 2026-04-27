@@ -31,6 +31,7 @@ class PauseSubState extends MusicBeatSubstate
 	];
 	
 	var difficultyChoices = [];
+	var lerpSelected:Float = 0;
 	var curSelected:Int = 0;
 
 	var pauseMusic:FlxSound;
