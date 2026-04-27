@@ -177,7 +177,8 @@ class Alphabet extends FlxSpriteGroup
 			var lerpVal:Float = Math.exp(-elapsed * 9.6);
 
 			if(changeX)
-				x = FlxG.width / 2;
+				this.screenCenter(X);
+				this.alignment = CENTERED;
 			if(changeY)
 				y = FlxMath.lerp((targetY * 1.3 * distancePerItem.y) + startPosition.y, y, lerpVal);
 		}
