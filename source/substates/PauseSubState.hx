@@ -352,8 +352,8 @@ class PauseSubState extends MusicBeatSubstate
 			}
 		}
 
-		var min:Int = Math.round(Math.max(0, Math.min(songs.length, lerpSelected - _drawDistance)));
-		var max:Int = Math.round(Math.max(0, Math.min(songs.length, lerpSelected + _drawDistance)));
+		var min:Int = Math.round(Math.max(0, Math.min(menuItems.length, lerpSelected - _drawDistance)));
+		var max:Int = Math.round(Math.max(0, Math.min(menuItems.length, lerpSelected + _drawDistance)));
 		for (i in min...max)
 		{
 			lerpSelected = FlxMath.lerp(curSelected, lerpSelected, Math.exp(-elapsed * 9.6));
