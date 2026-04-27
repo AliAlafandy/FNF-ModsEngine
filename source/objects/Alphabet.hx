@@ -198,8 +198,9 @@ class Alphabet extends FlxSpriteGroup
 
 		if (isMenuItemCentered)
 		{
-			/*if(changeX)
-				x = FlxG.width / 2;*/
+			if(changeX)
+				this.screenCenter(X);
+				this.alignment = CENTERED;
 			if(changeY)
 				y = (targetY * 1.3 * distancePerItem.y) + startPosition.y;
 		}
