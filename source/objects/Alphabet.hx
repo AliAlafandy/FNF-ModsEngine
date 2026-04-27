@@ -36,11 +36,6 @@ class Alphabet extends FlxSpriteGroup
 		this.startPosition.y = y;
 		this.bold = bold;
 		this.text = text;
-
-		if (isMenuItemCentered)
-		{
-			this.screenCenter(X);
-		}
 	}
 
 	public function setAlignmentFromString(align:String)
@@ -181,8 +176,8 @@ class Alphabet extends FlxSpriteGroup
 		{
 			var lerpVal:Float = Math.exp(-elapsed * 9.6);
 
-			/*if(changeX)
-				x = FlxG.width / 2;*/
+			if(changeX)
+				x = FlxG.width / 2;
 			if(changeY)
 				y = FlxMath.lerp((targetY * 1.3 * distancePerItem.y) + startPosition.y, y, lerpVal);
 		}
