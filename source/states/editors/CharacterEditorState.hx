@@ -98,7 +98,7 @@ class CharacterEditorState extends MusicBeatState
 		gf.antialiasing = ClientPrefs.data.antialiasing;
 		gf.active = false;
 		// gf.offset.set(-5, 1.5);
-		gf.scale.set(2.55, 255);
+		gf.scale.set(2.55, 2.55);
 		silhouettes.add(gf);
 
 		silhouettes.alpha = 0.25;
