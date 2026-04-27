@@ -161,6 +161,8 @@ class PauseSubState extends MusicBeatSubstate
 		missingText.visible = false;
 		add(missingText);
 
+		lerpSelected = curSelected;
+
 		regenMenu();
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 
@@ -448,6 +450,8 @@ class PauseSubState extends MusicBeatSubstate
 			grpMenuShit.remove(obj, true);
 			obj.destroy();
 		}
+
+		lerpSelected = FlxMath.lerp(curSelected, lerpSelected, Math.exp(-elapsed * 9.6));
 
 		for (i in 0...menuItems.length) {
 			// var item = new Alphabet(90, 320, menuItems[i], true);
