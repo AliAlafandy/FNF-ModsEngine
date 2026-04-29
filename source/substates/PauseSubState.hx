@@ -20,8 +20,18 @@ class PauseSubState extends MusicBeatSubstate
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 
 	var menuItems:Array<String> = [];
-	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Chart Editor', 'Change Difficulty', 'Options', 'Exit to menu'];
+	
+	var menuItemsOG:Array<String> = [
+		'Resume',
+		'Restart Song',
+		'Chart Editor',
+		'Change Difficulty',
+		'Options',
+		'Exit to menu'
+	];
+	
 	var difficultyChoices = [];
+	var lerpSelected:Float = 0;
 	var curSelected:Int = 0;
 
 	var pauseMusic:FlxSound;
@@ -99,7 +109,7 @@ class PauseSubState extends MusicBeatSubstate
 		levelDifficulty.updateHitbox();
 		add(levelDifficulty);
 
-		var blueballedTxt:FlxText = new FlxText(20, 15 + 64, 0, "Blueballed: " + PlayState.deathCounter, 32);
+		var blueballedTxt:FlxText = new FlxText(20, 15 + 64, 0, "Death Times: " + PlayState.deathCounter, 32);
 		blueballedTxt.scrollFactor.set();
 		blueballedTxt.setFormat(Paths.font('vcr.ttf'), 32);
 		blueballedTxt.updateHitbox();
@@ -150,6 +160,8 @@ class PauseSubState extends MusicBeatSubstate
 		missingText.scrollFactor.set();
 		missingText.visible = false;
 		add(missingText);
+
+		lerpSelected = curSelected;
 
 		regenMenu();
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
@@ -440,8 +452,10 @@ class PauseSubState extends MusicBeatSubstate
 		}
 
 		for (i in 0...menuItems.length) {
-			var item = new Alphabet(90, 320, menuItems[i], true);
-			item.isMenuItem = true;
+			// var item = new Alphabet(90, 320, menuItems[i], true);
+			var item = new Alphabet(0, 320, menuItems[i], true);
+			// item.isMenuItem = true;
+			item.isMenuItemCentered = true;
 			item.targetY = i;
 			grpMenuShit.add(item);
 

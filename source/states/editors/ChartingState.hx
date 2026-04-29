@@ -30,6 +30,7 @@ import openfl.utils.Assets as OpenFlAssets;
 import backend.Song;
 import backend.Section;
 import backend.StageData;
+import backend.Difficulty;
 
 import objects.Note;
 import objects.StrumNote;
@@ -38,7 +39,6 @@ import objects.HealthIcon;
 import objects.AttachedSprite;
 import objects.Character;
 import substates.Prompt;
-
 
 #if sys
 import flash.media.Sound;
@@ -84,6 +84,7 @@ class ChartingState extends MusicBeatState
 	];
 
 	var _file:FileReference;
+	var postfix:String = '';
 
 	var UI_box:FlxUITabMenu;
 
@@ -640,6 +641,57 @@ class ChartingState extends MusicBeatState
 		stageDropDown.selectedLabel = _song.stage;
 		blockPressWhileScrolling.push(stageDropDown);
 
+		/*if (Difficulty.getString() != 'Normal')
+		{
+			postfix = '-' + Difficulty.getString();
+		} else {
+			postfix = '';
+		}*/
+
+		if (Difficulty.getString() == 'Easy')
+		{
+			postfix = '-easy';
+		} else if (Difficulty.getString() == 'Hard') {
+			postfix = '-hard';
+		} else if (Difficulty.getString() != Difficulty.getDefault()) {
+			postfix = '-' + Difficulty.getString();
+		} else if (Difficulty.getString() == 'Normal') {
+			postfix = '';
+		}
+
+		var difficultyDropDown = new FlxUIDropDownMenu(stageDropDown.x, gfVersionDropDown.y, FlxUIDropDownMenu.makeStrIdLabelArray(Difficulty.list, true), function(difficulty:String)
+		{
+				var newDifficulty:String = Difficulty.list[Std.parseInt(difficulty)];
+				trace("Current difficulty: " + Difficulty.getString());
+				trace("New diffculty: " + newDifficulty);
+				PlayState.storyDifficulty = Std.parseInt(difficulty);
+
+				/*if (newDifficulty != 'Normal')
+				{
+					postfix = '-' + newDifficulty;
+				} else {
+					postfix = '';
+				}*/
+
+				if (newDifficulty == 'Easy')
+				{
+					postfix = '-easy';
+				} else if (newDifficulty == 'Hard') {
+					postfix = '-hard';
+				} else if (newDifficulty != Difficulty.getDefault()) {
+					postfix = '-' + newDifficulty;
+				} else if (newDifficulty == 'Normal') {
+					postfix = '';
+				}
+
+				loadJson(_song.song.toLowerCase());
+
+				/*PlayState.SONG = Song.loadFromJson(_song.song.toLowerCase() + postfix, _song.song.toLowerCase());
+				MusicBeatState.resetState();*/
+		});
+		difficultyDropDown.selectedLabel = Difficulty.getString();
+		blockPressWhileScrolling.push(difficultyDropDown);
+
 		var tab_group_song = new FlxUI(null, UI_box);
 		tab_group_song.name = "Song";
 		tab_group_song.add(UI_songTitle);
@@ -660,9 +712,11 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(new FlxText(stepperSpeed.x, stepperSpeed.y - 15, 0, 'Song Speed:'));
 		tab_group_song.add(new FlxText(player2DropDown.x, player2DropDown.y - 15, 0, 'Opponent:'));
 		tab_group_song.add(new FlxText(gfVersionDropDown.x, gfVersionDropDown.y - 15, 0, 'Girlfriend:'));
+		tab_group_song.add(new FlxText(difficultyDropDown.x, difficultyDropDown.y - 15, 0, 'Difficulty:'));
 		tab_group_song.add(new FlxText(player1DropDown.x, player1DropDown.y - 15, 0, 'Boyfriend:'));
 		tab_group_song.add(new FlxText(stageDropDown.x, stageDropDown.y - 15, 0, 'Stage:'));
 		tab_group_song.add(player2DropDown);
+		tab_group_song.add(difficultyDropDown);
 		tab_group_song.add(gfVersionDropDown);
 		tab_group_song.add(player1DropDown);
 		tab_group_song.add(stageDropDown);
@@ -3399,13 +3453,13 @@ class ChartingState extends MusicBeatState
 		//make it look sexier if possible
 		try {
 			if (Difficulty.getString() != Difficulty.getDefault()) {
-				if(Difficulty.getString() == null){
+				if (Difficulty.getString() == null) {
 					PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
-				}else{
-					PlayState.SONG = Song.loadFromJson(song.toLowerCase() + "-" + Difficulty.getString(), song.toLowerCase());
+				} else {
+					PlayState.SONG = Song.loadFromJson(song.toLowerCase() + "-" + Difficulty.getString(), song.toLowerCase()); // Difficulty.getString()
 				}
 			}
-			else PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
+			else PlayState.SONG = Song.loadFromJson(song.toLowerCase() + postfix, song.toLowerCase());
 			MusicBeatState.resetState();
 		}
 		catch(e)
@@ -3460,13 +3514,13 @@ class ChartingState extends MusicBeatState
 		if ((data != null) && (data.length > 0))
 		{
 			#if mobile
-			StorageUtil.saveContent('${Paths.formatToSongPath(_song.song)}.json', data.trim());
+			StorageUtil.saveContent('${Paths.formatToSongPath(_song.song)}' + postfix + '.json', data.trim());
 			#else
 			_file = new FileReference();
 			_file.addEventListener(#if desktop Event.SELECT #else Event.COMPLETE #end, onSaveComplete);
 			_file.addEventListener(Event.CANCEL, onSaveCancel);
 			_file.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
-			_file.save(data.trim(), Paths.formatToSongPath(_song.song) + ".json");
+			_file.save(data.trim(), Paths.formatToSongPath(_song.song) + postfix + ".json");
 			#end
 		}
 	}

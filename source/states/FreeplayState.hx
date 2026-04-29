@@ -111,15 +111,12 @@ class FreeplayState extends MusicBeatState
 
 		for (i in 0...songs.length)
 		{
-			var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
-			// var songText:Alphabet = new Alphabet(0, 320, songs[i].songName, true);
-			songText.isMenuItem = true;
-			// songText.isMenuItemCentered = true;
+			// var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
+			var songText:Alphabet = new Alphabet(0, 320, songs[i].songName, true); // FlxG.width / 2
 			songText.targetY = i;
 			grpSongs.add(songText);
 
-			//songText.scaleX = Math.min(1, 980 / songText.width);
-			songText.screenCenter(X);
+			// songText.scaleX = Math.min(1, 980 / songText.width);
 			songText.snapToPosition();
 
 			Mods.currentModDirectory = songs[i].folder;
@@ -136,6 +133,7 @@ class FreeplayState extends MusicBeatState
 
 			// songText.x += 40;
 			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
+			// songText.screenCenter(X);
 		}
 		WeekData.setDirectoryFromWeek();
 
@@ -203,12 +201,6 @@ class FreeplayState extends MusicBeatState
 		
 		super.create();
 	}
-
-	/*inline function unselectableCheck(i:Int):Bool
-	{
-		if (i < 0 || i >= songs.length) return true;
-		return !Song.doesSongExist(Paths.formatToSongPath(songs[i].songName));
-	}*/
 
 	override function closeSubState() {
 		changeSelection(0, false);
@@ -660,7 +652,7 @@ class FreeplayState extends MusicBeatState
 		{
 			bullShit++;
 			item.alpha = 0.6;
-			if (item.targetY == curSelected)
+			if (item.targetY == curSelected) 
 				item.alpha = 1;
 		}
 		
@@ -698,7 +690,6 @@ class FreeplayState extends MusicBeatState
 
 	var _drawDistance:Int = 4;
 	var _lastVisibles:Array<Int> = [];
-
 	public function updateTexts(elapsed:Float = 0.0)
 	{
 		lerpSelected = FlxMath.lerp(curSelected, lerpSelected, Math.exp(-elapsed * 9.6));
@@ -715,9 +706,10 @@ class FreeplayState extends MusicBeatState
 		for (i in min...max)
 		{
 			var item:Alphabet = grpSongs.members[i];
+			item.screenCenter(X);
 			item.visible = item.active = true;
-			item.x = ((item.targetY - lerpSelected) * item.distancePerItem.x) + item.startPosition.x;
-			item.y = ((item.targetY - lerpSelected) * 1.7 * item.distancePerItem.y) + item.startPosition.y;
+			// item.x = ((item.targetY - lerpSelected) * item.distancePerItem.x) + item.startPosition.x;
+			item.y = ((item.targetY - lerpSelected) * 1.3 * item.distancePerItem.y) + item.startPosition.y;
 
 			var icon:HealthIcon = iconArray[i];
 			icon.visible = icon.active = true;
