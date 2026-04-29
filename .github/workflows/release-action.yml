@@ -16,12 +16,12 @@ jobs:
             os: windows-2022
             buildArgs: "windows -final -X64 -D HXCPP_X64"
             artifactName: Windows x64
-            artifactPath: export/release/windows/64bits/bin/*
+            artifactPath: export\release\windows\bin\*
           - name: Windows x32
             os: windows-2022
             buildArgs: "windows -final -X32 -D HXCPP_X32 -D 32bits"
             artifactName: Windows x32
-            artifactPath: export/release/windows/32bits/bin/*
+            artifactPath: export\32bit\windows\bin\*
           - name: Linux
             os: ubuntu-22.04
             buildArgs: "linux -final"
@@ -70,8 +70,8 @@ jobs:
       - name: Publish The Release
         uses: softprops/action-gh-release@v2
         with:
-          name: "9.6.6"
-          tag_name: "9.6.6"
+          name: "6.9.9"
+          tag_name: "6.9.9"
           make_latest: false
           files: |
             Windows x64.zip
