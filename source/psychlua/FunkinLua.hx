@@ -197,6 +197,7 @@ class FunkinLua {
 		set('noResetButton', ClientPrefs.data.noReset);
 		set('lowQuality', ClientPrefs.data.lowQuality);
 		set('shadersEnabled', ClientPrefs.data.shaders);
+		set('themes', ClientPrefs.data.themes);
 		set('scriptName', scriptName);
 		set('currentModDirectory', Mods.currentModDirectory);
 
