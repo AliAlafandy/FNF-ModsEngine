@@ -16,6 +16,7 @@ import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.ui.FlxUITabMenu;
 import flixel.addons.ui.FlxUIDropDownMenu;
 import flixel.addons.ui.FlxUIRadioGroup;
+import flixel.addons.ui.FlxUIInputText;
 
 import flixel.math.FlxRect;
 import flixel.util.FlxDestroyUtil;
@@ -1823,7 +1824,13 @@ class StageEditorState extends MusicBeatState
 		_file.addEventListener(Event.CANCEL, onLoadCancel);
 		_file.addEventListener(IOErrorEvent.IO_ERROR, onLoadError);
 
-		final filters = [new FileFilter('PNG (Image)', '*.png'), new FileFilter('XML (Sparrow)', '*.xml'), new FileFilter('JSON (Aseprite)', '*.json'), new FileFilter('TXT (Packer)', '*.txt')];
+		final filters = [
+			new FileFilter('PNG (Image)', '*.png'),
+			new FileFilter('XML (Sparrow)', '*.xml'),
+			new FileFilter('JSON (Aseprite)', '*.json'),
+			new FileFilter('TXT (Packer)', '*.txt')
+		];
+		
 		_file.browse(#if !mac filters #else [] #end);
 	}
 	
