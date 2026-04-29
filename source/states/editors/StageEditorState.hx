@@ -32,9 +32,7 @@ import openfl.events.IOErrorEvent;
 import substates.Prompt;
 import substates.PreloadListSubState;
 
-#if sys
 import flash.net.FileFilter;
-#end
 
 class StageEditorState extends MusicBeatState
 {
