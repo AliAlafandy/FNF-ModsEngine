@@ -14,6 +14,8 @@ import flixel.addons.display.FlxBackdrop;
 import flixel.addons.display.FlxGridOverlay;
 
 import flixel.addons.ui.FlxUITabMenu;
+import flixel.addons.ui.FlxUIDropDownMenu;
+import flixel.addons.ui.FlxUIRadioGroup;
 
 import flixel.math.FlxRect;
 import flixel.util.FlxDestroyUtil;
@@ -22,7 +24,6 @@ import openfl.utils.Assets;
 
 import openfl.display.Sprite;
 
-import openfl.net.FileFilter; // flash
 import openfl.net.FileReference;
 
 import openfl.events.Event;
@@ -30,6 +31,10 @@ import openfl.events.IOErrorEvent;
 
 import substates.Prompt;
 import substates.PreloadListSubState;
+
+#if sys
+import flash.net.FileFilter;
+#end
 
 class StageEditorState extends MusicBeatState
 {
