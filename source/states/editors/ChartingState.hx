@@ -210,7 +210,8 @@ class ChartingState extends MusicBeatState
 				player2: 'dad',
 				gfVersion: 'gf',
 				speed: 1,
-				stage: 'stage'
+				stage: 'stage',
+				format: 'Mods Engine v${states.MainMenuState.modsEngineVersion}'
 			};
 			addSection();
 			PlayState.SONG = _song;
@@ -3505,6 +3506,9 @@ class ChartingState extends MusicBeatState
 	private function saveLevel()
 	{
 		if(_song.events != null && _song.events.length > 1) _song.events.sort(sortByTime);
+		var formatChart:Dynamic = {
+			format: _song.format
+		};
 		var json = {
 			"song": _song
 		};
@@ -3535,6 +3539,9 @@ class ChartingState extends MusicBeatState
 		if(_song.events != null && _song.events.length > 1) _song.events.sort(sortByTime);
 		var eventsSong:Dynamic = {
 			events: _song.events
+		};
+		var formatChart:Dynamic = {
+			format: _song.format
 		};
 		var json = {
 			"song": eventsSong
