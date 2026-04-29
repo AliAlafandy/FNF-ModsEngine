@@ -39,8 +39,6 @@ import objects.HealthIcon;
 import objects.AttachedSprite;
 import objects.Character;
 
-import states.MainMenuState;
-
 import substates.Prompt;
 
 #if sys
