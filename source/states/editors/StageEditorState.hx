@@ -4,7 +4,9 @@ import backend.StageData;
 import backend.PsychCamera;
 
 import objects.Character;
+
 import psychlua.LuaUtils;
+import psychlua.ModchartSprite;
 
 import flixel.FlxObject;
 
@@ -20,13 +22,11 @@ import openfl.utils.Assets;
 
 import openfl.display.Sprite;
 
+import openfl.net.FileFilter; // flash
 import openfl.net.FileReference;
 
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
-
-import psychlua.ModchartSprite;
-import flash.net.FileFilter;
 
 import substates.Prompt;
 import substates.PreloadListSubState;
