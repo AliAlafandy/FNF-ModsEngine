@@ -38,6 +38,9 @@ import objects.NoteSplash;
 import objects.HealthIcon;
 import objects.AttachedSprite;
 import objects.Character;
+
+import states.MainMenuState;
+
 import substates.Prompt;
 
 #if sys
@@ -210,7 +213,8 @@ class ChartingState extends MusicBeatState
 				player2: 'dad',
 				gfVersion: 'gf',
 				speed: 1,
-				stage: 'stage'
+				stage: 'stage',
+				'format': 'Mods Engine v' + MainMenuState.modsEngineVersion
 			};
 			addSection();
 			PlayState.SONG = _song;
