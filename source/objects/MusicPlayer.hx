@@ -199,6 +199,7 @@ class MusicPlayer extends FlxGroup
 		}
 		updatePlaybackTxt();
 
+		#if mobile
 		if (instance.touchPad.buttonC.justPressed || instance.controls.RESET)
 		{
 			playbackRate = 1;
@@ -210,6 +211,19 @@ class MusicPlayer extends FlxGroup
 
 			updateTimeTxt();
 		}
+		#else
+		if (instance.controls.RESET)
+		{
+			playbackRate = 1;
+			setPlaybackRate();
+
+			FlxG.sound.music.time = 0;
+			if (FreeplayState.vocals != null)
+				FreeplayState.vocals.time = 0;
+
+			updateTimeTxt();
+		}
+		#end
 	}
 
 	public function pauseOrResume(resume:Bool = false) 
