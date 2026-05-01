@@ -158,7 +158,7 @@
 
 	<!-- Category Type for Android Systems -->
 	<android manifest="project/android/AndroidManifest.xml"/>
-	<!-- <config:android resizable="true" /> -->
+	<config:android resizable="true" />
 	<config:android resizableActivity="true" />
 
 	<!-- Category Type for Apple Systems -->
