@@ -157,9 +157,11 @@
 	<certificate path="key.keystore" password="psychengine" alias="psychport" alias-password="psychengine" if="android" unless="debug" />
 
 	<!-- Category Type for Android Systems -->
-	<android manifest="project/android/AndroidManifest.xml"/>
-	<config:android resizable="true" />
-	<config:android resizableActivity="true" />
+	<!-- <android manifest="project/android/AndroidManifest.xml"/> -->
+	<!-- <config:android resizable="true" /> -->
+	<!-- <config:android resizableActivity="true" /> -->
+	<!-- <android resizable="true" /> -->
+	<android resizableActivity="true" />
 
 	<!-- Category Type for Apple Systems -->
 	<config:ios category_type="public.app-category.music-games" />
