@@ -132,7 +132,7 @@ class CreditEditorState extends MusicBeatState
 
 		var tipTextArray:Array<String> = text.split('\n');
 		for (i in 0...tipTextArray.length) {
-			var tipText:FlxText = new FlxText(FlxG.game.x + 3, 73, 0, tipTextArray[i], 14); // 13, UI_box.x, UI_box.y + UI_box.height + 8
+			var tipText:FlxText = new FlxText(FlxG.game.x, 73, 0, tipTextArray[i], 14); // 13, UI_box.x, UI_box.y + UI_box.height + 8
 			tipText.y += i * 9;
 			tipText.setFormat("VCR OSD Mono", 14, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			tipText.borderSize = 1;
