@@ -5,7 +5,7 @@ import lime.utils.Assets;
 
 import backend.Section;
 
-import states.MainMenuState;
+// import states.MainMenuState;
 
 typedef SwagSong =
 {
@@ -31,7 +31,7 @@ typedef SwagSong =
 	@:optional var arrowSkin:String;
 	@:optional var splashSkin:String;
 
-	@:optional var format:String;
+	// @:optional var format:String;
 }
 
 class Song
@@ -53,7 +53,7 @@ class Song
 	public var player1:String = 'bf';
 	public var player2:String = 'dad';
 	public var gfVersion:String = 'gf';
-	public var format:String = 'Mods Engine v' + MainMenuState.modsEngineVersion;
+	// public var format:String = 'Mods Engine v' + MainMenuState.modsEngineVersion;
 
 	private static function onLoadJson(songJson:Dynamic) // Convert old charts to newest format
 	{
