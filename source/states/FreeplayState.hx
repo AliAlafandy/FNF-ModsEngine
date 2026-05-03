@@ -711,7 +711,7 @@ class FreeplayState extends MusicBeatState
 			// item.x = ((item.targetY - lerpSelected) * item.distancePerItem.x) + item.startPosition.x;
 			item.y = ((item.targetY - lerpSelected) * 1.3 * item.distancePerItem.y) + item.startPosition.y;
 
-			var icon:HealthIcon = iconArray[i];
+			var icon:HealthIcon = iconArray[i][0];
 			icon.visible = icon.active = true;
 			_lastVisibles.push(i);
 		}
