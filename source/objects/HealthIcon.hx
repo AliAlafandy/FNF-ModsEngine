@@ -53,6 +53,10 @@ class HealthIcon extends FlxSprite
 			} else if (width == 150) {
 				loadGraphic(file, true, Math.floor(width), Math.floor(height)); //Then load it fr // winning icons go br
 				iconOffsets[0] = (width - 150);
+			} else {
+				loadGraphic(file, true, Math.floor(width / 2), Math.floor(height)); //Then load it fr // winning icons go br
+				iconOffsets[0] = (width - 150) / 2;
+				iconOffsets[1] = (width - 150) / 2;
 			}
 			
 			updateHitbox();
@@ -63,6 +67,8 @@ class HealthIcon extends FlxSprite
 				animation.add(char, [0, 1], 0, false, isPlayer);
 			} else if (width2 == 150) {
 				animation.add(char, [0], 0, false, isPlayer);
+			} else {
+				animation.add(char, [0, 1], 0, false, isPlayer);
 			}
 
 			animation.play(char);
