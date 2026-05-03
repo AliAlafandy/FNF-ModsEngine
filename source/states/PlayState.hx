@@ -1990,6 +1990,11 @@ class PlayState extends MusicBeatState
 					iconP1.animation.curAnim.curFrame = 0;
 			case 1:
 				iconP1.animation.curAnim.curFrame = 0;
+			case 0:
+				if (healthBar.percent < 20)
+					iconP1.animation.curAnim.curFrame = 1;
+				else
+					iconP1.animation.curAnim.curFrame = 0;
 		}
 		switch(iconP2.animation.numFrames)
 		{
@@ -2007,6 +2012,11 @@ class PlayState extends MusicBeatState
 					iconP2.animation.curAnim.curFrame = 0;
 			case 1:
 				iconP2.animation.curAnim.curFrame = 0;
+			case 0:
+				if (healthBar.percent < 20)
+					iconP2.animation.curAnim.curFrame = 1;
+				else
+					iconP2.animation.curAnim.curFrame = 0;
 		}
 
 		/*iconP1.animation.curAnim.curFrame = (healthBar.percent < 20) ? 1 : 0; //If health is under 20%, change player icon to frame 1 (losing icon), otherwise, frame 0 (normal)
