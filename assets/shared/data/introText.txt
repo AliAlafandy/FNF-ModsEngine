@@ -2,11 +2,14 @@ alafandy--engine
 alsuh--engine
 a--slice
 bs--engine
+cdev--engine
+fps--plus
 fuck you--codename engine
 hello--player
 js--engine
 kade--engine
 mods--engine
+nightmare--vision
 novaflare--engine
 os--engine
 p--slice
@@ -14,6 +17,5 @@ play--engine
 psych--engine
 rebound--engine
 sb--engine
-sun--engine
 thanks for playing--this engine
 v--slice
