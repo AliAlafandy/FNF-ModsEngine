@@ -723,8 +723,8 @@ class FreeplayState extends MusicBeatState
 					icon.animation.curAnim.curFrame = 0;
 				case 1:
 					icon.animation.curAnim.curFrame = 0;
-				case 0:
-					icon.animation.curAnim.curFrame = 0;
+				/*case 0:
+					icon.animation.curAnim.curFrame = 0;*/
 			}
 		}
 	}
