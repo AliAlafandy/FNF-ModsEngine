@@ -57,9 +57,9 @@ class HealthIcon extends FlxSprite
 			
 			updateHitbox();
 			
-			if (width2 >= 450) {
+			if (width2 == 450) {
 				animation.add(char, [0, 1, 2], 0, false, isPlayer);
-			} else if (width2 <= 150) {
+			} else if (width2 == 150) {
 				animation.add(char, [0], 0, false, isPlayer);
 			} else {
 				animation.add(char, [0, 1], 0, false, isPlayer);
