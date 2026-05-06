@@ -717,14 +717,14 @@ class FreeplayState extends MusicBeatState
 
 			switch (icon.animation.numFrames)
 			{
+				case 4:
+					icon.animation.curAnim.curFrame = 0;
 				case 3:
 					icon.animation.curAnim.curFrame = 0;
 				case 2:
 					icon.animation.curAnim.curFrame = 0;
 				case 1:
 					icon.animation.curAnim.curFrame = 0;
-				/*case 0:
-					icon.animation.curAnim.curFrame = 0;*/
 			}
 		}
 	}
