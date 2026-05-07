@@ -54,7 +54,7 @@ class AchievementsMenuState extends MusicBeatState
 		menuBG.scrollFactor.set();
 		add(menuBG);
 
-		if (ClientPrefs.data.gridTitle == true)
+		if (ClientPrefs.data.gridTitle == 'On')
 		{
 			grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
 			grid.velocity.set(40, 40);
