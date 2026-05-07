@@ -17,7 +17,7 @@ class OutdatedState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
 
-		if (ClientPrefs.data.gridTitle == true)
+		if (ClientPrefs.data.gridTitle == 'On')
 		{
 			switch (ClientPrefs.data.themes) {
 				case 'Mods Engine':
