@@ -175,9 +175,10 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Grid Title',
-			"If checked, make the Title or Song Intro have Grid.",
+			"If checked, make States and Substates have Grid.",
 			'gridTitle',
-			'bool');
+			'string',
+			['On', 'Psych', 'Off']);
 		addOption(option);
 
 		super();
