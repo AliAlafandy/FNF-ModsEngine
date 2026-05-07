@@ -2,12 +2,18 @@ package states;
 
 import flixel.FlxObject;
 import flixel.util.FlxSort;
+
+import flixel.addons.display.FlxBackdrop;
+import flixel.addons.display.FlxGridOverlay;
+
 import objects.Bar;
 
 #if ACHIEVEMENTS_ALLOWED
 class AchievementsMenuState extends MusicBeatState
 {
 	public var curSelected:Int = 0;
+
+	public var grid:FlxBackdrop;
 
 	public var options:Array<Dynamic> = [];
 	public var grpOptions:FlxSpriteGroup;
@@ -47,6 +53,15 @@ class AchievementsMenuState extends MusicBeatState
 		menuBG.screenCenter();
 		menuBG.scrollFactor.set();
 		add(menuBG);
+
+		if (ClientPrefs.data.gridTitle == true)
+		{
+			grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+			grid.velocity.set(40, 40);
+			grid.alpha = 0;
+			FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+			add(grid);
+		}
 
 		grpOptions = new FlxSpriteGroup();
 		grpOptions.scrollFactor.x = 0;
