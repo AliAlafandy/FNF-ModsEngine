@@ -52,7 +52,7 @@ class MasterEditorMenu extends MusicBeatState
 		
 		add(bg);
 
-		if (ClientPrefs.data.gridTitle == true)
+		if (ClientPrefs.data.gridTitle == 'On')
 		{
 			switch (ClientPrefs.data.themes) {
 				case 'Mods Engine':
