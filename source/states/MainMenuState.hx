@@ -86,7 +86,7 @@ class MainMenuState extends MusicBeatState
 		
 		add(magenta);
 
-		if (ClientPrefs.data.gridTitle == true)
+		if (ClientPrefs.data.gridTitle == 'On')
 		{
 			var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
 			grid.velocity.set(40, 40);
