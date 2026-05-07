@@ -1,8 +1,13 @@
 package states;
 
+import flixel.addons.display.FlxBackdrop;
+import flixel.addons.display.FlxGridOverlay;
+
 class OutdatedState extends MusicBeatState
 {
 	public static var leftState:Bool = false;
+
+	public var grid:FlxBackdrop;
 
 	var warnText:FlxText;
 	override function create()
@@ -11,6 +16,25 @@ class OutdatedState extends MusicBeatState
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
+
+		if (ClientPrefs.data.gridTitle == true)
+		{
+			switch (ClientPrefs.data.themes) {
+				case 'Mods Engine':
+					grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
+					grid.velocity.set(40, 40);
+					grid.alpha = 0;
+					FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+					add(grid);
+			
+				case 'Psych Engine':
+					grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+					grid.velocity.set(40, 40);
+					grid.alpha = 0;
+					FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+					add(grid);
+			}
+		}
 
 		var guh:String;
 
