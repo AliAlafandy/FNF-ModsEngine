@@ -100,7 +100,7 @@ class FreeplayState extends MusicBeatState
 		bg.screenCenter();
 		add(bg);
 
-		if (ClientPrefs.data.gridTitle == true)
+		if (ClientPrefs.data.gridTitle == 'On')
 		{
 			grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
 			grid.velocity.set(40, 40);
@@ -439,7 +439,7 @@ class FreeplayState extends MusicBeatState
 				return;
 			}
 
-			if((FlxG.keys.pressed.SHIFT || touchPad.buttonZ.pressed || touchPad.buttonZ.justPressed) && !player.playingMusic) {
+			if((FlxG.keys.pressed.SHIFT || FlxG.keys.justPressed.SHIFT || touchPad.buttonZ.pressed || touchPad.buttonZ.justPressed) && !player.playingMusic) {
 				LoadingState.loadAndSwitchState(new ChartingState());
 			} else {
 				LoadingState.loadAndSwitchState(new PlayState());
@@ -550,7 +550,7 @@ class FreeplayState extends MusicBeatState
 				return;
 			}
 
-			if(FlxG.keys.pressed.SHIFT && !player.playingMusic) {
+			if((FlxG.keys.pressed.SHIFT || FlxG.keys.justPressed.SHIFT) && !player.playingMusic) {
 				LoadingState.loadAndSwitchState(new ChartingState());
 			} else {
 				LoadingState.loadAndSwitchState(new PlayState());
