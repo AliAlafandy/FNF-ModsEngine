@@ -28,7 +28,7 @@ class FlashingState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
 
-		if (ClientPrefs.data.gridTitle == 'On')
+		if (ClientPrefs.data.lowQuality == false)
 		{
 			switch (ClientPrefs.data.themes) {
 				case 'Mods Engine':
@@ -38,7 +38,7 @@ class FlashingState extends MusicBeatState
 					FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
 					add(grid);
 			
-				case 'Psych Engine':
+				case 'Vanilla (Normal)':
 					grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
 					grid.velocity.set(40, 40);
 					grid.alpha = 0;
