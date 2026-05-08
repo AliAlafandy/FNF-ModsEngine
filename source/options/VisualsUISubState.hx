@@ -171,14 +171,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		    'Change theme from different engines.\nThis option will work after close Options, for less lag!',
 			'themes',
 		    'string',
-			['Mods Engine', 'Psych Engine']);
-		addOption(option);
-
-		var option:Option = new Option('Grid Title',
-			"If checked, make States and Substates have Grid.",
-			'gridTitle',
-			'string',
-			['On', 'Psych', 'Off']);
+			['Mods Engine', 'Vanilla (Normal)']);
 		addOption(option);
 
 		super();
