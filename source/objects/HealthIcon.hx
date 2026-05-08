@@ -41,14 +41,14 @@ class HealthIcon extends FlxSprite
 
 			loadGraphic(file); //Load stupidly first for getting the file size
 			var width2 = width;
-			if (width >= 450) {
+			if (width == 450) {
 				loadGraphic(file, true, Math.floor(width / 3), Math.floor(height)); //Then load it fr // winning icons go br
 				iconOffsets[0] = (width - 150) / 3;
 				iconOffsets[1] = (width - 150) / 3;
 				iconOffsets[2] = (width - 150) / 3;
-			} else if (width <= 150) {
-				loadGraphic(file, true, Math.floor(width), Math.floor(height)); //Then load it fr // winning icons go br
-				iconOffsets[0] = (width - 150);
+			} else if (width == 150) {
+				loadGraphic(file, true, Math.floor(width / 1), Math.floor(height)); //Then load it fr // winning icons go br
+				iconOffsets[0] = (width - 150) / 1;
 			} else {
 				loadGraphic(file, true, Math.floor(width / 2), Math.floor(height)); //Then load it fr // winning icons go br
 				iconOffsets[0] = (width - 150) / 2;
