@@ -220,7 +220,7 @@ class TitleState extends MusicBeatState
 		// bg.updateHitbox();
 		add(bg);
 
-		if (ClientPrefs.data.lowQuality == false)
+		/*if (ClientPrefs.data.lowQuality == false)
 		{
 			switch (ClientPrefs.data.themes) {
 				case 'Mods Engine':
@@ -237,7 +237,7 @@ class TitleState extends MusicBeatState
 					FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
 					add(grid);
 			}
-		}
+		}*/
 
 		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
