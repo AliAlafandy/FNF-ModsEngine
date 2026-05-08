@@ -106,7 +106,7 @@ class EditorPlayState extends MusicBeatSubstate
 		{
 			switch (ClientPrefs.data.themes) {
 				case 'Mods Engine':
-					bg.color = 0xFF000080;
+					bg.color = 0xFF008080;
 			
 				case 'Psych Engine':
 					bg.color = 0xFF101010;
