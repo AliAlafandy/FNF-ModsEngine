@@ -186,7 +186,7 @@ class FunkinLua {
 		set('ghostTapping', ClientPrefs.data.ghostTapping);
 		set('botplayName', ClientPrefs.data.botplayName);
 		set('hideHud', ClientPrefs.data.hideHud);
-		set('timebarType', ClientPrefs.data.timeBarType);
+		set('timeBarType', ClientPrefs.data.timeBarType);
 		set('hudColor', ClientPrefs.data.hudColor);
 		set('iconBops', ClientPrefs.data.iconBops);
 		set('scoreZoom', ClientPrefs.data.scoreZoom);
