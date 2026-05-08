@@ -80,7 +80,7 @@ class MainMenuState extends MusicBeatState
 			case 'Mods Engine':
 				magenta.color = 0xFF000080;
 			
-			case 'Psych Engine':
+			case 'Vanilla (Normal)':
 				magenta.color = 0xFFFD719B;
 		}
 		
