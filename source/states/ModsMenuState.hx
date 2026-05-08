@@ -81,7 +81,7 @@ class ModsMenuState extends MusicBeatState
 			case 'Mods Engine':
 				bg.color = 0xFF0000AF;
 			
-			case 'Psych Engine':
+			case 'Vanilla (Normal)':
 				bg.color = 0xFF665AFF;
 		}
 		
