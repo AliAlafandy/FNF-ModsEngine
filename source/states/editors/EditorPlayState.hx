@@ -101,18 +101,7 @@ class EditorPlayState extends MusicBeatSubstate
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		bg.scrollFactor.set();
-
-		if (ClientPrefs.data.gridTitle == true)
-		{
-			switch (ClientPrefs.data.themes) {
-				case 'Mods Engine':
-					bg.color = 0xFF008080;
-			
-				case 'Vanilla (Normal)':
-					bg.color = 0xFF101010;
-			}
-		}
-		
+		bg.color = 0xFF101010;
 		bg.alpha = 0.9;
 		add(bg);
 
