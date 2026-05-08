@@ -7,8 +7,6 @@ class OutdatedState extends MusicBeatState
 {
 	public static var leftState:Bool = false;
 
-	public var grid:FlxBackdrop;
-
 	var warnText:FlxText;
 	override function create()
 	{
