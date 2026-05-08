@@ -13,8 +13,6 @@ class FlashingState extends MusicBeatState
 {
 	public static var leftState:Bool = false;
 
-	public var grid:FlxBackdrop;
-
 	#if mobile
 	var warnTextMobile:FlxText;
 	#else
