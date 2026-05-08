@@ -101,27 +101,28 @@ class EditorPlayState extends MusicBeatSubstate
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		bg.scrollFactor.set();
-		bg.color = 0xFF101010;
+
+		if (ClientPrefs.data.gridTitle == true)
+		{
+			switch (ClientPrefs.data.themes) {
+				case 'Mods Engine':
+					bg.color = 0xFF000080;
+			
+				case 'Psych Engine':
+					bg.color = 0xFF101010;
+			}
+		}
+		
 		bg.alpha = 0.9;
 		add(bg);
 
 		if (ClientPrefs.data.lowQuality == false)
 		{
-			switch (ClientPrefs.data.themes) {
-				case 'Mods Engine':
-					var grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
-					grid.velocity.set(40, 40);
-					grid.alpha = 0;
-					FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-					add(grid);
-			
-				case 'Vanilla (Normal)':
-					var grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
-					grid.velocity.set(40, 40);
-					grid.alpha = 0;
-					FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-					add(grid);
-			}
+			var grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+			grid.velocity.set(40, 40);
+			grid.alpha = 0;
+			FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+			add(grid);
 		}
 		
 		/**** NOTES ****/
