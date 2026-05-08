@@ -91,7 +91,7 @@ class PauseSubState extends MusicBeatSubstate
 		bg.scrollFactor.set();
 		add(bg);
 
-		if (ClientPrefs.data.gridTitle == 'On')
+		if (ClientPrefs.data.lowQuality == false)
 		{
 			var grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
 			grid.velocity.set(40, 40);
