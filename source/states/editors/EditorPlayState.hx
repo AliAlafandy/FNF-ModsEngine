@@ -108,7 +108,7 @@ class EditorPlayState extends MusicBeatSubstate
 				case 'Mods Engine':
 					bg.color = 0xFF008080;
 			
-				case 'Psych Engine':
+				case 'Vanilla (Normal)':
 					bg.color = 0xFF101010;
 			}
 		}
