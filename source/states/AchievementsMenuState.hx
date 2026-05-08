@@ -13,8 +13,6 @@ class AchievementsMenuState extends MusicBeatState
 {
 	public var curSelected:Int = 0;
 
-	public var grid:FlxBackdrop;
-
 	public var options:Array<Dynamic> = [];
 	public var grpOptions:FlxSpriteGroup;
 	public var nameText:FlxText;
@@ -56,7 +54,7 @@ class AchievementsMenuState extends MusicBeatState
 
 		if (ClientPrefs.data.lowQuality == false)
 		{
-			grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+			var grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
 			grid.velocity.set(40, 40);
 			grid.scrollFactor.set(0, 0);
 			grid.alpha = 0;
