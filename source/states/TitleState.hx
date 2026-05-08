@@ -220,7 +220,7 @@ class TitleState extends MusicBeatState
 		// bg.updateHitbox();
 		add(bg);
 
-		if (ClientPrefs.data.gridTitle == 'On')
+		if (ClientPrefs.data.lowQuality == false)
 		{
 			switch (ClientPrefs.data.themes) {
 				case 'Mods Engine':
