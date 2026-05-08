@@ -246,6 +246,7 @@ class ChartingState extends MusicBeatState
 				case 'Mods Engine':
 					grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
 					grid.velocity.set(40, 40);
+					grid.scrollFactor.set(0, 0);
 					grid.alpha = 0;
 					FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
 					add(grid);
@@ -253,6 +254,7 @@ class ChartingState extends MusicBeatState
 				case 'Vanilla (Normal)':
 					grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
 					grid.velocity.set(40, 40);
+					grid.scrollFactor.set(0, 0);
 					grid.alpha = 0;
 					FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
 					add(grid);
