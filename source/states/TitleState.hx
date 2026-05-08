@@ -46,8 +46,6 @@ class TitleState extends MusicBeatState
 
 	public static var checkingToastMessage:Bool = false;
 
-	public var grid:FlxBackdrop;
-
 	var blackScreen:FlxSprite;
 	var credGroup:FlxGroup;
 	var credTextShit:Alphabet;
@@ -224,14 +222,14 @@ class TitleState extends MusicBeatState
 		{
 			switch (ClientPrefs.data.themes) {
 				case 'Mods Engine':
-					grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
+					var grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
 					grid.velocity.set(40, 40);
 					grid.alpha = 0;
 					FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
 					add(grid);
 			
 				case 'Vanilla (Normal)':
-					grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+					var grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
 					grid.velocity.set(40, 40);
 					grid.alpha = 0;
 					FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
