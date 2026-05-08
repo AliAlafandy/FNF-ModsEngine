@@ -93,7 +93,7 @@ class FPSCounter extends TextField
 			case 'Mods Engine':
 				textColor = 0xFF0000FF;
 			
-			case 'Psych Engine':
+			case 'Vanilla (Normal)':
 				textColor = 0xFFFFFFFF;
 		}
 		
