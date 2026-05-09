@@ -11,8 +11,8 @@
 - Old: https://youtube.com/channel/UClK5uzYLZDUZmbI6O56J-QA
 - New: https://youtube.com/@alialafandy
 ## Discord:
-- Old: @Ali Alafandy#2135
-- New: @alialafandy
+- Old: ```@Ali Alafandy#2135```
+- New: ```@alialafandy```
 ## Gamebanana:
 - https://gamebanana.com/members/2237967
 ## Github:
