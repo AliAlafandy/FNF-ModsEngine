@@ -220,6 +220,7 @@ class TitleState extends MusicBeatState
 		add(bg);
 
 		if (titleJSON.gridTitle == true)
+		{
 			if (ClientPrefs.data.lowQuality == false)
 			{
 				switch (ClientPrefs.data.themes) {
