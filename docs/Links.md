@@ -2,7 +2,7 @@
 ## Discord:
 - https://discord.com/invite/c9sUbkRDKA
 ## Gamebanana:
-- https://gamebanana.com/
+- https://gamebanana.com/tools/22710
 ## Github:
 - https://github.com/AliAlafandy/FNF-ModsEngine/
 
