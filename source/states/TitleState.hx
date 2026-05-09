@@ -33,7 +33,8 @@ typedef TitleData =
 	gfx:Float,
 	gfy:Float,
 	backgroundSprite:String,
-	bpm:Float
+	bpm:Float,
+	gridTitle:Bool
 }
 
 class TitleState extends MusicBeatState
@@ -218,24 +219,26 @@ class TitleState extends MusicBeatState
 		// bg.updateHitbox();
 		add(bg);
 
-		/*if (ClientPrefs.data.lowQuality == false)
-		{
-			switch (ClientPrefs.data.themes) {
-				case 'Mods Engine':
-					var grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
-					grid.velocity.set(40, 40);
-					grid.alpha = 0;
-					FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-					add(grid);
+		if (titleJSON.gridTitle == true)
+			if (ClientPrefs.data.lowQuality == false)
+			{
+				switch (ClientPrefs.data.themes) {
+					case 'Mods Engine':
+						var grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
+						grid.velocity.set(40, 40);
+						grid.alpha = 0;
+						FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+						add(grid);
 			
-				case 'Vanilla (Normal)':
-					var grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
-					grid.velocity.set(40, 40);
-					grid.alpha = 0;
-					FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-					add(grid);
+					case 'Vanilla (Normal)':
+						var grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+						grid.velocity.set(40, 40);
+						grid.alpha = 0;
+						FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+						add(grid);
+				}
 			}
-		}*/
+		}
 
 		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
