@@ -2268,6 +2268,12 @@ class PlayState extends MusicBeatState
 						if(Math.isNaN(charType)) charType = 0;
 				}
 
+				switch(ClientPrefs.data.hudColor)
+					case 'Time Bar Only':
+						reloadTimeBarColor();
+					case 'On':
+						reloadHUDColors();
+
 				switch(charType) {
 					case 0:
 						if(boyfriend.curCharacter != value2) {
@@ -2322,13 +2328,7 @@ class PlayState extends MusicBeatState
 							setOnScripts('gfName', gf.curCharacter);
 						}
 				}
-
 				reloadHealthBarColors();
-				switch (ClientPrefs.data.hudColor)
-					case 'Time Bar Only':
-						reloadTimeBarColor();
-					case 'On':
-						reloadHUDColors();
 
 			case 'Change Scroll Speed':
 				if (songSpeedType != "constant")
