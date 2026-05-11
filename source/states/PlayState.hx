@@ -2268,11 +2268,12 @@ class PlayState extends MusicBeatState
 						if(Math.isNaN(charType)) charType = 0;
 				}
 
-				switch(ClientPrefs.data.hudColor)
-					case 'Time Bar Only':
-						reloadTimeBarColor();
-					case 'On':
-						reloadHUDColors();
+				if (ClientPrefs.data.hudColor == 'Time Bar Only')
+				{
+					reloadTimeBarColor();
+				} else if (ClientPrefs.data.hudColor == 'On') {
+					reloadHUDColors();
+				}
 
 				switch(charType) {
 					case 0:
