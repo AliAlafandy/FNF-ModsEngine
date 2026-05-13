@@ -2268,13 +2268,6 @@ class PlayState extends MusicBeatState
 						if(Math.isNaN(charType)) charType = 0;
 				}
 
-				if (ClientPrefs.data.hudColor == 'Time Bar Only')
-				{
-					reloadTimeBarColor();
-				} else if (ClientPrefs.data.hudColor == 'On') {
-					reloadHUDColors();
-				}
-
 				switch(charType) {
 					case 0:
 						if(boyfriend.curCharacter != value2) {
@@ -2309,6 +2302,13 @@ class PlayState extends MusicBeatState
 							}
 							dad.alpha = lastAlpha;
 							iconP2.changeIcon(dad.healthIcon);
+
+							if (ClientPrefs.data.hudColor == 'Time Bar Only')
+							{
+								reloadTimeBarColor();
+							} else if (ClientPrefs.data.hudColor == 'On') {
+								reloadHUDColors();
+							}
 						}
 						setOnScripts('dadName', dad.curCharacter);
 
