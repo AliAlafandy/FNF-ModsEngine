@@ -66,12 +66,14 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 
+		#if mobile
 		var option:Option = new Option('Game Over Vibration',
 			"If checked, your device will vibrate at game over.",
 			'gameOverVibration',
 			'bool');
 		addOption(option);
 		option.onChange = onChangeVibration;
+		#end
 
 		var option:Option = new Option('Hitsound Volume',
 			'Funny notes does \"Tick!\" when you hit them.',
