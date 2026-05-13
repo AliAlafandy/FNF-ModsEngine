@@ -703,12 +703,14 @@ class PlayState extends MusicBeatState
 		#if android
 		if (ClientPrefs.data.pauseButton == true) {
 			addTouchPad("NONE", "PAUSE");
+			removeTouchPad("NONE", "P");
 			// touchPad.pauseButton.color = 0xFFF1F1F1;
 		} else {
 			addTouchPad("NONE", "NONE");
 		}
 		#else
 		addTouchPad("NONE", "PAUSE");
+		removeTouchPad("NONE", "P");
 		// touchPad.pauseButton.color = 0xFFF1F1F1;
 		#end
  		addTouchPadCamera();
