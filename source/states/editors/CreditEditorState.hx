@@ -336,9 +336,9 @@ class CreditEditorState extends MusicBeatState
 		for (i in 0...creditsStuff.length)
 		{
 			var isSelectable:Bool = !unselectableCheck(i);
-			var optionText:Alphabet = new Alphabet(0, 300, creditsStuff[i][0], !isSelectable); // FlxG.width /2
-			optionText.isMenuItemCentered = true; // isMenuItem
-			optionText.targetY = i - curSelected;
+			var optionText:Alphabet = new Alphabet(FlxG.width / 2, 300, creditsStuff[i][0], !isSelectable);
+			optionText.isMenuItem = true;
+			optionText.targetY = i - curSelected; // i
 
 			optionText.ID = i;
 			optionText.changeX = false;
@@ -677,7 +677,8 @@ class CreditEditorState extends MusicBeatState
 		{
 			if (!item.bold)
 			{
-				item.x = 200;
+				item.screenCenter(X);
+				// item.x = 200;
 			}
 		}
 		super.update(elapsed);
