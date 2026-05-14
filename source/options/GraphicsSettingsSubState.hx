@@ -111,6 +111,6 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 	{
 		super.changeSelection(change);
 		boyfriend.visible = (antialiasingOption == curSelected);
-		BaseOptionsMenu.grid.visible = !(antialiasingOption == curSelected);
+		grid.visible = !(antialiasingOption == curSelected);
 	}
 }
