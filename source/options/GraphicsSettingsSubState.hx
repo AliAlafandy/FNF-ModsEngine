@@ -1,6 +1,7 @@
 package options;
 
 import objects.Character;
+import options.BaseOptionsMenu;
 
 class GraphicsSettingsSubState extends BaseOptionsMenu
 {
@@ -99,6 +100,6 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 	{
 		super.changeSelection(change);
 		boyfriend.visible = (antialiasingOption == curSelected);
-		grid.visible = !(antialiasingOption == curSelected);
+		BaseOptionsMenu.grid.visible = !(antialiasingOption == curSelected);
 	}
 }
