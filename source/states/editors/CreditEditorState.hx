@@ -677,7 +677,7 @@ class CreditEditorState extends MusicBeatState
 		{
 			if (!item.bold)
 			{
-				item.x = 200;
+				// item.x = 200;
 
 				var lerpVal:Float = Math.exp(-elapsed * 12);
 				if(item.targetY == 0)
@@ -686,7 +686,7 @@ class CreditEditorState extends MusicBeatState
 					item.screenCenter(X);
 					item.x = FlxMath.lerp(item.x - 70, lastX, lerpVal);
 				} else {
-					item.x = FlxMath.lerp(200 + -40 * Math.abs(item.targetY), item.x, lerpVal);
+					item.x = FlxMath.lerp(300 + -40 * Math.abs(item.targetY), item.x, lerpVal); // 200
 				}
 			}
 		}
