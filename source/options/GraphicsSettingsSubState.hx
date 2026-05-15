@@ -15,7 +15,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		boyfriend.setGraphicSize(Std.int(boyfriend.width * 0.75));
 		boyfriend.updateHitbox();
 		boyfriend.dance();
-		boyfriend.ID = 1;
+		boyfriend.ID = 3;
 		boyfriend.animation.finishCallback = function (name:String) boyfriend.dance();
 		boyfriend.visible = false;
 
