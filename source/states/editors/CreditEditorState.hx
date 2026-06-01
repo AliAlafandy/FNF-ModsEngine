@@ -61,8 +61,6 @@ class CreditEditorState extends MusicBeatState
 
 	override function create()
 	{
-		FlxG.sound.playMusic(Paths.music('offsetSong'), 0.5);
-		
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 		
@@ -519,11 +517,6 @@ class CreditEditorState extends MusicBeatState
 	var holdTime:Float = 0;
 	override function update(elapsed:Float)
 	{
-		if (FlxG.sound.music.volume < 0.7)
-		{
-			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
-		}
-
 		var blockInput:Bool = false;
 		for (inputText in blockPressWhileTypingOn) {
 			if(inputText.hasFocus) {
