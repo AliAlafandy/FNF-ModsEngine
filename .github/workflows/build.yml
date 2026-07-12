@@ -37,9 +37,16 @@ jobs:
         with:
           haxe-version: ${{ env.HAXE_VERSION }}
 
+      - name: Update APT
+        if: inputs.name == 'Linux'
+        run: |
+          sudo apt-get clean
+          sudo rm -rf /var/lib/apt/lists/*
+          sudo apt-get update --fix-missing
+
       - name: Install libVLC
         if: inputs.name == 'Linux'
-        run: sudo apt install libvlc-dev libvlccore-dev
+        run: sudo apt-get install -y libvlc-dev libvlccore-dev
 
       - name: Setup XCode
         if: inputs.name == 'iOS'
