@@ -46,23 +46,23 @@ class HealthIcon extends FlxSprite
 				iconOffsets[0] = (width - 150) / 3;
 				iconOffsets[1] = (width - 150) / 3;
 				iconOffsets[2] = (width - 150) / 3;
-			} else if (width == 300) {
+			} else if (width == 150) {
+				loadGraphic(file, true, Math.floor(width / 1), Math.floor(height)); //Then load it fr // winning icons go br
+				iconOffsets[0] = (width - 150) / 1;
+			} else {
 				loadGraphic(file, true, Math.floor(width / 2), Math.floor(height)); //Then load it fr // winning icons go br
 				iconOffsets[0] = (width - 150) / 2;
 				iconOffsets[1] = (width - 150) / 2;
-			} else if (width == 150) {
-				loadGraphic(file, true, Math.floor(width), Math.floor(height)); //Then load it fr // winning icons go br
-				iconOffsets[0] = (width - 150);
 			}
 			
 			updateHitbox();
 			
 			if (width2 == 450) {
 				animation.add(char, [0, 1, 2], 0, false, isPlayer);
-			} else if (width2 == 300) {
-				animation.add(char, [0, 1], 0, false, isPlayer);
 			} else if (width2 == 150) {
 				animation.add(char, [0], 0, false, isPlayer);
+			} else {
+				animation.add(char, [0, 1], 0, false, isPlayer);
 			}
 
 			animation.play(char);

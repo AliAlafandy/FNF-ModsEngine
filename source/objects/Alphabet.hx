@@ -179,7 +179,7 @@ class Alphabet extends FlxSpriteGroup
 			if(changeX)
 				this.screenCenter(X);
 				// this.alignment = CENTERED;
-				// x = FlxG.width / 2
+				// x = FlxG.width / 2;
 			if(changeY)
 				y = FlxMath.lerp((targetY * 1.3 * distancePerItem.y) + startPosition.y, y, lerpVal);
 		}
@@ -202,7 +202,7 @@ class Alphabet extends FlxSpriteGroup
 			if(changeX)
 				this.screenCenter(X);
 				// this.alignment = CENTERED;
-				// x = FlxG.width / 2
+				// x = FlxG.width / 2;
 			if(changeY)
 				y = (targetY * 1.3 * distancePerItem.y) + startPosition.y;
 		}

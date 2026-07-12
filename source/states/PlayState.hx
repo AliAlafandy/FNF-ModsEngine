@@ -703,13 +703,15 @@ class PlayState extends MusicBeatState
 		#if android
 		if (ClientPrefs.data.pauseButton == true) {
 			addTouchPad("NONE", "PAUSE");
-			touchPad.buttonP.color = 0xFFF1F1F1;
+			// removeTouchPad("NONE", "P");
+			// touchPad.pauseButton.color = 0xFFF1F1F1;
 		} else {
 			addTouchPad("NONE", "NONE");
 		}
 		#else
 		addTouchPad("NONE", "PAUSE");
-		touchPad.buttonP.color = 0xFFF1F1F1;
+		// removeTouchPad("NONE", "P");
+		// touchPad.pauseButton.color = 0xFFF1F1F1;
 		#end
  		addTouchPadCamera();
 		#end
@@ -1991,7 +1993,7 @@ class PlayState extends MusicBeatState
 			case 1:
 				iconP1.animation.curAnim.curFrame = 0;
 		}
-		switch(iconP2.animation.numFrames)
+		switch (iconP2.animation.numFrames)
 		{
 			case 3:
 				if (healthBar.percent > 80)
@@ -2302,6 +2304,13 @@ class PlayState extends MusicBeatState
 							}
 							dad.alpha = lastAlpha;
 							iconP2.changeIcon(dad.healthIcon);
+
+							if (ClientPrefs.data.hudColor == 'Time Bar Only')
+							{
+								reloadTimeBarColor();
+							} else if (ClientPrefs.data.hudColor == 'On') {
+								reloadHUDColors();
+							}
 						}
 						setOnScripts('dadName', dad.curCharacter);
 

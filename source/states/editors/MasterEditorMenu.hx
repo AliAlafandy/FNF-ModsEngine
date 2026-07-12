@@ -30,8 +30,6 @@ class MasterEditorMenu extends MusicBeatState
 	private var curDirectory = 0;
 	private var directoryTxt:FlxText;
 
-	public var grid:FlxBackdrop;
-
 	override function create()
 	{
 		FlxG.camera.bgColor = FlxColor.BLACK;
@@ -47,24 +45,20 @@ class MasterEditorMenu extends MusicBeatState
 			case 'Mods Engine':
 				bg.color = 0xFF000035;
 			
-			case 'Psych Engine':
+			case 'Vanilla (Normal)':
 				bg.color = 0xFF353535;
 		}
 		
 		add(bg);
 
-		switch (ClientPrefs.data.themes) {
-			case 'Mods Engine':
-				grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
-			
-			case 'Psych Engine':
-				grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+		if (ClientPrefs.data.lowQuality == false)
+		{
+			var grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+			grid.velocity.set(40, 40);
+			grid.alpha = 0;
+			FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+			add(grid);
 		}
-		
-		grid.velocity.set(40, 40);
-		grid.alpha = 0;
-		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-		add(grid);
 
 		grpTexts = new FlxTypedGroup<Alphabet>();
 		add(grpTexts);

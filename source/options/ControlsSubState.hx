@@ -94,11 +94,14 @@ class ControlsSubState extends MusicBeatSubstate
 		bg.screenCenter();
 		add(bg);
 
-		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
-		grid.velocity.set(40, 40);
-		grid.alpha = 0;
-		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-		add(grid);
+		if (ClientPrefs.data.lowQuality == false)
+		{
+			var grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+			grid.velocity.set(40, 40);
+			grid.alpha = 0;
+			FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+			add(grid);
+		}
 
 		grpDisplay = new FlxTypedGroup<Alphabet>();
 		add(grpDisplay);
@@ -656,7 +659,7 @@ class ControlsSubState extends MusicBeatSubstate
 			case 'Mods Engine':
 				colorTween = FlxTween.color(bg, 0.5, bg.color, onKeyboardMode ? modsGamepadColor : modsKeyboardColor, {ease: FlxEase.linear});
 
-			case 'Psych Engine':
+			case 'Vanilla (Normal)':
 				colorTween = FlxTween.color(bg, 0.5, bg.color, onKeyboardMode ? psychGamepadColor : psychKeyboardColor, {ease: FlxEase.linear});
 		}
 

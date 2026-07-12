@@ -1,10 +1,13 @@
 package states;
 
 import flixel.FlxSubState;
-
 import flixel.effects.FlxFlicker;
+
 import lime.app.Application;
+
 import flixel.addons.transition.FlxTransitionableState;
+import flixel.addons.display.FlxBackdrop;
+import flixel.addons.display.FlxGridOverlay;
 
 class FlashingState extends MusicBeatState
 {
@@ -22,6 +25,15 @@ class FlashingState extends MusicBeatState
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
+
+		if (ClientPrefs.data.lowQuality == false)
+		{
+			var grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+			grid.velocity.set(40, 40);
+			grid.alpha = 0;
+			FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+			add(grid);
+		}
 
 		#if mobile
 		var guhMobile:String = "Hey, watch out!\n

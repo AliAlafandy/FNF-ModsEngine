@@ -211,8 +211,8 @@ class ChartingState extends MusicBeatState
 				player2: 'dad',
 				gfVersion: 'gf',
 				speed: 1,
-				stage: 'stage',
-				format: 'Mods Engine v${states.MainMenuState.modsEngineVersion}'
+				stage: 'stage'
+				// , format: 'Mods Engine v${states.MainMenuState.modsEngineVersion}'
 			};
 			addSection();
 			PlayState.SONG = _song;
@@ -235,24 +235,21 @@ class ChartingState extends MusicBeatState
 			case 'Mods Engine':
 				bg.color = 0xFF000022;
 			
-			case 'Psych Engine':
+			case 'Vanilla (Normal)':
 				bg.color = 0xFF222222;
 		}
 		
 		add(bg);
 
-		switch (ClientPrefs.data.themes) {
-			case 'Mods Engine':
-				grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
-			
-			case 'Psych Engine':
-				grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+		if (ClientPrefs.data.lowQuality == false)
+		{
+			grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+			grid.velocity.set(40, 40);
+			grid.scrollFactor.set(0, 0);
+			grid.alpha = 0;
+			FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+			add(grid);
 		}
-
-		grid.velocity.set(40, 40);
-		grid.alpha = 0;
-		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-		add(grid);
 
 		gridLayer = new FlxTypedGroup<FlxSprite>();
 		add(gridLayer);
@@ -3507,9 +3504,9 @@ class ChartingState extends MusicBeatState
 	private function saveLevel()
 	{
 		if(_song.events != null && _song.events.length > 1) _song.events.sort(sortByTime);
-		var formatChart:Dynamic = {
+		/*var formatChart:Dynamic = {
 			format: _song.format
-		};
+		};*/
 		var json = {
 			"song": _song
 		};
@@ -3541,9 +3538,9 @@ class ChartingState extends MusicBeatState
 		var eventsSong:Dynamic = {
 			events: _song.events
 		};
-		var formatChart:Dynamic = {
+		/*var formatChart:Dynamic = {
 			format: _song.format
-		};
+		};*/
 		var json = {
 			"song": eventsSong
 		}

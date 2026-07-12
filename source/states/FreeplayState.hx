@@ -44,8 +44,6 @@ class FreeplayState extends MusicBeatState
 	var intendedColor:Int;
 	var colorTween:FlxTween;
 
-	var grid:FlxBackdrop;
-
 	var missingTextBG:FlxSprite;
 	var missingText:FlxText;
 
@@ -100,11 +98,14 @@ class FreeplayState extends MusicBeatState
 		bg.screenCenter();
 		add(bg);
 
-		grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
-		grid.velocity.set(40, 40);
-		grid.alpha = 0;
-		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-		add(grid);
+		if (ClientPrefs.data.lowQuality == false)
+		{
+			var grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+			grid.velocity.set(40, 40);
+			grid.alpha = 0;
+			FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+			add(grid);
+		}
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
@@ -436,7 +437,7 @@ class FreeplayState extends MusicBeatState
 				return;
 			}
 
-			if((FlxG.keys.pressed.SHIFT || touchPad.buttonZ.pressed || touchPad.buttonZ.justPressed) && !player.playingMusic) {
+			if((FlxG.keys.pressed.SHIFT || FlxG.keys.justPressed.SHIFT || touchPad.buttonZ.pressed || touchPad.buttonZ.justPressed) && !player.playingMusic) {
 				LoadingState.loadAndSwitchState(new ChartingState());
 			} else {
 				LoadingState.loadAndSwitchState(new PlayState());
@@ -547,7 +548,7 @@ class FreeplayState extends MusicBeatState
 				return;
 			}
 
-			if(FlxG.keys.pressed.SHIFT && !player.playingMusic) {
+			if((FlxG.keys.pressed.SHIFT || FlxG.keys.justPressed.SHIFT) && !player.playingMusic) {
 				LoadingState.loadAndSwitchState(new ChartingState());
 			} else {
 				LoadingState.loadAndSwitchState(new PlayState());
@@ -714,6 +715,16 @@ class FreeplayState extends MusicBeatState
 			var icon:HealthIcon = iconArray[i];
 			icon.visible = icon.active = true;
 			_lastVisibles.push(i);
+
+			switch (icon.animation.numFrames)
+			{
+				case 3:
+					icon.animation.curAnim.curFrame = 0;
+				case 2:
+					icon.animation.curAnim.curFrame = 0;
+				case 1:
+					icon.animation.curAnim.curFrame = 0;
+			}
 		}
 	}
 

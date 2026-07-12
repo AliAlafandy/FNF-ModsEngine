@@ -49,7 +49,6 @@ class CreditEditorState extends MusicBeatState
 	public var camOther:FlxCamera;
 
 	var bg:FlxSprite;
-	var grid:FlxBackdrop;
 	var descText:FlxText;
 	var intendedColor:Int;
 	var colorTween:FlxTween;
@@ -62,8 +61,6 @@ class CreditEditorState extends MusicBeatState
 
 	override function create()
 	{
-		FlxG.sound.playMusic(Paths.music('offsetSong'), 0.5);
-		
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 		
@@ -77,11 +74,14 @@ class CreditEditorState extends MusicBeatState
 		add(bg);
 		bg.screenCenter();
 
-		grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
-		grid.velocity.set(40, 40);
-		grid.alpha = 0;
-		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-		add(grid);
+		if (ClientPrefs.data.lowQuality == false)
+		{
+			var grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+			grid.velocity.set(40, 40);
+			grid.alpha = 0;
+			FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+			add(grid);
+		}
 		
 		FlxG.mouse.visible = true;
 		
@@ -336,7 +336,7 @@ class CreditEditorState extends MusicBeatState
 			var isSelectable:Bool = !unselectableCheck(i);
 			var optionText:Alphabet = new Alphabet(FlxG.width / 2, 300, creditsStuff[i][0], !isSelectable);
 			optionText.isMenuItem = true;
-			optionText.targetY = i - curSelected;
+			optionText.targetY = i - curSelected; // i
 
 			optionText.ID = i;
 			optionText.changeX = false;
@@ -517,11 +517,6 @@ class CreditEditorState extends MusicBeatState
 	var holdTime:Float = 0;
 	override function update(elapsed:Float)
 	{
-		if (FlxG.sound.music.volume < 0.7)
-		{
-			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
-		}
-
 		var blockInput:Bool = false;
 		for (inputText in blockPressWhileTypingOn) {
 			if(inputText.hasFocus) {
@@ -675,7 +670,17 @@ class CreditEditorState extends MusicBeatState
 		{
 			if (!item.bold)
 			{
-				item.x = 200;
+				// item.x = 200;
+
+				var lerpVal:Float = Math.exp(-elapsed * 12);
+				if(item.targetY == 0)
+				{
+					var lastX:Float = item.x;
+					item.screenCenter(X);
+					item.x = FlxMath.lerp(item.x - 70, lastX, lerpVal);
+				} else {
+					item.x = FlxMath.lerp(300 + -40 * Math.abs(item.targetY), item.x, lerpVal); // 200
+				}
 			}
 		}
 		super.update(elapsed);

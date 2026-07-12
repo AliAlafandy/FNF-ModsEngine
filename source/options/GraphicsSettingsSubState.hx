@@ -15,6 +15,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		boyfriend.setGraphicSize(Std.int(boyfriend.width * 0.75));
 		boyfriend.updateHitbox();
 		boyfriend.dance();
+		boyfriend.ID = 3;
 		boyfriend.animation.finishCallback = function (name:String) boyfriend.dance();
 		boyfriend.visible = false;
 
@@ -98,6 +99,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 	override function changeSelection(change:Int = 0)
 	{
 		super.changeSelection(change);
-		boyfriend.visible = (antialiasingOption == curSelected);
+		// boyfriend.visible = (antialiasingOption == curSelected);
+		// grid.visible = !(antialiasingOption == curSelected);
 	}
 }

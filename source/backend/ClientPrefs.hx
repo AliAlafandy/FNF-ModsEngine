@@ -67,7 +67,6 @@ import states.TitleState;
 	public var checkForUpdates:Bool = true;
 	public var comboStacking:Bool = true;
 	public var themes:String = 'Mods Engine';
-	public var gridTitle:Bool = false;
 	
 	public var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,

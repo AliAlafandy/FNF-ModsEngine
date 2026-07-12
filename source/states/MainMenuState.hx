@@ -80,17 +80,21 @@ class MainMenuState extends MusicBeatState
 			case 'Mods Engine':
 				magenta.color = 0xFF000080;
 			
-			case 'Psych Engine':
+			case 'Vanilla (Normal)':
 				magenta.color = 0xFFFD719B;
 		}
 		
 		add(magenta);
 
-		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
-		grid.velocity.set(40, 40);
-		grid.alpha = 0;
-		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-		add(grid);
+		if (ClientPrefs.data.lowQuality == false)
+		{
+			var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+			grid.velocity.set(40, 40);
+			grid.scrollFactor.set(0, 0);
+			grid.alpha = 0;
+			FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+			add(grid);
+		}
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);

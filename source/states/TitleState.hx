@@ -33,7 +33,8 @@ typedef TitleData =
 	gfx:Float,
 	gfy:Float,
 	backgroundSprite:String,
-	bpm:Float
+	bpm:Float,
+	gridTitle:Bool
 }
 
 class TitleState extends MusicBeatState
@@ -45,8 +46,6 @@ class TitleState extends MusicBeatState
 	public static var initialized:Bool = false;
 
 	public static var checkingToastMessage:Bool = false;
-
-	public var grid:FlxBackdrop;
 
 	var blackScreen:FlxSprite;
 	var credGroup:FlxGroup;
@@ -220,22 +219,27 @@ class TitleState extends MusicBeatState
 		// bg.updateHitbox();
 		add(bg);
 
-		if (ClientPrefs.data.gridTitle == true)
+		if (titleJSON.gridTitle == true)
 		{
-			switch (ClientPrefs.data.themes) {
-				case 'Mods Engine':
-					grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
-					grid.velocity.set(40, 40);
-					grid.alpha = 0;
-					FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-					add(grid);
+			var grid:FlxBackdrop;
 			
-				case 'Psych Engine':
-					grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
-					grid.velocity.set(40, 40);
-					grid.alpha = 0;
-					FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-					add(grid);
+			if (ClientPrefs.data.lowQuality == false)
+			{
+				switch (ClientPrefs.data.themes) {
+					case 'Mods Engine':
+						grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x330000FF, 0x0));
+						grid.velocity.set(40, 40);
+						grid.alpha = 0;
+						FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+						add(grid);
+			
+					case 'Vanilla (Normal)':
+						grid = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+						grid.velocity.set(40, 40);
+						grid.alpha = 0;
+						FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+						add(grid);
+				}
 			}
 		}
 
