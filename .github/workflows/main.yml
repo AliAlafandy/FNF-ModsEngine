@@ -32,12 +32,12 @@ jobs:
           - name: Android x64
             os: macos-15
             buildArgs: "android -ONLY_ARM64"
-            artifactName: Android
+            artifactName: Android x64
             artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
           - name: Android x32
             os: macos-15
             buildArgs: "android -ONLY_ARMV7"
-            artifactName: Android
+            artifactName: Android x32
             artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
           - name: iOS
             os: macos-15
