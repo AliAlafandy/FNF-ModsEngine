@@ -18,12 +18,12 @@ jobs:
             os: windows-2022
             buildArgs: "windows -final -X64 -D HXCPP_X64 -D 64bits"
             artifactName: Windows x64
-            artifactPath: export/release/windows/64bits/bin/*
+            artifactPath: export\release\windows\bin\*
           - name: Windows x32
             os: windows-2022
             buildArgs: "windows -final -X32 -D HXCPP_X32 -D 32bits"
             artifactName: Windows x32
-            artifactPath: export/release/windows/32bits/bin/*
+            artifactPath: export\32bit\windows\bin\*
           - name: Linux
             os: ubuntu-22.04
             buildArgs: "linux -final"
@@ -34,10 +34,15 @@ jobs:
             buildArgs: "mac -final"
             artifactName: MacOS
             artifactPath: export/release/macos/bin/*
-          - name: Android
+          - name: Android x64
             os: macos-15
-            buildArgs: "android -final -D officialBuild"
-            artifactName: Android
+            buildArgs: "android -final -ONLY_ARM64"
+            artifactName: Android x64
+            artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
+          - name: Android x32
+            os: macos-15
+            buildArgs: "android -final -ONLY_ARMV7"
+            artifactName: Android x32
             artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
           - name: iOS
             os: macos-15
@@ -101,14 +106,23 @@ jobs:
           cd /home/runner/MacOS
           tar czf "/home/runner/${{ env.PROJECT_NAME }}-MacOS.tar" .
 
-      - name: Download Android Build
+      - name: Download Android x64 Build
         uses: actions/download-artifact@main
         with:
-          name: Android
+          name: Android x64
           path: /home/runner
 
-      - name: Move Android File
-        run: mv /home/runner/${{ env.PROJECT_NAME }}-release.apk /home/runner/${{ env.PROJECT_NAME }}-Android.apk
+      - name: Move Android x64 File
+        run: mv /home/runner/${{ env.PROJECT_NAME }}-release.apk /home/runner/${{ env.PROJECT_NAME }}-Android-x64.apk
+
+      - name: Download Android x32 Build
+        uses: actions/download-artifact@main
+        with:
+          name: Android x32
+          path: /home/runner
+
+      - name: Move Android x32 File
+        run: mv /home/runner/${{ env.PROJECT_NAME }}-release.apk /home/runner/${{ env.PROJECT_NAME }}-Android-x32.apk
 
       - name: Download iOS Build
         uses: actions/download-artifact@main
@@ -125,8 +139,8 @@ jobs:
       - name: Publish The Release
         uses: softprops/action-gh-release@v2
         with:
-          name: "9.6.6"
-          tag_name: "9.6.6"
+          name: "6.9.9"
+          tag_name: "6.9.9"
           last_release: false
           files: |
             /home/runner/*.apk
