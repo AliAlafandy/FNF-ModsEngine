@@ -22,7 +22,6 @@ on:
 env:
   HAXE_VERSION: 4.3.2
   PROJECT_NAME: ModsEngine
-  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
 jobs:
   build:
@@ -37,9 +36,11 @@ jobs:
         with:
           haxe-version: ${{ env.HAXE_VERSION }}
 
-      - name: Install libVLC
+      - name: Install VLC Libraries
         if: inputs.name == 'Linux'
-        run: sudo apt install libvlc-dev libvlccore-dev
+        run: |
+          sudo apt update
+          sudo apt install -y libvlc-dev libvlccore-dev
 
       - name: Setup XCode
         if: inputs.name == 'iOS'
