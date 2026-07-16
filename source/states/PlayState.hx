@@ -1623,19 +1623,48 @@ class PlayState extends MusicBeatState
 					//babyArrow.y -= 10;
 					babyArrow.alpha = 0;
 					FlxTween.tween(babyArrow, {/*y: babyArrow.y + 10,*/ alpha: targetAlpha}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
-				}
-				else
+				} else {
 					babyArrow.alpha = targetAlpha;
+				}
 
-				if (player == 1)
-					babyArrow.x = FlxG.width / 2 - 220 + (i * 110);
-					babyArrow.y = FlxG.height - 180;
-					playerStrums.add(babyArrow);
-				else
-				{
-					babyArrow.x = 40 + (i * 110);
-					babyArrow.y = 40;
-					opponentStrums.add(babyArrow);
+				if (player == 1) {
+					if (ClientPrefs.data.middleScroll) {
+						babyArrow.x = FlxG.width / 2 - 220 + (i * 110);
+						babyArrow.y = FlxG.height - 180;
+						playerStrums.add(babyArrow);
+					} else {
+						babyArrow.x = FlxG.width / 2 - 220 + (i * 110);
+						babyArrow.y = FlxG.height - 180;
+						playerStrums.add(babyArrow);
+					}
+					if (ClientPrefs.data.downScroll) {
+						babyArrow.x = FlxG.width / 2 - 220 + (i * 110);
+						babyArrow.y = FlxG.height - 180;
+						playerStrums.add(babyArrow);
+					} else {
+						babyArrow.x = FlxG.width / 2 - 220 + (i * 110);
+						babyArrow.y = FlxG.height - 180;
+						playerStrums.add(babyArrow);
+					}
+				} else {
+					if (ClientPrefs.data.middleScroll) {
+						babyArrow.x = 40 + (i * 110);
+						babyArrow.y = 40;
+						opponentStrums.add(babyArrow);
+					} else {
+						babyArrow.x = 40 + (i * 110);
+						babyArrow.y = 40;
+						opponentStrums.add(babyArrow);
+					}
+					if (ClientPrefs.data.downScroll) {
+						babyArrow.x = 40 + (i * 110);
+						babyArrow.y = 40;
+						opponentStrums.add(babyArrow);
+					} else {
+						babyArrow.x = 40 + (i * 110);
+						babyArrow.y = 40;
+						opponentStrums.add(babyArrow);
+					}
 				}
 
 				strumLineNotes.add(babyArrow);
@@ -1656,14 +1685,13 @@ class PlayState extends MusicBeatState
 					//babyArrow.y -= 10;
 					babyArrow.alpha = 0;
 					FlxTween.tween(babyArrow, {/*y: babyArrow.y + 10,*/ alpha: targetAlpha}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
-				}
-				else
+				} else {
 					babyArrow.alpha = targetAlpha;
+				}
 
-				if (player == 1)
+				if (player == 1) {
 					playerStrums.add(babyArrow);
-				else
-				{
+				} else {
 					if(ClientPrefs.data.middleScroll)
 					{
 						babyArrow.x += 310;
@@ -1698,14 +1726,13 @@ class PlayState extends MusicBeatState
 				//babyArrow.y -= 10;
 				babyArrow.alpha = 0;
 				FlxTween.tween(babyArrow, {/*y: babyArrow.y + 10,*/ alpha: targetAlpha}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
-			}
-			else
+			} else {
 				babyArrow.alpha = targetAlpha;
+			}
 
-			if (player == 1)
+			if (player == 1) {
 				playerStrums.add(babyArrow);
-			else
-			{
+			} else {
 				if(ClientPrefs.data.middleScroll)
 				{
 					babyArrow.x += 310;
