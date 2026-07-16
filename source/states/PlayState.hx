@@ -64,6 +64,10 @@ import psychlua.HScript;
 import tea.SScript;
 #end
 
+#if mobile
+import mobile.substates.MobileControlSelectSubState;
+#end
+
 /**
  * This is where all the Gameplay stuff happens and is managed
  *
@@ -1597,6 +1601,84 @@ class PlayState extends MusicBeatState
 	public var skipArrowStartTween:Bool = false; //for lua
 	private function generateStaticArrows(player:Int):Void
 	{
+		#if mobile
+		var strumLineX:Float = ClientPrefs.data.middleScroll ? STRUM_X_MIDDLESCROLL : STRUM_X;
+		var strumLineY:Float = ClientPrefs.data.downScroll ? (FlxG.height - 150) : 50;
+		for (i in 0...4)
+		{
+			if (MobileControlSelectSubState.options == 'Official')
+			{
+				// FlxG.log.add(i);
+				var targetAlpha:Float = 1;
+				if (player < 1)
+				{
+					if(!ClientPrefs.data.opponentStrums) targetAlpha = 0;
+					// else if(ClientPrefs.data.middleScroll) targetAlpha = 0.35;
+				}
+
+				var babyArrow:StrumNote = new StrumNote(strumLineX, strumLineY, i, player);
+				babyArrow.downScroll = ClientPrefs.data.downScroll;
+				if (!isStoryMode && !skipArrowStartTween)
+				{
+					//babyArrow.y -= 10;
+					babyArrow.alpha = 0;
+					FlxTween.tween(babyArrow, {/*y: babyArrow.y + 10,*/ alpha: targetAlpha}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
+				}
+				else
+					babyArrow.alpha = targetAlpha;
+
+				if (player == 1)
+					babyArrow.x = FlxG.width / 2 - 220 + (i * 110);
+					babyArrow.y = FlxG.height - 180;
+					playerStrums.add(babyArrow);
+				else
+				{
+					babyArrow.x = 40 + (i * 110);
+					babyArrow.y = 40;
+					opponentStrums.add(babyArrow);
+				}
+
+				strumLineNotes.add(babyArrow);
+				babyArrow.postAddedToGroup();
+			} else {
+				// FlxG.log.add(i);
+				var targetAlpha:Float = 1;
+				if (player < 1)
+				{
+					if(!ClientPrefs.data.opponentStrums) targetAlpha = 0;
+					else if(ClientPrefs.data.middleScroll) targetAlpha = 0.35;
+				}
+
+				var babyArrow:StrumNote = new StrumNote(strumLineX, strumLineY, i, player);
+				babyArrow.downScroll = ClientPrefs.data.downScroll;
+				if (!isStoryMode && !skipArrowStartTween)
+				{
+					//babyArrow.y -= 10;
+					babyArrow.alpha = 0;
+					FlxTween.tween(babyArrow, {/*y: babyArrow.y + 10,*/ alpha: targetAlpha}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
+				}
+				else
+					babyArrow.alpha = targetAlpha;
+
+				if (player == 1)
+					playerStrums.add(babyArrow);
+				else
+				{
+					if(ClientPrefs.data.middleScroll)
+					{
+						babyArrow.x += 310;
+						if(i > 1) { //Up and Right
+							babyArrow.x += FlxG.width / 2 + 25;
+						}
+					}
+					opponentStrums.add(babyArrow);
+				}
+
+				strumLineNotes.add(babyArrow);
+				babyArrow.postAddedToGroup();
+			}
+		}
+		#else
 		var strumLineX:Float = ClientPrefs.data.middleScroll ? STRUM_X_MIDDLESCROLL : STRUM_X;
 		var strumLineY:Float = ClientPrefs.data.downScroll ? (FlxG.height - 150) : 50;
 		for (i in 0...4)
@@ -1637,6 +1719,7 @@ class PlayState extends MusicBeatState
 			strumLineNotes.add(babyArrow);
 			babyArrow.postAddedToGroup();
 		}
+		#end
 	}
 
 	override function openSubState(SubState:FlxSubState)
