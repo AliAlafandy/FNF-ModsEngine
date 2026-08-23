@@ -692,6 +692,13 @@ class Paths
 					folderOrImg = Paths.image('$originalPath/spritemap$st');
 					break;
 				}
+				else if(Paths.fileExists('images/$originalPath/spritemap$st.astc', BINARY))
+				{
+					//trace('found Sprite ASTC');
+					changedImage = true;
+					folderOrImg = Paths.image('$originalPath/spritemap$st');
+					break;
+				}
 			}
 
 			if(!changedImage)
