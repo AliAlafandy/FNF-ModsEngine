@@ -36,6 +36,28 @@ jobs:
         with:
           haxe-version: ${{ env.HAXE_VERSION }}
 
+      - name: Restore existing build cache for faster compilation
+        uses: actions/cache@v4
+        with:
+          # not caching the bin folder to prevent asset duplication and stuff like that
+          key: cache-build-${{ inputs.name }}
+          path: |
+            ~/.gradle
+            .haxelib/
+            /home/runner/haxelib/
+            /Users/runner/haxelib/
+            C:/hostedtoolcache/windows/haxe/4.3.7/x64/lib/
+            ~/.haxelib/
+            export/release/android/haxe/
+            export/release/android/obj/
+            export/release/ios/${{ env.PROJECT_NAME }}/haxe/
+            export/release/ios/${{ env.PROJECT_NAME }}/obj/
+            export\release\windows\haxe\
+            export\release\windows\obj\
+            .haxelib\
+          restore-keys: |
+            cache-build-${{ inputs.name }}
+
       - name: Update APT
         if: inputs.name == 'Linux'
         run: |
@@ -97,3 +119,46 @@ jobs:
           name: ${{ inputs.artifactName }}
           path: ${{ inputs.artifactPath }}
           if-no-files-found: error
+
+      - name: Clearing already existing cache
+        if: inputs.name == 'iOS'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const caches = await github.rest.actions.getActionsCacheList({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            })
+            for (const cache of caches.data.actions_caches) {
+              if (cache.key == "cache-build-${{ inputs.name }}") {
+                console.log('Clearing ' + cache.key + '...')
+                await github.rest.actions.deleteActionsCacheById({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  cache_id: cache.id,
+                })
+                console.log("Cache cleared.")
+              }
+            }
+
+      - name: Uploading new cache
+        uses: actions/cache@v4
+        with:
+          # caching again since for some reason it doesnt work with the first post cache shit
+          key: cache-build-${{ inputs.name }}
+          path: |
+            ~/.gradle
+            .haxelib/
+            /home/runner/haxelib/
+            /Users/runner/haxelib/
+            C:/hostedtoolcache/windows/haxe/4.3.7/x64/lib/
+            ~/.haxelib/
+            export/release/android/haxe/
+            export/release/android/obj/
+            export/release/ios/${{ env.PROJECT_NAME }}/haxe/
+            export/release/ios/${{ env.PROJECT_NAME }}/obj/
+            export\release\windows\haxe\
+            export\release\windows\obj\
+            .haxelib\
+          restore-keys: |
+            cache-build-${{ inputs.name }}

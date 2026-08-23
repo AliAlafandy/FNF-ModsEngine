@@ -1,9 +1,7 @@
 name: Release
 on: workflow_dispatch
 
-permissions:
-  contents: write
-  discussions: write
+permissions: write-all
 
 env:
   PROJECT_NAME: ModsEngine
@@ -104,6 +102,7 @@ jobs:
         with:
           name: "release : 6.9.9"
           tag_name: "release-TEST"
+          prerelease: true
           make_latest: false
           files: |
             /home/runner/*-png.apk
