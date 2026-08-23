@@ -39,8 +39,8 @@ import android.os.BatteryManager as AndroidBatteryManager;
 #end
 
 #if sys
-import sys.*;
-import sys.io.*;
+import funk.ModsEngineFileSystem as FileSystem;
+import funk.ModsEngineFile as File;
 #elseif js
 import js.html.*;
 #end

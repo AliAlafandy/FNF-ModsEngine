@@ -25,6 +25,7 @@ package mobile.backend;
 import lime.system.System as LimeSystem;
 import haxe.io.Path;
 import haxe.Exception;
+import sys.io.*;
 
 /**
  * A storage class for mobile.
