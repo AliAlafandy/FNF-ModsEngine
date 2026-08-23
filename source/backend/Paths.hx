@@ -528,15 +528,11 @@ class Paths
 	}
 
 	inline static public function modsImages(key:String) {
-		var astcCheck:String = modFolders('images/' + key + '.astc');
-		var ddsCheck:String = modFolders('images/' + key + '.dds');
-		if (FileSystem.exists(astcCheck)) {
-			return astcCheck;
-		}
-		else if (FileSystem.exists(ddsCheck)) {
-			return ddsCheck;
-		}
-		return modFolders('images/' + key + '.png');
+    var astcCheck:String = modFolders('images/' + key + '.astc');
+    var ddsCheck:String = modFolders('images/' + key + '.dds');
+    
+    return FileSystem.exists(astcCheck) ? astcCheck : 
+           (FileSystem.exists(ddsCheck) ? ddsCheck : modFolders('images/' + key + '.png'));
 	}
 
 	inline static public function modsXml(key:String) {
