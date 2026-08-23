@@ -63,9 +63,7 @@
 	<!-- Assets -->
 	<haxedef name="USING_GPU_TEXTURES" />
 
-    <section if="mobile">
-        <assets path="assets/secrets/images-astc" rename="assets/images" />
-        <assets path="assets/secrets" rename="assets/shared" exclude="*.mp3|images-png|images-astc" />
+    <section if="USING_GPU_TEXTURES">
         
         <assets path="assets/exclude/images-astc" rename="assets/images" />
         <assets path="assets/exclude" rename="assets/shared" exclude="*.mp3|images-png|images-astc" />
@@ -76,11 +74,7 @@
         </section>
     </section>
 
-    <section unless="mobile">
-        <assets path="assets/secrets/images-png" rename="assets/images" />
-        <assets path="assets/secrets" rename="assets/shared" exclude="*.mp3|images-png|images-astc" unless="web" />
-        <assets path="assets/secrets" rename="assets/shared" exclude="*.ogg|images-png|images-astc" if="web" />
-        
+    <section unless="USING_GPU_TEXTURES">        
         <assets path="assets/exclude/images-png" rename="assets/images" />
         <assets path="assets/exclude" rename="assets/shared" exclude="*.mp3|images-png|images-astc" unless="web" />
         <assets path="assets/exclude" rename="assets/shared" exclude="*.ogg|images-png|images-astc" if="web" />
@@ -124,10 +118,12 @@
     <assets path="assets/songs"  library="songs"  exclude="*.ogg" if="web"/>
     <assets path="assets/songs"  library="songs"  exclude="*.mp3" unless="web"/>
     
-    <section if="mobile">
+    <section if="USING_GPU_TEXTURES">
         <assets path="assets/shared/images-astc" rename="assets/shared/images" library="shared" />
 		<assets path="assets/shared/mobile/images-astc" rename="assets/shared/mobile/images" />
         <assets path="assets/shared/mobile" rename="assets/shared/mobile" exclude="*.mp3|images-png|images-astc" />
+		<assets path="assets/shared/music" exclude="*.mp3|images-png|images-astc" />
+		<assets path="assets/shared/sounds" exclude="*.mp3|images-png|images-astc" />
 		<assets path="assets/shared" library="shared" exclude="*.mp3|images-png|images-astc" />
 
         <assets path="assets/week_assets/week2/images-astc" rename="assets/week_assets/week2/images" library="week2" />
@@ -149,11 +145,13 @@
         <assets path="assets/week_assets/week7" rename="assets/week_assets/week7" library="week7" exclude="*.mp3|images-png|images-astc" />
     </section>
 
-    <section unless="mobile">
+    <section unless="USING_GPU_TEXTURES">
         <assets path="assets/shared/images-png" rename="assets/shared/images" library="shared" />
 		<assets path="assets/shared/mobile/images-png" rename="assets/shared/mobile/images" />
         <assets path="assets/shared/mobile" rename="assets/shared/mobile" exclude="*.mp3|images-png|images-astc" unless="web" />
         <assets path="assets/shared/mobile" rename="assets/shared/mobile" exclude="*.ogg|images-png|images-astc" if="web" />
+		<assets path="assets/shared/music" exclude="*.mp3|images-png|images-astc" />
+		<assets path="assets/shared/sounds" exclude="*.mp3|images-png|images-astc" />
 		<assets path="assets/shared" library="shared" exclude="*.mp3|images-png|images-astc" unless="web" />
         <assets path="assets/shared" library="shared" exclude="*.ogg|images-png|images-astc" if="web" />
 
@@ -178,7 +176,7 @@
         <assets path="assets/week_assets/week6" rename="assets/week_assets/week6" library="week6" exclude="*.ogg|images-png|images-astc" if="web" />
 
         <assets path="assets/week_assets/week7/images-png" rename="assets/week_assets/week7/images" library="week7" />
-        <assets path="assets/week_assets/week7" rename="assets/week_asssets/week7" library="week7" exclude="*.mp3|images-png|images-astc" unless="web" />
+        <assets path="assets/week_assets/week7" rename="assets/week_assets/week7" library="week7" exclude="*.mp3|images-png|images-astc" unless="web" />
         <assets path="assets/week_assets/week7" rename="assets/week_assets/week7" library="week7" exclude="*.ogg|images-png|images-astc" if="web" />
     </section>
 
