@@ -350,7 +350,7 @@ class CreditEditorState extends MusicBeatState
 				}
 
 				var icon:AttachedSprite;
-				if(Paths.fileExists('images/credits/' + creditsStuff[i][1] + '.png', IMAGE)  || 'images/credits/' + creditsStuff[i][1] + '.astc', BINARY))
+				if(Paths.fileExists('images/credits/' + creditsStuff[i][1] + '.png', IMAGE)  || Paths.fileExists('images/credits/' + creditsStuff[i][1] + '.astc', BINARY))
 					icon = new AttachedSprite('credits/' + creditsStuff[i][1]);
 				else {
 					icon = new AttachedSprite('credits/missing_icon'); // If icon didnt load it will load the unknow icon.
