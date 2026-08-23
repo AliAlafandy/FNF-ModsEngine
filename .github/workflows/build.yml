@@ -62,7 +62,7 @@ jobs:
       - name: hxvlc For ios
         if: (inputs.name == 'iOS-PNG' || inputs.name == 'iOS-ASTC' || inputs.name == 'iOS')
         run: |
-          haxelib remove hxCoded
+          haxelib remove hxCodec
           haxelib install hxvlc --quiet
 
       - name: Configure Android x64
