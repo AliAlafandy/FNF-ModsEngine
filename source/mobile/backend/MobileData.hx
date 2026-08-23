@@ -28,6 +28,11 @@ import haxe.io.Path;
 import openfl.utils.Assets;
 import flixel.util.FlxSave;
 
+#if sys
+import funk.ModsEngineFileSystem as FileSystem;
+import funk.ModsEngineFile as File;
+#end
+
 /**
  * ...
  * @author: Karim Akra

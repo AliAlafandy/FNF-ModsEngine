@@ -1,5 +1,10 @@
 package backend;
 
+#if sys
+import funk.ModsEngineFileSystem as FileSystem;
+import funk.ModsEngineFile as File;
+#end
+
 class Highscore
 {
 	public static var weekScores:Map<String, Int> = new Map();

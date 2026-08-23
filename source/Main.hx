@@ -70,6 +70,7 @@ class Main extends Sprite
 		Sys.setCwd(StorageUtil.getStorageDirectory());
 		#end
 		backend.CrashHandler.init();
+		MobileData.init();
 
 		#if windows
 		@:functionCode("

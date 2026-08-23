@@ -17,6 +17,11 @@ import flash.media.Sound;
 
 import haxe.Json;
 
+#if sys
+import funk.ModsEngineFileSystem as FileSystem;
+import funk.ModsEngineFile as File;
+#end
+
 
 #if MODS_ALLOWED
 import backend.Mods;

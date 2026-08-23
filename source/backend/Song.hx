@@ -5,6 +5,11 @@ import lime.utils.Assets;
 
 import backend.Section;
 
+#if sys
+import funk.ModsEngineFileSystem as FileSystem;
+import funk.ModsEngineFile as File;
+#end
+
 // import states.MainMenuState;
 
 typedef SwagSong =
