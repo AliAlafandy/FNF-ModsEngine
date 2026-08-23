@@ -14,7 +14,7 @@ import openfl.Lib;
 
 	ASTCTexture cannot be instantiated directly. Create instances by using Context3D
 	`createASTCTexture()` method.
-**/
+*/
 #if !openfl_debug
 @:fileXml('tags="haxe,release"')
 @:noDebug

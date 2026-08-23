@@ -921,7 +921,7 @@ import lime.math.Vector2;
 		3 to render the image after the 8x8 pixel image loads.
 
 		**Note:** Setting this property to a value > 0 can impact memory usage and
-		performance.
+		performance...
 
 		@return	A new Texture object
 		@throws	Error	Object Disposed: if this Context3D object has been disposed by a calling dispose() or because the underlying rendering hardware has been lost.
