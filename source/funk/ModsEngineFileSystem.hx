@@ -1,7 +1,7 @@
 package funk;
 
 import openfl.Assets;
-import mobile.StorageUtil;
+import mobile.backend.StorageUtil;
 #if sys
 import sys.FileSystem;
 import sys.FileStat;
