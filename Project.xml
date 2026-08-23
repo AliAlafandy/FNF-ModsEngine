@@ -126,10 +126,9 @@
     
     <section if="mobile">
         <assets path="assets/shared/images-astc" rename="assets/shared/images" library="shared" />
-        <assets path="assets/shared" library="shared" exclude="*.mp3|images-png|images-astc" />
-
 		<assets path="assets/shared/mobile/images-astc" rename="assets/shared/mobile/images" />
         <assets path="assets/shared/mobile" rename="assets/shared/mobile" exclude="*.mp3|images-png|images-astc" />
+		<assets path="assets/shared" library="shared" exclude="*.mp3|images-png|images-astc" />
 
         <assets path="assets/week_assets/week2/images-astc" rename="assets/week_assets/week2/images" library="week2" />
         <assets path="assets/week_assets/week2" rename="assets/week_assets/week2" library="week2" exclude="*.mp3|images-png|images-astc" />
@@ -152,12 +151,11 @@
 
     <section unless="mobile">
         <assets path="assets/shared/images-png" rename="assets/shared/images" library="shared" />
-        <assets path="assets/shared" library="shared" exclude="*.mp3|images-png|images-astc" unless="web" />
-        <assets path="assets/shared" library="shared" exclude="*.ogg|images-png|images-astc" if="web" />
-
 		<assets path="assets/shared/mobile/images-png" rename="assets/shared/mobile/images" />
         <assets path="assets/shared/mobile" rename="assets/shared/mobile" exclude="*.mp3|images-png|images-astc" unless="web" />
         <assets path="assets/shared/mobile" rename="assets/shared/mobile" exclude="*.ogg|images-png|images-astc" if="web" />
+		<assets path="assets/shared" library="shared" exclude="*.mp3|images-png|images-astc" unless="web" />
+        <assets path="assets/shared" library="shared" exclude="*.ogg|images-png|images-astc" if="web" />
 
         <assets path="assets/week_assets/week2/images-png" rename="assets/week_assets/week2/images" library="week2" />
         <assets path="assets/week_assets/week2" rename="assets/week_assets/week2" library="week2" exclude="*.mp3|images-png|images-astc" unless="web" />
