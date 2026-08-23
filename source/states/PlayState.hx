@@ -38,6 +38,7 @@ import openfl.filters.ShaderFilter;
 #end
 
 #if VIDEOS_ALLOWED
+#if !ios
 #if (hxCodec >= "3.0.0")
 import hxcodec.flixel.FlxVideo as VideoHandler;
 #elseif (hxCodec >= "2.6.1")
@@ -46,6 +47,9 @@ import hxcodec.VideoHandler as VideoHandler;
 import VideoHandler;
 #else
 import vlc.MP4Handler as VideoHandler;
+#end
+#else
+import objects.VideoSprite;
 #end
 #end
 
@@ -936,6 +940,7 @@ class PlayState extends MusicBeatState
 		char.y += char.positionArray[1];
 	}
 
+	#if !ios
 	public function startVideo(name:String)
 	{
 		#if VIDEOS_ALLOWED
@@ -986,6 +991,74 @@ class PlayState extends MusicBeatState
 		else
 			startCountdown();
 	}
+	#elseif ios
+	public var videoCutscene:VideoSprite = null;
+	public function startVideo(name:String, forMidSong:Bool = false, canSkip:Bool = true, loop:Bool = false, playOnLoad:Bool = true)
+	{
+		#if VIDEOS_ALLOWED
+		inCutscene = !forMidSong;
+		canPause = forMidSong;
+
+		var foundFile:Bool = false;
+		var fileName:String = Paths.video(name);
+
+		#if sys
+		if (FileSystem.exists(fileName))
+		#else
+		if (OpenFlAssets.exists(fileName))
+		#end
+		foundFile = true;
+
+		if (foundFile)
+		{
+			videoCutscene = new VideoSprite(fileName, forMidSong, canSkip, loop);
+			if(forMidSong) videoCutscene.videoSprite.bitmap.rate = playbackRate;
+
+			// Finish callback
+			if (!forMidSong)
+			{
+				function onVideoEnd()
+				{
+					if (!isDead && generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null && !endingSong && !isCameraOnForcedPos)
+					{
+						moveCameraSection();
+						FlxG.camera.snapToTarget();
+					}
+					videoCutscene = null;
+					canPause = true;
+					inCutscene = false;
+					startAndEnd();
+				}
+				videoCutscene.finishCallback = onVideoEnd;
+				videoCutscene.onSkip = onVideoEnd;
+			}
+			if (GameOverSubstate.instance != null && isDead) GameOverSubstate.instance.add(videoCutscene);
+			else add(videoCutscene);
+
+			if (playOnLoad)
+				videoCutscene.play();
+			return videoCutscene;
+		}
+		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
+		else addTextToDebug("Video not found: " + fileName, FlxColor.RED);
+		#else
+		else FlxG.log.error("Video not found: " + fileName);
+		#end
+		#else
+		FlxG.log.warn('Platform not supported!');
+		startAndEnd();
+		#end
+		return null;
+	}	
+
+		function startAndEnd()
+	    {
+		   if(endingSong)
+			   endSong();
+		   else
+			   startCountdown();
+	    }
+	#end
 
 	var dialogueCount:Int = 0;
 	public var psychDialogue:DialogueBoxPsych;

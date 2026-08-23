@@ -916,10 +916,10 @@ class ModItem extends FlxSpriteGroup
 		add(text);
 
 		var isPixel = false;
-		var bmp = Paths.cacheBitmap(Paths.mods('$folder/pack.png'));
+		var bmp = Paths.cacheBitmap(Paths.mods('$folder/pack.png') || Paths.mods('$folder/pack.astc'));
 		if(bmp == null)
 		{
-			bmp = Paths.cacheBitmap(Paths.mods('$folder/pack-pixel.png'));
+			bmp = Paths.cacheBitmap(Paths.mods('$folder/pack-pixel.png') || Paths.mods('$folder/pack-pixel.astc'));
 			isPixel = true;
 		}
 

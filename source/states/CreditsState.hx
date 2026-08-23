@@ -162,8 +162,8 @@ class CreditsState extends MusicBeatState
 				if(creditsStuff[i][1] != null && creditsStuff[i][1].length > 0)
 				{
 					var fileName = 'credits/' + creditsStuff[i][1];
-					if (Paths.fileExists('images/$fileName.png', IMAGE)) str = fileName;
-					else if (Paths.fileExists('images/$fileName-pixel.png', IMAGE)) str = fileName + '-pixel';
+					if (Paths.fileExists('images/$fileName.png', IMAGE) || Paths.fileExists('images/$fileName.astc', BINARY)) str = fileName;
+					else if (Paths.fileExists('images/$fileName-pixel.png', IMAGE) || Paths.fileExists('images/$fileName-pixel.astc', BINARY)) str = fileName + '-pixel';
 				}
 
 				var icon:AttachedSprite = new AttachedSprite(str);

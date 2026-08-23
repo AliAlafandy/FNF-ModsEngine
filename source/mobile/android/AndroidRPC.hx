@@ -21,7 +21,7 @@ class AndroidRPC {
 	}
 
 	public static function update(title:String, artist:String, ?imagePath:String) {
-		//if (imagePath == null) imagePath = "assets/images/discord_icon.png";
+		if (imagePath == null) imagePath = "assets/images/discord_icon.astc";
 		if (_update == null) {
 			_update = JNI.createStaticMethod("arkoselabs/utils/KizzyHelper", "updateStatus", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
 		}

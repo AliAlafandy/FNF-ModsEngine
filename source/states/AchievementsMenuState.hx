@@ -79,6 +79,11 @@ class AchievementsMenuState extends MusicBeatState
 					graphic = Paths.image('$image-pixel');
 					hasAntialias = false;
 				}
+				else if(Paths.fileExists('images/$image-pixel.astc', BINARY))
+				{
+					graphic = Paths.image('$image-pixel');
+					hasAntialias = false;
+				}
 				else graphic = Paths.image(image);
 
 				if(graphic == null) graphic = Paths.image('unknownMod');

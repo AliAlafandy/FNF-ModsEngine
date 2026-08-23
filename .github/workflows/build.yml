@@ -20,7 +20,7 @@ on:
         type: string
 
 env:
-  HAXE_VERSION: 4.3.2
+  HAXE_VERSION: 4.3.7
   PROJECT_NAME: ModsEngine
   ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
@@ -58,6 +58,11 @@ jobs:
         run: |
           haxelib install hmm --quiet
           haxelib run hmm install --quiet
+
+      - name: hxvlc For ios
+        run: |
+          remove hxCoded
+          haxelib install hxvlc --quiet
 
       - name: Configure Android x64
         if: inputs.name == 'Android x64'
