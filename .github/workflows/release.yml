@@ -104,7 +104,7 @@ jobs:
         with:
           name: "release : 6.9.9"
           tag_name: "release-${{ needs.get-commit-hash.outputs.commit_hash }}"
-          make_latest: true
+          make_latest: false
           files: |
             /home/runner/*-png.apk
             /home/runner/*-png.ipa
