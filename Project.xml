@@ -64,8 +64,8 @@
 	<haxedef name="USING_GPU_TEXTURES" />
 
     <section if="mobile">
-        <assets path="assets/preload/images-astc" rename="assets/images" />
-        <assets path="assets/preload" rename="assets" exclude="*.mp3|images-png|images-astc" />
+        <assets path="assets/secrets/images-astc" rename="assets/images" />
+        <assets path="assets/secrets" rename="assets" exclude="*.mp3|images-png|images-astc" />
 
 		<assets path="assets/shared/mobile/images-astc" rename="assets/shared/mobile/images" />
         <assets path="assets/shared/mobile" rename="assets/shared/mobile" exclude="*.mp3|images-png|images-astc" />
@@ -80,9 +80,9 @@
     </section>
 
     <section unless="mobile">
-        <assets path="assets/preload/images-png" rename="assets/images" />
-        <assets path="assets/preload" rename="assets" exclude="*.mp3|images-png|images-astc" unless="web" />
-        <assets path="assets/preload" rename="assets" exclude="*.ogg|images-png|images-astc" if="web" />
+        <assets path="assets/secrets/images-png" rename="assets/images" />
+        <assets path="assets/secrets" rename="assets" exclude="*.mp3|images-png|images-astc" unless="web" />
+        <assets path="assets/secrets" rename="assets" exclude="*.ogg|images-png|images-astc" if="web" />
 
 		<assets path="assets/shared/mobile/images-png" rename="assets/shared/mobile/images" />
         <assets path="assets/shared/mobile" rename="assets/shared/mobile" exclude="*.mp3|images-png|images-astc" unless="web" />
