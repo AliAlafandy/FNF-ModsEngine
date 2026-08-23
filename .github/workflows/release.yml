@@ -20,12 +20,12 @@ jobs:
             artifactName: windowsBuild-PNG
             artifactPath: export\release\windows\bin\*
           - name: Android-PNG
-            os: ubuntu-22.04
+            os: macos-15
             buildArgs: "android -final -D officialBuild"
             artifactName: androidBuild-PNG
             artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
           - name: Android-ASTC
-            os: ubuntu-22.04
+            os: macos-15
             buildArgs: "android -final -D officialBuild -D USING_GPU_TEXTURES"
             artifactName: androidBuild-ASTC
             artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
