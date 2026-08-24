@@ -284,6 +284,10 @@ class Paths
         if (OpenFlAssets.exists(defaultNormalPngPath, IMAGE))   return createFlxGraphic(defaultNormalPngPath, IMAGE, cacheKey);
         
         trace('Asset totally missing - Clean Key: ' + cleanKey + ' (Orig: ' + key + ', Library: ' + library + ')');
+		trace('   -> Tried ASTC path: ' + astcPath);
+		trace('   -> Tried Default ASTC: ' + defaultAstcPath);
+		trace('   -> Tried PNG path: ' + pngPath);
+		trace('   -> Tried Default PNG: ' + defaultPngPath);
         return null;
     }
 
