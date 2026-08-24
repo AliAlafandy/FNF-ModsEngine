@@ -130,7 +130,7 @@ class MobileData
 		return buttonsInstance;
 	}
 
-	static function readDirectory(folder:String, map:Dynamic)
+	public static function readDirectory(folder:String, map:Dynamic)
 	{
 		var originalFolder:String = folder;
 		var cleanFolder:String = folder.contains(':') ? folder.split(':')[1] : folder;
