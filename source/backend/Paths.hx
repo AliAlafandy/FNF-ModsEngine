@@ -302,37 +302,41 @@ class Paths
     }
 
     private static function createFlxGraphic(path:String, type:openfl.utils.AssetType, cacheKey:String):FlxGraphic 
-    {
-        if(!currentTrackedAssets.exists(cacheKey)) {
-            var assetBitmap:BitmapData = null;
-
-            if (type == BINARY && haxe.io.Path.extension(path) == 'astc') {
-                try {
-                    var bytes = OpenFlAssets.getBytes(path);
-                    if (bytes != null) {
-                        var texture = openfl.Lib.current.stage.context3D.createASTCTexture(bytes);
-                        assetBitmap = BitmapData.fromTexture(texture);
-                    }
-                } catch(e:Dynamic) {
-                    trace('Failed loading hardware ASTC texture: ' + e);
-                }
-            } else {
-                assetBitmap = OpenFlAssets.getBitmapData(path, false);
-            }
-
-            if (assetBitmap != null) {
-                var newGraphic:FlxGraphic = FlxGraphic.fromBitmapData(assetBitmap, false, cacheKey);
-                newGraphic.persist = true;
-                newGraphic.destroyOnNoUse = false;
-                currentTrackedAssets.set(cacheKey, newGraphic);
-            } else {
-                trace('BitmapData processing returned null for path target: ' + path);
-                return null;
-            }
-        }
-        localTrackedAssets.push(cacheKey);
-        return currentTrackedAssets.get(cacheKey);
-    }
+	{
+	    if(!currentTrackedAssets.exists(cacheKey)) {
+	        var assetBitmap:BitmapData = null;
+	
+	        if (type == BINARY && haxe.io.Path.extension(path) == 'astc') {
+	            try {
+	                var bytes = sys.io.File.getBytes(path);
+	                if (bytes != null) {
+	                    var texture = openfl.Lib.current.stage.context3D.createASTCTexture(bytes);
+	                    assetBitmap = BitmapData.fromTexture(texture);
+	                }
+	            } catch(e:Dynamic) {
+	                trace('Failed loading hardware ASTC texture: ' + e);
+	            }
+	        } else {
+	            try {
+	                assetBitmap = BitmapData.fromFile(path);
+	            } catch(e:Dynamic) {
+	                assetBitmap = OpenFlAssets.getBitmapData(path, false);
+	            }
+	        }
+	
+	        if (assetBitmap != null) {
+	            var newGraphic:FlxGraphic = FlxGraphic.fromBitmapData(assetBitmap, false, cacheKey);
+	            newGraphic.persist = true;
+	            newGraphic.destroyOnNoUse = false;
+	            currentTrackedAssets.set(cacheKey, newGraphic);
+	        } else {
+	            trace('BitmapData processing returned null for path target: ' + path);
+	            return null;
+	        }
+	    }
+	    localTrackedAssets.push(cacheKey);
+	    return currentTrackedAssets.get(cacheKey);
+	}
 
 	static public function cacheBitmap(file:String, ?bitmap:BitmapData = null, ?allowGPU:Bool = true)
 	{
