@@ -300,15 +300,23 @@ class Paths
 	    if (OpenFlAssets.exists(weekAssetPng, IMAGE))   return createFlxGraphic(weekAssetPng, IMAGE, cacheKey);
 	
 	    #if sys
-	    for (i in 1...8)
-	    {
-	        var localPng = 'assets/week_assets/week$i/images/$cleanKey.png';
-	        var localAstc = 'assets/week_assets/week$i/images/$cleanKey.astc';
-	        
-	        if (FileSystem.exists(localPng))  return createFlxGraphic(localPng, IMAGE, cacheKey);
-	        if (FileSystem.exists(localAstc)) return createFlxGraphic(localAstc, BINARY, cacheKey);
-	    }
-	    #end
+		for (i in 1...8)
+		{
+			var libName = (i == 1 ? "week_assets" : "week$i");
+			
+			var weekPng = getPath('images/$cleanKey.png', IMAGE, libName);
+			var weekAstc = getPath('images/$cleanKey.astc', BINARY, libName);
+			
+			if (OpenFlAssets.exists(weekAstc, BINARY)) return createFlxGraphic(weekAstc, BINARY, cacheKey);
+			if (OpenFlAssets.exists(weekPng, IMAGE))   return createFlxGraphic(weekPng, IMAGE, cacheKey);
+	
+			var localPng = 'assets/week_assets/week$i/images/$cleanKey.png';
+			var localAstc = 'assets/week_assets/week$i/images/$cleanKey.astc';
+			
+			if (FileSystem.exists(localPng))  return createFlxGraphic(localPng, IMAGE, cacheKey);
+			if (FileSystem.exists(localAstc)) return createFlxGraphic(localAstc, BINARY, cacheKey);
+		}
+		#end
         
         trace('Asset totally missing - Clean Key: ' + cleanKey + ' (Orig: ' + key + ', Library: ' + library + ')');
 		trace('   -> Tried ASTC path: ' + astcPath);
