@@ -446,9 +446,12 @@ class Paths
 	inline static public function getSparrowAtlas(key:String, ?library:String = null, ?allowGPU:Bool = true):FlxAtlasFrames
 	{
 		var imageLoaded:FlxGraphic = image(key, library, allowGPU);
+		if (imageLoaded == null) {
+        trace('WARNING: FlxAtlasFrames could not load image for key: "$key"');
+        return null;
+    	}
 		#if MODS_ALLOWED
 		var xmlExists:Bool = false;
-
 		var xml:String = modsXml(key);
 		if(FileSystem.exists(xml)) xmlExists = true;
 
@@ -508,7 +511,7 @@ class Paths
 			if(!currentTrackedSounds.exists(file))
 			{
 				currentTrackedSounds.set(file, Sound.fromFile(file));
-				//trace('precached mod sound: $file');
+				trace('precached mod sound: $file');
 			}
 			localTrackedAssets.push(file);
 			return currentTrackedSounds.get(file);
@@ -520,7 +523,7 @@ class Paths
 		if(path != null) gottenPath = '$path/$gottenPath';
 		gottenPath = getPath(gottenPath, SOUND, library);
 		gottenPath = gottenPath.substring(gottenPath.indexOf(':') + 1, gottenPath.length);
-		// trace(gottenPath);
+		trace(gottenPath);
 		if(!currentTrackedSounds.exists(gottenPath))
 		{
 			var retKey:String = (path != null) ? '$path/$key' : key;
@@ -528,7 +531,7 @@ class Paths
 			if(OpenFlAssets.exists(retKey, SOUND))
 			{
 				currentTrackedSounds.set(gottenPath, OpenFlAssets.getSound(retKey));
-				//trace('precached vanilla sound: $retKey');
+				trace('precached vanilla sound: $retKey');
 			}
 		}
 		localTrackedAssets.push(gottenPath);
@@ -707,7 +710,7 @@ class Paths
 					spriteJson = getTextFromFile('images/$originalPath/spritemap$st.json');
 					if(spriteJson != null)
 					{
-						//trace('found Sprite Json');
+						trace('found Sprite Json');
 						changedImage = true;
 						changedAtlasJson = true;
 						folderOrImg = Paths.image('$originalPath/spritemap$st');
@@ -716,14 +719,14 @@ class Paths
 				}
 				else if(Paths.fileExists('images/$originalPath/spritemap$st.png', IMAGE))
 				{
-					//trace('found Sprite PNG');
+					trace('found Sprite PNG');
 					changedImage = true;
 					folderOrImg = Paths.image('$originalPath/spritemap$st');
 					break;
 				}
 				else if(Paths.fileExists('images/$originalPath/spritemap$st.astc', BINARY))
 				{
-					//trace('found Sprite ASTC');
+					trace('found Sprite ASTC');
 					changedImage = true;
 					folderOrImg = Paths.image('$originalPath/spritemap$st');
 					break;
