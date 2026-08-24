@@ -292,6 +292,23 @@ class Paths
 	
 	    if (OpenFlAssets.exists(sharedAstcPath, BINARY))       return createFlxGraphic(sharedAstcPath, BINARY, cacheKey);
 	    if (OpenFlAssets.exists(sharedPngPath, IMAGE))         return createFlxGraphic(sharedPngPath, IMAGE, cacheKey);
+
+		var weekAssetPng = getPath('images/$cleanKey.png', IMAGE, 'week_assets');
+	    var weekAssetAstc = getPath('images/$cleanKey.astc', BINARY, 'week_assets');
+	
+	    if (OpenFlAssets.exists(weekAssetAstc, BINARY)) return createFlxGraphic(weekAssetAstc, BINARY, cacheKey);
+	    if (OpenFlAssets.exists(weekAssetPng, IMAGE))   return createFlxGraphic(weekAssetPng, IMAGE, cacheKey);
+	
+	    #if sys
+	    for (i in 1...8)
+	    {
+	        var localPng = 'assets/week_assets/week$i/images/$cleanKey.png';
+	        var localAstc = 'assets/week_assets/week$i/images/$cleanKey.astc';
+	        
+	        if (FileSystem.exists(localPng))  return createFlxGraphic(localPng, IMAGE, cacheKey);
+	        if (FileSystem.exists(localAstc)) return createFlxGraphic(localAstc, BINARY, cacheKey);
+	    }
+	    #end
         
         trace('Asset totally missing - Clean Key: ' + cleanKey + ' (Orig: ' + key + ', Library: ' + library + ')');
 		trace('   -> Tried ASTC path: ' + astcPath);
