@@ -252,7 +252,7 @@ class Paths
         #end
 
         var cleanKey:String = key;
-        if (cleanKey.startsWith("assets/")) cleanKey = cleanKey.substring(7);
+        if (cleanKey.startsWith("assets/shared")) cleanKey = cleanKey.substring(14);
         if (library != null && cleanKey.startsWith(library + "/")) cleanKey = cleanKey.substring(library.length + 1);
 
         var astcPath       = getPath('images/$cleanKey.astc', BINARY, library);
