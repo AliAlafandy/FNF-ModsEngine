@@ -471,20 +471,48 @@ class Paths
 
 	inline static public function getSparrowAtlas(key:String, ?library:String = null, ?allowGPU:Bool = true):FlxAtlasFrames
 	{
-		var imageLoaded:FlxGraphic = image(key, library, allowGPU);
-		if (imageLoaded == null) {
-        trace('WARNING: FlxAtlasFrames could not load image for key: "$key"');
-        return null;
-    	}
-		#if MODS_ALLOWED
-		var xmlExists:Bool = false;
-		var xml:String = modsXml(key);
-		if(FileSystem.exists(xml)) xmlExists = true;
-
-		return FlxAtlasFrames.fromSparrow(imageLoaded, (xmlExists ? File.getContent(xml) : getPath('images/$key.xml', library)));
-		#else
-		return FlxAtlasFrames.fromSparrow(imageLoaded, getPath('images/$key.xml', library));
-		#end
+	    var imageLoaded:FlxGraphic = image(key, library, allowGPU);
+	    if (imageLoaded == null) {
+	        trace('WARNING: FlxAtlasFrames could not load image for key: "$key"');
+	        return null;
+	    }
+	
+	    var xmlContent:String = null;
+	
+	    #if MODS_ALLOWED
+	    var modXmlPath:String = modsXml(key);
+	    if (FileSystem.exists(modXmlPath)) {
+	        xmlContent = File.getContent(modXmlPath);
+	    }
+	    #end
+	
+	    if (xmlContent == null) {
+	        var xmlPath:String = getPath('images/$key.xml', TEXT, library);
+	        var defaultXmlPath:String = getSharedPath('images/$key.xml');
+	
+	        #if sys
+	        if (FileSystem.exists(xmlPath)) {
+	            xmlContent = File.getContent(xmlPath);
+	        } else if (FileSystem.exists(defaultXmlPath)) {
+	            xmlContent = File.getContent(defaultXmlPath);
+	        }
+	        #end
+	
+	        if (xmlContent == null) {
+	            if (OpenFlAssets.exists(xmlPath, TEXT)) {
+	                xmlContent = OpenFlAssets.getText(xmlPath);
+	            } else if (OpenFlAssets.exists(defaultXmlPath, TEXT)) {
+	                xmlContent = OpenFlAssets.getText(defaultXmlPath);
+	            }
+	        }
+	    }
+	
+	    if (xmlContent != null) {
+	        return FlxAtlasFrames.fromSparrow(imageLoaded, xmlContent);
+	    }
+	
+	    trace('WARNING: FlxAtlasFrames could not load XML content for key: "$key"');
+	    return null;
 	}
 
 	inline static public function getPackerAtlas(key:String, ?library:String = null, ?allowGPU:Bool = true):FlxAtlasFrames
