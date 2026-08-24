@@ -65,22 +65,22 @@
 
     <section if="USING_GPU_TEXTURES">
         
-        <assets path="assets/exclude/images-astc" rename="assets/images" />
+        <assets path="assets/exclude/images-astc" rename="assets/shared/images" />
         <assets path="assets/exclude" rename="assets/shared" exclude="*.mp3|images-png|images-astc" />
         
         <section if="TITLE_SCREEN_EASTER_EGG">
-            <assets path="assets/secrets/images-astc" rename="assets/images" />
+            <assets path="assets/secrets/images-astc" rename="assets/shared/images" />
             <assets path="assets/secrets" rename="assets/shared" exclude="*.mp3|images-png|images-astc" />
         </section>
     </section>
 
     <section unless="USING_GPU_TEXTURES">        
-        <assets path="assets/exclude/images-png" rename="assets/images" />
+        <assets path="assets/exclude/images-png" rename="assets/shared/images" />
         <assets path="assets/exclude" rename="assets/shared" exclude="*.mp3|images-png|images-astc" unless="web" />
         <assets path="assets/exclude" rename="assets/shared" exclude="*.ogg|images-png|images-astc" if="web" />
         
         <section if="TITLE_SCREEN_EASTER_EGG">
-            <assets path="assets/secrets/images-png" rename="assets/images" />
+            <assets path="assets/secrets/images-png" rename="assets/shared/images" />
             <assets path="assets/secrets" rename="assets/shared" exclude="*.mp3|images-png|images-astc" unless="web" />
             <assets path="assets/secrets" rename="assets/shared" exclude="*.ogg|images-png|images-astc" if="web" />
         </section>
@@ -128,7 +128,7 @@
 		<assets path="assets/shared/sounds" exclude="*.mp3|images-png|images-astc" />
 		<assets path="assets/shared" library="shared" exclude="*.mp3|images-png|images-astc" />
 
-		<assets path="assets/week_assets/week1/images-astc" rename="assets/week_assets/week2/images" library="week_assets" />
+		<assets path="assets/week_assets/week1/images-astc" rename="assets/week_assets/week1/images" library="week_assets" />
         <assets path="assets/week_assets/week1" rename="assets/week_assets/week1" library="week_assets" exclude="*.mp3|images-png|images-astc" />
 
         <assets path="assets/week_assets/week2/images-astc" rename="assets/week_assets/week2/images" library="week_assets" />
