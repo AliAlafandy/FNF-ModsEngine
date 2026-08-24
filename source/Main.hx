@@ -64,13 +64,13 @@ class Main extends Sprite
 	{
 		super();
 		#if mobile
+		MobileData.init();
 		#if android
 		StorageUtil.requestPermissions();
 		#end
 		Sys.setCwd(StorageUtil.getStorageDirectory());
 		#end
 		backend.CrashHandler.init();
-		MobileData.init();
 
 		#if windows
 		@:functionCode("
