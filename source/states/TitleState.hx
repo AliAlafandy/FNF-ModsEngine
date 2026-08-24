@@ -307,7 +307,7 @@ class TitleState extends MusicBeatState
 		}
 
 		#if MODS_ALLOWED
-		var mobilePath = getValidMobilePath(Sys.getCwd() + "mods/" + Paths.currentModDirectory + "/images/titleEnter_mobile");
+		var mobilePath = getValidMobilePath(Sys.getCwd() + "mods/" + Mods.currentModDirectory + "/images/titleEnter_mobile");
 		if (mobilePath == null) mobilePath = getValidMobilePath(Sys.getCwd() + "mods/images/titleEnter_mobile");
 		if (mobilePath == null) mobilePath = getValidMobilePath("assets/images/titleEnter_mobile");
 		
@@ -375,7 +375,7 @@ class TitleState extends MusicBeatState
 		}
 		
 		#if MODS_ALLOWED
-		var pcPath = getValidPCPath("mods/" + Paths.currentModDirectory + "/images/titleEnter");
+		var pcPath = getValidPCPath("mods/" + Mods.currentModDirectory + "/images/titleEnter");
 		if (pcPath == null) pcPath = getValidPCPath("mods/images/titleEnter");
 		if (pcPath == null) pcPath = getValidPCPath("assets/images/titleEnter");
 		
