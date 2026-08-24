@@ -122,8 +122,6 @@
         <assets path="assets/shared/images-astc" rename="assets/shared/images" library="shared" />
 		<assets path="assets/shared/mobile/images-astc" rename="assets/shared/mobile/images" />
         <assets path="assets/shared/mobile" rename="assets/shared/mobile" exclude="*.mp3|images-png|images-astc" />
-		<assets path="assets/shared/mobile" rename="assets/mobile" exclude="*.mp3|images-png|images-astc" />
-		<assets path="assets/shared/mobile" rename="mobile" exclude="*.mp3|images-png|images-astc" />
 		<assets path="assets/shared/music" exclude="*.mp3|images-png|images-astc" />
 		<assets path="assets/shared/sounds" exclude="*.mp3|images-png|images-astc" />
 		<assets path="assets/shared" library="shared" exclude="*.mp3|images-png|images-astc" />
@@ -154,8 +152,6 @@
         <assets path="assets/shared/images-png" rename="assets/shared/images" library="shared" />
 		<assets path="assets/shared/mobile/images-png" rename="assets/shared/mobile/images" />
         <assets path="assets/shared/mobile" rename="assets/shared/mobile" exclude="*.mp3|images-png|images-astc" unless="web" />
-		<assets path="assets/shared/mobile" rename="assets/mobile" exclude="*.mp3|images-png|images-astc" />
-		<assets path="assets/shared/mobile" rename="mobile" exclude="*.mp3|images-png|images-astc" />
 		<assets path="assets/shared/music" exclude="*.mp3|images-png|images-astc" />
 		<assets path="assets/shared/sounds" exclude="*.mp3|images-png|images-astc" />
 		<assets path="assets/shared" library="shared" exclude="*.mp3|images-png|images-astc" unless="web" />
@@ -192,7 +188,8 @@
 
 	<library name="videos"        preload="true" if="VIDEOS_ALLOWED"/>
 	<library name="songs"         preload="true" />
-	<path name="assets/fonts" />
+	
+	<assets name="assets/fonts" library="fonts" />
 
 	<!--<define name="CHECK_FOR_UPDATES" if="officialBuild" />-->
 
