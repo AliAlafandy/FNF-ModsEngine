@@ -130,21 +130,32 @@ class MobileData
 		return buttonsInstance;
 	}
 
-	public static function readDirectory(folder:String, map:Dynamic)
+	static function readDirectory(folder:String, map:Dynamic)
 	{
-		folder = folder.contains(':') ? folder.split(':')[1] : folder;
-
-		#if MODS_ALLOWED if (FileSystem.exists(folder)) #end
-		for (file in Paths.readDirectory(folder))
+		var originalFolder:String = folder;
+		var cleanFolder:String = folder.contains(':') ? folder.split(':')[1] : folder;
+		if (FileSystem.exists(cleanFolder))
 		{
-			var fileWithNoLib:String = file.contains(':') ? file.split(':')[1] : file;
-			if (Path.extension(fileWithNoLib) == 'json')
+			for (file in FileSystem.readDirectory(cleanFolder))
 			{
-				file = Path.join([folder, Path.withoutDirectory(file)]);
-				var str = #if MODS_ALLOWED File.getContent(file) #else Assets.getText(file) #end;
-				var json:TouchButtonsData = cast Json.parse(str);
-				var mapKey:String = Path.withoutDirectory(Path.withoutExtension(fileWithNoLib));
-				map.set(mapKey, json);
+				var fileWithNoLib:String = file.contains(':') ? file.split(':')[1] : file;
+				if (Path.extension(fileWithNoLib) == 'json')
+				{
+					var targetFile:String = Path.join([originalFolder, Path.withoutDirectory(fileWithNoLib)]);
+					
+					var str:String = "";
+					try {
+						str = File.getContent(targetFile);
+					} catch(e:Dynamic) {
+						trace('Failed to read mobile JSON asset path: ' + targetFile + ' - Error: ' + e);
+						continue;
+					}
+					if (str != null && str.trim().length > 0) {
+						var json:TouchButtonsData = cast Json.parse(str);
+						var mapKey:String = Path.withoutDirectory(Path.withoutExtension(fileWithNoLib));
+						map.set(mapKey, json);
+					}
+				}
 			}
 		}
 	}
