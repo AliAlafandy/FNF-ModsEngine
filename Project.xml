@@ -187,6 +187,8 @@
 	<library name="songs"         preload="true" />
 	<library name="week_assets"   preload="true" />
 
+	<path name="assets/fonts" />
+
 	<!--<define name="CHECK_FOR_UPDATES" if="officialBuild" />-->
 
 	<section if="MODS_ALLOWED">
