@@ -279,7 +279,7 @@ class Paths
 	    var sharedPngPath  = getPath('images/$cleanKey.png', IMAGE, 'shared');
 	
 	    if (OpenFlAssets.exists(sharedAstcPath, BINARY))       return createFlxGraphic(sharedAstcPath, BINARY, cacheKey);
-	    if (OpenFlAssets.exists(sharedPngPath, IMAGE))         return createFlxGraphic(sharedPngPath, cacheKey);
+	    if (OpenFlAssets.exists(sharedPngPath, IMAGE))         return createFlxGraphic(sharedPngPath, IMAGE, cacheKey);
         
         trace('Asset totally missing - Clean Key: ' + cleanKey + ' (Orig: ' + key + ', Library: ' + library + ')');
 		trace('   -> Tried ASTC path: ' + astcPath);
