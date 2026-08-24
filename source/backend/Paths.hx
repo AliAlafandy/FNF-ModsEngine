@@ -265,6 +265,18 @@ class Paths
         var defaultPngPath        = getSharedPath('images/$cleanKey.png');
         var defaultNormalPngPath  = getSharedPath('$cleanKey.png');
 
+		#if sys
+        if (FileSystem.exists(astcPath))         return createFlxGraphic(astcPath, BINARY, cacheKey);
+        if (FileSystem.exists(normalAstcPath))   return createFlxGraphic(normalAstcPath, BINARY, cacheKey);
+        if (FileSystem.exists(defaultAstcPath))  return createFlxGraphic(defaultAstcPath, BINARY, cacheKey);
+        if (FileSystem.exists(defaultNormalAstcPath)) return createFlxGraphic(defaultNormalAstcPath, BINARY, cacheKey);
+
+        if (FileSystem.exists(pngPath))          return createFlxGraphic(pngPath, IMAGE, cacheKey);
+        if (FileSystem.exists(normalPngPath))    return createFlxGraphic(normalPngPath, IMAGE, cacheKey);
+        if (FileSystem.exists(defaultPngPath))   return createFlxGraphic(defaultPngPath, IMAGE, cacheKey);
+        if (FileSystem.exists(defaultNormalPngPath)) return createFlxGraphic(defaultNormalPngPath, IMAGE, cacheKey);
+        #end
+
         if (OpenFlAssets.exists(astcPath, BINARY))             return createFlxGraphic(astcPath, BINARY, cacheKey);
         if (OpenFlAssets.exists(normalAstcPath, BINARY))       return createFlxGraphic(normalAstcPath, BINARY, cacheKey);
         if (OpenFlAssets.exists(defaultAstcPath, BINARY))       return createFlxGraphic(defaultAstcPath, BINARY, cacheKey);
