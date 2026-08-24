@@ -252,18 +252,26 @@ class Paths
         #end
 
         var cleanKey:String = key;
-        if (cleanKey.startsWith("assets/shared")) cleanKey = cleanKey.substring(14);
-        if (library != null && cleanKey.startsWith(library + "/")) cleanKey = cleanKey.substring(library.length + 1);
 
-        var astcPath       = getPath('images/$cleanKey.astc', BINARY, library);
-        var normalAstcPath = getPath('$cleanKey.astc', BINARY, library);
-        var defaultAstcPath       = getSharedPath('images/$cleanKey.astc');
-        var defaultNormalAstcPath = getSharedPath('$cleanKey.astc');
+		if (cleanKey.startsWith("assets/shared/images/"))
+			cleanKey = cleanKey.substring(21);
+		else if (cleanKey.startsWith("assets/shared/"))
+			cleanKey = cleanKey.substring(14);
+		else if (cleanKey.startsWith("assets/"))
+			cleanKey = cleanKey.substring(7);
 
-        var pngPath        = getPath('images/$cleanKey.png', IMAGE, library);
-        var normalPngPath  = getPath('$cleanKey.png', IMAGE, library);
-        var defaultPngPath        = getSharedPath('images/$cleanKey.png');
-        var defaultNormalPngPath  = getSharedPath('$cleanKey.png');
+		if (library != null && cleanKey.startsWith(library + "/")) 
+			cleanKey = cleanKey.substring(library.length + 1);
+
+		var astcPath           = getPath('images/$cleanKey.astc', BINARY, library);
+		var normalAstcPath     = getPath('$cleanKey.astc', BINARY, library);
+		var defaultAstcPath    = getSharedPath('images/$cleanKey.astc');
+		var defaultNormalAstcPath = getSharedPath('$cleanKey.astc');
+
+		var pngPath            = getPath('images/$cleanKey.png', IMAGE, library);
+		var normalPngPath      = getPath('$cleanKey.png', IMAGE, library);
+		var defaultPngPath     = getSharedPath('images/$cleanKey.png');
+		var defaultNormalPngPath = getSharedPath('$cleanKey.png');
 
         if (OpenFlAssets.exists(astcPath, BINARY))             return createFlxGraphic(astcPath, BINARY, cacheKey);
         if (OpenFlAssets.exists(normalAstcPath, BINARY))       return createFlxGraphic(normalAstcPath, BINARY, cacheKey);
