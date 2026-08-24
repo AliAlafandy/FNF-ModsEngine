@@ -9,6 +9,7 @@ import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.frames.FlxFrame;
 import flixel.group.FlxGroup;
 import flixel.input.gamepad.FlxGamepad;
+import flixel.graphics.FlxGraphic;
 import haxe.Json;
 
 import flixel.addons.display.FlxBackdrop;
