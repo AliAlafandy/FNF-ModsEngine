@@ -35,8 +35,8 @@ class HealthIcon extends FlxSprite
 	public function changeIcon(char:String, ?allowGPU:Bool = true) {
 		if(this.char != char) {
 			var name:String = 'icons/' + char;
-			if(!Paths.fileExists('images/' + name + '.png', IMAGE) && !Paths.fileExists('images/' + name + '.astc', BINARY)) name = 'icons/icon-' + char; //Older versions of psych engine's support
-			if(!Paths.fileExists('images/' + name + '.png', IMAGE) && !Paths.fileExists('images/' + name + '.astc', BINARY)) name = 'icons/icon-face'; //Prevents crash from missing icon
+			if(!Paths.fileExists('images/' + name + '.png', IMAGE) && !Paths.fileExists('images/' + name + '.astc', BINARY) && !Paths.fileExists('images/' + name + '.dds', BINARY)) name = 'icons/icon-' + char; //Older versions of psych engine's support
+		    if(!Paths.fileExists('images/' + name + '.png', IMAGE) && !Paths.fileExists('images/' + name + '.astc', BINARY) && !Paths.fileExists('images/' + name + '.dds', BINARY)) name = 'icons/icon-face'; //Prevents crash from missing icon
 			var file:Dynamic = Paths.image(name);
 
 			loadGraphic(file); //Load stupidly first for getting the file size
