@@ -16,9 +16,6 @@ import lime.app.Application;
 import states.TitleState;
 import mobile.backend.MobileScaleMode;
 import openfl.events.KeyboardEvent;
-#if COPYSTATE_ALLOWED
-import states.CopyState;
-#end
 
 #if linux
 import lime.graphics.Image;
