@@ -297,55 +297,122 @@ class TitleState extends MusicBeatState
 
 		#if mobile
 		titleTextMobile = new FlxSprite(titleJSON.startx - 35, titleJSON.starty);
+		
+		function getValidMobilePath(basePath:String):String {
+		    var pngPath = basePath + ".png";
+		    var astcPath = basePath + ".astc";
+		    if (FileSystem.exists(pngPath)) return pngPath;
+		    if (FileSystem.exists(astcPath)) return astcPath;
+		    return null;
+		}
+
+		#if MODS_ALLOWED
+		var mobilePath = getValidMobilePath(Sys.getCwd() + "mods/" + Paths.currentModDirectory + "/images/titleEnter_mobile");
+		if (mobilePath == null) mobilePath = getValidMobilePath(Sys.getCwd() + "mods/images/titleEnter_mobile");
+		if (mobilePath == null) mobilePath = getValidMobilePath("assets/images/titleEnter_mobile");
+		
+		if (mobilePath != null) {
+		    var xmlPath = mobilePath.endsWith(".png") ? StringTools.replace(mobilePath, ".png", ".xml") : StringTools.replace(mobilePath, ".astc", ".xml");
+		    var xmlData = FileSystem.exists(xmlPath) ? File.getContent(xmlPath) : null;
+		
+		    if (mobilePath.endsWith(".astc")) {
+		        try {
+		            var bytes = sys.io.File.getBytes(mobilePath);
+		            var texture = openfl.Lib.current.stage.context3D.createASTCTexture(bytes);
+		            var imgGraphic = FlxGraphic.fromBitmapData(BitmapData.fromTexture(texture), false, mobilePath);
+		            if (imgGraphic != null && xmlData != null)
+		                titleTextMobile.frames = FlxAtlasFrames.fromSparrow(imgGraphic, xmlData);
+		            else
+		                titleTextMobile.frames = Paths.getSparrowAtlas('titleEnter_mobile');
+		        } catch(e:Dynamic) {
+		            trace('Failed loading manual ASTC titleEnter_mobile: $e');
+		            titleTextMobile.frames = Paths.getSparrowAtlas('titleEnter_mobile');
+		        }
+		    } else {
+		        var imgGraphic = File.getBitmapData(mobilePath);
+		        if (imgGraphic != null && xmlData != null)
+		            titleTextMobile.frames = FlxAtlasFrames.fromSparrow(imgGraphic, xmlData);
+		        else
+		            titleTextMobile.frames = Paths.getSparrowAtlas('titleEnter_mobile');
+		    }
+		} else {
+		    titleTextMobile.frames = Paths.getSparrowAtlas('titleEnter_mobile');
+		}
+		#else
 		titleTextMobile.frames = Paths.getSparrowAtlas('titleEnter_mobile');
+		#end
+		
 		var animFrames:Array<FlxFrame> = [];
 		@:privateAccess {
-			titleTextMobile.animation.findByPrefix(animFrames, "ENTER IDLE");
-			titleTextMobile.animation.findByPrefix(animFrames, "ENTER FREEZE");
+		    titleTextMobile.animation.findByPrefix(animFrames, "ENTER IDLE");
+		    titleTextMobile.animation.findByPrefix(animFrames, "ENTER FREEZE");
 		}
 		
 		if (animFrames.length > 0) {
-			newTitle = true;
-			
-			titleTextMobile.animation.addByPrefix('idle', "ENTER IDLE", 24);
-			titleTextMobile.animation.addByPrefix('press', ClientPrefs.data.flashing ? "ENTER PRESSED" : "ENTER FREEZE", 24);
-		}
-		else {
-			newTitle = false;
-			
-			titleTextMobile.animation.addByPrefix('idle', "Press Enter to Begin", 24);
-			titleTextMobile.animation.addByPrefix('press', "ENTER PRESSED", 24);
+		    newTitle = true;
+		    titleTextMobile.animation.addByPrefix('idle', "ENTER IDLE", 24);
+		    titleTextMobile.animation.addByPrefix('press', ClientPrefs.data.flashing ? "ENTER PRESSED" : "ENTER FREEZE", 24);
+		} else {
+		    newTitle = false;
+		    titleTextMobile.animation.addByPrefix('idle', "Press Enter to Begin", 24);
+		    titleTextMobile.animation.addByPrefix('press', "ENTER PRESSED", 24);
 		}
 		
 		titleTextMobile.animation.play('idle');
 		titleTextMobile.updateHitbox();
-		// titleTextMobile.screenCenter(X);
 		add(titleTextMobile);
+		
 		#else
+		
 		titleText = new FlxSprite(titleJSON.startx, titleJSON.starty);
+		
+		function getValidPCPath(basePath:String):String {
+		    var pngPath = basePath + ".png";
+		    var astcPath = basePath + ".astc";
+		    if (FileSystem.exists(pngPath)) return pngPath;
+		    if (FileSystem.exists(astcPath)) return astcPath;
+		    return null;
+		}
+		
+		#if MODS_ALLOWED
+		var pcPath = getValidPCPath("mods/" + Paths.currentModDirectory + "/images/titleEnter");
+		if (pcPath == null) pcPath = getValidPCPath("mods/images/titleEnter");
+		if (pcPath == null) pcPath = getValidPCPath("assets/images/titleEnter");
+		
+		if (pcPath != null) {
+		    var xmlPath = pcPath.endsWith(".png") ? StringTools.replace(pcPath, ".png", ".xml") : StringTools.replace(pcPath, ".astc", ".xml");
+		    var xmlData = FileSystem.exists(xmlPath) ? File.getContent(xmlPath) : null;
+		    var imgGraphic = File.getBitmapData(pcPath);
+		
+		    if (imgGraphic != null && xmlData != null)
+		        titleText.frames = FlxAtlasFrames.fromSparrow(imgGraphic, xmlData);
+		    else
+		        titleText.frames = Paths.getSparrowAtlas('titleEnter');
+		} else {
+		    titleText.frames = Paths.getSparrowAtlas('titleEnter');
+		}
+		#else
 		titleText.frames = Paths.getSparrowAtlas('titleEnter');
+		#end
+		
 		var animFrames:Array<FlxFrame> = [];
 		@:privateAccess {
-			titleText.animation.findByPrefix(animFrames, "ENTER IDLE");
-			titleText.animation.findByPrefix(animFrames, "ENTER FREEZE");
+		    titleText.animation.findByPrefix(animFrames, "ENTER IDLE");
+		    titleText.animation.findByPrefix(animFrames, "ENTER FREEZE");
 		}
 		
 		if (animFrames.length > 0) {
-			newTitle = true;
-			
-			titleText.animation.addByPrefix('idle', "ENTER IDLE", 24);
-			titleText.animation.addByPrefix('press', ClientPrefs.data.flashing ? "ENTER PRESSED" : "ENTER FREEZE", 24);
-		}
-		else {
-			newTitle = false;
-			
-			titleText.animation.addByPrefix('idle', "Press Enter to Begin", 24);
-			titleText.animation.addByPrefix('press', "ENTER PRESSED", 24);
+		    newTitle = true;
+		    titleText.animation.addByPrefix('idle', "ENTER IDLE", 24);
+		    titleText.animation.addByPrefix('press', ClientPrefs.data.flashing ? "ENTER PRESSED" : "ENTER FREEZE", 24);
+		} else {
+		    newTitle = false;
+		    titleText.animation.addByPrefix('idle', "Press Enter to Begin", 24);
+		    titleText.animation.addByPrefix('press', "ENTER PRESSED", 24);
 		}
 		
 		titleText.animation.play('idle');
 		titleText.updateHitbox();
-		// titleText.screenCenter(X);
 		add(titleText);
 		#end
 
