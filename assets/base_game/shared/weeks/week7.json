@@ -1,0 +1,22 @@
+{
+	"songs": [
+		["Ugh", "tankman", [246, 128, 4]],
+		["Guns", "tankman", [246, 128, 4]],
+		["Stress", "tankman", [246, 128, 4]]
+	],
+
+	"weekCharacters": [
+		"tankman",
+		"bf",
+		"gf"
+	],
+	"weekBackground": "tank",
+
+	"storyName": "Tankman",
+	"weekBefore": "week6",
+	"weekName": "Week 7",
+	"startUnlocked": true,
+
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}
