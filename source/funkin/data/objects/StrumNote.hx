@@ -26,7 +26,7 @@ class StrumNote extends FlxSprite
 
 	public var useRGBShader:Bool = true;
 	public function new(x:Float, y:Float, leData:Int, player:Int) {
-		animation = new PsychAnimationController(this);
+		animation = new ModAnimationController(this);
 
 		rgbShader = new RGBShaderReference(this, Note.initializeGlobalRGBShader(leData));
 		rgbShader.enabled = false;
