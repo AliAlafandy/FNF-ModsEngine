@@ -1017,7 +1017,7 @@ class FunkinLua {
 			game.modchartSprites.set(tag, leSprite);
 		});
 		Lua_helper.add_callback(lua, "makeVideoSprite", function(tag:String, video:String, x:Float = 0, y:Float = 0, camera:String = "game", loop:Bool = false) {
-			var spr = new VideoSprite(x, y);
+			var spr:VideoSprite = new VideoSprite(x, y);
 			spr.camera = LuaUtils.cameraFromString(camera);
 			spr.play(video, loop);
 
