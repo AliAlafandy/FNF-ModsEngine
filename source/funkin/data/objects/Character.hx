@@ -85,7 +85,7 @@ class Character extends FlxSprite
 	{
 		super(x, y);
 
-		animation = new PsychAnimationController(this);
+		animation = new ModAnimationController(this);
 
 		animOffsets = new Map<String, Array<Dynamic>>();
 		curCharacter = character;
