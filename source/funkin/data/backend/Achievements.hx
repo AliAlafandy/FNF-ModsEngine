@@ -166,7 +166,7 @@ class Achievements {
 	inline public static function isUnlocked(name:String)
 		return achievementsUnlocked.contains(name);
 
-	@:allow(objects.AchievementPopup)
+	@:allow(funkin.data.objects.AchievementPopup)
 	private static var _popups:Array<AchievementPopup> = [];
 
 	public static var showingPopups(get, never):Bool;
