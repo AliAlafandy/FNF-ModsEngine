@@ -1017,30 +1017,46 @@ class FunkinLua {
 			game.modchartSprites.set(tag, leSprite);
 		});
 		Lua_helper.add_callback(lua, "makeVideoSprite", function(tag:String, video:String, x:Float = 0, y:Float = 0, camera:String = "game", loop:Bool = false) {
-			var spr:VideoSprite = new VideoSprite(x, y);
-			spr.camera = LuaUtils.cameraFromString(camera);
-			spr.play(video, loop);
-
-			PlayState.instance.modchartSprites.set(tag, spr);
-			PlayState.instance.add(spr);
+    		if(game.modchartSprites.exists(tag))
+			{
+        		game.modchartSprites.remove(tag);
+			}
+    		var spr:VideoSprite = new VideoSprite(x, y);
+    		spr.cameras = [LuaUtils.cameraFromString(camera)];
+    		spr.play(video, loop);
+    		game.modchartSprites.set(tag, spr);
+    		game.add(spr);
 		});
 
 		Lua_helper.add_callback(lua, "pauseVideoSprite", function(tag:String) {
-			var spr:VideoSprite = cast PlayState.instance.modchartSprites.get(tag);
-			if(spr != null && spr.video != null) spr.video.pause();
+    		if(!game.modchartSprites.exists(tag))
+			{
+        		return;
+			}
+    		var spr:ModchartSprite = game.modchartSprites.get(tag);
+    		if(Std.isOfType(spr, VideoSprite))
+        		cast(spr, VideoSprite).pause();
 		});
 		Lua_helper.add_callback(lua, "resumeVideoSprite", function(tag:String) {
-			var spr:VideoSprite = cast PlayState.instance.modchartSprites.get(tag);
-			if(spr != null && spr.video != null) spr.video.resume();
+    		if(!game.modchartSprites.exists(tag))
+			{
+        		return;
+			}
+    		var spr:ModchartSprite = game.modchartSprites.get(tag);
+    		if(Std.isOfType(spr, VideoSprite))
+			{
+        		cast(spr, VideoSprite).resume();
+			}
 		});
 		Lua_helper.add_callback(lua, "removeVideoSprite", function(tag:String) {
-			var spr:VideoSprite = cast PlayState.instance.modchartSprites.get(tag);
-			if(spr != null)
+    		if(!game.modchartSprites.exists(tag))
 			{
-				spr.destroy();
-				PlayState.instance.remove(spr, true);
-				PlayState.instance.modchartSprites.remove(tag);
+        		return;
 			}
+    		var spr:ModchartSprite = game.modchartSprites.get(tag);
+    		game.remove(spr, true);
+    		spr.destroy();
+    		game.modchartSprites.remove(tag);
 		});
 
 		Lua_helper.add_callback(lua, "makeGraphic", function(obj:String, width:Int = 256, height:Int = 256, color:String = 'FFFFFF') {
