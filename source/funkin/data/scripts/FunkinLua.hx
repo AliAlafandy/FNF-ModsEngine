@@ -23,6 +23,7 @@ import funkin.data.objects.StrumNote;
 import funkin.data.objects.Note;
 import funkin.data.objects.NoteSplash;
 import funkin.data.objects.Character;
+import funkin.data.objects.VideoSprite;
 
 import funkin.states.MainMenuState;
 import funkin.states.StoryMenuState;
