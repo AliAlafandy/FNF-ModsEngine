@@ -398,15 +398,15 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
-			case 'stage': new states.stages.StageWeek1(); //Week 1
-			case 'spooky': new states.stages.Spooky(); //Week 2
-			case 'philly': new states.stages.Philly(); //Week 3
-			case 'limo': new states.stages.Limo(); //Week 4
-			case 'mall': new states.stages.Mall(); //Week 5 - Cocoa, Eggnog
-			case 'mallEvil': new states.stages.MallEvil(); //Week 5 - Winter Horrorland
-			case 'school': new states.stages.School(); //Week 6 - Senpai, Roses
-			case 'schoolEvil': new states.stages.SchoolEvil(); //Week 6 - Thorns
-			case 'tank': new states.stages.Tank(); //Week 7 - Ugh, Guns, Stress
+			case 'stage': new funkin.states.stages.StageWeek1(); //Week 1
+			case 'spooky': new funkin.states.stages.Spooky(); //Week 2
+			case 'philly': new funkin.states.stages.Philly(); //Week 3
+			case 'limo': new funkin.states.stages.Limo(); //Week 4
+			case 'mall': new funkin.states.stages.Mall(); //Week 5 - Cocoa, Eggnog
+			case 'mallEvil': new funkin.states.stages.MallEvil(); //Week 5 - Winter Horrorland
+			case 'school': new funkin.states.stages.School(); //Week 6 - Senpai, Roses
+			case 'schoolEvil': new funkin.states.stages.SchoolEvil(); //Week 6 - Thorns
+			case 'tank': new funkin.states.stages.Tank(); //Week 7 - Ugh, Guns, Stress
 		}
 
 		if(isPixelStage) {
@@ -418,7 +418,7 @@ class PlayState extends MusicBeatState
 		add(boyfriendGroup);
 
 		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
-		luaDebugGroup = new FlxTypedGroup<psychlua.DebugLuaText>();
+		luaDebugGroup = new FlxTypedGroup<funkin.data.scripts.DebugLuaText>();
 		luaDebugGroup.cameras = [camOther];
 		add(luaDebugGroup);
 		#end
@@ -782,14 +782,14 @@ class PlayState extends MusicBeatState
 
 	#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
 	public function addTextToDebug(text:String, color:FlxColor) {
-		var newText:psychlua.DebugLuaText = luaDebugGroup.recycle(psychlua.DebugLuaText);
+		var newText:funkin.data.scripts.DebugLuaText = luaDebugGroup.recycle(psychlua.DebugLuaText);
 		newText.text = text;
 		newText.color = color;
 		newText.disableTime = 6;
 		newText.alpha = 1;
 		newText.setPosition(10, 8 - newText.height);
 
-		luaDebugGroup.forEachAlive(function(spr:psychlua.DebugLuaText) {
+		luaDebugGroup.forEachAlive(function(spr:funkin.data.scripts.DebugLuaText) {
 			spr.y += newText.height + 2;
 		});
 		luaDebugGroup.add(newText);
