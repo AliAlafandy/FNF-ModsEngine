@@ -26,7 +26,7 @@ class NoteSplash extends FlxSprite
 	public function new(x:Float = 0, y:Float = 0) {
 		super(x, y);
 
-		animation = new PsychAnimationController(this);
+		animation = new ModAnimationController(this);
 
 		var skin:String = null;
 		if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) skin = PlayState.SONG.splashSkin;
