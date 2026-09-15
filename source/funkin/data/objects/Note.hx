@@ -209,7 +209,7 @@ class Note extends FlxSprite
 	{
 		super();
 
-		animation = new PsychAnimationController(this);
+		animation = new ModAnimationController(this);
 
 		antialiasing = ClientPrefs.data.antialiasing;
 		if(createdFrom == null) createdFrom = PlayState.instance;
