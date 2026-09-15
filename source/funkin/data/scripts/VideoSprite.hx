@@ -1,6 +1,4 @@
-package funkin.data.objects;
-
-import funkin.data.scripts.ModchartSprite as ModChartSprite;
+package funkin.data.scripts;
 
 #if VIDEOS_ALLOWED
 #if (hxCodec >= "3.0.0")
@@ -14,7 +12,7 @@ import vlc.MP4Handler as VideoHandler;
 #end
 #end
 
-class VideoSprite extends ModChartSprite
+class VideoSprite extends FlxSprite
 {
 	public var video:VideoHandler;
 
