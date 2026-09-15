@@ -89,12 +89,12 @@ class HScript extends SScript
 		set('FlxMath', flixel.math.FlxMath);
 		set('FlxSprite', flixel.FlxSprite);
 		set('FlxCamera', flixel.FlxCamera);
-		set('ModCamera', backend.ModCamera);
+		set('ModCamera', funkin.data.backend.ModCamera);
 		set('FlxTimer', flixel.util.FlxTimer);
 		set('FlxTween', flixel.tweens.FlxTween);
 		set('FlxEase', flixel.tweens.FlxEase);
 		set('FlxColor', CustomFlxColor);
-		set('Countdown', backend.BaseStage.Countdown);
+		set('Countdown', funkin.data.backend.BaseStage.Countdown);
 		set('PlayState', PlayState);
 		set('Paths', Paths);
 		set('StorageUtil', StorageUtil);
@@ -105,7 +105,7 @@ class HScript extends SScript
 		#end
 		set('Character', Character);
 		set('Alphabet', Alphabet);
-		set('Note', objects.Note);
+		set('Note', funkin.data.objects.Note);
 		set('CustomSubstate', CustomSubstate);
 		#if (!flash && sys)
 		set('FlxRuntimeShader', flixel.addons.display.FlxRuntimeShader);
