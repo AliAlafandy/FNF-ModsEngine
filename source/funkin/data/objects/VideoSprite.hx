@@ -16,13 +16,13 @@ import vlc.MP4Handler as VideoHandler;
 
 class VideoSprite extends FlxSprite
 {
-	public var video:FlxVideo;
+	public var video:VideoHandler;
 
 	public function new(x:Float = 0, y:Float = 0)
 	{
 		super(x, y);
 
-		video = new FlxVideo();
+		video = new VideoHandler();
 		video.alpha = 0;
 	}
 
