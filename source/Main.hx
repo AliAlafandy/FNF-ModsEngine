@@ -14,7 +14,7 @@ import openfl.display.StageScaleMode;
 import lime.system.System as LimeSystem;
 import lime.app.Application;
 import funkin.states.TitleState;
-import mobile.data.backend.MobileScaleMode;
+import mobile.funkin.data.backend.MobileScaleMode;
 import openfl.events.KeyboardEvent;
 #if COPYSTATE_ALLOWED
 import funkin.states.CopyState;
