@@ -213,7 +213,7 @@ class ChartingState extends MusicBeatState
 				gfVersion: 'gf',
 				speed: 1,
 				stage: 'stage',
-				format: 'Mods Engine v${states.MainMenuState.modsEngineVersion}'
+				format: 'Mods Engine v${funkin.states.MainMenuState.modsEngineVersion}'
 			};
 			addSection();
 			PlayState.SONG = _song;
@@ -2066,7 +2066,7 @@ class ChartingState extends MusicBeatState
 				playtesting = true;
 				playtestingTime = Conductor.songPosition;
 				playtestingOnComplete = FlxG.sound.music.onComplete;
-				openSubState(new states.editors.EditorPlayState(playbackSpeed));
+				openSubState(new funkin.states.editors.EditorPlayState(playbackSpeed));
 			}
 			else if (FlxG.keys.justPressed.ENTER)
 			{
@@ -2124,7 +2124,7 @@ class ChartingState extends MusicBeatState
 				// Protect against lost data when quickly leaving the chart editor.
 				autosaveSong();
 				PlayState.chartingMode = false;
-				MusicBeatState.switchState(new states.editors.MasterEditorMenu());
+				MusicBeatState.switchState(new funkin.states.editors.MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				FlxG.mouse.visible = false;
 				return;
@@ -2586,7 +2586,7 @@ class ChartingState extends MusicBeatState
 	override function destroy()
 	{
 		Note.globalRgbShaders = [];
-		backend.NoteTypesConfig.clearNoteTypesData();
+		funkin.data.backend.NoteTypesConfig.clearNoteTypesData();
 		super.destroy();
 	}
 
