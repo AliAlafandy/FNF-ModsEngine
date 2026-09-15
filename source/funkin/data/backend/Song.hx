@@ -86,6 +86,11 @@ class Song
 				}
 			}
 		}
+
+		if (songJson.song.format == null)
+		{
+    		songJson.song.format = "Mods Engine v" + MainMenuState.modsEngineVersion;
+		}
 	}
 
 	public function new(song, notes, bpm)
@@ -98,11 +103,6 @@ class Song
 	public static function loadFromJson(jsonInput:String, ?folder:String):SwagSong
 	{
 		var rawJson = null;
-
-		if (songJson.song.format == null)
-		{
-    		songJson.song.format = "Mods Engine v" + MainMenuState.modsEngineVersion;
-		}
 
 		var formattedFolder:String = Paths.formatToSongPath(folder);
 		var formattedSong:String = Paths.formatToSongPath(jsonInput);
