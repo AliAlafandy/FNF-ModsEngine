@@ -782,7 +782,7 @@ class PlayState extends MusicBeatState
 
 	#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
 	public function addTextToDebug(text:String, color:FlxColor) {
-		var newText:funkin.data.scripts.DebugLuaText = luaDebugGroup.recycle(psychlua.DebugLuaText);
+		var newText:funkin.data.scripts.DebugLuaText = luaDebugGroup.recycle(funkin.data.scripts.DebugLuaText);
 		newText.text = text;
 		newText.color = color;
 		newText.disableTime = 6;
