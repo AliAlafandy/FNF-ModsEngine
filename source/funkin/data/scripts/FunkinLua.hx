@@ -23,7 +23,6 @@ import funkin.data.objects.StrumNote;
 import funkin.data.objects.Note;
 import funkin.data.objects.NoteSplash;
 import funkin.data.objects.Character;
-import funkin.data.objects.VideoSprite;
 
 import funkin.states.MainMenuState;
 import funkin.states.StoryMenuState;
@@ -41,6 +40,7 @@ import funkin.data.scripts.HScript;
 
 import funkin.data.scripts.DebugLuaText;
 import funkin.data.scripts.ModchartSprite;
+import funkin.data.scripts.VideoSprite;
 
 import flixel.input.keyboard.FlxKey;
 import flixel.input.gamepad.FlxGamepadInputID;
@@ -1016,47 +1016,31 @@ class FunkinLua {
 			LuaUtils.loadFrames(leSprite, image, spriteType);
 			game.modchartSprites.set(tag, leSprite);
 		});
-		Lua_helper.add_callback(lua, "makeVideoSprite", function(tag:String, video:String, x:Float = 0, y:Float = 0, camera:String = "game", loop:Bool = false) {
-    		if(game.modchartSprites.exists(tag))
-			{
-        		game.modchartSprites.remove(tag);
-			}
-    		var spr:VideoSprite = new VideoSprite(x, y);
-    		spr.cameras = [LuaUtils.cameraFromString(camera)];
-    		spr.play(video, loop);
-    		game.modchartSprites.set(tag, spr);
-    		game.add(spr);
+		Lua_helper.add_callback(lua, "makeVideoSprite", function(tag:String, video:String, ?x:Float = 0, ?y:Float = 0, ?camera:String = "game", ?loop:Bool = false) {
+    		var leSprite:VideoSprite = new VideoSprite(x, y);
+			leSprite.camera = LuaUtils.cameraFromString(camera);
+			leSprite.play(video, loop);
+
+			PlayState.instance.videoSprites.set(tag, leSprite);
+			PlayState.instance.add(leSprite);
 		});
 
 		Lua_helper.add_callback(lua, "pauseVideoSprite", function(tag:String) {
-    		if(!game.modchartSprites.exists(tag))
-			{
-        		return;
-			}
-    		var spr:ModchartSprite = game.modchartSprites.get(tag);
-    		if(Std.isOfType(spr, VideoSprite))
-        		cast(spr, VideoSprite).pause();
+    		var spr:VideoSprite = cast PlayState.instance.videoSprites.get(tag);
+			if(spr != null && spr.video != null) spr.video.pause();
 		});
 		Lua_helper.add_callback(lua, "resumeVideoSprite", function(tag:String) {
-    		if(!game.modchartSprites.exists(tag))
-			{
-        		return;
-			}
-    		var spr:ModchartSprite = game.modchartSprites.get(tag);
-    		if(Std.isOfType(spr, VideoSprite))
-			{
-        		cast(spr, VideoSprite).resume();
-			}
+    		var spr:VideoSprite = cast PlayState.instance.videoSprites.get(tag);
+			if(spr != null && spr.video != null) spr.video.resume();
 		});
 		Lua_helper.add_callback(lua, "removeVideoSprite", function(tag:String) {
-    		if(!game.modchartSprites.exists(tag))
+    		var spr:VideoSprite = cast PlayState.instance.videoSprites.get(tag);
+			if(spr != null)
 			{
-        		return;
+				spr.destroy();
+				PlayState.instance.remove(spr, true);
+				PlayState.instance.videoSprites.remove(tag);
 			}
-    		var spr:ModchartSprite = game.modchartSprites.get(tag);
-    		game.remove(spr, true);
-    		spr.destroy();
-    		game.modchartSprites.remove(tag);
 		});
 
 		Lua_helper.add_callback(lua, "makeGraphic", function(obj:String, width:Int = 256, height:Int = 256, color:String = 'FFFFFF') {
