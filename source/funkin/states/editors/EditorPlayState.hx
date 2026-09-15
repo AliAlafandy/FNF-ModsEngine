@@ -17,7 +17,7 @@ import flixel.input.keyboard.FlxKey;
 import openfl.events.KeyboardEvent;
 
 import haxe.Json;
-import objects.Character;
+import funkin.data.objects.Character;
 import openfl.utils.Assets as OpenFlAssets;
 
 class EditorPlayState extends MusicBeatSubstate
