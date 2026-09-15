@@ -1,6 +1,6 @@
 package funkin.data.objects;
 
-import funkin.data.scripts.ModchartSprite;
+import funkin.data.scripts.ModchartSprite as ModChartSprite;
 
 #if VIDEOS_ALLOWED
 #if (hxCodec >= "3.0.0")
