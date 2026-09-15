@@ -89,7 +89,7 @@ class CreditEditorState extends MusicBeatState
 		add(grpOptions);
 		
 		// var gameCam:FlxCamera = FlxG.camera;
-		camGame = initPsychCamera(); // new FlxCamera
+		camGame = initModCamera(); // new FlxCamera
 		camUI = new FlxCamera();
 		camOther = new FlxCamera();
 		camUI.bgColor.alpha = 0;
@@ -649,7 +649,7 @@ class CreditEditorState extends MusicBeatState
 				}
 				FlxG.mouse.visible = false;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
-				MusicBeatState.switchState(new states.editors.MasterEditorMenu());
+				MusicBeatState.switchState(new funkin.states.editors.MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				quitting = true;
 			}
