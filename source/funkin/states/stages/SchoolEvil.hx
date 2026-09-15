@@ -58,7 +58,7 @@ class SchoolEvil extends BaseStage
 				}
 		}
 	}
-	override function eventPushed(event:objects.Note.EventNote)
+	override function eventPushed(event:funkin.data.objects.Note.EventNote)
 	{
 		// used for preloading assets used on events
 		switch(event.event)
