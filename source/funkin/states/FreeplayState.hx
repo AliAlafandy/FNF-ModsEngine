@@ -58,7 +58,7 @@ class FreeplayState extends MusicBeatState
 		//Paths.clearStoredMemory();
 		//Paths.clearUnusedMemory();
 
-		if(WeekData.weeksList.length < 1)
+		/*if(WeekData.weeksList.length < 1)
 		{
 			FlxTransitionableState.skipNextTransIn = true;
 			persistentUpdate = false;
@@ -74,7 +74,7 @@ class FreeplayState extends MusicBeatState
 			#end
 
 			return;
-		}
+		}*/
 		
 		persistentUpdate = true;
 		PlayState.isStoryMode = false;
