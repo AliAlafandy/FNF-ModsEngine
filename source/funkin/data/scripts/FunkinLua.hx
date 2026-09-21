@@ -1040,13 +1040,13 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "pauseVideoSprite", function(tag:String) {
 			#if VIDEOS_ALLOWED
     		var spr:VideoSprite = cast PlayState.instance.videoSprites.get(tag);
-			if(spr != null && spr.video != null) spr.video.pause();
+			if(spr != null) spr.pause();
 			#end
 		});
 		Lua_helper.add_callback(lua, "resumeVideoSprite", function(tag:String) {
 			#if VIDEOS_ALLOWED
     		var spr:VideoSprite = cast PlayState.instance.videoSprites.get(tag);
-			if(spr != null && spr.video != null) spr.video.resume();
+			if(spr != null) spr.resume();
 			#end
 		});
 		Lua_helper.add_callback(lua, "removeVideoSprite", function(tag:String) {
