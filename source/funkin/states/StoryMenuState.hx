@@ -46,7 +46,7 @@ class StoryMenuState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
-		if(WeekData.weeksList.length < 1)
+		/*if(WeekData.weeksList.length < 1)
 		{
 			FlxTransitionableState.skipNextTransIn = true;
 			persistentUpdate = false;
@@ -62,7 +62,7 @@ class StoryMenuState extends MusicBeatState
 			#end
 
 			return;
-		}
+		}*/
 
 		PlayState.isStoryMode = true;
 		WeekData.reloadWeekFiles(true);
