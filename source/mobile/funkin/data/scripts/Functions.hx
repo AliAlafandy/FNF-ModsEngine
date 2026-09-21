@@ -326,7 +326,7 @@ class AndroidFunctions
 		Lua_helper.add_callback(lua, "menuPressed", FlxG.android.pressed.MENU);
 		Lua_helper.add_callback(lua, "menuJustReleased", FlxG.android.justReleased.MENU);
 
-		Lua_helper.add_callback(lua, "getCurrentOrientation", () -> PsychJNI.getCurrentOrientationAsString());
+		Lua_helper.add_callback(lua, "getCurrentOrientation", () -> ModJNI.getCurrentOrientationAsString());
 		Lua_helper.add_callback(lua, "setOrientation", function(?hint:String):Void
 		{
 			switch (hint.toLowerCase())
@@ -344,7 +344,7 @@ class AndroidFunctions
 			}
 			if (hint == null)
 				return FunkinLua.luaTrace('setOrientation: No orientation specified.');
-			PsychJNI.setOrientation(FlxG.stage.stageWidth, FlxG.stage.stageHeight, false, hint);
+			ModJNI.setOrientation(FlxG.stage.stageWidth, FlxG.stage.stageHeight, false, hint);
 		});
 
 		Lua_helper.add_callback(lua, "minimizeWindow", () -> AndroidTools.minimizeWindow());
@@ -364,24 +364,24 @@ class AndroidFunctions
 			AndroidToast.makeText(text, duration, -1, xOffset, yOffset);
 		});
 
-		Lua_helper.add_callback(lua, "isScreenKeyboardShown", () -> PsychJNI.isScreenKeyboardShown());
+		Lua_helper.add_callback(lua, "isScreenKeyboardShown", () -> ModJNI.isScreenKeyboardShown());
 
-		Lua_helper.add_callback(lua, "clipboardHasText", () -> PsychJNI.clipboardHasText());
-		Lua_helper.add_callback(lua, "clipboardGetText", () -> PsychJNI.clipboardGetText());
+		Lua_helper.add_callback(lua, "clipboardHasText", () -> ModJNI.clipboardHasText());
+		Lua_helper.add_callback(lua, "clipboardGetText", () -> ModJNI.clipboardGetText());
 		Lua_helper.add_callback(lua, "clipboardSetText", function(?text:String):Void
 		{
 			if (text != null)
 				return FunkinLua.luaTrace('clipboardSetText: No text specified.');
-			PsychJNI.clipboardSetText(text);
+			ModJNI.clipboardSetText(text);
 		});
 
-		Lua_helper.add_callback(lua, "manualBackButton", () -> PsychJNI.manualBackButton());
+		Lua_helper.add_callback(lua, "manualBackButton", () -> ModJNI.manualBackButton());
 
 		Lua_helper.add_callback(lua, "setActivityTitle", function(text:String):Void
 		{
 			if (text != null)
 				return FunkinLua.luaTrace('setActivityTitle: No text specified.');
-			PsychJNI.setActivityTitle(text);
+			ModJNI.setActivityTitle(text);
 		});
 	}
 }
