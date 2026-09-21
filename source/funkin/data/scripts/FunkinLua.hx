@@ -14,7 +14,15 @@ import flixel.FlxObject;
 import flixel.addons.transition.FlxTransitionableState;
 
 #if VIDEOS_ALLOWED
-import hxcodec.flixel.FlxVideoSprite;
+#if (hxCodec >= "3.0.0")
+import hxcodec.flixel.FlxVideoSprite as VideoSprite;
+#elseif (hxCodec >= "2.6.1")
+import hxCodec.VideoSprite as VideoSprite;
+#elseif (hxCodec == "2.6.0")
+import VideoSprite;
+#else
+import vlc.MP4Sprite as VideoSprite;
+#end
 #end
 
 #if (!flash && sys)
@@ -1021,7 +1029,7 @@ class FunkinLua {
 		});
 		Lua_helper.add_callback(lua, "makeVideoSprite", function(tag:String, video:String, ?x:Float = 0, ?y:Float = 0, ?loop:Bool = false) {
 			#if VIDEOS_ALLOWED
-    		var leSprite:FlxVideoSprite = new FlxVideoSprite(x, y);
+    		var leSprite:VideoSprite = new VideoSprite(x, y);
 			leSprite.play(video, loop);
 
 			PlayState.instance.videoSprites.set(tag, leSprite);
@@ -1031,19 +1039,19 @@ class FunkinLua {
 
 		Lua_helper.add_callback(lua, "pauseVideoSprite", function(tag:String) {
 			#if VIDEOS_ALLOWED
-    		var spr:FlxVideoSprite = cast PlayState.instance.videoSprites.get(tag);
+    		var spr:VideoSprite = cast PlayState.instance.videoSprites.get(tag);
 			if(spr != null && spr.video != null) spr.video.pause();
 			#end
 		});
 		Lua_helper.add_callback(lua, "resumeVideoSprite", function(tag:String) {
 			#if VIDEOS_ALLOWED
-    		var spr:FlxVideoSprite = cast PlayState.instance.videoSprites.get(tag);
+    		var spr:VideoSprite = cast PlayState.instance.videoSprites.get(tag);
 			if(spr != null && spr.video != null) spr.video.resume();
 			#end
 		});
 		Lua_helper.add_callback(lua, "removeVideoSprite", function(tag:String) {
 			#if VIDEOS_ALLOWED
-    		var spr:FlxVideoSprite = cast PlayState.instance.videoSprites.get(tag);
+    		var spr:VideoSprite = cast PlayState.instance.videoSprites.get(tag);
 			if(spr != null)
 			{
 				spr.destroy();
