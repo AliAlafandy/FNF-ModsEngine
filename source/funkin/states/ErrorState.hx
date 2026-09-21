@@ -52,6 +52,11 @@ class ErrorState extends MusicBeatState
 		errorText.screenCenter();
 		add(errorText);
 		super.create();
+
+		#if mobile
+		addTouchPad('NONE', 'A_B');
+		addTouchPadCamera();
+		#end
 	}
 
 	override function update(elapsed:Float)
