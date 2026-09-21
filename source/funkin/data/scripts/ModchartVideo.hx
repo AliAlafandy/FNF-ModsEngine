@@ -10,7 +10,6 @@ import VideoSprite; // as VideoSprite
 #else
 import vlc.MP4Sprite as VideoSprite;
 #end
-#end
 
 class ModchartVideo extends VideoSprite
 {
@@ -19,3 +18,4 @@ class ModchartVideo extends VideoSprite
 		super(x, y);
 	}
 }
+#end
