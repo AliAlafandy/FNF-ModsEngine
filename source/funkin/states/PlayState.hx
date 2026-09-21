@@ -2409,13 +2409,12 @@ class PlayState extends MusicBeatState
 					{
 						lyricsText.color = CoolUtil.colorFromString(value2);
 					} else {
-						var who:Character;
 						var daddyColor:FlxColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
 						var bfColor:FlxColor = FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]);
-						if(who == dad) {
+						if(SONG.notes[curSection].mustHitSection == false) {
 							lyricsText.color = daddyColor;
 						}
-						if(who == boyfriend) {
+						if(SONG.notes[curSection].mustHitSection == true) {
 							lyricsText.color = bfColor;
 						}
 					}
