@@ -13,6 +13,10 @@ import flixel.FlxBasic;
 import flixel.FlxObject;
 import flixel.addons.transition.FlxTransitionableState;
 
+#if VIDEOS_ALLOWED
+import hxcodec.flixel.FlxVideoSprite;
+#end
+
 #if (!flash && sys)
 import flixel.addons.display.FlxRuntimeShader;
 #end
@@ -40,7 +44,6 @@ import funkin.data.scripts.HScript;
 
 import funkin.data.scripts.DebugLuaText;
 import funkin.data.scripts.ModchartSprite;
-import funkin.data.scripts.VideoSprite;
 
 import flixel.input.keyboard.FlxKey;
 import flixel.input.gamepad.FlxGamepadInputID;
@@ -1016,31 +1019,38 @@ class FunkinLua {
 			LuaUtils.loadFrames(leSprite, image, spriteType);
 			game.modchartSprites.set(tag, leSprite);
 		});
-		Lua_helper.add_callback(lua, "makeVideoSprite", function(tag:String, video:String, ?x:Float = 0, ?y:Float = 0, ?camera:String = "game", ?loop:Bool = false) {
-    		var leSprite:VideoSprite = new VideoSprite(x, y);
-			leSprite.camera = LuaUtils.cameraFromString(camera);
+		Lua_helper.add_callback(lua, "makeVideoSprite", function(tag:String, video:String, ?x:Float = 0, ?y:Float = 0, ?loop:Bool = false) {
+			#if VIDEOS_ALLOWED
+    		var leSprite:FlxVideoSprite = new FlxVideoSprite(x, y);
 			leSprite.play(video, loop);
 
 			PlayState.instance.videoSprites.set(tag, leSprite);
 			PlayState.instance.add(leSprite);
+			#end
 		});
 
 		Lua_helper.add_callback(lua, "pauseVideoSprite", function(tag:String) {
-    		var spr:VideoSprite = cast PlayState.instance.videoSprites.get(tag);
+			#if VIDEOS_ALLOWED
+    		var spr:FlxVideoSprite = cast PlayState.instance.videoSprites.get(tag);
 			if(spr != null && spr.video != null) spr.video.pause();
+			#end
 		});
 		Lua_helper.add_callback(lua, "resumeVideoSprite", function(tag:String) {
-    		var spr:VideoSprite = cast PlayState.instance.videoSprites.get(tag);
+			#if VIDEOS_ALLOWED
+    		var spr:FlxVideoSprite = cast PlayState.instance.videoSprites.get(tag);
 			if(spr != null && spr.video != null) spr.video.resume();
+			#end
 		});
 		Lua_helper.add_callback(lua, "removeVideoSprite", function(tag:String) {
-    		var spr:VideoSprite = cast PlayState.instance.videoSprites.get(tag);
+			#if VIDEOS_ALLOWED
+    		var spr:FlxVideoSprite = cast PlayState.instance.videoSprites.get(tag);
 			if(spr != null)
 			{
 				spr.destroy();
 				PlayState.instance.remove(spr, true);
 				PlayState.instance.videoSprites.remove(tag);
 			}
+			#end
 		});
 
 		Lua_helper.add_callback(lua, "makeGraphic", function(obj:String, width:Int = 256, height:Int = 256, color:String = 'FFFFFF') {
