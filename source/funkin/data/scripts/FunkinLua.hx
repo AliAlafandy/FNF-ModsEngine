@@ -40,6 +40,7 @@ import funkin.data.scripts.HScript;
 
 import funkin.data.scripts.DebugLuaText;
 import funkin.data.scripts.ModchartSprite;
+import funkin.data.scripts.ModchartVideo;
 
 import flixel.input.keyboard.FlxKey;
 import flixel.input.gamepad.FlxGamepadInputID;
@@ -1017,7 +1018,7 @@ class FunkinLua {
 		});
 		Lua_helper.add_callback(lua, "makeVideoSprite", function(tag:String, video:String, ?x:Float = 0, ?y:Float = 0, ?loop:Bool = false) {
 			#if VIDEOS_ALLOWED
-    		var leSprite:VideoSprite = new VideoSprite(x, y);
+    		var leSprite:ModchartVideo = new ModchartVideo(x, y);
 			leSprite.play(video, loop);
 
 			PlayState.instance.modchartVideos.set(tag, leSprite);
@@ -1027,19 +1028,19 @@ class FunkinLua {
 
 		Lua_helper.add_callback(lua, "pauseVideoSprite", function(tag:String) {
 			#if VIDEOS_ALLOWED
-    		var spr:VideoSprite = cast PlayState.instance.modchartVideos.get(tag);
+    		var spr:ModchartVideo = cast PlayState.instance.modchartVideos.get(tag);
 			if(spr != null) spr.pause();
 			#end
 		});
 		Lua_helper.add_callback(lua, "resumeVideoSprite", function(tag:String) {
 			#if VIDEOS_ALLOWED
-    		var spr:VideoSprite = cast PlayState.instance.modchartVideos.get(tag);
+    		var spr:ModchartVideo = cast PlayState.instance.modchartVideos.get(tag);
 			if(spr != null) spr.resume();
 			#end
 		});
 		Lua_helper.add_callback(lua, "removeVideoSprite", function(tag:String) {
 			#if VIDEOS_ALLOWED
-    		var spr:VideoSprite = cast PlayState.instance.modchartVideos.get(tag);
+    		var spr:ModchartVideo = cast PlayState.instance.modchartVideos.get(tag);
 			if(spr != null)
 			{
 				spr.destroy();
