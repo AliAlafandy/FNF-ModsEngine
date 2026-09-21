@@ -2030,7 +2030,7 @@ class ChartingState extends MusicBeatState
 				playtestingOnComplete = FlxG.sound.music.onComplete;
 				// touchPad.alpha = 0;
 				// touchPad.active = touchPad.visible = false;
-				openSubState(new states.editors.EditorPlayState(playbackSpeed));
+				openSubState(new funkin.states.editors.EditorPlayState(playbackSpeed));
 			}
 			else if (FlxG.keys.justPressed.ENTER || touchPad.buttonA.justPressed)
 			{
@@ -2114,7 +2114,7 @@ class ChartingState extends MusicBeatState
 				// Protect against lost data when quickly leaving the chart editor.
 				autosaveSong();
 				PlayState.chartingMode = false;
-				MusicBeatState.switchState(new states.editors.MasterEditorMenu());
+				MusicBeatState.switchState(new funkin.states.editors.MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				FlxG.mouse.visible = false;
 				return;
