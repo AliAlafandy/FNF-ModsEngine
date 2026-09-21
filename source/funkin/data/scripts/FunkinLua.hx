@@ -15,13 +15,13 @@ import flixel.addons.transition.FlxTransitionableState;
 
 #if VIDEOS_ALLOWED
 #if (hxCodec >= "3.0.0")
-import hxcodec.flixel.FlxVideoSprite as VideoSprite;
+import hxcodec.flixel.FlxVideoSprite;
 #elseif (hxCodec >= "2.6.1")
-import hxCodec.VideoSprite as VideoSprite;
+import hxCodec.VideoSprite as FlxVideoSprite;
 #elseif (hxCodec == "2.6.0")
-import VideoSprite;
+import VideoSprite as FlxVideoSprite;
 #else
-import vlc.MP4Sprite as VideoSprite;
+import vlc.MP4Sprite as FlxVideoSprite;
 #end
 #end
 
@@ -1029,34 +1029,34 @@ class FunkinLua {
 		});
 		Lua_helper.add_callback(lua, "makeVideoSprite", function(tag:String, video:String, ?x:Float = 0, ?y:Float = 0, ?loop:Bool = false) {
 			#if VIDEOS_ALLOWED
-    		var leSprite:VideoSprite = new VideoSprite(x, y);
+    		var leSprite:FlxVideoSprite = new FlxVideoSprite(x, y);
 			leSprite.play(video, loop);
 
-			PlayState.instance.videoSprites.set(tag, leSprite);
+			PlayState.instance.modchartVideos.set(tag, leSprite);
 			PlayState.instance.add(leSprite);
 			#end
 		});
 
 		Lua_helper.add_callback(lua, "pauseVideoSprite", function(tag:String) {
 			#if VIDEOS_ALLOWED
-    		var spr:VideoSprite = cast PlayState.instance.videoSprites.get(tag);
+    		var spr:FlxVideoSprite = cast PlayState.instance.modchartVideos.get(tag);
 			if(spr != null) spr.pause();
 			#end
 		});
 		Lua_helper.add_callback(lua, "resumeVideoSprite", function(tag:String) {
 			#if VIDEOS_ALLOWED
-    		var spr:VideoSprite = cast PlayState.instance.videoSprites.get(tag);
+    		var spr:FlxVideoSprite = cast PlayState.instance.modchartVideos.get(tag);
 			if(spr != null) spr.resume();
 			#end
 		});
 		Lua_helper.add_callback(lua, "removeVideoSprite", function(tag:String) {
 			#if VIDEOS_ALLOWED
-    		var spr:VideoSprite = cast PlayState.instance.videoSprites.get(tag);
+    		var spr:FlxVideoSprite = cast PlayState.instance.modchartVideos.get(tag);
 			if(spr != null)
 			{
 				spr.destroy();
 				PlayState.instance.remove(spr, true);
-				PlayState.instance.videoSprites.remove(tag);
+				PlayState.instance.modchartVideos.remove(tag);
 			}
 			#end
 		});
