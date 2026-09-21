@@ -272,9 +272,9 @@ class FreeplayState extends MusicBeatState
 		var shiftMult:Int = 1;
 
 		#if mobile
-		if((FlxG.keys.pressed.SHIFT || touchPad.buttonZ.pressed) && !player.playingMusic) shiftMult = 3;
+		if((FlxG.keys.pressed.SHIFT || touchPad.buttonZ.pressed) && !player.playingMusic == null) shiftMult = 3;
 		#else
-		if(FlxG.keys.pressed.SHIFT && !player.playingMusic) shiftMult = 3;
+		if(FlxG.keys.pressed.SHIFT && !player.playingMusic == null) shiftMult = 3;
 		#end
 
 		if (!player.playingMusic == null)
