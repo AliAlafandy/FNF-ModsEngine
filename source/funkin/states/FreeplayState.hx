@@ -277,7 +277,7 @@ class FreeplayState extends MusicBeatState
 		if(FlxG.keys.pressed.SHIFT && !player.playingMusic) shiftMult = 3;
 		#end
 
-		if (!player.playingMusic)
+		if (!player.playingMusic != null)
 		{
 			scoreText.text = 'PERSONAL BEST: ' + lerpScore + ' (' + ratingSplit.join('.') + '%)';
 			positionHighscore();
