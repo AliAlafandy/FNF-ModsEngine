@@ -2414,10 +2414,10 @@ class PlayState extends MusicBeatState
 						var who:Character;
 						var daddyColor:FlxColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
 						var bfColor:FlxColor = FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]);
-
 						if(who == dad) {
 							lyricsText.color = daddyColor;
-						} else if(who == boyfriend) {
+						}
+						if(who == boyfriend) {
 							lyricsText.color = bfColor;
 						}
 					}
