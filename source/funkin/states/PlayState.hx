@@ -40,16 +40,16 @@ import openfl.filters.ShaderFilter;
 #if VIDEOS_ALLOWED
 #if (hxCodec >= "3.0.0")
 import hxcodec.flixel.FlxVideo as VideoHandler;
-import hxcodec.flixel.FlxVideoSprite as VideoSprite;
+import hxcodec.flixel.FlxVideoSprite;
 #elseif (hxCodec >= "2.6.1")
-import hxcodec.VideoHandler as VideoHandler;
-import hxCodec.VideoSprite as VideoSprite;
+import hxcodec.VideoHandler; // as VideoHandler
+import hxCodec.VideoSprite as FlxVideoSprite;
 #elseif (hxCodec == "2.6.0")
 import VideoHandler;
-import VideoSprite;
+import VideoSprite as FlxVideoSprite;
 #else
 import vlc.MP4Handler as VideoHandler;
-import vlc.MP4Sprite as VideoSprite;
+import vlc.MP4Sprite as FlxVideoSprite;
 #end
 #end
 
@@ -118,7 +118,7 @@ class PlayState extends MusicBeatState
 	#if LUA_ALLOWED
 	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
 	public var modchartSprites:Map<String, ModchartSprite> = new Map<String, ModchartSprite>();
-	public var videoSprites:Map<String, VideoSprite> = new Map<String, VideoSprite>();
+	public var modchartVideos:Map<String, FlxVideoSprite> = new Map<String, FlxVideoSprite>();
 	public var modchartTimers:Map<String, FlxTimer> = new Map<String, FlxTimer>();
 	public var modchartSounds:Map<String, FlxSound> = new Map<String, FlxSound>();
 	public var modchartTexts:Map<String, FlxText> = new Map<String, FlxText>();
