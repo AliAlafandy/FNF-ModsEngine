@@ -14,7 +14,7 @@ import vlc.MP4Sprite as VideoSprite;
 
 class ModchartVideo extends VideoSprite
 {
-	public function new(x:Float = 0, y:Float = 0)
+	public function new(?x:Float = 0, ?y:Float = 0)
 	{
 		super(x, y);
 	}
