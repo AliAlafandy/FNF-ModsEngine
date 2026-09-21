@@ -13,18 +13,6 @@ import flixel.FlxBasic;
 import flixel.FlxObject;
 import flixel.addons.transition.FlxTransitionableState;
 
-#if VIDEOS_ALLOWED
-#if (hxCodec >= "3.0.0")
-import hxcodec.flixel.FlxVideoSprite as VideoSprite;
-#elseif (hxCodec >= "2.6.1")
-import hxCodec.VideoSprite as VideoSprite;
-#elseif (hxCodec == "2.6.0")
-import VideoSprite; // as VideoSprite
-#else
-import vlc.MP4Sprite as VideoSprite;
-#end
-#end
-
 #if (!flash && sys)
 import flixel.addons.display.FlxRuntimeShader;
 #end
