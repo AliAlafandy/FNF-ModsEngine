@@ -184,6 +184,7 @@ class FunkinLua {
 		// Other settings
 		set('downscroll', ClientPrefs.data.downScroll);
 		set('middlescroll', ClientPrefs.data.middleScroll);
+		set('subtitles', ClientPrefs.data.subTitles);
 		set('framerate', ClientPrefs.data.framerate);
 		set('ghostTapping', ClientPrefs.data.ghostTapping);
 		set('botplayName', ClientPrefs.data.botplayName);
