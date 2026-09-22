@@ -121,18 +121,20 @@ class MainMenuState extends MusicBeatState
 
 		// Mods Engine Old Logo
 		/* modsEngineLogo = new FlxSprite(735, 0).loadGraphic(Paths.image('modsEngineLogoOld'));
-		// modsEngineLogo.scrollFactor.set(0, 0);
+		modsEngineLogo.scrollFactor.set(0, 0);
 		modsEngineLogo.antialiasing = ClientPrefs.data.antialiasing;
-		// modsEngineLogo.setGraphicSize(Std.int(bg.width * 0.32));
+		modsEngineLogo.visible = true;
+		modsEngineLogo.setGraphicSize(Std.int(bg.width * 0.32));
 		modsEngineLogo.updateHitbox();
 		modsEngineLogo.screenCenter(Y);
 		modsEngineLogo.scale.set(0.5, 0.5);
 		add(modsEngineLogo); */
 
 		modsEngineLogo = new FlxSprite(735, 0).loadGraphic(Paths.image('modsEngineLogo'));
-		// modsEngineLogo.scrollFactor.set(0, 0);
+		modsEngineLogo.scrollFactor.set(0, 0);
 		modsEngineLogo.antialiasing = ClientPrefs.data.antialiasing;
-		// modsEngineLogo.setGraphicSize(Std.int(bg.width * 0.32));
+		modsEngineLogo.visible = true;
+		modsEngineLogo.setGraphicSize(Std.int(bg.width * 0.32));
 		modsEngineLogo.updateHitbox();
 		modsEngineLogo.screenCenter(Y);
 		modsEngineLogo.scale.set(0.4, 0.4);
