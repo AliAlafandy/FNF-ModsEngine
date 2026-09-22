@@ -2405,7 +2405,7 @@ class PlayState extends MusicBeatState
 				lyricsText.text = value1;
 
 				if(ClientPrefs.data.hudColor == 'On') {
-					if(value2 == null && value2.length < 0)
+					if(value2 != null && value2.length > 0)
 					{
 						lyricsText.color = CoolUtil.colorFromString(value2);
 					} else {
