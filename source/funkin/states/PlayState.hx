@@ -841,7 +841,8 @@ class PlayState extends MusicBeatState
 
 		if(!SONG.notes[curSection].mustHitSection) {
 			lyricsText.color = dadColor;
-		} else if (SONG.notes[curSection].mustHitSection) {
+		}
+		if (SONG.notes[curSection].mustHitSection) {
 			lyricsText.color = bfColor;
 		}
 	}
@@ -2424,7 +2425,8 @@ class PlayState extends MusicBeatState
 						} else {
 							if(!SONG.notes[curSection].mustHitSection) {
 								reloadSubTitlesColor();
-							} else if (SONG.notes[curSection].mustHitSection) {
+							}
+							if (SONG.notes[curSection].mustHitSection) {
 								reloadSubTitlesColor();
 							}
 						}
