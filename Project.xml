@@ -38,9 +38,9 @@
 	<define name="BASE_GAME_FILES"/>
 	<define name="VIDEOS_ALLOWED" if="desktop || mobile" unless="32bits || hl || NOVIDEO || rpi"/> <!-- i'll keep this cuz it makes vscode think i don't use videos -->
 
-	<!-- <section if="officialBuild">
+	<section if="officialBuild">
 		<define name="TITLE_SCREEN_EASTER_EGG"/>
-	</section> -->
+	</section>
 
 	<!-- ____________________________ Window Settings ___________________________ -->
 
