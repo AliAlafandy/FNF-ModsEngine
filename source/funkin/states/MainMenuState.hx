@@ -120,32 +120,22 @@ class MainMenuState extends MusicBeatState
 		}
 
 		// Mods Engine Old Logo
-		/*
-		modsEngineLogo = new FlxSprite(0).loadGraphic(Paths.image('modsEngineLogoOld'));
-		modsEngineLogo.scrollFactor.x = 0;
-		modsEngineLogo.scrollFactor.y = 0;
+		/* modsEngineLogo = new FlxSprite(735, 0).loadGraphic(Paths.image('modsEngineLogoOld'));
+		// modsEngineLogo.scrollFactor.set(0, 0);
 		modsEngineLogo.antialiasing = ClientPrefs.data.antialiasing;
-		modsEngineLogo.visible = true;
-		modsEngineLogo.setGraphicSize(Std.int(bg.width * 0.32));
+		// modsEngineLogo.setGraphicSize(Std.int(bg.width * 0.32));
 		modsEngineLogo.updateHitbox();
 		modsEngineLogo.screenCenter(Y);
-		modsEngineLogo.x = 735;
-		modsEngineLogo.scale.x = 0.5;
-		modsEngineLogo.scale.y = 0.5;
-		add(modsEngineLogo);
-		*/
+		modsEngineLogo.scale.set(0.5, 0.5);
+		add(modsEngineLogo); */
 
-		modsEngineLogo = new FlxSprite(0).loadGraphic(Paths.image('modsEngineLogo'));
-		modsEngineLogo.scrollFactor.x = 0;
-		modsEngineLogo.scrollFactor.y = 0;
+		modsEngineLogo = new FlxSprite(735, 0).loadGraphic(Paths.image('modsEngineLogo'));
+		// modsEngineLogo.scrollFactor.set(0, 0);
 		modsEngineLogo.antialiasing = ClientPrefs.data.antialiasing;
-		modsEngineLogo.visible = true;
-		modsEngineLogo.setGraphicSize(Std.int(bg.width * 0.32));
+		// modsEngineLogo.setGraphicSize(Std.int(bg.width * 0.32));
 		modsEngineLogo.updateHitbox();
 		modsEngineLogo.screenCenter(Y);
-		modsEngineLogo.x = 735;
-		modsEngineLogo.scale.x = 0.4;
-		modsEngineLogo.scale.y = 0.4;
+		modsEngineLogo.scale.set(0.4, 0.4);
 		add(modsEngineLogo);
 
 		var modsVer:FlxText = new FlxText(12, FlxG.height - 64, 0, "Mods Engine v" + modsEngineVersion, 12);
