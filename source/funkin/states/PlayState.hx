@@ -647,6 +647,7 @@ class PlayState extends MusicBeatState
 			
 			case 'On':
 				reloadHUDColors();
+				reloadSubTitlesColor();
 		}
 
 		#if LUA_ALLOWED
@@ -832,6 +833,17 @@ class PlayState extends MusicBeatState
         	scoreTxt.color = hudColor;
         	botplayTxt.color = hudColor;
     	}
+	}
+
+	public function reloadSubTitlesColor() {
+		var dadColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
+		var bfColor = FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]);
+
+		if(!SONG.notes[curSection].mustHitSection) {
+			lyricsText.color = dadColor;
+		} else if (SONG.notes[curSection].mustHitSection) {
+			lyricsText.color = bfColor;
+		}
 	}
 
 	public function addCharacterToList(newCharacter:String, type:Int) {
@@ -2395,46 +2407,46 @@ class PlayState extends MusicBeatState
 				if(flValue2 == null) flValue2 = 1;
 				FlxG.sound.play(Paths.sound(value1), flValue2);
 
-			case 'Lyrics':
-				if(value1 == null || value1.trim() == "")
-				{
-					lyricsText.visible = false;
-					lyricsBG.visible = false;
-					return;
-				}
-				lyricsText.text = value1;
-
-				if(ClientPrefs.data.hudColor == 'On') {
-					if(value2 != null && value2.length > 0)
+			case 'Subtitles':
+				if(ClientPrefs.data.subTitles) {
+					if(value1 == null || value1.trim() == "")
 					{
-						lyricsText.color = CoolUtil.colorFromString(value2);
+						lyricsText.visible = false;
+						lyricsBG.visible = false;
+						return;
+					}
+					lyricsText.text = value1;
+
+					if(ClientPrefs.data.hudColor == 'On') {
+						if(value2 != null && value2.length > 0)
+						{
+							lyricsText.color = CoolUtil.colorFromString(value2);
+						} else {
+							if(!SONG.notes[curSection].mustHitSection) {
+								reloadSubTitlesColor();
+							} else if (SONG.notes[curSection].mustHitSection) {
+								reloadSubTitlesColor();
+							}
+						}
 					} else {
-						var daddyColor:FlxColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
-						var bfColor:FlxColor = FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]);
-						if(!SONG.notes[curSection].mustHitSection) {
-							lyricsText.color = daddyColor;
-						} else if (SONG.notes[curSection].mustHitSection) {
-							lyricsText.color = bfColor;
+						if(value2 != null && value2.length > 0)
+						{
+							lyricsText.color = CoolUtil.colorFromString(value2);
+						} else {
+							lyricsText.color = FlxColor.WHITE;
 						}
 					}
-				} else {
-					if(value2 != null && value2.length > 0)
-					{
-						lyricsText.color = CoolUtil.colorFromString(value2);
-					} else {
-						lyricsText.color = FlxColor.WHITE;
-					}
+
+					lyricsText.screenCenter(X);
+					lyricsText.y = FlxG.height - 180;
+
+					lyricsBG.makeGraphic(Std.int(lyricsText.width + 16), Std.int(lyricsText.height + 8), FlxColor.BLACK);
+					lyricsBG.alpha = 0.6;
+					lyricsBG.setPosition(lyricsText.x - 8, lyricsText.y - 4);
+
+					lyricsBG.visible = true;
+					lyricsText.visible = true;
 				}
-
-				lyricsText.screenCenter(X);
-				lyricsText.y = FlxG.height - 180;
-
-				lyricsBG.makeGraphic(Std.int(lyricsText.width + 16), Std.int(lyricsText.height + 8), FlxColor.BLACK);
-				lyricsBG.alpha = 0.6;
-				lyricsBG.setPosition(lyricsText.x - 8, lyricsText.y - 4);
-
-				lyricsBG.visible = true;
-				lyricsText.visible = true;
 		}
 
 		stagesFunc(function(stage:BaseStage) stage.eventCalled(eventName, value1, value2, flValue1, flValue2, strumTime));
