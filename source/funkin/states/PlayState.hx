@@ -2411,9 +2411,9 @@ class PlayState extends MusicBeatState
 					} else {
 						var daddyColor:FlxColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
 						var bfColor:FlxColor = FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]);
-						if(SONG.notes[curSection].mustHitSection == false) {
+						if(!SONG.notes[curSection].mustHitSection) {
 							lyricsText.color = daddyColor;
-						} else if (SONG.notes[curSection].mustHitSection == true) {
+						} else if (SONG.notes[curSection].mustHitSection) {
 							lyricsText.color = bfColor;
 						}
 					}
