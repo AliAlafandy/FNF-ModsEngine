@@ -2413,8 +2413,7 @@ class PlayState extends MusicBeatState
 						var bfColor:FlxColor = FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]);
 						if(SONG.notes[curSection].mustHitSection == false) {
 							lyricsText.color = daddyColor;
-						}
-						if(SONG.notes[curSection].mustHitSection == true) {
+						} else if(SONG.notes[curSection].mustHitSection == true) {
 							lyricsText.color = bfColor;
 						}
 					}
