@@ -34,6 +34,12 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 
+		var option:Option = new Option('Subtitles',
+			"If checked, showing subtitles while play",
+			'subTitles',
+			'bool');
+		addOption(option);
+
 		var option:Option = new Option('Bot Play Name:',
 			"'Normal': Nothing change,\n'Song Name': change BOTPLAY to This Song you play it,\n'None': make BOTPLAY not visible.",
 			'botplayName',
