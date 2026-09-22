@@ -87,9 +87,9 @@ class Song
 			}
 		}
 
-		if (songJson.song.format == null)
+		if (songJson.format == null)
 		{
-    		songJson.song.format = "Mods Engine v" + MainMenuState.modsEngineVersion;
+    		songJson.format = "Mods Engine v" + MainMenuState.modsEngineVersion;
 		}
 	}
 
