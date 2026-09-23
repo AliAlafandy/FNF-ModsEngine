@@ -2441,17 +2441,19 @@ class PlayState extends MusicBeatState
 						}
 					}
 
-					var char:Character = dad;
+					var char:Character;
 					var charColor = FlxColor.fromRGB(char.healthColorArray[0], char.healthColorArray[1], char.healthColorArray[2]);
 					switch(value2.toLowerCase().trim()) {
 						case 'bf' | 'boyfriend':
 							char = boyfriend;
+						case 'dad':
+							char = dad;
 						case 'gf' | 'girlfriend':
 							char = gf;
 						default:
-							if(flValue2 == null) flValue2 = 0;
 							switch(Math.round(flValue2)) {
-								case 1: char = boyfriend;
+								case 0: char = boyfriend;
+								case 1: char = dad;
 								case 2: char = gf;
 							}
 					}
