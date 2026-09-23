@@ -89,8 +89,8 @@
 	</section>
 
 	<section if="BASE_GAME_FILES">
-		<assets path="assets/base_game" rename="assets/shared" exclude="*.ogg" if="web"/>
-		<assets path="assets/base_game" rename="assets/shared" exclude="*.mp3" unless="web"/>
+		<assets path="assets/base_game" rename="assets" exclude="*.ogg" if="web"/>
+		<assets path="assets/base_game" rename="assets" exclude="*.mp3" unless="web"/>
 	</section>
 
 	<!-- <library name="videos" preload="true" if="VIDEOS_ALLOWED"/>
