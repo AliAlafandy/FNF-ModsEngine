@@ -837,12 +837,16 @@ class PlayState extends MusicBeatState
 
 	public function reloadSubTitlesColor() {
 		var dadColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
+		var gfColor = FlxColor.fromRGB(gf.healthColorArray[0], gf.healthColorArray[1], gf.healthColorArray[2]);
 		var bfColor = FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]);
 
-		if(!SONG.notes[curSection].mustHitSection) {
+		if(!SONG.notes[sec].mustHitSection) {
 			lyricsText.color = dadColor;
 		}
-		if (SONG.notes[curSection].mustHitSection) {
+		if(SONG.notes[sec].gfSection) {
+			lyricsText.color = gfColor;
+		}
+		if (SONG.notes[sec].mustHitSection) {
 			lyricsText.color = bfColor;
 		}
 	}
@@ -2423,7 +2427,7 @@ class PlayState extends MusicBeatState
 						{
 							lyricsText.color = CoolUtil.colorFromString(value2);
 						} else {
-							if(SONG.notes[curSection].mustHitSection || !SONG.notes[curSection].mustHitSection)
+							if(!SONG.notes[sec].mustHitSection || SONG.notes[sec].gfSection || SONG.notes[sec].mustHitSection)
 							{
 								reloadSubTitlesColor();
 							}
@@ -2435,6 +2439,25 @@ class PlayState extends MusicBeatState
 						} else {
 							lyricsText.color = FlxColor.WHITE;
 						}
+					}
+
+					var char:Character = dad;
+					var charColor = FlxColor.fromRGB(char.healthColorArray[0], char.healthColorArray[1], char.healthColorArray[2]);
+					switch(value2.toLowerCase().trim()) {
+						case 'bf' | 'boyfriend':
+							char = boyfriend;
+						case 'gf' | 'girlfriend':
+							char = gf;
+						default:
+							if(flValue2 == null) flValue2 = 0;
+							switch(Math.round(flValue2)) {
+								case 1: char = boyfriend;
+								case 2: char = gf;
+							}
+					}
+					if (char != null)
+					{
+						lyricsText.color = charColor;
 					}
 
 					lyricsText.screenCenter(X);
