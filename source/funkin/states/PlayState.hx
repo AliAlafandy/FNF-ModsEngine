@@ -2423,10 +2423,8 @@ class PlayState extends MusicBeatState
 						{
 							lyricsText.color = CoolUtil.colorFromString(value2);
 						} else {
-							if(!SONG.notes[curSection].mustHitSection) {
-								reloadSubTitlesColor();
-							}
-							if (SONG.notes[curSection].mustHitSection) {
+							if(SONG.notes[curSection].mustHitSection || !SONG.notes[curSection].mustHitSection)
+							{
 								reloadSubTitlesColor();
 							}
 						}
