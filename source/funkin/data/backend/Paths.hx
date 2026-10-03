@@ -120,7 +120,7 @@ class Paths
 		{
 			var levelPath:String = '';
 			if(currentLevel != 'shared') {
-				levelPath = getLibraryPathForce(file, 'week_assets', currentLevel);
+				levelPath = getLibraryPath(file, currentLevel);
 				if (OpenFlAssets.exists(levelPath, type))
 					return levelPath;
 			}
