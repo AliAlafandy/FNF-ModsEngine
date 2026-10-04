@@ -2443,18 +2443,13 @@ class PlayState extends MusicBeatState
 
 					var char:Character = null;
 					switch(value2.toLowerCase().trim()) {
-						case 'bf' | 'boyfriend':
+						case 'bf' | 'boyfriend' | '0':
 							char = boyfriend;
-						case 'dad':
+						case 'dad' | '1':
 							char = dad;
-						case 'gf' | 'girlfriend':
+						case 'gf' | 'girlfriend' | '2':
 							char = gf;
-						default:
-							switch(Math.round(flValue2)) {
-								case 0: char = boyfriend;
-								case 1: char = dad;
-								case 2: char = gf;
-							}
+						// default: // nothing
 					}
 					if (char != null)
 					{
