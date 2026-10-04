@@ -13,22 +13,22 @@ jobs:
             os: windows-2022
             buildArgs: windows
             artifactName: Windows x64
-            artifactPath: export\release\windows\bin\*
+            artifactPath: export\release\windows\bin
           - name: Windows x32
             os: windows-2022
             buildArgs: "windows -32 -D HXCPP_M32 -D 32bits"
             artifactName: Windows x32
-            artifactPath: export\32bit\windows\bin\*
+            artifactPath: export\32bit\windows\bin
           - name: Linux
             os: ubuntu-22.04
             buildArgs: linux
             artifactName: Linux
-            artifactPath: export/release/linux/bin/*
+            artifactPath: export/release/linux/bin
           - name: MacOS
             os: macos-15
             buildArgs: mac
             artifactName: MacOS
-            artifactPath: export/release/macos/bin/*
+            artifactPath: export/release/macos/bin
           - name: Android x64
             os: ubuntu-22.04
             buildArgs: "android -ONLY_ARM64"
