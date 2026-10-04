@@ -1127,6 +1127,7 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "addLuaSprite", function(tag:String, front:Bool = false) {
 			var mySprite:FlxSprite = null;
 			if(game.modchartSprites.exists(tag)) mySprite = game.modchartSprites.get(tag);
+			else if(game.modchartVideos.exists(tag)) mySprite = game.modchartVideos.get(tag);
 			else if(game.variables.exists(tag)) mySprite = game.variables.get(tag);
 
 			if(mySprite == null) return false;
@@ -1545,10 +1546,22 @@ class FunkinLua {
 			return closed;
 		});
 
-		#if DISCORD_ALLOWED DiscordClient.addLuaCallbacks(lua); #end
-		#if HSCRIPT_ALLOWED HScript.implement(this); #end
-		#if ACHIEVEMENTS_ALLOWED Achievements.addLuaCallbacks(lua); #end
-		#if flxanimate FlxAnimateFunctions.implement(this); #end
+		#if DISCORD_ALLOWED
+		DiscordClient.addLuaCallbacks(lua);
+		#end
+
+		#if HSCRIPT_ALLOWED
+		HScript.implement(this);
+		#end
+
+		#if ACHIEVEMENTS_ALLOWED
+		Achievements.addLuaCallbacks(lua);
+		#end
+
+		#if flxanimate
+		FlxAnimateFunctions.implement(this);
+		#end
+
 		ReflectionFunctions.implement(this);
 		TextFunctions.implement(this);
 		ExtraFunctions.implement(this);
@@ -1558,6 +1571,7 @@ class FunkinLua {
 
 		#if mobile
 		MobileFunctions.implement(this);
+
 		#if android
 		AndroidFunctions.implement(this);
 		#end
