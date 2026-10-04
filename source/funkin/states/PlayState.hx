@@ -2441,7 +2441,7 @@ class PlayState extends MusicBeatState
 						}
 					}
 
-					var char:Character;
+					var char:Character = null;
 					switch(value2.toLowerCase().trim()) {
 						case 'bf' | 'boyfriend':
 							char = boyfriend;
