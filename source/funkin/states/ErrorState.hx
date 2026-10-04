@@ -9,18 +9,18 @@ class ErrorState extends MusicBeatState
 	public var backCallback:Void->Void;
 	public var errorMsg:String;
 
-	public function new(error:String, accept:Void->Void = null, back:Void->Void = null)
+	public function new(message:String, ?accept:Void->Void, ?back:Void->Void)
 	{
-		this.errorMsg = error;
-		this.acceptCallback = accept;
-		this.backCallback = back;
+		errorMessage = message;
+		acceptCallback = accept;
+		backCallback = back;
 
 		super();
 	}
 
 	public var errorSine:Float = 0;
 	public var errorText:FlxText;
-	override function create()
+	override public function create():Void
 	{
 		var bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 
@@ -46,28 +46,43 @@ class ErrorState extends MusicBeatState
 		}
 
 		errorText = new FlxText(0, 0, FlxG.width - 300, errorMsg, 32);
-		errorText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+
+		switch (ClientPrefs.data.themes) {
+			case "Mods Engine":
+				errorText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+
+			case "Vanilla (Normal)":
+				errorText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		}
+
 		errorText.scrollFactor.set();
 		errorText.borderSize = 2;
 		errorText.screenCenter();
 		add(errorText);
-		super.create();
 
 		#if mobile
 		addTouchPad('NONE', 'A_B');
 		addTouchPadCamera();
 		#end
+
+		super.create();
 	}
 
-	override function update(elapsed:Float)
+	override public function update(elapsed:Float):Void
 	{
 		errorSine += 180 * elapsed;
 		errorText.alpha = 1 - Math.sin((Math.PI * errorSine) / 180);
 
-		if(controls.ACCEPT && acceptCallback != null)
+		if (controls.ACCEPT && acceptCallback != null)
+		{
 			acceptCallback();
-		else if(controls.BACK && backCallback != null)
+			return;
+		}
+		if (controls.BACK && backCallback != null)
+		{
 			backCallback();
+			return;
+		}
 
 		super.update(elapsed);
 	}
