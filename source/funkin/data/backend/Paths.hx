@@ -305,7 +305,7 @@ class Paths
 		{
 			var levelPath:String = '';
 			if(currentLevel != 'shared') {
-				levelPath = getLibraryPathForce(key, 'week_assets', currentLevel);
+				levelPath = getLibraryPath(key, currentLevel); // getLibraryPathForce(key, 'week_assets', currentLevel)
 				if (FileSystem.exists(levelPath))
 					return File.getContent(levelPath);
 			}
