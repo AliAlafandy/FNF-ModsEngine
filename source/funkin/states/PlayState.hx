@@ -2442,7 +2442,6 @@ class PlayState extends MusicBeatState
 					}
 
 					var char:Character;
-					var charColor = FlxColor.fromRGB(char.healthColorArray[0], char.healthColorArray[1], char.healthColorArray[2]);
 					switch(value2.toLowerCase().trim()) {
 						case 'bf' | 'boyfriend':
 							char = boyfriend;
@@ -2459,6 +2458,7 @@ class PlayState extends MusicBeatState
 					}
 					if (char != null)
 					{
+						var charColor = FlxColor.fromRGB(char.healthColorArray[0], char.healthColorArray[1], char.healthColorArray[2]);
 						lyricsText.color = charColor;
 					}
 
