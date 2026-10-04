@@ -1127,8 +1127,11 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "addLuaSprite", function(tag:String, front:Bool = false) {
 			var mySprite:FlxSprite = null;
 			if(game.modchartSprites.exists(tag)) mySprite = game.modchartSprites.get(tag);
-			else if(game.modchartVideos.exists(tag)) mySprite = game.modchartVideos.get(tag);
 			else if(game.variables.exists(tag)) mySprite = game.variables.get(tag);
+
+			#if VIDEOS_ALLOWED
+			if(game.modchartVideos.exists(tag)) mySprite = game.modchartVideos.get(tag);
+			#end
 
 			if(mySprite == null) return false;
 
