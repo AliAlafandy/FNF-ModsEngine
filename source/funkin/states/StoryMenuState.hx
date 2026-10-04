@@ -53,11 +53,11 @@ class StoryMenuState extends MusicBeatState
 
 			#if mobile
 			MusicBeatState.switchState(new funkin.states.ErrorState("NO WEEKS ADDED FOR STORY MODE\n\nPress A to go to the Week Editor Menu.\nPress B to return to Main Menu.",
-				function() { MusicBeatState.switchState(new funkin.states.WeekEditorState()); },
+				function() { MusicBeatState.switchState(new funkin.states.editors.WeekEditorState()); },
 				function() { MusicBeatState.switchState(new funkin.states.MainMenuState()); }));
 			#else
 			MusicBeatState.switchState(new funkin.states.ErrorState("NO WEEKS ADDED FOR STORY MODE\n\nPress ACCEPT to go to the Week Editor Menu.\nPress BACK to return to Main Menu.",
-				function() { MusicBeatState.switchState(new funkin.states.WeekEditorState()); },
+				function() { MusicBeatState.switchState(new funkin.states.editors.WeekEditorState()); },
 				function() { MusicBeatState.switchState(new funkin.states.MainMenuState()); }));
 			#end
 
