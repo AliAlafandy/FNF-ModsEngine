@@ -9,18 +9,18 @@ class ErrorState extends MusicBeatState
 	public var backCallback:Void->Void;
 	public var errorMsg:String;
 
-	public function new(message:String, ?accept:Void->Void, ?back:Void->Void)
+	public function new(error:String, accept:Void->Void = null, back:Void->Void = null)
 	{
-		errorMessage = message;
-		acceptCallback = accept;
-		backCallback = back;
+		this.errorMsg = error;
+		this.acceptCallback = accept;
+		this.backCallback = back;
 
 		super();
 	}
 
 	public var errorSine:Float = 0;
 	public var errorText:FlxText;
-	override public function create():Void
+	override function create()
 	{
 		var bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 
@@ -68,7 +68,7 @@ class ErrorState extends MusicBeatState
 		super.create();
 	}
 
-	override public function update(elapsed:Float):Void
+	override function update(elapsed:Float)
 	{
 		errorSine += 180 * elapsed;
 		errorText.alpha = 1 - Math.sin((Math.PI * errorSine) / 180);
