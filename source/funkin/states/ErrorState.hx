@@ -25,11 +25,11 @@ class ErrorState extends MusicBeatState
 		var bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 
 		switch (ClientPrefs.data.themes) {
-			case "Mods Engine":
-				bg.color = 0xFF000080;
-
-			case "Vanilla (Normal)":
+			case 'Base Game':
 				bg.color = FlxColor.GRAY;
+
+			case 'Mods Engine':
+				bg.color = 0xFF000080;
 		}
 		
 		bg.antialiasing = ClientPrefs.data.antialiasing;
@@ -48,11 +48,11 @@ class ErrorState extends MusicBeatState
 		errorText = new FlxText(0, 0, FlxG.width - 300, errorMsg, 32);
 
 		switch (ClientPrefs.data.themes) {
-			case "Mods Engine":
-				errorText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-
-			case "Vanilla (Normal)":
+			case 'Base Game':
 				errorText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+
+			case 'Mods Engine':
+				errorText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		}
 
 		errorText.scrollFactor.set();
