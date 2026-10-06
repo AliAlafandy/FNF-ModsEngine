@@ -49,11 +49,11 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		
 		switch (ClientPrefs.data.themes) {
+			case 'Base Game':
+				bg.color = 0xFFEA71FD;
+
 			case 'Mods Engine':
 				bg.color = 0xFF000080;
-			
-			case 'Vanilla (Normal)':
-				bg.color = 0xFFEA71FD;
 		}
 		
 		bg.screenCenter();
