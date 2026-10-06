@@ -583,13 +583,24 @@ class PlayState extends MusicBeatState
 		iconP2.alpha = ClientPrefs.data.healthBarAlpha;
 		uiGroup.add(iconP2);
 
-		scoreTxt = new FlxText(0, healthBar.y + 40, FlxG.width, "", 20);
-		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		scoreTxt.scrollFactor.set();
-		scoreTxt.borderSize = 1.25;
-		scoreTxt.visible = !ClientPrefs.data.hideHud;
-		updateScore(false);
-		uiGroup.add(scoreTxt);
+		if (ClientPrefs.data.typeRating == 'Base Game') {
+			// scoreTxt = new FlxText(0, healthBar.y + 40, FlxG.width, "", 20);
+			scoreTxt = new FlxText(healthBar.x + healthBar.width - 190, healthBar.y + 30, 0, "", 20);
+			scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			scoreTxt.scrollFactor.set();
+			scoreTxt.borderSize = 1.25;
+			scoreTxt.visible = !ClientPrefs.data.hideHud;
+			updateScore(false);
+			uiGroup.add(scoreTxt);
+		} else {
+			scoreTxt = new FlxText(0, healthBar.y + 40, FlxG.width, "", 20);
+			scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			scoreTxt.scrollFactor.set();
+			scoreTxt.borderSize = 1.25;
+			scoreTxt.visible = !ClientPrefs.data.hideHud;
+			updateScore(false);
+			uiGroup.add(scoreTxt);
+		}
 
 		switch (ClientPrefs.data.botplayName) {
 			case 'Normal':
@@ -802,8 +813,14 @@ class PlayState extends MusicBeatState
 	}
 	#end
 	public function reloadHealthBarColors() {
-		healthBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
-			FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
+		switch (ClientPrefs.data.healthColor) {
+			case 'Base Game':
+				healthBar.setColors(0xFFFF0000, 0xFF66FF33);
+
+			case 'Icon Color':
+				healthBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
+					FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
+		}
 	}
 
 	public function reloadTimeBarColor() {
@@ -1276,18 +1293,24 @@ class PlayState extends MusicBeatState
 			str += ' (${percent}%) - ${ratingFC}';
 		}
 
-		var tempScore:String = 'Score: ${songScore}'
+		var psychScore:String = 'Score: ${songScore}'
 		+ (!instakillOnMiss ? ' | Misses: ${songMisses}' : "")
 		+ ' | Rating: ${str}';
-		var scoreTemp:String = 'Score: ${songScore}'
+		var modsScore:String = 'Score: ${songScore}'
 		+ (!instakillOnMiss ? ' | Misses: ${songMisses}' : "");
+		var baseScore:String = 'Score: ${songScore}';
 		// "tempScore" variable is used to prevent another memory leak, just in case
 		// "\n" here prevents the text from being cut off by beat zooms
-		if(ClientPrefs.data.accuracyRating)
+		switch(ClientPrefs.data.typeRating)
 		{
-			scoreTxt.text = '${tempScore}\n';
-		} else {
-			scoreTxt.text = '${scoreTemp}\\n';
+			case 'Base Game':
+				scoreTxt.text = '${baseScore}\n';
+
+			case 'Mods Engine':
+				scoreTxt.text = '${modsScore}\n';
+
+			case 'Psych Engine':
+				scoreTxt.text = '${psychScore}\n';
 		}
 
 		if (!miss && !cpuControlled)
