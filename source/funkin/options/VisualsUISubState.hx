@@ -178,7 +178,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		    'Change theme from different engines.\nThis option will work after close Options, for less lag!',
 			'themes',
 		    'string',
-			['Mods Engine', 'Vanilla (Normal)']);
+			['Base Game', 'Mods Engine']);
 		addOption(option);
 
 		super();
