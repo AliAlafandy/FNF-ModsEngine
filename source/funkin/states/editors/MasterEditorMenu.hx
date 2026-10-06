@@ -41,11 +41,11 @@ class MasterEditorMenu extends MusicBeatState
 		bg.scrollFactor.set();
 		
 		switch (ClientPrefs.data.themes) {
+			case 'Base Game':
+				bg.color = 0xFF353535;
+
 			case 'Mods Engine':
 				bg.color = 0xFF000035;
-			
-			case 'Vanilla (Normal)':
-				bg.color = 0xFF353535;
 		}
 		
 		add(bg);
