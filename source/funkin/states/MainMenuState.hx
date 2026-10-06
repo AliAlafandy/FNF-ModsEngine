@@ -78,11 +78,11 @@ class MainMenuState extends MusicBeatState
 		magenta.visible = false;
 		
 		switch (ClientPrefs.data.themes) {
+			case 'Base Game':
+				magenta.color = 0xFFFD719B;
+
 			case 'Mods Engine':
 				magenta.color = 0xFF000080;
-			
-			case 'Vanilla (Normal)':
-				magenta.color = 0xFFFD719B;
 		}
 		
 		add(magenta);
