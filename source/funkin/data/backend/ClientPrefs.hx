@@ -62,10 +62,12 @@ import funkin.states.TitleState;
 	public var iconBops:Bool = true;
 	public var scoreZoom:Bool = true;
 	public var noReset:Bool = false;
+	public var healthColor:String = 'Icon Color';
 	public var healthBarAlpha:Float = 1;
 	public var hitsoundVolume:Float = 0;
 	public var pauseMusic:String = 'Tea Time';
 	public var checkForUpdates:Bool = true;
+	public var typeRating:String = 'Mods Engine';
 	public var comboStacking:Bool = true;
 	public var themes:String = 'Mods Engine';
 	
