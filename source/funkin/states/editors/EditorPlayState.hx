@@ -130,13 +130,22 @@ class EditorPlayState extends MusicBeatSubstate
 		generateStaticArrows(0);
 		generateStaticArrows(1);
 		/***************/
-		
-		scoreTxt = new FlxText(10, FlxG.height - 50, FlxG.width - 20, "", 20);
-		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		scoreTxt.scrollFactor.set();
-		scoreTxt.borderSize = 1.25;
-		scoreTxt.visible = !ClientPrefs.data.hideHud;
-		add(scoreTxt);
+
+		if (ClientPrefs.data.typeRating == 'Base Game') {
+			scoreTxt = new FlxText(FlxG.width - 10, FlxG.height - 50, FlxG.width - 20, "", 20);
+			scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			scoreTxt.scrollFactor.set();
+			scoreTxt.borderSize = 1.25;
+			scoreTxt.visible = !ClientPrefs.data.hideHud;
+			add(scoreTxt);
+		} else {
+			scoreTxt = new FlxText(10, FlxG.height - 50, FlxG.width - 20, "", 20);
+			scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			scoreTxt.scrollFactor.set();
+			scoreTxt.borderSize = 1.25;
+			scoreTxt.visible = !ClientPrefs.data.hideHud;
+			add(scoreTxt);
+		}
 		
 		dataTxt = new FlxText(10, 580, FlxG.width - 20, "Section: 0", 20);
 		dataTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -1050,11 +1059,15 @@ class EditorPlayState extends MusicBeatSubstate
 			var percent:Float = CoolUtil.floorDecimal(ratingPercent * 100, 2);
 			str = '$percent% - $ratingFC';
 		}
-		if(ClientPrefs.data.accuracyRating)
-		{
-			scoreTxt.text = 'Hits: $songHits | Misses: $songMisses | Rating: $str';
-		} else {
-			scoreTxt.text = 'Hits: $songHits | Misses: $songMisses';
+		switch(ClientPrefs.data.typeRating)
+			case 'Psych Engine':
+				scoreTxt.text = 'Hits: $songHits | Misses: $songMisses | Rating: $str';
+
+			case 'Mods Engine':
+				scoreTxt.text = 'Hits: $songHits | Misses: $songMisses';
+
+			case 'Base Game':
+				scoreTxt.text = 'Hits: $songHits';
 		}
 	}
 	
