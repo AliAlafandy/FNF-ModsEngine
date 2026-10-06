@@ -41,7 +41,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Bot Play Name:',
-			"'Normal': Nothing change,\n'Song Name': change BOTPLAY to This Song you play it,\n'None': make BOTPLAY not visible.",
+			"'Normal': nothing change,\n'Song Name': change BOTPLAY to This Song you play it,\n'None': make BOTPLAY not visible.",
 			'botplayName',
 			'string',
 			['Normal', 'Song Name', 'None']);
@@ -59,6 +59,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 		option.onChange = onChangeAutoPause;
+
+		var option:Option = new Option('Type Score:',
+			"'Base Game':  Score only,\n'Mods Engine': Score and Misses,\n'Psych Engine': Score, Misses and Rating.",
+			'typeRating',
+			'string',
+			['Base Game', 'Mods Engine', 'Psych Engine']);
+		addOption(option);
 
 		var option:Option = new Option('Pop Up Score',
 			"If unchecked, hitting notes won't make \"sick\", \"good\".. and combo popups (Useful for low end " + Main.platform + ").",
