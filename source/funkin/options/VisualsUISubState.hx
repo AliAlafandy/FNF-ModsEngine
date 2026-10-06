@@ -110,6 +110,13 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 
+		var option:Option = new Option('Health Bar:',
+			"What should the Health Bar color?",
+			'healthColor',
+			'string',
+			['Base Game', 'Icon Color']);
+		addOption(option);
+
 		var option:Option = new Option('Health Bar Opacity',
 			'How much transparent should the health bar and icons be.',
 			'healthBarAlpha',
