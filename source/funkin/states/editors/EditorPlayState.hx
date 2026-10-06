@@ -1050,7 +1050,12 @@ class EditorPlayState extends MusicBeatSubstate
 			var percent:Float = CoolUtil.floorDecimal(ratingPercent * 100, 2);
 			str = '$percent% - $ratingFC';
 		}
-		scoreTxt.text = 'Hits: $songHits | Misses: $songMisses | Rating: $str';
+		if(ClientPrefs.data.accuracyRating)
+		{
+			scoreTxt.text = 'Hits: $songHits | Misses: $songMisses | Rating: $str';
+		} else {
+			scoreTxt.text = 'Hits: $songHits | Misses: $songMisses';
+		}
 	}
 	
 	function fullComboUpdate()
