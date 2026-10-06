@@ -233,11 +233,11 @@ class ChartingState extends MusicBeatState
 		bg.scrollFactor.set();
 
 		switch (ClientPrefs.data.themes) {
+			case 'Base Game':
+				bg.color = 0xFF222222;
+
 			case 'Mods Engine':
 				bg.color = 0xFF000022;
-			
-			case 'Vanilla (Normal)':
-				bg.color = 0xFF222222;
 		}
 		
 		add(bg);
