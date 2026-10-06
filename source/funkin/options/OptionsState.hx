@@ -74,11 +74,11 @@ class OptionsState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		
 		switch (ClientPrefs.data.themes) {
+			case 'Base Game':
+				bg.color = 0xFFEA71FD;
+
 			case 'Mods Engine':
 				bg.color = 0xFF000080;
-			
-			case 'Vanilla (Normal)':
-				bg.color = 0xFFEA71FD;
 		}
 		
 		bg.updateHitbox();
