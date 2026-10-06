@@ -59,10 +59,10 @@ class ControlsSubState extends MusicBeatSubstate
 	var selectSpr:AttachedSprite;
 
 	var modsGamepadColor:FlxColor = 0xFF008080;
-	var psychGamepadColor:FlxColor = 0xFFFD7194;
+	var baseGamepadColor:FlxColor = 0xFFFD7194;
 	
 	var modsKeyboardColor:FlxColor = 0xFF000080;
-	var psychKeyboardColor:FlxColor = 0xFF7192FD;
+	var baseKeyboardColor:FlxColor = 0xFF7192FD;
 
 	var onKeyboardMode:Bool = true;
 	
@@ -85,11 +85,11 @@ class ControlsSubState extends MusicBeatSubstate
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 
 		switch (ClientPrefs.data.themes) {
+			case 'Base Game':
+				bg.color = baseKeyboardColor;
+
 			case 'Mods Engine':
 				bg.color = modsKeyboardColor;
-
-			case 'Psych Engine':
-				bg.color = psychKeyboardColor;
 		}
 		
 		bg.antialiasing = ClientPrefs.data.antialiasing;
@@ -658,11 +658,11 @@ class ControlsSubState extends MusicBeatSubstate
 		if(colorTween != null) colorTween.destroy();
 
 		switch (ClientPrefs.data.themes) {
+			case 'Base Game':
+				colorTween = FlxTween.color(bg, 0.5, bg.color, onKeyboardMode ? baseGamepadColor : baseKeyboardColor, {ease: FlxEase.linear});
+
 			case 'Mods Engine':
 				colorTween = FlxTween.color(bg, 0.5, bg.color, onKeyboardMode ? modsGamepadColor : modsKeyboardColor, {ease: FlxEase.linear});
-
-			case 'Vanilla (Normal)':
-				colorTween = FlxTween.color(bg, 0.5, bg.color, onKeyboardMode ? psychGamepadColor : psychKeyboardColor, {ease: FlxEase.linear});
 		}
 
 		onKeyboardMode = !onKeyboardMode;
