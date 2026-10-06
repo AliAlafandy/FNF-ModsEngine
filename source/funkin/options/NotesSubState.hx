@@ -49,7 +49,7 @@ class NotesSubState extends MusicBeatSubstate
 	var tipTxt:FlxText;
 
 	public function new() {
-                controls.isInSubstate = true;
+        controls.isInSubstate = true;
 
 		super();
 		
@@ -60,11 +60,11 @@ class NotesSubState extends MusicBeatSubstate
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		
 		switch (ClientPrefs.data.themes) {
+			case 'Base Game':
+				bg.color = 0xFFEA71FD;
+
 			case 'Mods Engine':
 				bg.color = 0xFF000080;
-			
-			case 'Vanilla (Normal)':
-				bg.color = 0xFFEA71FD;
 		}
 		
 		bg.screenCenter();
