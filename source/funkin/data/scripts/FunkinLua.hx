@@ -48,7 +48,7 @@ import flixel.input.gamepad.FlxGamepadInputID;
 import haxe.Json;
 
 #if mobile
-import mobile.data.scripts.MobileLua;
+import mobile.data.scripts.MobileFunctions;
 #end
 
 class FunkinLua {
@@ -1573,7 +1573,7 @@ class FunkinLua {
 		DeprecatedFunctions.implement(this);
 
 		#if mobile
-		MobileLua.implement(this);
+		MobileFunctions.implement(this);
 		#if android
 		AndroidFunctions.implement(this);
 		#end
