@@ -86,15 +86,15 @@ class FPSCounter extends TextField
 		text = 
 		'FPS: $currentFPS' + 
 		'\nMemory: ${flixel.util.FlxStringUtil.formatBytes(memoryMegas)}' +
-		os +
+		// os +
 		engineVersion;
 
 		switch (ClientPrefs.data.themes) {
+			case 'Base Game':
+				textColor = 0xFFFFFFFF;
+
 			case 'Mods Engine':
 				textColor = 0xFF0000FF;
-			
-			case 'Vanilla (Normal)':
-				textColor = 0xFFFFFFFF;
 		}
 		
 		if (currentFPS < FlxG.drawFramerate * 0.5)
