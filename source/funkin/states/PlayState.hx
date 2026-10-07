@@ -2489,7 +2489,11 @@ class PlayState extends MusicBeatState
 					if (char != null)
 					{
 						var charColor = FlxColor.fromRGB(char.healthColorArray[0], char.healthColorArray[1], char.healthColorArray[2]);
-						lyricsText.color = charColor;
+						if (charColor == FlxColor.BLACK) {
+							lyricsText.color = FlxG.WHITE;
+						} else {
+							lyricsText.color = charColor;
+						}
 					}
 
 					lyricsText.screenCenter(X);
