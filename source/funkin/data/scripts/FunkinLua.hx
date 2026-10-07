@@ -48,7 +48,7 @@ import flixel.input.gamepad.FlxGamepadInputID;
 import haxe.Json;
 
 #if mobile
-import mobile.funkin.data.scripts.Functions;
+import mobile.data.scripts.MobileLua;
 #end
 
 class FunkinLua {
