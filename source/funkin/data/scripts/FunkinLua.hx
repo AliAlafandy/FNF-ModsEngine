@@ -1024,7 +1024,7 @@ class FunkinLua {
     		var leSprite:ModchartVideo = new ModchartVideo(x, y);
 
 			leSprite.play(video, loop);
-			gane.modchartVideos.set(tag, leSprite);
+			game.modchartVideos.set(tag, leSprite);
 			leSprite.active = true;
 			#end
 		});
