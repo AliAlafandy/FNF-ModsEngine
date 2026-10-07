@@ -1,4 +1,4 @@
-package mobile.funkin.data.backend;
+package mobile.data.backend;
 
 import haxe.ds.Map;
 import haxe.Json;
