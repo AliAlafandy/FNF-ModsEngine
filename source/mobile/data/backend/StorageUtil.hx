@@ -1,4 +1,4 @@
-package mobile.funkin.data.backend;
+package mobile.data.backend;
 
 import lime.system.System as LimeSystem;
 import haxe.io.Path;
