@@ -176,6 +176,10 @@
 	<!-- Do whatever you want I'm tired uninstall and install everytime -->
 	<certificate path="key.keystore" password="@ellawy09" alias="alafandy" alias-password="@ellawy09" if="android" unless="debug"/>
 
+	<!-- Basic Support For Kizzy -->
+	<java path="source/mobile/android/" if="android" />
+	<java path="mobile/android/" if="android" />
+
 	<!-- Category Type for Apple Systems -->
 	<config:ios category_type="public.app-category.music-games"/>
 	<config:mac category_type="public.app-category.music-games"/>
