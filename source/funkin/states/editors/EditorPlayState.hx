@@ -1067,6 +1067,7 @@ class EditorPlayState extends MusicBeatSubstate
 			str = '$percent% - $ratingFC';
 		}
 		switch(ClientPrefs.data.typeRating)
+		{
 			case 'Psych Engine':
 				scoreTxt.text = 'Hits: $songHits | Misses: $songMisses | Rating: $str';
 
