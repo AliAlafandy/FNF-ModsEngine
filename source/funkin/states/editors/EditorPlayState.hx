@@ -137,22 +137,12 @@ class EditorPlayState extends MusicBeatSubstate
 		generateStaticArrows(0);
 		generateStaticArrows(1);
 		/***************/
-
-		if (ClientPrefs.data.typeRating == 'Base Game') {
-			scoreTxt = new FlxText(FlxG.width - 10, FlxG.height - 50, FlxG.width - 20, "", 20);
-			scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-			scoreTxt.scrollFactor.set();
-			scoreTxt.borderSize = 1.25;
-			scoreTxt.visible = !ClientPrefs.data.hideHud;
-			add(scoreTxt);
-		} else {
-			scoreTxt = new FlxText(10, FlxG.height - 50, FlxG.width - 20, "", 20);
-			scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-			scoreTxt.scrollFactor.set();
-			scoreTxt.borderSize = 1.25;
-			scoreTxt.visible = !ClientPrefs.data.hideHud;
-			add(scoreTxt);
-		}
+		scoreTxt = new FlxText(10, FlxG.height - 50, FlxG.width - 20, "", 20);
+		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreTxt.scrollFactor.set();
+		scoreTxt.borderSize = 1.25;
+		scoreTxt.visible = !ClientPrefs.data.hideHud;
+		add(scoreTxt);
 		
 		dataTxt = new FlxText(10, 580, FlxG.width - 20, "Section: 0", 20);
 		dataTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
