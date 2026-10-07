@@ -1019,35 +1019,26 @@ class FunkinLua {
 		});
 		Lua_helper.add_callback(lua, "makeVideoSprite", function(tag:String, video:String, ?x:Float = 0, ?y:Float = 0, ?loop:Bool = false) {
 			#if VIDEOS_ALLOWED
+			tag = tag.replace('.', '');
+			LuaUtils.resetSpriteTag(tag);
     		var leSprite:ModchartVideo = new ModchartVideo(x, y);
-			leSprite.play(video, loop);
 
-			PlayState.instance.modchartVideos.set(tag, leSprite);
-			PlayState.instance.add(leSprite);
+			leSprite.play(video, loop);
+			gane.modchartVideos.set(tag, leSprite);
+			leSprite.active = true;
 			#end
 		});
 
 		Lua_helper.add_callback(lua, "pauseVideoSprite", function(tag:String) {
 			#if VIDEOS_ALLOWED
-    		var spr:ModchartVideo = cast PlayState.instance.modchartVideos.get(tag);
+    		var spr:ModchartVideo = game.modchartVideos.get(tag);
 			if(spr != null) spr.pause();
 			#end
 		});
 		Lua_helper.add_callback(lua, "resumeVideoSprite", function(tag:String) {
 			#if VIDEOS_ALLOWED
-    		var spr:ModchartVideo = cast PlayState.instance.modchartVideos.get(tag);
+    		var spr:ModchartVideo = game.modchartVideos.get(tag);
 			if(spr != null) spr.resume();
-			#end
-		});
-		Lua_helper.add_callback(lua, "removeVideoSprite", function(tag:String) {
-			#if VIDEOS_ALLOWED
-    		var spr:ModchartVideo = cast PlayState.instance.modchartVideos.get(tag);
-			if(spr != null)
-			{
-				spr.destroy();
-				PlayState.instance.remove(spr, true);
-				PlayState.instance.modchartVideos.remove(tag);
-			}
 			#end
 		});
 
@@ -1225,6 +1216,23 @@ class FunkinLua {
 				pee.destroy();
 				game.modchartSprites.remove(tag);
 			}
+
+			#if VIDEOS_ALLOWED
+			if (!game.modchartVideos.exists(tag)) {
+				return;
+			}
+
+    		var spr:ModchartVideo = game.modchartVideos.get(tag);
+			if(destroy) {
+				spr.kill();
+			}
+
+			LuaUtils.getTargetInstance().remove(spr, true);
+			if(destroy) {
+				spr.destroy();
+				game.modchartVideos.remove(tag);
+			}
+			#end
 		});
 
 		Lua_helper.add_callback(lua, "luaSpriteExists", function(tag:String) {
