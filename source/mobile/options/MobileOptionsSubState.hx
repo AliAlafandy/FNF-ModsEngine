@@ -1,6 +1,6 @@
-package mobile.funkin.options;
+package mobile.options;
 
-import mobile.funkin.data.backend.MobileScaleMode;
+import mobile.data.backend.MobileScaleMode;
 
 import flixel.input.keyboard.FlxKey;
 
