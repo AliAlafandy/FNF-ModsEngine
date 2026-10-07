@@ -25,6 +25,7 @@ import mobile.input.MobileInputID;
 import mobile.data.backend.MobileData;
 import mobile.input.MobileInputManager;
 
+import mobile.data.backend.StorageUtil;
 import mobile.data.backend.TouchUtil;
 
 // Android
@@ -58,8 +59,6 @@ import funkin.data.backend.Conductor;
 import funkin.data.backend.BaseStage;
 import funkin.data.backend.Difficulty;
 import funkin.data.backend.Mods;
-
-import mobile.funkin.data.backend.StorageUtil;
 
 import funkin.data.objects.Alphabet;
 import funkin.data.objects.BGSprite;
