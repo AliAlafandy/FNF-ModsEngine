@@ -484,7 +484,7 @@ class PauseSubState extends MusicBeatSubstate
 		if(skipTimeText == null || skipTimeTracker == null) return;
 
 		skipTimeText.x = skipTimeTracker.x; // + skipTimeTracker.width + 60
-		skipTimeText.y = skipTimeTracker.y + 10;
+		skipTimeText.y = skipTimeTracker.y + 60;
 		skipTimeText.visible = (skipTimeTracker.alpha >= 1);
 	}
 
