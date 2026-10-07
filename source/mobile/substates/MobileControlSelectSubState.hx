@@ -1,11 +1,11 @@
-package mobile.funkin.substates;
+package mobile.substates;
 
 import flixel.FlxObject;
 import flixel.addons.display.FlxBackdrop;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.util.FlxGradient;
 
-import mobile.funkin.data.backend.TouchUtil;
+import mobile.data.backend.TouchUtil;
 
 import flixel.input.touch.FlxTouch;
 import flixel.ui.FlxButton as UIButton;
