@@ -1573,8 +1573,7 @@ class FunkinLua {
 		DeprecatedFunctions.implement(this);
 
 		#if mobile
-		MobileFunctions.implement(this);
-
+		MobileLua.implement(this);
 		#if android
 		AndroidFunctions.implement(this);
 		#end
