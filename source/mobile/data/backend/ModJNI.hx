@@ -1,4 +1,4 @@
-package mobile.funkin.data.backend;
+package mobile.data.backend;
 
 #if android
 import lime.system.JNI;
