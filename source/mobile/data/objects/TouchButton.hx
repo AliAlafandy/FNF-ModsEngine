@@ -1,4 +1,4 @@
-package mobile.funkin.data.objects;
+package mobile.data.objects;
 
 import flixel.input.FlxInput;
 import flixel.input.FlxPointer;
