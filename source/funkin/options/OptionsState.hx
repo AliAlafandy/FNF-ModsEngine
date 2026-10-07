@@ -6,7 +6,7 @@ import funkin.data.backend.StageData;
 import flixel.addons.transition.FlxTransitionableState;
 
 #if mobile
-import mobile.funkin.substates.MobileControlSelectSubState;
+import mobile.substates.MobileControlSelectSubState;
 #end
 
 #if (target.threaded)
@@ -57,7 +57,7 @@ class OptionsState extends MusicBeatState
 			
 			#if mobile
 			case 'Mobile Options':
-				openSubState(new mobile.funkin.options.MobileOptionsSubState());
+				openSubState(new mobile.options.MobileOptionsSubState());
 			#end
 		}
 	}
