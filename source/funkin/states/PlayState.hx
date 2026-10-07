@@ -2506,7 +2506,7 @@ class PlayState extends MusicBeatState
 					{
 						var charColor = FlxColor.fromRGB(char.healthColorArray[0], char.healthColorArray[1], char.healthColorArray[2]);
 						if (charColor == FlxColor.BLACK) {
-							lyricsText.color = FlxG.WHITE;
+							lyricsText.color = FlxColor.WHITE;
 						} else {
 							lyricsText.color = charColor;
 						}
