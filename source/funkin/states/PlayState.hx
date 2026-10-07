@@ -664,8 +664,18 @@ class PlayState extends MusicBeatState
 		#if LUA_ALLOWED
 		for (notetype in noteTypes)
 			startLuasNamed('custom_notetypes/' + notetype + '.lua');
+			/*var luaToLoad:String = 'custom_notetypes/' + notetype + '.lua';
+		    luaToLoad = Paths.getPreloadPath(luaToLoad);			
+			if(OpenFlAssets.exists(luaToLoad)) {
+				luaArray.push(new FunkinLua(Asset2File.getPath(luaToLoad)));
+			}*/
 		for (event in eventsPushed)
 			startLuasNamed('custom_events/' + event + '.lua');
+			/*var luaToLoad:String = 'custom_events/' + event + '.lua';
+		    luaToLoad = Paths.getPreloadPath(luaToLoad);			
+			if(OpenFlAssets.exists(luaToLoad)) {
+				luaArray.push(new FunkinLua(Asset2File.getPath(luaToLoad)));
+			}*/
 		#end
 
 		#if HSCRIPT_ALLOWED
