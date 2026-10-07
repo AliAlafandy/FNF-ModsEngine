@@ -861,7 +861,7 @@ class PlayState extends MusicBeatState
 			|| (bfColor == FlxColor.BLACK && SONG.notes[curSection].mustHitSection)) {
 			lyricsText.color = FlxColor.WHITE;
 		} else {
-			(!SONG.notes[curSection].mustHitSection) {
+			if (!SONG.notes[curSection].mustHitSection) {
 				lyricsText.color = dadColor;
 			}
 			if (SONG.notes[curSection].gfSection) {
