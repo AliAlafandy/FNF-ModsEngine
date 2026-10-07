@@ -15,17 +15,17 @@ import funkin.data.backend.Achievements;
 #end
 
 //Mobile Controls
-import mobile.funkin.data.objects.MobileControls;
-import mobile.funkin.data.objects.IMobileControls;
-import mobile.funkin.data.objects.Hitbox;
-import mobile.funkin.data.objects.TouchPad;
-import mobile.funkin.data.objects.TouchButton;
+import mobile.data.objects.MobileControls;
+import mobile.data.objects.IMobileControls;
+import mobile.data.objects.Hitbox;
+import mobile.data.objects.TouchPad;
+import mobile.data.objects.TouchButton;
 
-import mobile.engine.input.MobileInputID;
-import mobile.funkin.data.backend.MobileData;
-import mobile.engine.input.MobileInputManager;
+import mobile.input.MobileInputID;
+import mobile.data.backend.MobileData;
+import mobile.input.MobileInputManager;
 
-import mobile.funkin.data.backend.TouchUtil;
+import mobile.data.backend.TouchUtil;
 
 // Android
 #if android
