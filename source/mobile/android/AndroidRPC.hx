@@ -1,4 +1,4 @@
-package mobile.engine.android;
+package mobile.android;
 
 #if android
 import lime.system.JNI;
