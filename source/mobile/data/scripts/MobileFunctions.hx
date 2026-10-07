@@ -15,7 +15,7 @@ import mobile.data.backend.ModJNI;
 #end
 
 #if mobile
-class MobileLua
+class MobileFunctions
 {
 	public static function implement(funk:FunkinLua)
 	{
