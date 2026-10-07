@@ -1,4 +1,4 @@
-package mobile.funkin.data.scripts;
+package mobile.data.scripts;
 
 import funkin.data.scripts.CustomSubstate;
 
@@ -8,14 +8,14 @@ import lime.ui.Haptic;
 import funkin.data.scripts.FunkinLua;
 import funkin.data.scripts.LuaUtils;
 
-import mobile.funkin.data.backend.TouchUtil;
+import mobile.data.backend.TouchUtil;
 
 #if android
-import mobile.funkin.data.backend.ModJNI;
+import mobile.data.backend.ModJNI;
 #end
 
 #if mobile
-class MobileFunctions
+class MobileLua
 {
 	public static function implement(funk:FunkinLua)
 	{
