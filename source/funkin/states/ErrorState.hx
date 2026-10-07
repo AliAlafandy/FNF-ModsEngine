@@ -76,12 +76,12 @@ class ErrorState extends MusicBeatState
 		if (controls.ACCEPT && acceptCallback != null)
 		{
 			acceptCallback();
-			return;
+			// return;
 		}
 		if (controls.BACK && backCallback != null)
 		{
 			backCallback();
-			return;
+			// return;
 		}
 
 		super.update(elapsed);
