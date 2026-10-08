@@ -1,15 +1,7 @@
 package funkin.data.scripts;
 
 #if VIDEOS_ALLOWED
-#if (hxCodec >= "3.0.0")
-import hxcodec.flixel.FlxVideoSprite as VideoSprite;
-#elseif (hxCodec >= "2.6.1")
-import hxCodec.VideoSprite as VideoSprite;
-#elseif (hxCodec == "2.6.0")
-import VideoSprite; // as VideoSprite
-#else
-import vlc.MP4Sprite as VideoSprite;
-#end
+import hxvlc.flixel.FlxVideoSprite as VideoSprite;
 
 class ModchartVideo extends VideoSprite
 {
