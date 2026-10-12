@@ -1399,12 +1399,12 @@ class FunkinLua {
 			#if VIDEOS_ALLOWED
 			if(FileSystem.exists(Paths.video(videoFile)))
 			{
-				if(game.videoCutscene != null)
+				if(game.video != null)
 				{
-					game.remove(game.videoCutscene);
-					game.videoCutscene.destroy();
+					game.remove(game.video);
+					game.video.destroy();
 				}
-				game.videoCutscene = game.startVideo(videoFile);
+				game.video = game.startVideo(videoFile, forMidSong, canSkip, shouldLoop, playOnLoad);
 				return true;
 			}
 			else
