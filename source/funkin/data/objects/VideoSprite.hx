@@ -1,4 +1,4 @@
-package objects;
+package funkin.data.objects;
 
 import flixel.addons.display.FlxPieDial;
 
@@ -43,10 +43,13 @@ class VideoSprite extends FlxSpriteGroup {
 		videoSprite = new FlxVideoSprite();
 		videoSprite.antialiasing = ClientPrefs.data.antialiasing;
 		add(videoSprite);
-		if(canSkip) this.canSkip = true;
+
+		if(canSkip)
+			this.canSkip = true;
 
 		// callbacks
-		if(!shouldLoop) videoSprite.bitmap.onEndReached.add(finishVideo);
+		if(!shouldLoop)
+			videoSprite.bitmap.onEndReached.add(finishVideo);
 
 		videoSprite.bitmap.onFormatSetup.add(function()
 		{
@@ -121,7 +124,9 @@ class VideoSprite extends FlxSpriteGroup {
 
 			if(holdingTime >= _timeToSkip)
 			{
-				if(onSkip != null) onSkip();
+				if(onSkip != null)
+					onSkip();
+
 				finishCallback = null;
 				videoSprite.bitmap.onEndReached.dispatch();
 				trace('Skipped video');
@@ -145,9 +150,7 @@ class VideoSprite extends FlxSpriteGroup {
 				skipSprite.amount = 0;
 				add(skipSprite);
 			}
-		}
-		else if(skipSprite != null)
-		{
+		} else if(skipSprite != null) {
 			remove(skipSprite);
 			skipSprite.destroy();
 			skipSprite = null;
@@ -157,25 +160,26 @@ class VideoSprite extends FlxSpriteGroup {
 
 	function updateSkipAlpha()
 	{
-		if(skipSprite == null) return;
+		if(skipSprite == null)
+			return;
 
 		skipSprite.amount = Math.min(1, Math.max(0, (holdingTime / _timeToSkip) * 1.025));
 		skipSprite.alpha = FlxMath.remapToRange(skipSprite.amount, 0.025, 1, 0, 1);
 	}
 
 	public function play()
-  {
-    videoSprite?.play();
-  }
+	{
+		videoSprite?.play();
+	}
 
 	public function resume()
-  {
-    videoSprite?.resume();
-  }
+	{
+		videoSprite?.resume();
+	}
 
 	public function pause()
-  {
-    videoSprite?.pause();
-  }
+	{
+		videoSprite?.pause();
+	}
 	#end
 }
