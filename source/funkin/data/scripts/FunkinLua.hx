@@ -1023,7 +1023,7 @@ class FunkinLua {
 			LuaUtils.resetSpriteTag(tag);
     		var leSprite:ModchartVideo = new ModchartVideo(x, y);
 
-			leSprite.play(video, loop);
+			leSprite.load(video, loop); // play
 			game.modchartVideos.set(tag, leSprite);
 			leSprite.active = true;
 			#end
@@ -1032,13 +1032,15 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "pauseVideoSprite", function(tag:String) {
 			#if VIDEOS_ALLOWED
     		var spr:ModchartVideo = game.modchartVideos.get(tag);
-			if(spr != null) spr.pause();
+			if(spr != null)
+				spr.pause();
 			#end
 		});
 		Lua_helper.add_callback(lua, "resumeVideoSprite", function(tag:String) {
 			#if VIDEOS_ALLOWED
     		var spr:ModchartVideo = game.modchartVideos.get(tag);
-			if(spr != null) spr.resume();
+			if(spr != null)
+				spr.resume();
 			#end
 		});
 
@@ -1395,7 +1397,7 @@ class FunkinLua {
 			}
 			return false;
 		});
-		Lua_helper.add_callback(lua, "startVideo", function(videoFile:String) {
+		Lua_helper.add_callback(lua, "startVideo", function(videoFile:String, ?canSkip:Bool = true, ?forMidSong:Bool = false, ?shouldLoop:Bool = false, ?playOnLoad:Bool = true) {
 			#if VIDEOS_ALLOWED
 			if(FileSystem.exists(Paths.video(videoFile)))
 			{
