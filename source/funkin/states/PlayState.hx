@@ -41,6 +41,18 @@ import openfl.filters.ShaderFilter;
 import hxvlc.flixel.FlxVideo as VideoHandler;
 #end
 
+/*#if VIDEOS_ALLOWED
+#if (hxCodec >= "3.0.0")
+import hxcodec.flixel.FlxVideo as VideoHandler;
+#elseif (hxCodec >= "2.6.1")
+import hxcodec.VideoHandler as VideoHandler;
+#elseif (hxCodec == "2.6.0")
+import VideoHandler;
+#else
+import vlc.MP4Handler as VideoHandler;
+#end
+#end*/
+
 import funkin.data.objects.Note.EventNote;
 import funkin.data.objects.*;
 import funkin.states.stages.objects.*;
@@ -1020,7 +1032,7 @@ class PlayState extends MusicBeatState
 		}
 
 		var video:VideoHandler = new VideoHandler();
-		video.startVideo(filepath); // play
+		video.load(filepath); // play
 		video.onEndReached.add(function()
 			{
 				video.dispose();
@@ -1033,6 +1045,49 @@ class PlayState extends MusicBeatState
 		return;
 		#end
 	}
+
+	/*public function startVideo(name:String)
+	{
+		#if VIDEOS_ALLOWED
+		inCutscene = true;
+
+		var filepath:String = Paths.video(name);
+		#if sys
+		if(!FileSystem.exists(filepath))
+		#else
+		if(!OpenFlAssets.exists(filepath))
+		#end
+		{
+			FlxG.log.warn('Couldnt find video file: ' + name);
+			startAndEnd();
+			return;
+		}
+
+		var video:VideoHandler = new VideoHandler();
+			#if (hxCodec >= "3.0.0")
+			// Recent versions
+			video.play(filepath);
+			video.onEndReached.add(function()
+			{
+				video.dispose();
+				startAndEnd();
+				return;
+			}, true);
+			#else
+			// Older versions
+			video.playVideo(filepath);
+			video.finishCallback = function()
+			{
+				startAndEnd();
+				return;
+			}
+			#end
+		#else
+		FlxG.log.warn('Platform not supported!');
+		startAndEnd();
+		return;
+		#end
+	}*/
 
 	function startAndEnd()
 	{
