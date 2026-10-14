@@ -1018,17 +1018,32 @@ class FunkinLua {
 			game.modchartSprites.set(tag, leSprite);
 		});
 		Lua_helper.add_callback(lua, "makeVideoSprite", function(tag:String, video:String, ?x:Float = 0, ?y:Float = 0, ?loop:Bool = false) {
-			#if VIDEOS_ALLOWED
-			tag = tag.replace('.', '');
-			LuaUtils.resetSpriteTag(tag);
-    		var leSprite:ModchartVideo = new ModchartVideo(x, y);
-
-			leSprite.load(video, loop); // play
-			game.modchartVideos.set(tag, leSprite);
-			leSprite.active = true;
-			#end
+		    #if VIDEOS_ALLOWED
+		    tag = tag.replace('.', '');
+		    LuaUtils.resetSpriteTag(tag);
+		    var leSprite:ModchartVideo = new ModchartVideo(x, y);
+		
+		    if (leSprite.load(Paths.video(video)))
+		    {
+		        leSprite.bitmap.onEndReached.add(function() {
+		            if (loop)
+		            {
+		                leSprite.bitmap.position = 0.0;
+		                leSprite.play();
+		            }
+		            else
+		            {
+		                leSprite.destroy();
+		                game.modchartVideos.remove(tag);
+		            }
+		        });
+		
+		        leSprite.play();
+		    }
+		    game.modchartVideos.set(tag, leSprite);
+		    leSprite.active = true;
+		    #end
 		});
-
 		Lua_helper.add_callback(lua, "pauseVideoSprite", function(tag:String) {
 			#if VIDEOS_ALLOWED
     		var spr:ModchartVideo = game.modchartVideos.get(tag);
