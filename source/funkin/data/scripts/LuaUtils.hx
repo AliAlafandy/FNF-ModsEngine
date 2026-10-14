@@ -363,6 +363,18 @@ class LuaUtils
 		PlayState.instance.remove(target, true);
 		target.destroy();
 		PlayState.instance.modchartSprites.remove(tag);
+
+		#if VIDEOS_ALLOWED
+		if(!PlayState.instance.modchartVideos.exists(tag)) {
+			return;
+		}
+
+		var getTar:ModchartVideos = PlayState.instance.modchartVideos.get(tag);
+		getTar.kill();
+		PlayState.instance.remove(getTar, true);
+		getTar.destroy();
+		PlayState.instance.modchartVideos.destroy(tag); // remove
+		#end
 		#end
 	}
 
@@ -520,6 +532,7 @@ class LuaUtils
 
 	public static function cameraFromString(cam:String):FlxCamera {
 		switch(cam.toLowerCase()) {
+			// case 'camgame' | 'game': return PlayState.instance.camGame;
 			case 'camhud' | 'hud': return PlayState.instance.camHUD;
 			case 'camother' | 'other': return PlayState.instance.camOther;
 		}
