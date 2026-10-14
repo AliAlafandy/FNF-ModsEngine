@@ -38,13 +38,14 @@ class ModsEngineFileSystem {
 
 	public static function exists(path:String):Bool {
 		#if sys
-		if (sys.FileSystem.exists(cwd(path)))
+		var nativePath = cwd(path);
+		if (sys.FileSystem.exists(nativePath))
 			return true;
 		#end
 		
 		if (Assets.exists(openflcwd(path)))
 			return true;
-			
+
 		var cleanPath = path.replace("\\", "/");
 		cleanPath = cleanPath.endsWith("/") ? cleanPath : cleanPath + "/";
 		
@@ -102,10 +103,11 @@ class ModsEngineFileSystem {
 
 	public static function isDirectory(path:String):Bool {
 		#if sys
-		if (sys.FileSystem.exists(cwd(path)) && sys.FileSystem.isDirectory(cwd(path)))
+		var nativePath = cwd(path);
+		if (sys.FileSystem.exists(nativePath) && sys.FileSystem.isDirectory(nativePath))
 			return true;
 		#end
-		
+
 		var cleanPath = path.replace("\\", "/");
 		cleanPath = cleanPath.endsWith("/") ? cleanPath : cleanPath + "/";
 		
