@@ -134,7 +134,8 @@ class MobileData
 	{
 		var originalFolder:String = folder;
 		var cleanFolder:String = folder.contains(':') ? folder.split(':')[1] : folder;
-		if (FileSystem.exists(cleanFolder))
+		
+		if (FileSystem.exists(cleanFolder) || FileSystem.isDirectory(cleanFolder))
 		{
 			for (file in FileSystem.readDirectory(cleanFolder))
 			{
@@ -157,6 +158,10 @@ class MobileData
 					}
 				}
 			}
+		}
+		else
+		{
+			trace('Warning: MobileData readDirectory skipped because folder does not exist or is empty: ' + cleanFolder);
 		}
 	}
 
