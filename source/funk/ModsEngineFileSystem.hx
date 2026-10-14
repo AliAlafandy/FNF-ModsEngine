@@ -49,11 +49,14 @@ class ModsEngineFileSystem {
 		var cleanPath = path.replace("\\", "/");
 		cleanPath = cleanPath.endsWith("/") ? cleanPath : cleanPath + "/";
 		
-		return Assets.list().exists(f -> {
+		for (f in Assets.list()) {
 			var assetPath = f.contains(":") ? f.split(":")[1] : f;
 			assetPath = assetPath.replace("\\", "/");
-			return assetPath.startsWith(cleanPath);
-		});
+			if (assetPath.startsWith(cleanPath)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public static function rename(path:String, newPath:String):Void {
@@ -111,11 +114,14 @@ class ModsEngineFileSystem {
 		var cleanPath = path.replace("\\", "/");
 		cleanPath = cleanPath.endsWith("/") ? cleanPath : cleanPath + "/";
 		
-		return Assets.list().exists(f -> {
+		for (f in Assets.list()) {
 			var assetPath = f.contains(":") ? f.split(":")[1] : f;
 			assetPath = assetPath.replace("\\", "/");
-			return assetPath.startsWith(cleanPath);
-		});
+			if (assetPath.startsWith(cleanPath)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public static function createDirectory(path:String):Void {
