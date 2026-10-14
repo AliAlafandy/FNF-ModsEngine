@@ -38,10 +38,21 @@ class ModsEngineFileSystem {
 
 	public static function exists(path:String):Bool {
 		#if sys
-		if (FileSystem.exists(cwd(path)))
+		if (sys.FileSystem.exists(cwd(path)))
 			return true;
 		#end
-		return Assets.exists(openflcwd(path));
+		
+		if (Assets.exists(openflcwd(path)))
+			return true;
+			
+		var cleanPath = path.replace("\\", "/");
+		cleanPath = cleanPath.endsWith("/") ? cleanPath : cleanPath + "/";
+		
+		return Assets.list().exists(f -> {
+			var assetPath = f.contains(":") ? f.split(":")[1] : f;
+			assetPath = assetPath.replace("\\", "/");
+			return assetPath.startsWith(cleanPath);
+		});
 	}
 
 	public static function rename(path:String, newPath:String):Void {
@@ -91,11 +102,18 @@ class ModsEngineFileSystem {
 
 	public static function isDirectory(path:String):Bool {
 		#if sys
-		if (FileSystem.exists(cwd(path)) && FileSystem.isDirectory(cwd(path)))
+		if (sys.FileSystem.exists(cwd(path)) && sys.FileSystem.isDirectory(cwd(path)))
 			return true;
 		#end
-		return false;
-		//return Assets.list().exists(f -> f.startsWith(path) && f != path);
+		
+		var cleanPath = path.replace("\\", "/");
+		cleanPath = cleanPath.endsWith("/") ? cleanPath : cleanPath + "/";
+		
+		return Assets.list().exists(f -> {
+			var assetPath = f.contains(":") ? f.split(":")[1] : f;
+			assetPath = assetPath.replace("\\", "/");
+			return assetPath.startsWith(cleanPath);
+		});
 	}
 
 	public static function createDirectory(path:String):Void {
