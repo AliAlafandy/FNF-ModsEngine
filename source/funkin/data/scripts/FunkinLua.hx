@@ -1018,27 +1018,44 @@ class FunkinLua {
 			game.modchartSprites.set(tag, leSprite);
 		});
 		Lua_helper.add_callback(lua, "makeVideoSprite", function(tag:String, video:String, ?x:Float = 0, ?y:Float = 0, ?loop:Bool = false) {
-			#if VIDEOS_ALLOWED
-			tag = tag.replace('.', '');
-			LuaUtils.resetSpriteTag(tag);
-    		var leSprite:ModchartVideo = new ModchartVideo(x, y);
-
-			leSprite.play(video, loop);
-			game.modchartVideos.set(tag, leSprite);
-			leSprite.active = true;
-			#end
+		    #if VIDEOS_ALLOWED
+		    tag = tag.replace('.', '');
+		    LuaUtils.resetSpriteTag(tag);
+		    var leSprite:ModchartVideo = new ModchartVideo(x, y);
+		
+		    if (leSprite.load(Paths.video(video)))
+		    {
+		        leSprite.bitmap.onEndReached.add(function() {
+		            if (loop)
+		            {
+		                leSprite.bitmap.position = 0.0;
+		                leSprite.play();
+		            }
+		            else
+		            {
+		                leSprite.destroy();
+		                game.modchartVideos.remove(tag);
+		            }
+		        });
+		
+		        leSprite.play();
+		    }
+		    game.modchartVideos.set(tag, leSprite);
+		    leSprite.active = true;
+		    #end
 		});
-
 		Lua_helper.add_callback(lua, "pauseVideoSprite", function(tag:String) {
 			#if VIDEOS_ALLOWED
     		var spr:ModchartVideo = game.modchartVideos.get(tag);
-			if(spr != null) spr.pause();
+			if(spr != null)
+				spr.pause();
 			#end
 		});
 		Lua_helper.add_callback(lua, "resumeVideoSprite", function(tag:String) {
 			#if VIDEOS_ALLOWED
     		var spr:ModchartVideo = game.modchartVideos.get(tag);
-			if(spr != null) spr.resume();
+			if(spr != null)
+				spr.resume();
 			#end
 		});
 
@@ -1395,8 +1412,38 @@ class FunkinLua {
 			}
 			return false;
 		});
-		Lua_helper.add_callback(lua, "startVideo", function(videoFile:String) {
+		Lua_helper.add_callback(lua, "startVideo", function(videoFile:String, ?canSkip:Bool = true, ?forMidSong:Bool = false, ?shouldLoop:Bool = false, ?playOnLoad:Bool = true) {
 			#if VIDEOS_ALLOWED
+			if(FileSystem.exists(Paths.video(videoFile)))
+			{
+				if(game.video != null)
+				{
+					game.remove(game.video);
+					game.video.destroy();
+				}
+				game.video = game.startVideo(videoFile, forMidSong, canSkip, shouldLoop, playOnLoad);
+				return true;
+			}
+			else
+			{
+				luaTrace('startVideo: Video file not found: ' + videoFile, false, false, FlxColor.RED);
+			}
+			return false;
+
+			#else
+			PlayState.instance.inCutscene = true;
+			new FlxTimer().start(0.1, function(tmr:FlxTimer)
+			{
+				PlayState.instance.inCutscene = false;
+				if(game.endingSong)
+					game.endSong();
+				else
+					game.startCountdown();
+			});
+			return true;
+			#end
+
+			/*#if VIDEOS_ALLOWED
 			if(FileSystem.exists(Paths.video(videoFile))) {
 				game.startVideo(videoFile);
 				return true;
@@ -1412,7 +1459,7 @@ class FunkinLua {
 				game.startCountdown();
 			}
 			return true;
-			#end
+			#end*/
 		});
 
 		Lua_helper.add_callback(lua, "playMusic", function(sound:String, volume:Float = 1, loop:Bool = false) {

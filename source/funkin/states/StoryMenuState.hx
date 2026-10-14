@@ -194,11 +194,11 @@ class StoryMenuState extends MusicBeatState
 		changeWeek();
 		changeDifficulty();
 
+		super.create();
+
 		#if mobile
 		addTouchPad("LEFT_FULL", "A_B_X_Y");
 		#end
-
-		super.create();
 	}
 
 	override function closeSubState() {

@@ -37,17 +37,22 @@ import flixel.addons.display.FlxRuntimeShader;
 import openfl.filters.ShaderFilter;
 #end
 
-#if VIDEOS_ALLOWED
+/*#if VIDEOS_ALLOWED
+import hxvlc.flixel.FlxVideo as VideoHandler;
+import hxvlc.flixel.FlxVideoSprite as VideoSprite;
+#end*/
+
+/*#if VIDEOS_ALLOWED
 #if (hxCodec >= "3.0.0")
 import hxcodec.flixel.FlxVideo as VideoHandler;
 #elseif (hxCodec >= "2.6.1")
 import hxcodec.VideoHandler as VideoHandler;
 #elseif (hxCodec == "2.6.0")
-import VideoHandler; // as VideoHandler
+import VideoHandler;
 #else
 import vlc.MP4Handler as VideoHandler;
 #end
-#end
+#end*/
 
 import funkin.data.objects.Note.EventNote;
 import funkin.data.objects.*;
@@ -1010,7 +1015,66 @@ class PlayState extends MusicBeatState
 		char.y += char.positionArray[1];
 	}
 
-	public function startVideo(name:String)
+	public var video:VideoSprite = null;
+	public function startVideo(name:String, forMidSong:Bool = false, canSkip:Bool = true, loop:Bool = false, playOnLoad:Bool = true)
+	{
+		#if VIDEOS_ALLOWED
+		inCutscene = !forMidSong;
+		canPause = forMidSong;
+
+		var foundFile:Bool = false;
+		var fileName:String = Paths.video(name);
+
+		#if sys
+		if (FileSystem.exists(fileName))
+		#else
+		if (OpenFlAssets.exists(fileName))
+		#end
+		foundFile = true;
+
+		if (foundFile)
+		{
+			video = new VideoSprite(fileName, forMidSong, canSkip, loop);
+			if(forMidSong) video.videoSprite.bitmap.rate = playbackRate;
+
+			// Finish callback
+			if (!forMidSong)
+			{
+				function onVideoEnd()
+				{
+					if (!isDead && generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null && !endingSong && !isCameraOnForcedPos)
+					{
+						moveCameraSection();
+						FlxG.camera.snapToTarget();
+					}
+					video = null;
+					canPause = true;
+					inCutscene = false;
+					startAndEnd();
+				}
+				video.finishCallback = onVideoEnd;
+				video.onSkip = onVideoEnd;
+			}
+			if (GameOverSubstate.instance != null && isDead) GameOverSubstate.instance.add(video);
+			else add(video);
+
+			if (playOnLoad)
+				video.play();
+			return video;
+		}
+		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
+		else addTextToDebug("Video not found: " + fileName, FlxColor.RED);
+		#else
+		else FlxG.log.error("Video not found: " + fileName);
+		#end
+		#else
+		FlxG.log.warn('Platform not supported!');
+		startAndEnd();
+		#end
+		return null;
+	}
+
+	/*public function startVideo(name:String)
 	{
 		#if VIDEOS_ALLOWED
 		inCutscene = true;
@@ -1051,7 +1115,7 @@ class PlayState extends MusicBeatState
 		startAndEnd();
 		return;
 		#end
-	}
+	}*/
 
 	function startAndEnd()
 	{
