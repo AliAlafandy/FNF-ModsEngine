@@ -224,8 +224,7 @@ class PlayState extends MusicBeatState
 	public var cameraSpeed:Float = 1;
 	
 	public var dancingLeft:Bool = false;
-
-	public var waterMark:FlxText;
+	public var waterMarkTxt:FlxText;
 
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
@@ -512,6 +511,7 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.data.downScroll) timeTxt.y = FlxG.height - 44;
 		if(ClientPrefs.data.timeBarType == 'Song Name')
 		{
+			if (!cpuControlled) timeTxt.text = SONG.song;
 			switch (ClientPrefs.data.botplayName) {
 				case 'Normal':
 					timeTxt.text = SONG.song;
@@ -592,23 +592,21 @@ class PlayState extends MusicBeatState
 
 		if (ClientPrefs.data.waterMark)
 		{
-			waterMark = new FlxText(4, healthBar.y + 50, 0, "", 16);
-			watermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
-			watermark.scrollFactor.set();
-			uiGroup.add(watermark);
+			waterMarkTxt = new FlxText(4, healthBar.y + 50, 0, "", 16);
+			waterMarkTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+			waterMarkTxt.scrollFactor.set();
+			uiGroup.add(waterMarkTxt);
 		}
 
+		if (ClientPrefs.data.downScroll) waterMarkTxt.y = FlxG.height * 0.9 + 45;
 		switch (ClientPrefs.data.waterMarkStyle)
 		{
 			case 'Kade Engine':
-				waterMark.text = SONG.song + " - " + Playstate.storyDifficulty + " | ME " + MainMenuState.modsEngineVersion;
+				waterMarkTxt.text = SONG.song + " - " + Playstate.storyDifficulty + " | ME " + MainMenuState.modsEngineVersion;
 
 			case 'Mods Engine':
-				waterMark.text = "Mods Engine v" + MainMenuState.modsEngineVersion;
+				waterMarkTxt.text = "Mods Engine v" + MainMenuState.modsEngineVersion;
 		}
-
-		if (ClientPrefs.data.downScroll)
-			watermark.y = FlxG.height * 0.9 + 45;
 
 		if (ClientPrefs.data.typeRating == 'Base Game') {
 			// scoreTxt = new FlxText(0, healthBar.y + 40, FlxG.width, "", 20);
@@ -884,13 +882,15 @@ class PlayState extends MusicBeatState
         	timeBar.setColors(FlxColor.WHITE);
         	scoreTxt.color = FlxColor.WHITE;
         	botplayTxt.color = FlxColor.WHITE;
+			waterMarkTxt.color = FlxColor.WHITE;
     	} else {
         	var hudColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
-			
+
         	timeTxt.color = hudColor;
         	timeBar.setColors(hudColor);
         	scoreTxt.color = hudColor;
         	botplayTxt.color = hudColor;
+			waterMarkTxt.color = hudColor;
     	}
 	}
 
@@ -1395,7 +1395,6 @@ class PlayState extends MusicBeatState
 		if(totalPlayed != 0)
 		{
 			var percent:Float = CoolUtil.floorDecimal(ratingPercent * 100, 2);
-
 			if (ClientPrefs.data.typeRating == 'Kade Engine')
 			{
 				str += ' (${percent}%) | ${ratingFC}';
