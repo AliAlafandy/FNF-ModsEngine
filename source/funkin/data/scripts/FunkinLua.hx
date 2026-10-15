@@ -1017,7 +1017,7 @@ class FunkinLua {
 			LuaUtils.loadFrames(leSprite, image, spriteType);
 			game.modchartSprites.set(tag, leSprite);
 		});
-		Lua_helper.add_callback(lua, "makeVideoSprite", function(tag:String, video:String, ?x:Float = 0, ?y:Float = 0, ?loop:Bool = false) {
+		Lua_helper.add_callback(lua, "makeVideoSprite", function(tag:String, video:String, ?x:Float = 0, ?y:Float = 0, ?loop:Dynamic = false) {
 		    #if VIDEOS_ALLOWED
 		    tag = tag.replace('.', '');
 		    LuaUtils.resetSpriteTag(tag);
