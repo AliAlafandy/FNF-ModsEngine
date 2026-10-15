@@ -64,7 +64,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			"'Base Game':  Score only,\n'Mods Engine': Score and Misses,\n'Psych Engine': Score, Misses and Rating.",
 			'typeRating',
 			'string',
-			['Base Game', 'Mods Engine', 'Psych Engine']);
+			['Base Game', 'Kade Engine', 'Psych Engine']);
 		addOption(option);
 
 		var option:Option = new Option('Pop Up Score',
