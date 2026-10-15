@@ -373,7 +373,7 @@ class LuaUtils
 		getTar.kill();
 		PlayState.instance.remove(getTar, true);
 		getTar.destroy();
-		PlayState.instance.modchartVideos.destroy(tag); // remove
+		PlayState.instance.modchartVideos.remove(tag);
 		#end
 		#end
 	}
