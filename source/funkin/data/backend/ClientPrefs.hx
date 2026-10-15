@@ -61,6 +61,8 @@ import funkin.states.TitleState;
 	public var hudColor:String = 'Off';
 	public var iconBops:Bool = true;
 	public var scoreZoom:Bool = true;
+	public var waterMark:Bool = false;
+	public var waterMarkStyle:String = 'Mods Engine';
 	public var noReset:Bool = false;
 	public var healthColor:String = 'Icon Color';
 	public var healthBarAlpha:Float = 1;
