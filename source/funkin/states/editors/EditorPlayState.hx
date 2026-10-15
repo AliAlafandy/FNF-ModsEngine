@@ -1054,15 +1054,20 @@ class EditorPlayState extends MusicBeatSubstate
 		if(totalPlayed != 0)
 		{
 			var percent:Float = CoolUtil.floorDecimal(ratingPercent * 100, 2);
-			str = '$percent% - $ratingFC';
+			if (ClientPrefs.data.typeRating == 'Kade Engine')
+			{
+				str = '$percent% - $ratingFC';
+			} else {
+				str = '$percent% | $ratingFC';
+			}
 		}
 		switch(ClientPrefs.data.typeRating)
 		{
 			case 'Psych Engine':
 				scoreTxt.text = 'Hits: $songHits | Misses: $songMisses | Rating: $str';
 
-			case 'Mods Engine':
-				scoreTxt.text = 'Hits: $songHits | Misses: $songMisses';
+			case 'Kade Engine':
+				scoreTxt.text = 'Hits: $songHits | Combo Breaks: $songMisses | Accuracy: $str';
 
 			case 'Base Game':
 				scoreTxt.text = 'Hits: $songHits';
