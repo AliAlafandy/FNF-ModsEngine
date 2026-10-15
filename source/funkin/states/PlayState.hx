@@ -225,6 +225,8 @@ class PlayState extends MusicBeatState
 	
 	public var dancingLeft:Bool = false;
 
+	public var waterMark:FlxText;
+
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
@@ -587,6 +589,26 @@ class PlayState extends MusicBeatState
 		iconP2.visible = !ClientPrefs.data.hideHud;
 		iconP2.alpha = ClientPrefs.data.healthBarAlpha;
 		uiGroup.add(iconP2);
+
+		if (ClientPrefs.data.waterMark)
+		{
+			waterMark = new FlxText(4, healthBar.y + 50, 0, "", 16);
+			watermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+			watermark.scrollFactor.set();
+			uiGroup.add(watermark);
+		}
+
+		switch (ClientPrefs.data.waterMarkStyle)
+		{
+			case 'Kade Engine':
+				waterMark.text = SONG.song + " - " + Playstate.storyDifficulty + " | ME " + MainMenuState.modsEngineVersion;
+
+			case 'Mods Engine':
+				waterMark.text = "Mods Engine v" + MainMenuState.modsEngineVersion;
+		}
+
+		if (ClientPrefs.data.downScroll)
+			watermark.y = FlxG.height * 0.9 + 45;
 
 		if (ClientPrefs.data.typeRating == 'Base Game') {
 			// scoreTxt = new FlxText(0, healthBar.y + 40, FlxG.width, "", 20);
@@ -1373,14 +1395,21 @@ class PlayState extends MusicBeatState
 		if(totalPlayed != 0)
 		{
 			var percent:Float = CoolUtil.floorDecimal(ratingPercent * 100, 2);
-			str += ' (${percent}%) - ${ratingFC}';
+
+			if (ClientPrefs.data.typeRating == 'Kade Engine')
+			{
+				str += ' (${percent}%) | ${ratingFC}';
+			} else {
+				str += ' (${percent}%) - ${ratingFC}';
+			}
 		}
 
 		var psychScore:String = 'Score: ${songScore}'
 		+ (!instakillOnMiss ? ' | Misses: ${songMisses}' : "")
 		+ ' | Rating: ${str}';
-		var modsScore:String = 'Score: ${songScore}'
-		+ (!instakillOnMiss ? ' | Misses: ${songMisses}' : "");
+		var kadeScore:String = 'Score: ${songScore}'
+		+ (!instakillOnMiss ? ' | Combo Breaks: ${songMisses}' : "")
+		+ ' | Rating: ${str}';
 		var baseScore:String = 'Score: ${songScore}';
 		// "tempScore" variable is used to prevent another memory leak, just in case
 		// "\n" here prevents the text from being cut off by beat zooms
@@ -1389,8 +1418,8 @@ class PlayState extends MusicBeatState
 			case 'Base Game':
 				scoreTxt.text = '${baseScore}\n';
 
-			case 'Mods Engine':
-				scoreTxt.text = '${modsScore}\n';
+			case 'Kade Engine':
+				scoreTxt.text = '${kadeScore}\n';
 
 			case 'Psych Engine':
 				scoreTxt.text = '${psychScore}\n';
