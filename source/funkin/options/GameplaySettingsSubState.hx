@@ -35,7 +35,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Subtitles',
-			"If checked, showing subtitles while play",
+			"If checked, it will show subtitles while you playing.",
 			'subTitles',
 			'bool');
 		addOption(option);
