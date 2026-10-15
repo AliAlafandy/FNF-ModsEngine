@@ -1033,7 +1033,8 @@ class FunkinLua {
 		                game.modchartVideos.remove(tag);
 		            } else {
 		                // leSprite.bitmap.position = 0.0;
-		                leSprite.play();
+		                // leSprite.play();
+						leSprite.load(Paths.video(video), loop ? ['input-repeat=65545'] : null);
 		            }
 		        });
 			}
@@ -1237,14 +1238,14 @@ class FunkinLua {
 				return;
 			}
 
-    		var spr:ModchartVideo = game.modchartVideos.get(tag);
+    		var poo:ModchartVideo = game.modchartVideos.get(tag);
 			if(destroy) {
-				spr.kill();
+				poo.kill();
 			}
 
-			LuaUtils.getTargetInstance().remove(spr, true);
+			LuaUtils.getTargetInstance().remove(poo, true);
 			if(destroy) {
-				spr.destroy();
+				poo.destroy();
 				game.modchartVideos.remove(tag);
 			}
 			#end
