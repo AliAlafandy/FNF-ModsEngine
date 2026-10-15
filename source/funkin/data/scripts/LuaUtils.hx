@@ -6,7 +6,6 @@ import funkin.data.objects.Character;
 import openfl.display.BlendMode;
 import Type.ValueType;
 
-import funkin.data.scripts.ModchartVideo;
 import funkin.substates.GameOverSubstate;
 
 typedef LuaTweenOptions = {
@@ -370,7 +369,7 @@ class LuaUtils
 			return;
 		}
 
-		var getTar:ModchartVideos = PlayState.instance.modchartVideos.get(tag);
+		var getTar:ModchartVideo = PlayState.instance.modchartVideos.get(tag);
 		getTar.kill();
 		PlayState.instance.remove(getTar, true);
 		getTar.destroy();
