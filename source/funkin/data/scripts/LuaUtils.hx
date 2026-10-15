@@ -6,6 +6,7 @@ import funkin.data.objects.Character;
 import openfl.display.BlendMode;
 import Type.ValueType;
 
+import funkin.data.scripts.ModchartVideo;
 import funkin.substates.GameOverSubstate;
 
 typedef LuaTweenOptions = {
