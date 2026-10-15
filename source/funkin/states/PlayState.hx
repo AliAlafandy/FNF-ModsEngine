@@ -1409,7 +1409,7 @@ class PlayState extends MusicBeatState
 		+ ' | Rating: ${str}';
 		var kadeScore:String = 'Score: ${songScore}'
 		+ (!instakillOnMiss ? ' | Combo Breaks: ${songMisses}' : "")
-		+ ' | Rating: ${str}';
+		+ ' | Accuracy: ${str}';
 		var baseScore:String = 'Score: ${songScore}';
 		// "tempScore" variable is used to prevent another memory leak, just in case
 		// "\n" here prevents the text from being cut off by beat zooms
