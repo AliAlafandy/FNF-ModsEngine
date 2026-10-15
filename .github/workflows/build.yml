@@ -32,6 +32,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@main
 
+      - name: Setup Android NDK
+        if: startsWith(inputs.name, 'Android')
+        uses: nttld/setup-ndk@main
+        id: setup-ndk
+        with:
+          ndk-version: r21e
+
+      - name: Setup Java JDK
+        if: startsWith(inputs.name, 'Android')
+        uses: actions/setup-java@main
+        with:
+          distribution: 'zulu'
+          java-version: 18
+
+      - name: Setup Android SDK
+        if: startsWith(inputs.name, 'Android')
+        uses: android-actions/setup-android@main
+
       - name: Setup Haxe
         uses: krdlab/setup-haxe@master
         with:
@@ -58,24 +76,6 @@ jobs:
         run: |
           haxelib install hmm --quiet
           haxelib run hmm install --quiet
-
-      - name: Setup Android NDK
-        if: startsWith(inputs.name, 'Android')
-        uses: nttld/setup-ndk@main
-        id: setup-ndk
-        with:
-          ndk-version: r21e
-
-      - name: Setup Java JDK
-        if: startsWith(inputs.name, 'Android')
-        uses: actions/setup-java@main
-        with:
-          distribution: 'zulu'
-          java-version: 18
-
-      - name: Setup Android SDK
-        if: startsWith(inputs.name, 'Android')
-        uses: android-actions/setup-android@main
 
       - name: Configure Android
         if: startsWith(inputs.name, 'Android')
