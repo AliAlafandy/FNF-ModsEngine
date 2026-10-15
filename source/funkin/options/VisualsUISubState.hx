@@ -104,6 +104,19 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 
+		var option:Option = new Option('Water Mark',
+			"If checked, it will add our water mark.",
+			'waterMark',
+			'bool');
+		addOption(option);
+
+		var option:Option = new Option('Water Mark Style:',
+			"What should the Water Mark style?",
+			'waterMarkStyle',
+			'string',
+			['Kade Engine', 'Mods Engine']);
+		addOption(option);
+
 		var option:Option = new Option('Score Text Zoom on Hit',
 			"If unchecked, disables the Score text zooming\neverytime you hit a note.",
 			'scoreZoom',
