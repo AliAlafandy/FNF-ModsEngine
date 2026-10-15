@@ -1030,7 +1030,7 @@ class FunkinLua {
 		            if (!loop)
 		            {
 						leSprite.destroy();
-		                game.modchartVideos.destroy(tag); // remove
+		                game.modchartVideos.remove(tag);
 		            } else {
 		                // leSprite.bitmap.position = 0.0;
 		                leSprite.play();
@@ -1245,7 +1245,7 @@ class FunkinLua {
 			LuaUtils.getTargetInstance().remove(spr, true);
 			if(destroy) {
 				spr.destroy();
-				game.modchartVideos.destroy(tag); // remove
+				game.modchartVideos.remove(tag);
 			}
 			#end
 		});
