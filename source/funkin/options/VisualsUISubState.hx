@@ -118,7 +118,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Random Engine Names',
-			"If checked, it will make engine name be random names.",
+			"If checked, it will make the engine pick random names.",
 			'randomEngineNames',
 			'bool');
 		addOption(option);
@@ -130,14 +130,14 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Health Bar:',
-			"What should the Health Bar color?",
+			"What color the Health Bar should be ?",
 			'healthColor',
 			'string',
 			['Base Game', 'Icon Color']);
 		addOption(option);
 
 		var option:Option = new Option('Health Bar Opacity',
-			'How much transparent should the health bar and icons be.',
+			'How much transparent the Health Bar and Icons should be ?',
 			'healthBarAlpha',
 			'percent');
 		option.scrollSpeed = 1.6;
@@ -194,7 +194,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 		
 		var option:Option = new Option('Themes:',
-		    'Change theme from different engines.\nThis option will work after close Options, for less lag!',
+		    'Change theme from different engines.\nThis option will take effect after closing Options, for less lag!',
 			'themes',
 		    'string',
 			['Base Game', 'Mods Engine']);
