@@ -104,15 +104,15 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 
-		var option:Option = new Option('Water Mark',
+		var option:Option = new Option('Engine Mark',
 			"If checked, it will add our water mark.",
-			'waterMark',
+			'engineMark',
 			'bool');
 		addOption(option);
 
-		var option:Option = new Option('Water Mark Style:',
-			"What should the Water Mark style?",
-			'waterMarkStyle',
+		var option:Option = new Option('Engine Mark Style:',
+			"What should the Engine Mark style?",
+			'engineMarkStyle',
 			'string',
 			['Kade Engine', 'Mods Engine']);
 		addOption(option);
