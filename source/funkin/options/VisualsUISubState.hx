@@ -105,7 +105,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Engine Mark',
-			"If checked, it will add our water mark.",
+			"If checked, it will show engine name like water mark.",
 			'engineMark',
 			'bool');
 		addOption(option);
@@ -115,6 +115,12 @@ class VisualsUISubState extends BaseOptionsMenu
 			'engineMarkStyle',
 			'string',
 			['Kade Engine', 'Mods Engine']);
+		addOption(option);
+
+		var option:Option = new Option('Random Engine Names',
+			"If checked, it will make engine name be random names.",
+			'randomEngineNames',
+			'bool');
 		addOption(option);
 
 		var option:Option = new Option('Score Text Zoom on Hit',
