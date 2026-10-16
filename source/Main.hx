@@ -50,7 +50,7 @@ class Main extends Sprite
 	public static var fpsVar:FPSCounter;
 
 	#if mobile
-	public static var logoMark:Sprite;
+	public static var waterMark:Sprite;
 	#end
 
 	#if mobile
@@ -145,26 +145,26 @@ class Main extends Sprite
 		}
 
 		#if mobile
-		if (ClientPrefs.data.logoMark)
+		if (ClientPrefs.data.waterMark)
 		{
-			switch (ClientPrefs.data.logoMarkStyle) {
+			switch (ClientPrefs.data.waterMarkStyle) {
 				case 'Psych Engine':
 					var bitmapData = Assets.getBitmapData("assets/shared/images/psychIcon.png");
-					logoMark = new Sprite();
-					logoMark.addChild(new Bitmap(bitmapData)); // Sets the graphic of the sprite to a Bitmap object, which uses our embedded BitmapData class.
-					logoMark.alpha = 0.4;
-					logoMark.x = Lib.application.window.width - 10 - logoMark.width;
-					logoMark.y = Lib.application.window.height - 10 - logoMark.height;
-					addChild(logoMark);
+					waterMark = new Sprite();
+					waterMark.addChild(new Bitmap(bitmapData)); // Sets the graphic of the sprite to a Bitmap object, which uses our embedded BitmapData class.
+					waterMark.alpha = 0.4;
+					waterMark.x = Lib.application.window.width - 10 - waterMark.width;
+					waterMark.y = Lib.application.window.height - 10 - waterMark.height;
+					addChild(waterMark);
 
 				case 'Mods Engine':
 					var bitmapData = Assets.getBitmapData("assets/shared/images/modsIcon.png");
-					logoMark = new Sprite();
-					logoMark.addChild(new Bitmap(bitmapData)); // Sets the graphic of the sprite to a Bitmap object, which uses our embedded BitmapData class.
-					logoMark.alpha = 0.4;
-					logoMark.x = Lib.application.window.width - 10 - logoMark.width;
-					logoMark.y = Lib.application.window.height - 10 - logoMark.height;
-					addChild(logoMark);
+					waterMark = new Sprite();
+					waterMark.addChild(new Bitmap(bitmapData)); // Sets the graphic of the sprite to a Bitmap object, which uses our embedded BitmapData class.
+					waterMark.alpha = 0.4;
+					waterMark.x = Lib.application.window.width - 10 - waterMark.width;
+					waterMark.y = Lib.application.window.height - 10 - waterMark.height;
+					addChild(waterMark);
 		}
 		#end
 
