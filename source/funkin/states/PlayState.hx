@@ -606,6 +606,7 @@ class PlayState extends MusicBeatState
 			case 2: engineName = 'Alsuh Engine';
 			case 3: engineName = 'BS Engine';
 			case 4: engineName = 'CDEV Engine';
+			//forget that codename engine
 			case 5: engineName = 'Forever Engine';
 			case 6: engineName = 'FPS Plus';
 			case 7: engineName = 'JS Engine';
