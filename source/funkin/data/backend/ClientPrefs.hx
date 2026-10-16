@@ -23,6 +23,8 @@ import funkin.states.TitleState;
 	public var popUpRating:Bool = true;
 	public var vsync:Bool = false;
 	public var gameOverVibration:Bool = false;
+	public var logoMark:Bool = false;
+	public var logoMarkStyle:String = 'Mods Engine';
 
 	// Other Releated
 	public var downScroll:Bool = false;
@@ -104,8 +106,6 @@ import funkin.states.TitleState;
 	public var guitarHeroSustains:Bool = false;
 	public var discordRPC:Bool = true;
 	public var loadingScreen:Bool = false;
-	public var logoMark:Bool = false;
-	public var logoMarkStyle:String = 'Mods Engine';
 }
 
 class ClientPrefs {
