@@ -214,7 +214,6 @@ class PlayState extends MusicBeatState
 
 	public var botplaySine:Float = 0;
 	public var botplayTxt:FlxText;
-	public var waterMarkTxt:FlxText;
 
 	public var iconP1:HealthIcon;
 	public var iconP2:HealthIcon;
@@ -598,8 +597,8 @@ class PlayState extends MusicBeatState
 			uiGroup.add(engineTxt);
 		}
 
-		var randomName:Int = FlxG.random.int(0, 19);
-		var engineName:String = '';
+		public var randomName:Int;
+		public var engineName:String = '';
 		switch (randomName)
 	    {
 			case 0: engineName = 'A Slice';
@@ -627,12 +626,20 @@ class PlayState extends MusicBeatState
 		}
 
 		if (ClientPrefs.data.downScroll) engineTxt.y = FlxG.height * 0.9 + 45;
-		switch (ClientPrefs.data.engineMarkStyle) {
+		switch (ClientPrefs.data.enginemarkStyle) {
 			case 'Kade Engine':
 				if (ClientPrefs.data.randomEngineNames) {
-					engineTxt.text = SONG.song + " - " + Difficulty.getString().toUpperCase() + " | " + engineName + " v" + MainMenuState.modsEngineVersion;
+					if (ClientPrefs.data.botplayName == 'Song Name') {
+						engineTxt.text = Difficulty.getString().toUpperCase() + " | " + engineName + " v" + MainMenuState.modsEngineVersion;
+					} else {
+						engineTxt.text = SONG.song + " - " + Difficulty.getString().toUpperCase() + " | " + engineName + " v" + MainMenuState.modsEngineVersion;
+					}
 				} else {
-					engineTxt.text = SONG.song + " - " + Difficulty.getString().toUpperCase() + " | Mods Engine v" + MainMenuState.modsEngineVersion;
+					if (ClientPrefs.data.botplayName == 'Song Name') {
+						engineTxt.text = Difficulty.getString().toUpperCase() + " | Mods Engine v" + MainMenuState.modsEngineVersion;
+					} else {
+						engineTxt.text = SONG.song + " - " + Difficulty.getString().toUpperCase() + " | Mods Engine v" + MainMenuState.modsEngineVersion;
+					}
 				}
 
 			case 'Mods Engine':
@@ -1975,6 +1982,8 @@ class PlayState extends MusicBeatState
 			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
 		}
 
+		randomName = Std.int(FlxG.random.int(0, 19) % 4);
+
 		#if mobile
 		if ((controls.PAUSE
 			 #if android
@@ -2762,6 +2771,14 @@ class PlayState extends MusicBeatState
 		
 		lyricsText.visible = false;
 		lyricsBG.visible = false;
+
+		if (ClientPrefs.data.enginemarkStyle == 'Kade Engine') {
+			if (ClientPrefs.data.randomEngineNames) {
+				engineTxt.text = engineName + ' v' + MainMenuState.modsEngineVersion;
+			} else {
+				engineTxt.text = 'Mods Engine v' + MainMenuState.modsEngineVersion;
+			}
+		}
 
 		timeBar.visible = false;
 		timeTxt.visible = false;
