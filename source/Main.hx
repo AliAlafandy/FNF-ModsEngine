@@ -149,7 +149,7 @@ class Main extends Sprite
 		#if mobile
 		if (ClientPrefs.data.waterMark)
 		{
-			switch (ClientPrefs.data.waterMarkStyle) {
+			switch (ClientPrefs.data.watermarkStyle) {
 				case 'Psych Engine':
 					var bitmapData = Assets.getBitmapData("assets/shared/images/psychIcon.png");
 					waterMark = new Sprite();
