@@ -22,6 +22,8 @@ class CreditsState extends MusicBeatState
 
 	var offsetThing:Float = -75;
 
+	var icon:AttachedSprite = new AttachedSprite();
+
 	override function create()
 	{
 		#if DISCORD_ALLOWED
@@ -153,31 +155,54 @@ class CreditsState extends MusicBeatState
 			grpOptions.add(optionText);
 
 			if(isSelectable) {
-				if(creditsStuff[i][5] != null)
-				{
-					Mods.currentModDirectory = creditsStuff[i][5];
-				}
+                if(creditsStuff[i][5] != null)
+                {
+                    Mods.currentModDirectory = creditsStuff[i][5];
+                }
 
-				var str:String = 'credits/missing_icon';
-				if(creditsStuff[i][1] != null && creditsStuff[i][1].length > 0)
-				{
-					var fileName = 'credits/' + creditsStuff[i][1];
-					if (Paths.fileExists('images/$fileName.png', IMAGE)) str = fileName;
-					else if (Paths.fileExists('images/$fileName-pixel.png', IMAGE)) str = fileName + '-pixel';
-				}
+                var str:String = 'credits/missing_icon';
+                var hasXml:Bool = false;
+                
+                if(creditsStuff[i][1] != null && creditsStuff[i][1].length > 0)
+                {
+                    var fileName = 'credits/' + creditsStuff[i][1];
+                    if (Paths.fileExists('images/$fileName.xml', TEXT) && Paths.fileExists('images/$fileName.png', IMAGE))
+                    {
+                        str = fileName;
+                        hasXml = true;
+                    }
+                    else if (Paths.fileExists('images/$fileName.png', IMAGE))
+                    {
+                        str = fileName;
+                    }
+                    else if (Paths.fileExists('images/$fileName-pixel.png', IMAGE))
+                    {
+                        str = fileName + '-pixel';
+                    }
+                }
 
-				var icon:AttachedSprite = new AttachedSprite(str);
-				if(str.endsWith('-pixel')) icon.antialiasing = false;
-				icon.xAdd = optionText.width + 10;
-				icon.sprTracker = optionText;
-	
-				// using a FlxGroup is too much fuss!
-				iconArray.push(icon);
-				add(icon);
-				Mods.currentModDirectory = '';
+                if (hasXml)
+                {
+                    icon.frames = Paths.getSparrowAtlas(str);
+                    icon.animation.addByPrefix('idle', 'idle', 24, true);
+                    icon.animation.addByPrefix('confirm', 'confirm', 24, false);
+                    icon.animation.play('idle');
+                }
+                else
+                {
+                    icon.loadGraphic(Paths.image(str));
+                }
 
-				if(curSelected == -1) curSelected = i;
-			}
+                if(str.endsWith('-pixel')) icon.antialiasing = false;
+                icon.xAdd = optionText.width + 10;
+                icon.sprTracker = optionText;
+    
+                iconArray.push(icon);
+                add(icon);
+                Mods.currentModDirectory = '';
+
+                if(curSelected == -1) curSelected = i;
+            }
 			else optionText.alignment = CENTERED;
 		}
 		
@@ -251,8 +276,13 @@ class CreditsState extends MusicBeatState
 			}
 
 			if(controls.ACCEPT && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4)) {
-				CoolUtil.browserLoad(creditsStuff[curSelected][3]);
-			}
+                var selectedIcon = iconArray[getIconIndex(curSelected)];
+                if (selectedIcon != null && selectedIcon.animation.getByName('confirm') != null)
+                {
+                    selectedIcon.animation.play('confirm');
+                }
+                CoolUtil.browserLoad(creditsStuff[curSelected][3]);
+            }
 			if (controls.BACK)
 			{
 				if(colorTween != null) {
@@ -295,6 +325,10 @@ class CreditsState extends MusicBeatState
 			if (curSelected >= creditsStuff.length)
 				curSelected = 0;
 		} while(unselectableCheck(curSelected));
+		if (icon.animation != null && icon.animation.getByName('idle') != null && icon.animation.playing != 'idle')
+		{
+			icon.animation.play('idle');
+		}
 
 		var newColor:FlxColor = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
 		//trace('The BG color is: $newColor');
