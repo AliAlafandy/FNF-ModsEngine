@@ -913,7 +913,7 @@ class PlayState extends MusicBeatState
         	timeBar.setColors(FlxColor.WHITE);
         	scoreTxt.color = FlxColor.WHITE;
         	botplayTxt.color = FlxColor.WHITE;
-			waterMarkTxt.color = FlxColor.WHITE;
+			engineTxt.color = FlxColor.WHITE;
     	} else {
         	var hudColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
 
@@ -921,7 +921,7 @@ class PlayState extends MusicBeatState
         	timeBar.setColors(hudColor);
         	scoreTxt.color = hudColor;
         	botplayTxt.color = hudColor;
-			waterMarkTxt.color = hudColor;
+			engineTxt.color = hudColor;
     	}
 	}
 
