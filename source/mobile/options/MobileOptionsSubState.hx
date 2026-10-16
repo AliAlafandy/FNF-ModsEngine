@@ -92,7 +92,7 @@ class MobileOptionsSubState extends BaseOptionsMenu
 
 		var option:Option = new Option('Water Mark Style:',
 			"What should the Water Mark style?",
-			'waterMarkStyle',
+			'watermarkStyle',
 			'string',
 			['Psych Engine', 'Mods Engine']);
 		addOption(option);
