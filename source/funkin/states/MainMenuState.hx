@@ -13,7 +13,7 @@ import funkin.options.OptionsState;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var modsEngineVersion:String = '7.0.0'; // Latest Version bcuz v1.0.0 so late these today and This is also used for Discord RPC
+	public static var modsEngineVersion:String = '7.0.0'; // Latest Version bcuz v1.0.0 so late these days and This is also used for Discord RPC
 	public static var psychEngineVersion:String = '0.7.3';
 	public static var curSelected:Int = 0;
 
