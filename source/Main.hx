@@ -48,7 +48,10 @@ class Main extends Sprite
 	};
 
 	public static var fpsVar:FPSCounter;
+
+	#if mobile
 	public static var logoMark:Sprite;
+	#end
 
 	#if mobile
 	public static final platform:String = "Phones";
@@ -141,6 +144,7 @@ class Main extends Sprite
 			fpsVar.visible = ClientPrefs.data.showFPS;
 		}
 
+		#if mobile
 		if (ClientPrefs.data.logoMark)
 		{
 			switch (ClientPrefs.data.logoMarkStyle) {
@@ -162,6 +166,7 @@ class Main extends Sprite
 					logoMark.y = Lib.application.window.height - 10 - logoMark.height;
 					addChild(logoMark);
 		}
+		#end
 
 		#if linux
 		var icon = Image.fromFile("icon.png");
