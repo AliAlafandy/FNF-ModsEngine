@@ -72,7 +72,7 @@ import funkin.states.TitleState;
 	public var hitsoundVolume:Float = 0;
 	public var pauseMusic:String = 'Tea Time';
 	public var checkForUpdates:Bool = true;
-	public var typeRating:String = 'Mods Engine';
+	public var typeRating:String = 'Psych Engine';
 	public var comboStacking:Bool = true;
 	public var themes:String = 'Mods Engine';
 	
