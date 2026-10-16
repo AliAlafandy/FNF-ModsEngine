@@ -112,7 +112,7 @@ class VisualsUISubState extends BaseOptionsMenu
 
 		var option:Option = new Option('Engine Mark Style:',
 			"What should the Engine Mark style?",
-			'engineMarkStyle',
+			'enginemarkStyle',
 			'string',
 			['Kade Engine', 'Mods Engine']);
 		addOption(option);
