@@ -84,15 +84,15 @@ class MobileOptionsSubState extends BaseOptionsMenu
 		addOption(option);
 		#end
 
-		var option:Option = new Option('Logo Mark',
-			"If checked, it will add our logo mark.",
-			'logoMark',
+		var option:Option = new Option('Water Mark',
+			"If checked, it will add water mark like icon.",
+			'waterMark',
 			'bool');
 		addOption(option);
 
-		var option:Option = new Option('Logo Mark Style:',
-			"What should the Logo Mark style?",
-			'logoMarkStyle',
+		var option:Option = new Option('Water Mark Style:',
+			"What should the Water Mark style?",
+			'waterMarkStyle',
 			'string',
 			['Psych Engine', 'Mods Engine']);
 		addOption(option);
