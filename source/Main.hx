@@ -167,7 +167,7 @@ class Main extends Sprite
 					waterMark.x = Lib.application.window.width - 10 - waterMark.width;
 					waterMark.y = Lib.application.window.height - 10 - waterMark.height;
 					addChild(waterMark);
-		}
+			}
 		}
 		#end
 
