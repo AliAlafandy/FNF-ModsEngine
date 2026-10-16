@@ -22,8 +22,6 @@ class CreditsState extends MusicBeatState
 
 	var offsetThing:Float = -75;
 
-	var icon:AttachedSprite = new AttachedSprite();
-
 	override function create()
 	{
 		#if DISCORD_ALLOWED
@@ -119,7 +117,7 @@ class CreditsState extends MusicBeatState
 
                 var str:String = 'credits/missing_icon';
                 var hasXml:Bool = false;
-                
+
                 if(creditsStuff[i][1] != null && creditsStuff[i][1].length > 0)
                 {
                     var fileName = 'credits/' + creditsStuff[i][1];
@@ -138,6 +136,7 @@ class CreditsState extends MusicBeatState
                     }
                 }
 
+				var icon:AttachedSprite = new AttachedSprite();
                 if (hasXml)
                 {
                     icon.frames = Paths.getSparrowAtlas(str);
