@@ -9,6 +9,8 @@ import flixel.FlxState;
 import haxe.io.Path;
 
 import openfl.Assets;
+import openfl.display.Bitmap;
+import openfl.display.BitmapData;
 import openfl.Lib;
 import openfl.display.Sprite;
 import openfl.events.Event;
