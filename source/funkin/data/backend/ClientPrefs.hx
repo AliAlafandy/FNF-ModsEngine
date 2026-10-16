@@ -104,6 +104,8 @@ import funkin.states.TitleState;
 	public var guitarHeroSustains:Bool = false;
 	public var discordRPC:Bool = true;
 	public var loadingScreen:Bool = false;
+	public var logoMark:Bool = false;
+	public var logoMarkStyle:String = 'Mods Engine';
 }
 
 class ClientPrefs {
