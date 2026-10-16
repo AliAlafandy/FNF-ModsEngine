@@ -84,6 +84,19 @@ class MobileOptionsSubState extends BaseOptionsMenu
 		addOption(option);
 		#end
 
+		var option:Option = new Option('Logo Mark',
+			"If checked, it will add our logo mark.",
+			'logoMark',
+			'bool');
+		addOption(option);
+
+		var option:Option = new Option('Logo Mark Style:',
+			"What should the Logo Mark style?",
+			'logoMarkStyle',
+			'string',
+			['Psych Engine', 'Mods Engine']);
+		addOption(option);
+
 		super();
 	}
 
