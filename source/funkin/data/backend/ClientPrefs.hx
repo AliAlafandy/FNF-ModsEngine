@@ -24,7 +24,7 @@ import funkin.states.TitleState;
 	public var vsync:Bool = false;
 	public var gameOverVibration:Bool = false;
 	public var waterMark:Bool = false;
-	public var waterMarkStyle:String = 'Mods Engine';
+	public var watermarkStyle:String = 'Mods Engine';
 
 	// Other Releated
 	public var downScroll:Bool = false;
@@ -64,7 +64,7 @@ import funkin.states.TitleState;
 	public var iconBops:Bool = true;
 	public var scoreZoom:Bool = true;
 	public var engineMark:Bool = false;
-	public var engineMarkStyle:String = 'Mods Engine';
+	public var enginemarkStyle:String = 'Mods Engine';
 	public var randomEngineNames:Bool = false;
 	public var noReset:Bool = false;
 	public var healthColor:String = 'Icon Color';
