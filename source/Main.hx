@@ -144,30 +144,6 @@ class Main extends Sprite
 			fpsVar.visible = ClientPrefs.data.showFPS;
 		}
 
-		#if mobile
-		if (ClientPrefs.data.waterMark)
-		{
-			switch (ClientPrefs.data.waterMarkStyle) {
-				case 'Psych Engine':
-					var bitmapData = Assets.getBitmapData("assets/shared/images/psychIcon.png");
-					waterMark = new Sprite();
-					waterMark.addChild(new Bitmap(bitmapData)); // Sets the graphic of the sprite to a Bitmap object, which uses our embedded BitmapData class.
-					waterMark.alpha = 0.4;
-					waterMark.x = Lib.application.window.width - 10 - waterMark.width;
-					waterMark.y = Lib.application.window.height - 10 - waterMark.height;
-					addChild(waterMark);
-
-				case 'Mods Engine':
-					var bitmapData = Assets.getBitmapData("assets/shared/images/modsIcon.png");
-					waterMark = new Sprite();
-					waterMark.addChild(new Bitmap(bitmapData)); // Sets the graphic of the sprite to a Bitmap object, which uses our embedded BitmapData class.
-					waterMark.alpha = 0.4;
-					waterMark.x = Lib.application.window.width - 10 - waterMark.width;
-					waterMark.y = Lib.application.window.height - 10 - waterMark.height;
-					addChild(waterMark);
-		}
-		#end
-
 		#if linux
 		var icon = Image.fromFile("icon.png");
 		Lib.current.stage.window.setIcon(icon);
@@ -209,6 +185,31 @@ class Main extends Sprite
 			if (FlxG.game != null)
 			resetSpriteCache(FlxG.game);
 		});
+
+		#if mobile
+		if (ClientPrefs.data.waterMark)
+		{
+			switch (ClientPrefs.data.waterMarkStyle) {
+				case 'Psych Engine':
+					var bitmapData = Assets.getBitmapData("assets/shared/images/psychIcon.png");
+					waterMark = new Sprite();
+					waterMark.addChild(new Bitmap(bitmapData)); // Sets the graphic of the sprite to a Bitmap object, which uses our embedded BitmapData class.
+					waterMark.alpha = 0.4;
+					waterMark.x = Lib.application.window.width - 10 - waterMark.width;
+					waterMark.y = Lib.application.window.height - 10 - waterMark.height;
+					addChild(waterMark);
+
+				case 'Mods Engine':
+					var bitmapData = Assets.getBitmapData("assets/shared/images/modsIcon.png");
+					waterMark = new Sprite();
+					waterMark.addChild(new Bitmap(bitmapData)); // Sets the graphic of the sprite to a Bitmap object, which uses our embedded BitmapData class.
+					waterMark.alpha = 0.4;
+					waterMark.x = Lib.application.window.width - 10 - waterMark.width;
+					waterMark.y = Lib.application.window.height - 10 - waterMark.height;
+					addChild(waterMark);
+			}
+		}
+		#end
 	}
 
 	static function resetSpriteCache(sprite:Sprite):Void {
