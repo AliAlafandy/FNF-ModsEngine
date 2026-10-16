@@ -209,7 +209,6 @@ class Main extends Sprite
 			if (FlxG.game != null)
 			resetSpriteCache(FlxG.game);
 		});
-	}
 
 	static function resetSpriteCache(sprite:Sprite):Void {
 		@:privateAccess {
