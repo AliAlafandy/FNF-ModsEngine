@@ -224,7 +224,7 @@ class PlayState extends MusicBeatState
 	public var cameraSpeed:Float = 1;
 	
 	public var dancingLeft:Bool = false;
-	public var waterMarkTxt:FlxText;
+	public var engineTxt:FlxText;
 
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
@@ -590,22 +590,56 @@ class PlayState extends MusicBeatState
 		iconP2.alpha = ClientPrefs.data.healthBarAlpha;
 		uiGroup.add(iconP2);
 
-		if (ClientPrefs.data.waterMark)
-		{
-			waterMarkTxt = new FlxText(4, healthBar.y + 50, 0, "", 16);
-			waterMarkTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
-			waterMarkTxt.scrollFactor.set();
-			uiGroup.add(waterMarkTxt);
+		if (ClientPrefs.data.engineMark) {
+			engineTxt = new FlxText(4, healthBar.y + 50, 0, "", 16);
+			engineTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+			engineTxt.scrollFactor.set();
+			uiGroup.add(engineTxt);
 		}
 
-		if (ClientPrefs.data.downScroll) waterMarkTxt.y = FlxG.height * 0.9 + 45;
-		switch (ClientPrefs.data.waterMarkStyle)
-		{
+		var randomName:Int = FlxG.random.int(0, 19);
+		var engineName:String = '';
+		switch (randomName)
+	    {
+			case 0: engineName = 'A Slice';
+			case 1: engineName = 'Alafandy Engine';
+			case 2: engineName = 'Alsuh Engine';
+			case 3: engineName = 'BS Engine';
+			case 4: engineName = 'CDEV Engine';
+			case 5: engineName = 'Forever Engine';
+			case 6: engineName = 'FPS Plus';
+			case 7: engineName = 'JS Engine';
+			case 8: engineName = 'Kade Engine';
+			case 9:	engineName = "Mic'd UP";
+			//case 10: engineName = "Mods Engine";
+			case 10: engineName = 'Nightmare Vision'; 
+			case 11: engineName = 'NovaFlare Engine';
+			case 12: engineName = 'OS Engine';
+			case 13: engineName = 'P Slice';
+			case 14: engineName = 'Play Engine';
+			case 15: engineName = 'Psych Engine';
+			case 16: engineName = 'ReBound Engine';
+			case 17: engineName = 'SB Engine';
+			case 18: engineName = 'Tr1ngle Engine';
+			case 19: engineName = 'V Slice';
+			default: engineName = 'Mods Engine';
+		}
+
+		if (ClientPrefs.data.downScroll) engineTxt.y = FlxG.height * 0.9 + 45;
+		switch (ClientPrefs.data.engineMarkStyle) {
 			case 'Kade Engine':
-				waterMarkTxt.text = SONG.song + " - " + Difficulty.getString().toUpperCase() + " | ME " + MainMenuState.modsEngineVersion;
+				if (ClientPrefs.data.randomEngineNames) {
+					engineTxt.text = SONG.song + " - " + Difficulty.getString().toUpperCase() + " | " + engineName + " v" + MainMenuState.modsEngineVersion;
+				} else {
+					engineTxt.text = SONG.song + " - " + Difficulty.getString().toUpperCase() + " | Mods Engine v" + MainMenuState.modsEngineVersion;
+				}
 
 			case 'Mods Engine':
-				waterMarkTxt.text = "Mods Engine v" + MainMenuState.modsEngineVersion;
+				if (ClientPrefs.data.randomEngineNames) {
+					engineTxt.text = engineName + " v" + MainMenuState.modsEngineVersion;
+				} else {
+					engineTxt.text = "Mods Engine v" + MainMenuState.modsEngineVersion;
+				}
 		}
 
 		if (ClientPrefs.data.typeRating == 'Base Game') {
@@ -627,6 +661,7 @@ class PlayState extends MusicBeatState
 			uiGroup.add(scoreTxt);
 		}
 
+		if(ClientPrefs.data.downScroll) botplayTxt.y = timeBar.y - 78;
 		switch (ClientPrefs.data.botplayName) {
 			case 'Normal':
 				botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "BOTPLAY", 32);
@@ -651,11 +686,6 @@ class PlayState extends MusicBeatState
 				botplayTxt.borderSize = 1.25;
 				botplayTxt.visible = cpuControlled;
 				uiGroup.add(botplayTxt);
-		}
-		
-		if(ClientPrefs.data.downScroll)
-		{
-			botplayTxt.y = timeBar.y - 78;
 		}
 
 		lyricsBG = new FlxSprite();
