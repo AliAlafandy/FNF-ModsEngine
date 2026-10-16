@@ -602,7 +602,7 @@ class PlayState extends MusicBeatState
 		switch (ClientPrefs.data.waterMarkStyle)
 		{
 			case 'Kade Engine':
-				waterMarkTxt.text = SONG.song + " - " + Playstate.storyDifficulty + " | ME " + MainMenuState.modsEngineVersion;
+				waterMarkTxt.text = SONG.song + " - " + Difficulty.getString().toUpperCase() + " | ME " + MainMenuState.modsEngineVersion;
 
 			case 'Mods Engine':
 				waterMarkTxt.text = "Mods Engine v" + MainMenuState.modsEngineVersion;
