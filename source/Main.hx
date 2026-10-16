@@ -141,13 +141,27 @@ class Main extends Sprite
 			fpsVar.visible = ClientPrefs.data.showFPS;
 		}
 
-		var bitmapData = Assets.getBitmapData("assets/shared/images/modsIcon.png");
-		logoMark = new Sprite();
-		logoMark.addChild(new Bitmap(bitmapData)); // Sets the graphic of the sprite to a Bitmap object, which uses our embedded BitmapData class.
-		logoMark.alpha = 0.4;
-		logoMark.x = Lib.application.window.width - 10 - logoMark.width;
-		logoMark.y = Lib.application.window.height - 10 - logoMark.height;
-		addChild(logoMark);
+		if (ClientPrefs.data.logoMark)
+		{
+			switch (ClientPrefs.data.logoMarkStyle) {
+				case 'Psych Engine':
+					var bitmapData = Assets.getBitmapData("assets/shared/images/psychIcon.png");
+					logoMark = new Sprite();
+					logoMark.addChild(new Bitmap(bitmapData)); // Sets the graphic of the sprite to a Bitmap object, which uses our embedded BitmapData class.
+					logoMark.alpha = 0.4;
+					logoMark.x = Lib.application.window.width - 10 - logoMark.width;
+					logoMark.y = Lib.application.window.height - 10 - logoMark.height;
+					addChild(logoMark);
+
+				case 'Mods Engine':
+					var bitmapData = Assets.getBitmapData("assets/shared/images/modsIcon.png");
+					logoMark = new Sprite();
+					logoMark.addChild(new Bitmap(bitmapData)); // Sets the graphic of the sprite to a Bitmap object, which uses our embedded BitmapData class.
+					logoMark.alpha = 0.4;
+					logoMark.x = Lib.application.window.width - 10 - logoMark.width;
+					logoMark.y = Lib.application.window.height - 10 - logoMark.height;
+					addChild(logoMark);
+		}
 
 		#if linux
 		var icon = Image.fromFile("icon.png");
