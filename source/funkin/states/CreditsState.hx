@@ -234,8 +234,8 @@ class CreditsState extends MusicBeatState
 			}
 
 			if(controls.ACCEPT && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4)) {
-                var selectedIcon = iconArray[getIconIndex(curSelected)];
-                if (selectedIcon != null && selectedIcon.animation.getByName('confirm') != null)
+                var selectedIcon:AttachedSprite = getSelectedIcon();
+                if (selectedIcon != null && selectedIcon.animation != null && selectedIcon.animation.getByName('confirm') != null)
                 {
                     selectedIcon.animation.play('confirm');
                 }
@@ -283,9 +283,14 @@ class CreditsState extends MusicBeatState
 			if (curSelected >= creditsStuff.length)
 				curSelected = 0;
 		} while(unselectableCheck(curSelected));
-		if (icon.animation != null && icon.animation.getByName('idle') != null && icon.animation.playing != 'idle')
+		
+		var selectedIcon:AttachedSprite = getSelectedIcon();
+		if (selectedIcon != null && selectedIcon.animation != null && selectedIcon.animation.getByName('idle') != null)
 		{
-			icon.animation.play('idle');
+			if (selectedIcon.animation.curAnim == null || selectedIcon.animation.curAnim.name != 'idle')
+			{
+				selectedIcon.animation.play('idle');
+			}
 		}
 
 		var newColor:FlxColor = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
@@ -351,4 +356,17 @@ class CreditsState extends MusicBeatState
 	private function unselectableCheck(num:Int):Bool {
 		return creditsStuff[num].length <= 1;
 	}
+
+	private function getSelectedIcon():AttachedSprite
+    {
+        var iconIdx:Int = 0;
+        for (i in 0...curSelected + 1)
+        {
+            if (!unselectableCheck(i))
+            {
+                iconIdx++;
+            }
+        }
+        return iconArray[iconIdx - 1];
+    }
 }
