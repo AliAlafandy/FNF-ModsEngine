@@ -63,7 +63,6 @@ class CreditsState extends MusicBeatState
 			['mcagabe19', 'lily', 'Head Porter of Psych Engine Mobile', 'https://www.youtube.com/@mcagabe19', 'FFE7C0'],
 			['Karim Akra', 'karim', 'Assistant Porter/Helper #1 of Psych Engine Mobile', 'https://youtube.com/@Karim0690', 'FFB4F0'],
 			['Moxie', 'moxie', 'Helper #2 of Psych Engine Mobile', 'https://twitter.com/moxie_specalist', 'F592C4'],
-			[''],
 			#end
 			[''],
 			['Psych Engine Team'],
