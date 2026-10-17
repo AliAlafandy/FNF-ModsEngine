@@ -122,35 +122,27 @@ class CreditsState extends MusicBeatState
                 {
                     var fileName = 'credits/' + creditsStuff[i][1];
                     if (Paths.fileExists('images/$fileName.xml', TEXT) && Paths.fileExists('images/$fileName.png', IMAGE))
-                    {
+					{
                         str = fileName;
                         hasXml = true;
-                    }
-                    else if (Paths.fileExists('images/$fileName.png', IMAGE))
-                    {
+                    } else if (Paths.fileExists('images/$fileName.png', IMAGE)) {
                         str = fileName;
-                    }
-                    else if (Paths.fileExists('images/$fileName-pixel.png', IMAGE))
-                    {
+                    } else if (Paths.fileExists('images/$fileName-pixel.png', IMAGE)) {
                         str = fileName + '-pixel';
                     }
                 }
 
 				var icon:AttachedSprite = new AttachedSprite();
-                if (hasXml)
-                {
+                if (hasXml) {
                     icon.frames = Paths.getSparrowAtlas(str);
                     icon.animation.addByPrefix('idle', 'idle', 12, true);
                     icon.animation.addByPrefix('confirm', 'confirm', 24, false);
                     icon.animation.play('idle');
-                }
-                else
-                {
+                } else {
                     icon.loadGraphic(Paths.image(str));
                 }
 
-                if (hasXml)
-                {
+                if (hasXml) {
                     icon.setGraphicSize(150, 150);
                     icon.updateHitbox();
                 }
@@ -242,6 +234,7 @@ class CreditsState extends MusicBeatState
                 if (selectedIcon != null && selectedIcon.animation != null && selectedIcon.animation.getByName('confirm') != null)
                 {
                     selectedIcon.animation.play('confirm');
+					if (selectedIcon.animation.finished) selectedIcon.animation.reverse();
                 }
                 CoolUtil.browserLoad(creditsStuff[curSelected][3]);
             }
