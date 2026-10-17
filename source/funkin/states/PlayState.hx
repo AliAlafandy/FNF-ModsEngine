@@ -597,8 +597,8 @@ class PlayState extends MusicBeatState
 			uiGroup.add(engineTxt);
 		}
 
-		public var randomName:Int;
-		public var engineName:String = '';
+		var randomName:Int;
+		var engineName:String = '';
 		switch (randomName)
 	    {
 			case 0: engineName = 'A Slice';
