@@ -600,7 +600,6 @@ class PlayState extends MusicBeatState
 			uiGroup.add(engineTxt);
 		}
 
-		//set up the engine name ig ?
 		updateEngineName();
 
 		if (ClientPrefs.data.downScroll) engineTxt.y = FlxG.height * 0.9 + 45;
@@ -852,6 +851,37 @@ class PlayState extends MusicBeatState
 		return playbackRate;
 	}
 
+	function updateEngineName()
+	{
+	    switch (randomName)
+	    {
+	        case 0: engineName = 'A Slice';
+	        case 1: engineName = 'Alafandy Engine';
+	        case 2: engineName = 'Alsuh Engine';
+	        case 3: engineName = 'BS Engine';
+	        case 4: engineName = 'CDEV Engine';
+			//forget that codename engine
+	        case 5: engineName = 'Forever Engine';
+	        case 6: engineName = 'FPS Plus';
+	        case 7: engineName = 'JS Engine';
+	        case 8: engineName = 'Kade Engine';
+	        case 9: engineName = "Mic'd UP";
+	        case 10: engineName = "Mods Engine";
+	        case 11: engineName = 'Nightmare Vision'; 
+	        case 12: engineName = 'NovaFlare Engine';
+	        case 13: engineName = 'OS Engine';
+	        case 14: engineName = 'P Slice';
+	        case 15: engineName = 'Play Engine';
+	        case 16: engineName = 'Psych Engine';
+	        case 17: engineName = 'ReBound Engine';
+	        case 18: engineName = 'SB Engine';
+	        case 19: engineName = 'Tr1ngle Engine';
+	        case 20: engineName = 'V Slice';
+			//unknown engine
+	        default: engineName = 'Mods Engine';
+		}
+	}
+
 	#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
 	public function addTextToDebug(text:String, color:FlxColor) {
 		var newText:funkin.data.scripts.DebugLuaText = luaDebugGroup.recycle(funkin.data.scripts.DebugLuaText);
@@ -869,6 +899,7 @@ class PlayState extends MusicBeatState
 		Sys.println(text);
 	}
 	#end
+
 	public function reloadHealthBarColors() {
 		switch (ClientPrefs.data.healthColor) {
 			case 'Base Game':
@@ -4150,33 +4181,4 @@ class PlayState extends MusicBeatState
 		return false;
 	}
 	#end
-
-	function updateEngineName()
-	{
-	    switch (randomName)
-	    {
-	        case 0: engineName = 'A Slice';
-	        case 1: engineName = 'Alafandy Engine';
-	        case 2: engineName = 'Alsuh Engine';
-	        case 3: engineName = 'BS Engine';
-	        case 4: engineName = 'CDEV Engine';
-	        case 5: engineName = 'Forever Engine';
-	        case 6: engineName = 'FPS Plus';
-	        case 7: engineName = 'JS Engine';
-	        case 8: engineName = 'Kade Engine';
-	        case 9: engineName = "Mic'd UP";
-	        case 10: engineName = "Mods Engine";
-	        case 11: engineName = 'Nightmare Vision'; 
-	        case 12: engineName = 'NovaFlare Engine';
-	        case 13: engineName = 'OS Engine';
-	        case 14: engineName = 'P Slice';
-	        case 15: engineName = 'Play Engine';
-	        case 16: engineName = 'Psych Engine';
-	        case 17: engineName = 'ReBound Engine';
-	        case 18: engineName = 'SB Engine';
-	        case 19: engineName = 'Tr1ngle Engine';
-	        case 20: engineName = 'V Slice';
-	        default: engineName = 'Mods Engine';
-	    }
-	}
 }
