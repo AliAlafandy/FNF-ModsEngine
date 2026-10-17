@@ -224,7 +224,10 @@ class PlayState extends MusicBeatState
 	public var cameraSpeed:Float = 1;
 	
 	public var dancingLeft:Bool = false;
+
 	public var engineTxt:FlxText;
+	public var randomName:Int = FlxG.random.int(0, 20); // 19
+	public var engineName:String = '';
 
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
@@ -287,9 +290,6 @@ class PlayState extends MusicBeatState
 	#if mobile
 	public var luaTouchPad:TouchPad;
 	#end
-
-	public var randomName:Int;
-	public var engineName:String = ''; //you have to define public class OUTSIDE of the function or it will cause a clausing brace error thingy NOTE TO SELF btw
 
 	override public function create()
 	{
@@ -613,17 +613,18 @@ class PlayState extends MusicBeatState
 			case 7: engineName = 'JS Engine';
 			case 8: engineName = 'Kade Engine';
 			case 9:	engineName = "Mic'd UP";
-			//case 10: engineName = "Mods Engine";
-			case 10: engineName = 'Nightmare Vision'; 
-			case 11: engineName = 'NovaFlare Engine';
-			case 12: engineName = 'OS Engine';
-			case 13: engineName = 'P Slice';
-			case 14: engineName = 'Play Engine';
-			case 15: engineName = 'Psych Engine';
-			case 16: engineName = 'ReBound Engine';
-			case 17: engineName = 'SB Engine';
-			case 18: engineName = 'Tr1ngle Engine';
-			case 19: engineName = 'V Slice';
+			case 10: engineName = "Mods Engine";
+			case 11: engineName = 'Nightmare Vision'; 
+			case 12: engineName = 'NovaFlare Engine';
+			case 13: engineName = 'OS Engine';
+			case 14: engineName = 'P Slice';
+			case 15: engineName = 'Play Engine';
+			case 16: engineName = 'Psych Engine';
+			case 17: engineName = 'ReBound Engine';
+			case 18: engineName = 'SB Engine';
+			case 19: engineName = 'Tr1ngle Engine';
+			case 20: engineName = 'V Slice';
+			//unknown engine
 			default: engineName = 'Mods Engine';
 		}
 
@@ -1984,7 +1985,7 @@ class PlayState extends MusicBeatState
 			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
 		}
 
-		randomName = Std.int(FlxG.random.int(0, 19) % 4);
+		if ((Conductor.crochet / 1000) % 4) randomName;
 
 		#if mobile
 		if ((controls.PAUSE
@@ -2774,12 +2775,13 @@ class PlayState extends MusicBeatState
 		lyricsText.visible = false;
 		lyricsBG.visible = false;
 
-		if (ClientPrefs.data.enginemarkStyle == 'Kade Engine') {
-			if (ClientPrefs.data.randomEngineNames) {
-				engineTxt.text = engineName + ' v' + MainMenuState.modsEngineVersion;
-			} else {
-				engineTxt.text = 'Mods Engine v' + MainMenuState.modsEngineVersion;
-			}
+		var same:String = 'Mods Engine v' + MainMenuState.modsEngineVersion;
+		switch (ClientPrefs.data.enginemarkStyle) {
+			case 'Kade Engine':
+				if (ClientPrefs.data.randomEngineNames) same;
+
+			case 'Mods Engine':
+				if (ClientPrefs.data.randomEngineNames) same;
 		}
 
 		timeBar.visible = false;
