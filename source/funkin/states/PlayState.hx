@@ -288,6 +288,9 @@ class PlayState extends MusicBeatState
 	public var luaTouchPad:TouchPad;
 	#end
 
+	public var randomName:Int;
+	public var engineName:String = ''; //you have to define public class OUTSIDE of the function or it will cause a clausing brace error thingy
+
 	override public function create()
 	{
 		//trace('Playback Rate: ' + playbackRate);
@@ -597,8 +600,6 @@ class PlayState extends MusicBeatState
 			uiGroup.add(engineTxt);
 		}
 
-		var randomName:Int;
-		var engineName:String = '';
 		switch (randomName)
 	    {
 			case 0: engineName = 'A Slice';
