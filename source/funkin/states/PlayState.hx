@@ -1985,7 +1985,7 @@ class PlayState extends MusicBeatState
 			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
 		}
 
-		if ((Conductor.crochet / 1000) % 4) randomName;
+		try ((Conductor.crochet / 1000) % 4) randomName;
 
 		#if mobile
 		if ((controls.PAUSE
