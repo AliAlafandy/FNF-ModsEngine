@@ -2006,8 +2006,6 @@ class PlayState extends MusicBeatState
 			updateEngineName();
 		}
 
-		updateEngineName()
-
 		if (startedCountdown && !paused)
 			Conductor.songPosition += FlxG.elapsed * 1000 * playbackRate;
 
