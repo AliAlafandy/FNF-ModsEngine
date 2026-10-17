@@ -140,13 +140,19 @@ class CreditsState extends MusicBeatState
                 if (hasXml)
                 {
                     icon.frames = Paths.getSparrowAtlas(str);
-                    icon.animation.addByPrefix('idle', 'idle', 24, true);
+                    icon.animation.addByPrefix('idle', 'idle', 12, true);
                     icon.animation.addByPrefix('confirm', 'confirm', 24, false);
                     icon.animation.play('idle');
                 }
                 else
                 {
                     icon.loadGraphic(Paths.image(str));
+                }
+
+                if (hasXml)
+                {
+                    icon.setGraphicSize(150, 150);
+                    icon.updateHitbox();
                 }
 
                 if(str.endsWith('-pixel')) icon.antialiasing = false;
