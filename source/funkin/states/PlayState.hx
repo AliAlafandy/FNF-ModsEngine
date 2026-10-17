@@ -289,7 +289,7 @@ class PlayState extends MusicBeatState
 	#end
 
 	public var randomName:Int;
-	public var engineName:String = ''; //you have to define public class OUTSIDE of the function or it will cause a clausing brace error thingy
+	public var engineName:String = ''; //you have to define public class OUTSIDE of the function or it will cause a clausing brace error thingy NOTE TO SELF btw
 
 	override public function create()
 	{
