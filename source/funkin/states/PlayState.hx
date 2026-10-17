@@ -1985,8 +1985,6 @@ class PlayState extends MusicBeatState
 			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
 		}
 
-		try ((Conductor.crochet / 1000) % 4) randomName;
-
 		#if mobile
 		if ((controls.PAUSE
 			 #if android
@@ -2026,6 +2024,9 @@ class PlayState extends MusicBeatState
 
 		updateIconsScale(elapsed);
 		updateIconsPosition();
+
+		if (startedCountdown && Conductor.songPosition += (Conductor.crochet / 1000))
+			randomName;
 
 		if (startedCountdown && !paused)
 			Conductor.songPosition += FlxG.elapsed * 1000 * playbackRate;
