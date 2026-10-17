@@ -349,19 +349,46 @@ class CreditEditorState extends MusicBeatState
 					Mods.currentModDirectory = creditsStuff[i][5];
 				}
 
-				var icon:AttachedSprite;
-				if(Paths.fileExists('images/credits/' + creditsStuff[i][1] + '.png', IMAGE))
-					icon = new AttachedSprite('credits/' + creditsStuff[i][1]);
-				else {
-					icon = new AttachedSprite('credits/missing_icon'); // If icon didnt load it will load the unknow icon.
-					if(creditsStuff[i][1] == null || creditsStuff[i][1] == '')
-						icon = new AttachedSprite('credits/missing_icon');
+				var str:String = 'credits/missing_icon';
+				var hasXml:Bool = false;
+				
+				if(creditsStuff[i][1] != null && creditsStuff[i][1].length > 0)
+				{
+					var fileName = 'credits/' + creditsStuff[i][1];
+					if (Paths.fileExists('images/$fileName.xml', TEXT) && Paths.fileExists('images/$fileName.png', IMAGE))
+					{
+						str = fileName;
+						hasXml = true;
+					}
+					else if (Paths.fileExists('images/$fileName.png', IMAGE))
+					{
+						str = fileName;
+					}
+					else if (Paths.fileExists('images/$fileName-pixel.png', IMAGE))
+					{
+						str = fileName + '-pixel';
+					}
 				}
 
+				var icon:AttachedSprite = new AttachedSprite();
+				if (hasXml)
+				{
+					icon.frames = Paths.getSparrowAtlas(str);
+					icon.animation.addByPrefix('idle', 'idle', 12, true);
+					icon.animation.addByPrefix('confirm', 'confirm', 12, false);
+					icon.animation.play('idle');
+					icon.setGraphicSize(150, 150);
+					icon.updateHitbox();
+				}
+				else
+				{
+					icon.loadGraphic(Paths.image(str));
+				}
+
+				if(str.endsWith('-pixel')) icon.antialiasing = false;
 				icon.xAdd = optionText.width + 10;
 				icon.sprTracker = optionText;
 	
-				// using a FlxGroup is too much fuss!
 				iconArray.push(icon);
 				add(icon);
 				Mods.currentModDirectory = '';
@@ -789,10 +816,17 @@ class CreditEditorState extends MusicBeatState
 	{
 		var daColor:Int;
 		if(text.length == 0) {
-			daColor = Std.parseInt('0xFFFFC31E'); // no input then
+			daColor = Std.parseInt('0xFFFFC31E');
 		} else {
-			if(!Paths.fileExists('images/credits/' + text + '.png', IMAGE)) daColor = Std.parseInt('0xFFFF004C'); // icon not found
-			else daColor = Std.parseInt('0xFF00FF37'); // icon was found
+			var fileName = 'credits/' + text;
+			var hasPng = Paths.fileExists('images/' + fileName + '.png', IMAGE);
+			var hasPixelPng = Paths.fileExists('images/' + fileName + '-pixel.png', IMAGE);
+			
+			if(!hasPng && !hasPixelPng) {
+				daColor = Std.parseInt('0xFFFF004C');
+			} else {
+				daColor = Std.parseInt('0xFF00FF37');
+			}
 		}
 		iconExistCheck.color = daColor;
 	}
