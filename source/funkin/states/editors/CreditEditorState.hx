@@ -351,7 +351,6 @@ class CreditEditorState extends MusicBeatState
 
 				var str:String = 'credits/missing_icon';
 				var hasXml:Bool = false;
-				
 				if(creditsStuff[i][1] != null && creditsStuff[i][1].length > 0)
 				{
 					var fileName = 'credits/' + creditsStuff[i][1];
@@ -359,13 +358,9 @@ class CreditEditorState extends MusicBeatState
 					{
 						str = fileName;
 						hasXml = true;
-					}
-					else if (Paths.fileExists('images/$fileName.png', IMAGE))
-					{
+					} else if (Paths.fileExists('images/$fileName.png', IMAGE)) {
 						str = fileName;
-					}
-					else if (Paths.fileExists('images/$fileName-pixel.png', IMAGE))
-					{
+					} else if (Paths.fileExists('images/$fileName-pixel.png', IMAGE)) {
 						str = fileName + '-pixel';
 					}
 				}
@@ -379,9 +374,7 @@ class CreditEditorState extends MusicBeatState
 					icon.animation.play('idle');
 					icon.setGraphicSize(150, 150);
 					icon.updateHitbox();
-				}
-				else
-				{
+				} else {
 					icon.loadGraphic(Paths.image(str));
 				}
 
