@@ -601,7 +601,7 @@ class PlayState extends MusicBeatState
 		}
 		engineNamesList();
 
-		if (ClientPrefs.data.downScroll) engineTxt.y = FlxG.height * 0.9 + 45;
+		if (ClientPrefs.data.downScroll) engineTxt.y = (FlxG.height * 0.9) + 45;
 		switch (ClientPrefs.data.enginemarkStyle) {
 			case 'Kade Engine':
 				if (ClientPrefs.data.randomEngineNames) {
