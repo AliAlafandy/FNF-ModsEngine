@@ -2784,10 +2784,10 @@ class PlayState extends MusicBeatState
 		var same:String = 'Mods Engine v' + MainMenuState.modsEngineVersion;
 		switch (ClientPrefs.data.enginemarkStyle) {
 			case 'Kade Engine':
-				if (ClientPrefs.data.randomEngineNames) same;
+				if (ClientPrefs.data.randomEngineNames) engineTxt.text = same;
 
 			case 'Mods Engine':
-				if (ClientPrefs.data.randomEngineNames) same;
+				if (ClientPrefs.data.randomEngineNames) engineTxt.text = same;
 		}
 
 		timeBar.visible = false;
@@ -3616,10 +3616,10 @@ class PlayState extends MusicBeatState
 
 		if (startedCountdown && ClientPrefs.data.randomEngineNames) {
 		    if (dancingLeft) {
-				randomName;
+				randomName = FlxG.random.int(0, 20); // 19
 				// engineNamesList();
 			} else {
-				randomName;
+				randomName = FlxG.random.int(0, 20); // 19
 				// engineNamesList();
 			}
 		}
