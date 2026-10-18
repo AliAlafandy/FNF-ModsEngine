@@ -233,9 +233,11 @@ class CreditsState extends MusicBeatState
                 if (selectedIcon != null && selectedIcon.animation != null && selectedIcon.animation.getByName('confirm') != null)
                 {
 					selectedIcon.animation.play('confirm');
-				} else if (selectedIcon.animation.get_finished()) { // 'confirm'
-					selectedIcon.animation.play('confirm', false, true);
-					// selectedIcon.animation.reverse();
+					if (selectedIcon.animation.curAnim == null && selectedIcon.animation.curAnim.name == 'confirm')
+					{
+						selectedIcon.animation.play('confirm', false, true);
+						// selectedIcon.animation.reverse();
+					}
                 }
 
 				// if (hasXml) {
