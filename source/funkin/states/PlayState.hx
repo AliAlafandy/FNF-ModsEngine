@@ -1196,32 +1196,32 @@ class PlayState extends MusicBeatState
 	}
 
 	var dialogueCount:Int = 0;
-	public var psychDialogue:DialogueBoxMod;
+	public var modDialogue:DialogueBoxMod;
 	//You don't have to add a song, just saying. You can just do "startDialogue(DialogueBoxMod.parseDialogue(Paths.json(songName + '/dialogue')))" and it should load dialogue.json
 	public function startDialogue(dialogueFile:DialogueFile, ?song:String = null):Void
 	{
 		// TO DO: Make this more flexible, maybe?
-		if(psychDialogue != null) return;
+		if(modDialogue != null) return;
 
 		if(dialogueFile.dialogue.length > 0) {
 			inCutscene = true;
-			psychDialogue = new DialogueBoxMod(dialogueFile, song);
-			psychDialogue.scrollFactor.set();
+			modDialogue = new DialogueBoxMod(dialogueFile, song);
+			modDialogue.scrollFactor.set();
 			if(endingSong) {
-				psychDialogue.finishThing = function() {
-					psychDialogue = null;
+				modDialogue.finishThing = function() {
+					modDialogue = null;
 					endSong();
 				}
 			} else {
-				psychDialogue.finishThing = function() {
-					psychDialogue = null;
+				modDialogue.finishThing = function() {
+					modDialogue = null;
 					startCountdown();
 				}
 			}
-			psychDialogue.nextDialogueThing = startNextDialogue;
-			psychDialogue.skipDialogueThing = skipDialogue;
-			psychDialogue.cameras = [camHUD];
-			add(psychDialogue);
+			modDialogue.nextDialogueThing = startNextDialogue;
+			modDialogue.skipDialogueThing = skipDialogue;
+			modDialogue.cameras = [camHUD];
+			add(modDialogue);
 		} else {
 			FlxG.log.warn('Your dialogue file is badly formatted!');
 			startAndEnd();
@@ -1469,6 +1469,9 @@ class PlayState extends MusicBeatState
 
 			case 'Psych Engine':
 				scoreTxt.text = '${psychScore}\n';
+
+			case 'Disabled':
+				scoreTxt.text = '';
 		}
 
 		if (!miss && !cpuControlled)
@@ -2030,12 +2033,6 @@ class PlayState extends MusicBeatState
 
 		updateIconsScale(elapsed);
 		updateIconsPosition();
-
-		if (startedCountdown)
-		{
-		    Conductor.songPosition += (Conductor.crochet / 1000);
-			updateEngineName();
-		}
 
 		if (startedCountdown && !paused)
 			Conductor.songPosition += FlxG.elapsed * 1000 * playbackRate;
@@ -3603,7 +3600,7 @@ class PlayState extends MusicBeatState
 		
 		dancingLeft = !dancingLeft;
 
-		if (ClientPrefs.data.iconBops == true) {
+		if (ClientPrefs.data.iconBops) {
 			if (dancingLeft) {
 				iconP1.angle = 8;
 				iconP2.angle = 8; // maybe i should do it with tweens, but i'm lazy // i'll make it in -1.0.0, i promise
@@ -3617,6 +3614,14 @@ class PlayState extends MusicBeatState
 		iconP2.updateHitbox();
 
 		characterBopper(curBeat);
+
+		if (startedCountdown && ClientPrefs.data.randomEngineNames) {
+		    if (dancingLeft) {
+				updateEngineName();
+			} else {
+				updateEngineName();
+			}
+		}
 
 		super.beatHit();
 		lastBeatHit = curBeat;
