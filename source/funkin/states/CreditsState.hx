@@ -136,7 +136,7 @@ class CreditsState extends MusicBeatState
                 if (hasXml) {
                     icon.frames = Paths.getSparrowAtlas(str);
                     icon.animation.addByPrefix('idle', 'idle', 12, true);
-                    icon.animation.addByPrefix('confirm', 'confirm', 24, false);
+                    icon.animation.addByPrefix('confirm', 'confirm', 12, false);
                     icon.animation.play('idle');
                 } else {
                     icon.loadGraphic(Paths.image(str));
@@ -233,10 +233,20 @@ class CreditsState extends MusicBeatState
                 var selectedIcon:AttachedSprite = getSelectedIcon();
                 if (selectedIcon != null && selectedIcon.animation != null && selectedIcon.animation.getByName('confirm') != null)
                 {
-                    selectedIcon.animation.play('confirm');
-					if (selectedIcon.animation.finished) selectedIcon.animation.reverse();
+					selectedIcon.animation.play('confirm');
+				} else if (selectedIcon.animation.getByName('confirm') == null) {
+					selectedIcon.animation.play('confirm');
+					selectedIcon.animation.reverse();
                 }
-                CoolUtil.browserLoad(creditsStuff[curSelected][3]);
+
+				if (hasXml) {
+					new FlxTimer().start(1, function(tmr:FlxTimer)
+            		{
+                		CoolUtil.browserLoad(creditsStuff[curSelected][3]);
+            		});
+				} else {
+					CoolUtil.browserLoad(creditsStuff[curSelected][3]);
+				}
             }
 			if (controls.BACK)
 			{
