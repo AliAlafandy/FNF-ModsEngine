@@ -599,8 +599,7 @@ class PlayState extends MusicBeatState
 			engineTxt.scrollFactor.set();
 			uiGroup.add(engineTxt);
 		}
-
-		updateEngineName();
+		engineNamesList();
 
 		if (ClientPrefs.data.downScroll) engineTxt.y = FlxG.height * 0.9 + 45;
 		switch (ClientPrefs.data.enginemarkStyle) {
@@ -851,7 +850,7 @@ class PlayState extends MusicBeatState
 		return playbackRate;
 	}
 
-	function updateEngineName()
+	function engineNamesList()
 	{
 	    switch (randomName)
 	    {
@@ -3618,10 +3617,10 @@ class PlayState extends MusicBeatState
 		if (startedCountdown && ClientPrefs.data.randomEngineNames) {
 		    if (dancingLeft) {
 				randomName;
-				updateEngineName();
+				// engineNamesList();
 			} else {
 				randomName;
-				updateEngineName();
+				// engineNamesList();
 			}
 		}
 
