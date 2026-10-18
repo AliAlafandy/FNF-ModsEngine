@@ -61,10 +61,10 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.onChange = onChangeAutoPause;
 
 		var option:Option = new Option('Type Score:',
-			"'Base Game':  Score only,\n'Mods Engine': Score and Misses,\n'Psych Engine': Score, Misses and Rating.",
+			"'Base Game': Score only,\n'Kade Engine': Score, Combo Breaks and Accuracy,\n'Psych Engine': Score, Misses and Rating,\n'Disabled': make Score invisible.",
 			'typeRating',
 			'string',
-			['Base Game', 'Kade Engine', 'Psych Engine']);
+			['Base Game', 'Kade Engine', 'Psych Engine', 'Disabled']);
 		addOption(option);
 
 		var option:Option = new Option('Pop Up Score',
