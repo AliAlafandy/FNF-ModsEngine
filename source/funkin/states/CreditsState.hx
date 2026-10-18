@@ -19,7 +19,6 @@ class CreditsState extends MusicBeatState
 	var colorTween:FlxTween;
 	
 	var descBox:AttachedSprite;
-	var hasXml:Bool = false;
 
 	var offsetThing:Float = -75;
 
@@ -117,6 +116,7 @@ class CreditsState extends MusicBeatState
                 }
 
                 var str:String = 'credits/missing_icon';
+				var hasXml:Bool = false;
                 if(creditsStuff[i][1] != null && creditsStuff[i][1].length > 0)
                 {
                     var fileName = 'credits/' + creditsStuff[i][1];
@@ -238,14 +238,14 @@ class CreditsState extends MusicBeatState
 					selectedIcon.animation.reverse();
                 }
 
-				if (hasXml) {
+				// if (hasXml) {
 					new FlxTimer().start(1, function(tmr:FlxTimer)
             		{
                 		CoolUtil.browserLoad(creditsStuff[curSelected][3]);
             		});
-				} else {
+				/*} else {
 					CoolUtil.browserLoad(creditsStuff[curSelected][3]);
-				}
+				}*/
             }
 			if (controls.BACK)
 			{
