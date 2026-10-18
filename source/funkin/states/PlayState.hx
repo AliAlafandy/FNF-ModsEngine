@@ -3617,8 +3617,10 @@ class PlayState extends MusicBeatState
 
 		if (startedCountdown && ClientPrefs.data.randomEngineNames) {
 		    if (dancingLeft) {
+				randomName;
 				updateEngineName();
 			} else {
+				randomName;
 				updateEngineName();
 			}
 		}
